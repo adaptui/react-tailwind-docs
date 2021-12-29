@@ -23,7 +23,7 @@
   "scripts": {
     "postinstall": "husky install",
     "dev": "next dev",
-    "build": "STORK_PATH=$(pwd)/bin/stork.bin next build",
+    "build": "next build",
     "start": "next start",
     "test": "jest --watch --watchAll=false",
     "test:ci": "jest --ci",
