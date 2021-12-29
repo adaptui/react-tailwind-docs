@@ -1,0 +1,59 @@
+import Callout from "nextra-theme-docs/callout";
+
+# Getting Started
+
+Renderlesskit uses tailwind to provide you better styling, so you'll need to
+install to setup a tailwind project using thier
+[installation](https://tailwindcss.com/docs/installation) guide.
+
+## Installation
+
+```bash
+npm i @renderlesskit/react-tailwind
+```
+
+```bash
+yarn add @renderlesskit/react-tailwind
+```
+
+## Tailwind setup
+
+After setting up tailwind in your project, import our `preset` function inside
+your `tailwind.config.js` and use it.
+
+```js noCopy
+const { preset } = require("@renderlesskit/react-tailwind/preset");
+
+module.exports = preset({
+  purge: [
+    // Make sure to add this purge to generate the component's default styling
+    "./node_modules/\\@renderlesskit/react-tailwind/dist/esm/theme/defaultTheme/*.js",
+  ],
+});
+```
+
+<Callout>
+  Checkout our integration [guides for CRA & Next.js](/guides/usage-with-cra)
+</Callout>
+
+## Setting up provider
+
+Renderlesskit needs a theme provider to pass down all the neccesary styling for
+the components.
+
+Go to the root of your application and add this:
+
+```js
+import * as React from "react";
+// 1. import `RenderlesskitProvider` component
+import { RenderlesskitProvider } from "@renderlesskit/react-tailwind";
+
+function App() {
+  // 2. Use at the root of your app
+  return (
+    <RenderlesskitProvider>
+      <App />
+    </RenderlesskitProvider>
+  );
+}
+```

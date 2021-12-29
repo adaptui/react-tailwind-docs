@@ -1,5 +1,5 @@
 {
-  "name": "next-react-app",
+  "name": "renderlesskit-tailwind-docs",
   "version": "1.0.0",
   "private": true,
   "description": "Personal Next React App",
@@ -23,7 +23,7 @@
   "scripts": {
     "postinstall": "husky install",
     "dev": "next dev",
-    "build": "next build",
+    "build": "STORK_PATH=$(pwd)/bin/stork.bin next build",
     "start": "next start",
     "test": "jest --watch --watchAll=false",
     "test:ci": "jest --ci",
@@ -63,9 +63,13 @@
     ]
   },
   "dependencies": {
+    "@renderlesskit/react-tailwind": "0.0.1-alpha.33",
     "next": "12.0.7",
+    "nextra": "2.0.0-beta.5",
+    "nextra-theme-docs": "2.0.0-beta.5",
     "react": "17.0.2",
-    "react-dom": "17.0.2"
+    "react-dom": "17.0.2",
+    "lodash": "4.17.21"
   },
   "devDependencies": {
     "@babel/core": "7.16.5",
@@ -78,6 +82,7 @@
     "@testing-library/react": "12.1.2",
     "@testing-library/user-event": "13.5.0",
     "@types/jest": "27.0.3",
+    "@types/lodash": "4.14.178",
     "@types/node": "17.0.5",
     "@types/react": "17.0.38",
     "@types/react-dom": "17.0.11",
@@ -95,6 +100,7 @@
     "lint-staged": "12.1.4",
     "postcss": "8.4.5",
     "prettier": "2.5.1",
+    "react-icons": "4.3.1",
     "release-it": "14.11.8",
     "sort-package-json": "1.53.1",
     "tailwindcss": "3.0.8",
