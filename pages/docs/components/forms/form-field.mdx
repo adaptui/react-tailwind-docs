@@ -1,4 +1,3 @@
-import PropsTable from "@/components/PropsTable";
 import ComponentLinks from "@/components/ComponentLinks";
 import Callout from "nextra-theme-docs/callout";
 
@@ -202,74 +201,3 @@ This example shows how to integrate renderlesskit Input with react-hook-form
 This example shows how to integrate renderlesskit Input with Formik
 
 [Explore on CodeSandbox](https://codesandbox.io/s/renderlesskit-formik-k1k9w)
-
-## API Reference
-
-### FormField
-
-FormField composes [Box](/docs/components/primitives/box)
-
-<PropsTable
-  data={[
-    {
-      name: "id",
-      type: "string",
-      description:
-        "Base id for the FormField which will be cascaded throughout the child component with concatenated unique ids",
-    },
-    {
-      name: "isDisabled",
-      type: "Boolean",
-      description: "if `true` Input will be disabled",
-    },
-    {
-      name: "isRequired",
-      type: "Boolean",
-      description: "if `true` Input will have required & aria-required",
-    },
-    {
-      name: "isReadOnly",
-      type: "Boolean",
-      description: "if `true` Input will have readonly & aria-readonly",
-    },
-    {
-      name: "isInvalid",
-      type: "Boolean",
-      description: "if `true` Input will have invalid & aria-invalid",
-    },
-
-    {
-      name: "children",
-      typeSimple: "RenderProp",
-      type: `RenderProp<FormFieldContextProps & { inputProps: ReturnType<typeof useFormControl> }>`,
-      description: "if `true` Input will be invalid",
-    },
-
-]} />
-
-### useFormControl
-
-<PropsTable
-  data={[
-    {
-      name: "isDisabled | disabled",
-      type: "Boolean",
-      description: "if `true` Input will be disabled",
-    },
-    {
-      name: "isRequired | required",
-      type: "Boolean",
-      description: "if `true` Input will have required & aria-required",
-    },
-    {
-      name: "isReadOnly | readOnly",
-      type: "Boolean",
-      description: "if `true` Input will have readonly & aria-readonly",
-    },
-    {
-      name: "isInvalid | invalid",
-      type: "Boolean",
-      description: "if `true` Input will have invalid & aria-invalid",
-    },
-  ]}
-/>

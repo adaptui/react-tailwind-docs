@@ -1,5 +1,5 @@
 import Callout from "nextra-theme-docs/callout";
-import PropsTable from "@/components/PropsTable";
+
 import ComponentLinks from "@/components/ComponentLinks";
 
 # Tag
@@ -102,57 +102,3 @@ To disable roving index on the tag closable icons you can set
   <Tag closable>Tag 3</Tag>
 </TagGroup>
 ```
-
-## API Reference
-
-### Tag Props
-
-<PropsTable
-  data={[
-    { name: "id", type: "string", description: "Id for the tag" },
-    { name: "size", themeKey: "tag.size", default: "md" },
-    { name: "variant", themeKey: "tag.variant", default: "primary" },
-    {
-      name: "closable",
-      type: "Boolean",
-      description:
-        "If added, tag will show suffix after the tag's label, This will only show if closable is set to `true`",
-      default: "false",
-    },
-    {
-      name: "onClose",
-      type: "(id?: string) => void",
-      typeSimple: "Function",
-      description: "Callback to fire when close icon is clicked",
-    },
-    {
-      name: "prefix",
-      type: "React.ReactElement",
-      description:
-        "If added, tag will show prefix the content before the tag's label",
-    },
-    {
-      name: "suffix",
-      type: "React.ReactElement",
-      description:
-        "If added, tag will show suffix the content after the tag's label",
-      default: "<CloseIcon />",
-    },
-  ]}
-/>
-
-### TagGroup Props
-
-<PropsTable
-  data={[
-    { name: "size", themeKey: "tag.size", default: "md" },
-    { name: "variant", themeKey: "tag.variant", default: "primary" },
-    {
-      name: "allowArrowNavigation",
-      type: "Boolean",
-      default: "true",
-      description:
-        "If set to `false`, it disables roving index for the tag close icons",
-    },
-  ]}
-/>

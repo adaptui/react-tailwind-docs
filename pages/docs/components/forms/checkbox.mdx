@@ -1,5 +1,5 @@
 import Callout from "nextra-theme-docs/callout";
-import PropsTable from "@/components/PropsTable";
+
 import ComponentLinks from "@/components/ComponentLinks";
 
 # Checkbox
@@ -160,29 +160,3 @@ const CustomCheckbox = () => {
 
 export default CustomCheckbox;
 ```
-
-## Integrations
-
-// TBD
-
-## API Reference
-
-### Checkbox
-
-Checkbox composes reakit's checkbox component
-
-<PropsTable
-  data={[
-    { name: "size", themeKey: "checkbox.label.size" },
-    {
-      name: "defaultState",
-      typeSimple: "ReakitCheckboxOptions",
-      type: 'boolean | "indeterminate" | (string | number)[] | undefined',
-    },
-    {
-      name: "onStateChange",
-      typeSimple: "Function",
-      type: "(value: CheckboxStatus) => void",
-    },
-  ]}
-/>

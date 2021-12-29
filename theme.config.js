@@ -6,7 +6,6 @@ export default {
   docsRepositoryBase:
     "https://github.com/timelessco/renderlesskit-tailwind-docs",
   // Docs Path in the above repo
-  path: "packages/website/",
   titleSuffix: " – Timeless",
   search: true,
   UNSTABLE_stork: false,

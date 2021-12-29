@@ -1,4 +1,3 @@
-import PropsTable from "@/components/PropsTable";
 import ComponentLinks from "@/components/ComponentLinks";
 
 # Spinner
@@ -42,24 +41,3 @@ accepts `visible` or `transparent` values
 ```jsx live
 <Spinner size="lg" stroke="visible" />
 ```
-
-## API Reference
-
-<PropsTable
-  data={[
-    { name: "size", themeKey: "spinner.size", default: "md" },
-    {
-      name: "stroke",
-      type: "visible | transparent",
-      default: "transparent",
-      description: "Sets the visibility of the stroke",
-    },
-    {
-      name: "label",
-      type: "string",
-      default: "Loading...",
-      description:
-        "For accessibility, it is important to add a fallback loading text. This text will be visible to screen readers.",
-    },
-  ]}
-/>
