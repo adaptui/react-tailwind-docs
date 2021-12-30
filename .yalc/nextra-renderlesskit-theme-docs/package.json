@@ -1,0 +1,98 @@
+{
+  "name": "nextra-renderlesskit-theme-docs",
+  "version": "1.0.0",
+  "description": "Nextra Renderlesskit Theme Docs",
+  "keywords": [
+    "react",
+    "docs",
+    "nextra-renderlesskit-theme-docs",
+    "typescript",
+    "nextra",
+    "theme"
+  ],
+  "bugs": {
+    "url": "https://github.com/navin-moorthy/nextra-renderlesskit-theme-docs/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/navin-moorthy/nextra-renderlesskit-theme-docs.git"
+  },
+  "license": "MIT",
+  "author": "Navin Moorthy <navin007.a@gmail.com>",
+  "exports": {
+    "./style.css": "./style.css",
+    ".": {
+      "import": "./dist/index.js"
+    },
+    "./callout": {
+      "import": "./dist/callout.js"
+    },
+    "./bleed": {
+      "import": "./dist/bleed.js"
+    }
+  },
+  "main": "dist/index.js",
+  "module": "dist/index.js",
+  "source": "src/index.ts",
+  "types": "./dist/types.d.ts",
+  "typings": "./dist/types.d.ts",
+  "files": [
+    "dist/*",
+    "style.css"
+  ],
+  "scripts": {
+    "postinstall": "husky install",
+    "dev": "node scripts/dev.js",
+    "build": "yarn build:pkg && yarn build:types",
+    "build:pkg": "node scripts/build.js",
+    "build:types": "tsc -p tsconfig.types.json",
+    "lint": "eslint --color --ext .js,.jsx,.ts,.tsx .",
+    "lint:fix": "eslint --color --ext .js,.jsx,.ts,.tsx . --fix",
+    "format": "prettier -wl \"./**/*.{html,css,js,jsx,ts,tsx,md,json}\"",
+    "format:package": "sort-package-json package.json",
+    "release": "release-it",
+    "commit": "gacp",
+    "contrib:init": "all-contributors init",
+    "contrib:add": "all-contributors add",
+    "contrib:generate": "all-contributors generate"
+  },
+  "commitlint": {
+    "extends": [
+      "@commitlint/config-conventional"
+    ]
+  },
+  "lint-staged": {
+    "**/*.{js,jsx,tx,tsx}": [
+      "yarn lint:fix"
+    ],
+    "**/*.{html,css,js,jsx,ts,tsx,md,json}": [
+      "yarn format"
+    ]
+  },
+  "dependencies": {
+    "@mdx-js/react": "2.0.0-rc.2",
+    "@reach/skip-nav": "0.16.0",
+    "classnames": "2.3.1",
+    "focus-visible": "5.2.0",
+    "github-slugger": "1.4.0",
+    "grapheme-splitter": "1.0.4",
+    "intersection-observer": "0.12.0",
+    "match-sorter": "6.3.1",
+    "next-themes": "0.0.15",
+    "parse-git-url": "1.0.1",
+    "prism-react-renderer": "1.2.1",
+    "title": "3.4.3"
+  },
+  "peerDependencies": {
+    "next": ">=9.5.3",
+    "react": ">=16.13.1",
+    "react-dom": ">=16.13.1"
+  },
+  "gacp": {
+    "add": false,
+    "push": false,
+    "emoji": "emoji",
+    "editor": false
+  },
+  "yalcSig": "ce299f7b490219a9f2f1eb4999c0c447"
+}
