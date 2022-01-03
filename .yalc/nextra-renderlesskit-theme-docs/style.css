@@ -1,4 +1,6 @@
 @tailwind base;
+@tailwind components;
+@tailwind utilities;
 
 html {
   @apply subpixel-antialiased;
@@ -10,7 +12,7 @@ body {
   @apply bg-white;
 }
 .dark body {
-  @apply bg-dark text-gray-100;
+  @apply bg-dark text-slate-100;
 }
 
 h1 {
@@ -21,7 +23,7 @@ h2 {
   @apply pb-1 border-b;
 }
 .dark h2 {
-  @apply border-gray-900;
+  @apply border-slate-900;
 }
 h3 {
   @apply text-2xl font-semibold tracking-tight mt-8;
@@ -51,18 +53,18 @@ hr {
   @apply my-8;
 }
 .dark hr {
-  @apply border-gray-900;
+  @apply border-slate-900;
 }
 code {
-  @apply text-gray-800 bg-gray-500 bg-opacity-25 rounded;
+  @apply text-slate-800 bg-slate-500 bg-opacity-25 rounded;
   box-decoration-break: clone;
 }
 .dark code {
-  @apply text-gray-300 bg-gray-800;
+  @apply text-slate-300 bg-slate-800;
 }
 pre {
-  @apply p-4 bg-gray-200 rounded-lg mt-6 mb-4 overflow-x-auto;
-  @apply dark:bg-gray-800;
+  @apply p-4 bg-slate-200 rounded-lg mt-6 mb-4 overflow-x-auto;
+  @apply dark:bg-slate-800;
 }
 pre code {
   @apply p-0 text-sm text-black bg-transparent rounded-none inline-block min-w-full;
@@ -70,9 +72,6 @@ pre code {
 a code {
   @apply text-current no-underline;
 }
-
-@tailwind components;
-@tailwind utilities;
 
 .main-container {
   min-height: 100vh;
@@ -89,31 +88,31 @@ a code {
   @apply ring;
 }
 .sidebar .active-anchor {
-  @apply font-semibold text-gray-900 dark:text-white;
+  @apply font-semibold text-slate-900 dark:text-white;
 }
 .sidebar li.active > a {
-  @apply font-semibold text-black bg-gray-200;
+  @apply font-semibold text-black bg-slate-200;
 }
 .dark .sidebar li.active > a {
-  @apply text-white bg-gray-800;
+  @apply text-white bg-slate-800;
 }
 .sidebar button,
 .sidebar a {
-  @apply block w-full text-left text-base no-underline text-gray-600 mt-1 p-2 rounded select-none outline-none;
+  @apply block w-full text-left text-base no-underline text-slate-600 mt-1 p-2 rounded select-none outline-none;
   -webkit-tap-highlight-color: transparent;
   -webkit-touch-callout: none;
 }
 .dark .sidebar button,
 .dark .sidebar a {
-  @apply text-gray-500;
+  @apply text-slate-500;
 }
 .sidebar a:hover,
 .sidebar button:hover {
-  @apply text-gray-900 bg-gray-100;
+  @apply text-slate-900 bg-slate-100;
 }
 .dark .sidebar a:hover,
 .dark .sidebar button:hover {
-  @apply text-white bg-gray-900;
+  @apply text-white bg-slate-900;
 }
 article ul {
   @apply list-disc ml-6 mt-6;
@@ -125,8 +124,8 @@ article ol {
   @apply list-decimal ml-6 mt-6;
 }
 article blockquote {
-  @apply italic pl-6 border-l-2 border-gray-300 text-gray-700;
-  @apply dark:border-gray-700 dark:text-gray-400;
+  @apply italic pl-6 border-l-2 border-slate-300 text-slate-700;
+  @apply dark:border-slate-700 dark:text-slate-400;
 }
 
 .subheading-anchor {
@@ -141,10 +140,10 @@ article blockquote {
 }
 .anchor-icon {
   opacity: 0;
-  @apply ml-2 text-gray-500 select-none;
+  @apply ml-2 text-slate-500 select-none;
 }
 .dark .anchor-icon {
-  @apply text-gray-700;
+  @apply text-slate-700;
 }
 
 h2 a {
@@ -166,36 +165,36 @@ h2 a {
 
 /* Search */
 .nextra-search input {
-  @apply border-gray-300 text-gray-900;
+  @apply border-slate-300 text-slate-900;
 }
 .dark .nextra-search input {
-  @apply bg-dark border-gray-800 text-gray-100;
+  @apply bg-dark border-slate-800 text-slate-100;
 }
 .nextra-search input::placeholder {
-  @apply text-gray-400;
+  @apply text-slate-400;
 }
 .dark .nextra-search input::placeholder {
-  @apply text-gray-700;
+  @apply text-slate-700;
 }
 .nextra-search ul {
-  @apply rounded border bg-white text-gray-100 border-gray-300 divide-gray-300 overflow-hidden shadow-lg list-none;
+  @apply rounded border bg-white text-slate-100 border-slate-300 divide-slate-300 overflow-hidden shadow-lg list-none;
 }
 .dark .nextra-search ul {
-  @apply bg-dark text-gray-100 border-gray-700 divide-gray-700;
+  @apply bg-dark text-slate-100 border-slate-700 divide-slate-700;
 }
 .nextra-search ul li {
-  @apply text-gray-800;
+  @apply text-slate-800;
 }
 .nextra-search ul li.active,
 .nextra-search ul a:focus li {
-  @apply bg-gray-200;
+  @apply bg-slate-200;
 }
 .dark .nextra-search ul li {
-  @apply text-gray-300;
+  @apply text-slate-300;
 }
 .dark .nextra-search ul li.active,
 .dark .nextra-search ul a:focus li {
-  @apply bg-gray-800;
+  @apply bg-slate-800;
 }
 .nextra-search ul li .highlight {
   @apply bg-yellow-300;
@@ -259,12 +258,12 @@ table {
   @apply p-0;
 }
 table tr {
-  @apply m-0 p-0 border-t border-gray-300;
-  @apply dark:border-gray-700;
+  @apply m-0 p-0 border-t border-slate-300;
+  @apply dark:border-slate-700;
 }
 table tr:nth-child(2n) {
-  @apply bg-gray-100;
-  @apply dark:bg-gray-900;
+  @apply bg-slate-100;
+  @apply dark:bg-slate-900;
 }
 table tr th {
   @apply font-semibold;
@@ -280,8 +279,8 @@ table tr td[align="right"] {
 table tr th,
 table tr td {
   @apply text-left;
-  @apply m-0 px-4 py-2 border border-gray-300;
-  @apply dark:border-gray-700;
+  @apply m-0 px-4 py-2 border border-slate-300;
+  @apply dark:border-slate-700;
 }
 .table-container {
   overflow: auto;
@@ -301,6 +300,11 @@ pre .prism-code {
 .dark pre .prism-code {
   --c-highlight: #3d4b61;
 }
+
+pre .prism-code .token-line {
+  line-height: 150%;
+}
+
 pre .prism-code .token.plain,
 pre .prism-code .token.builtin,
 pre .prism-code .token.char,

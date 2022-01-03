@@ -1,4 +1,5 @@
 import ComponentLinks from "@/components/ComponentLinks";
+import PropsTable from "@/components/PropsTable";
 
 # Box
 
@@ -7,6 +8,14 @@ components are built. It uses reakit's [Role](https://reakit.io/docs/role/)
 component internally.
 
 <ComponentLinks github="box" story="primitives-box" />
+
+## Imports
+
+```js
+import { Box } from "@renderlesskit/react-tailwind";
+```
+
+- **Box** - Only root component
 
 ## Usage
 
@@ -52,3 +61,18 @@ You can either pass string elements or pass ReactNodes to the as prop.
   </Box>
 </Box>
 ```
+
+## API Reference
+
+<PropsTable
+  data={[
+    {
+      name: "as",
+      default: "div",
+      typeSimple: "string | React.ElementType",
+      type: "type As<Props = any> = React.ElementType<Props>",
+      description:
+        "Polymorphic as prop, change the component to a different HTML tag or custom component.",
+    },
+  ]}
+/>

@@ -1,5 +1,5 @@
 {
+  "spinner": "Spinner",
   "progress": "Progress",
-  "circular-progress": "CircularProgress",
-  "spinner": "Spinner"
+  "circular-progress": "CircularProgress"
 }

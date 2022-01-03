@@ -325,7 +325,7 @@ var defaultTheme = {
   logo: /* @__PURE__ */ React2.createElement(React2.Fragment, null, /* @__PURE__ */ React2.createElement("span", {
     className: "mr-2 font-extrabold hidden md:inline"
   }, "Nextra"), /* @__PURE__ */ React2.createElement("span", {
-    className: "text-gray-600 font-normal hidden md:inline"
+    className: "text-slate-600 font-normal hidden md:inline"
   }, "The Next Docs Builder")),
   head: /* @__PURE__ */ React2.createElement(React2.Fragment, null, /* @__PURE__ */ React2.createElement("meta", {
     name: "msapplication-TileColor",
@@ -876,7 +876,7 @@ var NextLink = ({ route, title, isRTL }) => {
   return /* @__PURE__ */ React7.createElement(Link2, {
     href: route
   }, /* @__PURE__ */ React7.createElement("a", {
-    className: cn("text-lg font-medium p-4 -m-4 no-underline text-gray-600 hover:text-blue-600 flex items-center", { "ml-2": !isRTL, "mr-2": isRTL }),
+    className: cn("text-lg font-medium p-4 -m-4 no-underline text-slate-600 hover:text-blue-600 flex items-center", { "ml-2": !isRTL, "mr-2": isRTL }),
     title
   }, title, /* @__PURE__ */ React7.createElement(arrow_right_default, {
     className: cn("transform inline flex-shrink-0", {
@@ -889,7 +889,7 @@ var PrevLink = ({ route, title, isRTL }) => {
   return /* @__PURE__ */ React7.createElement(Link2, {
     href: route
   }, /* @__PURE__ */ React7.createElement("a", {
-    className: cn("text-lg font-medium p-4 -m-4 no-underline text-gray-600 hover:text-blue-600 flex items-center", { "mr-2": !isRTL, "ml-2": isRTL }),
+    className: cn("text-lg font-medium p-4 -m-4 no-underline text-slate-600 hover:text-blue-600 flex items-center", { "mr-2": !isRTL, "ml-2": isRTL }),
     title
   }, /* @__PURE__ */ React7.createElement(arrow_right_default, {
     className: cn("transform inline flex-shrink-0", {
@@ -957,7 +957,7 @@ var Footer = ({
   }, children, /* @__PURE__ */ React7.createElement("hr", null), config.footer ? /* @__PURE__ */ React7.createElement("div", {
     className: "mt-24 flex justify-between flex-col-reverse md:flex-row items-center md:items-end"
   }, /* @__PURE__ */ React7.createElement("span", {
-    className: "text-gray-600"
+    className: "text-slate-600"
   }, render_component_default(config.footerText, { locale })), /* @__PURE__ */ React7.createElement("div", {
     className: "mt-6"
   }), config.footerEditLink ? /* @__PURE__ */ React7.createElement(EditPageLink, {
@@ -1067,16 +1067,16 @@ function LocaleSwitch({ options, isRTL }) {
   })), /* @__PURE__ */ React11.createElement("span", {
     className: "sr-only"
   }, "Languages")), mounted ? /* @__PURE__ */ React11.createElement("ul", {
-    className: cn2("locale-dropdown absolute block bg-white dark:bg-dark border dark:border-gray-700 py-1 rounded shadow-lg", { "right-0": !isRTL, "left-0": isRTL })
+    className: cn2("locale-dropdown absolute block bg-white dark:bg-dark border dark:border-slate-700 py-1 rounded shadow-lg", { "right-0": !isRTL, "left-0": isRTL })
   }, Array.isArray(options) && options.map((l) => /* @__PURE__ */ React11.createElement("li", {
     key: l.locale
   }, /* @__PURE__ */ React11.createElement(Link3, {
     href: asPath,
     locale: l.locale
   }, /* @__PURE__ */ React11.createElement("a", {
-    className: cn2("block no-underline text-current py-2 px-4 hover:bg-gray-200 dark:hover:bg-gray-800 whitespace-nowrap", {
+    className: cn2("block no-underline text-current py-2 px-4 hover:bg-slate-200 dark:hover:bg-slate-800 whitespace-nowrap", {
       "font-semibold": locale === l.locale,
-      "bg-gray-100 dark:bg-gray-900": locale === l.locale
+      "bg-slate-100 dark:bg-slate-900": locale === l.locale
     })
   }, l.text))))) : null);
 }
@@ -1182,7 +1182,7 @@ var Search = ({ directories = [] }) => {
   }), show ? null : /* @__PURE__ */ React12.createElement("div", {
     className: "hidden sm:flex absolute inset-y-0 right-0 py-1.5 pr-1.5"
   }, /* @__PURE__ */ React12.createElement("kbd", {
-    className: "inline-flex items-center px-2 font-sans text-sm font-medium text-gray-400 dark:text-gray-800 dark:border-gray-800 border rounded"
+    className: "inline-flex items-center px-2 font-sans text-sm font-medium text-slate-400 dark:text-slate-800 dark:border-slate-800 border rounded"
   }, "/"))), renderList && /* @__PURE__ */ React12.createElement("ul", {
     className: "absolute left-0 z-20 w-full p-0 m-0 mt-1 list-none border divide-y rounded shadow-md md:right-0 top-100 md:w-auto"
   }, results.map((res, i) => {
@@ -1242,7 +1242,7 @@ var Item2 = ({ title, active, href, onMouseOver, excerpt }) => {
   }, /* @__PURE__ */ React13.createElement("span", {
     className: "font-semibold"
   }, title), excerpt ? /* @__PURE__ */ React13.createElement("div", {
-    className: "text-gray-600"
+    className: "text-slate-600"
   }, /* @__PURE__ */ React13.createElement(TextWithHighlights, {
     content: excerpt.text,
     ranges: excerpt.highlight_ranges
@@ -1368,7 +1368,7 @@ function Search2() {
   }), show ? null : /* @__PURE__ */ React13.createElement("div", {
     className: "hidden sm:flex absolute inset-y-0 right-0 py-1.5 pr-1.5"
   }, /* @__PURE__ */ React13.createElement("kbd", {
-    className: "inline-flex items-center px-2 font-sans text-sm font-medium text-gray-400 dark:text-gray-800 dark:border-gray-800 border rounded"
+    className: "inline-flex items-center px-2 font-sans text-sm font-medium text-slate-400 dark:text-slate-800 dark:border-slate-800 border rounded"
   }, "/"))), renderList && /* @__PURE__ */ React13.createElement("ul", {
     className: "absolute z-20 p-0 m-0 mt-1 divide-y top-full"
   }, results.map((res, i) => {
@@ -1450,7 +1450,7 @@ function Navbar({
   const activeRoute = getFSRoute(asPath, locale).split("#")[0];
   const { menu, setMenu } = useMenuContext();
   return /* @__PURE__ */ React15.createElement("nav", {
-    className: "flex items-center bg-white z-20 fixed top-0 left-0 right-0 h-16 border-b border-gray-200 px-6 dark:bg-dark dark:border-gray-900 bg-opacity-[.97] dark:bg-opacity-100"
+    className: "flex items-center bg-white z-20 fixed top-0 left-0 right-0 h-16 border-b border-slate-200 px-6 dark:bg-dark dark:border-slate-900 bg-opacity-[.97] dark:bg-opacity-100"
   }, /* @__PURE__ */ React15.createElement("div", {
     className: "w-full flex items-center mr-2"
   }, /* @__PURE__ */ React15.createElement(Link6, {
@@ -1469,7 +1469,7 @@ function Navbar({
       href,
       key: page.route
     }, /* @__PURE__ */ React15.createElement("a", {
-      className: cn5("no-underline whitespace-nowrap mr-4 hidden md:inline-block", page.route === activeRoute || activeRoute.startsWith(page.route + "/") ? "text-current" : "text-gray-500")
+      className: cn5("no-underline whitespace-nowrap mr-4 hidden md:inline-block", page.route === activeRoute || activeRoute.startsWith(page.route + "/") ? "text-current" : "text-slate-500")
     }, page.title));
   }) : null, /* @__PURE__ */ React15.createElement("div", {
     className: "flex-1"
@@ -1662,7 +1662,7 @@ function Sidebar({
       height: "calc(100vh - 4rem)"
     }
   }, /* @__PURE__ */ React16.createElement("div", {
-    className: "sidebar border-gray-200 dark:border-gray-900 w-full p-4 pb-40 md:pb-16 h-full overflow-y-auto"
+    className: "sidebar border-slate-200 dark:border-slate-900 w-full p-4 pb-40 md:pb-16 h-full overflow-y-auto"
   }, /* @__PURE__ */ React16.createElement("div", {
     className: "mb-4 block md:hidden"
   }, config.customSearch || (config.search ? config.unstable_stork ? /* @__PURE__ */ React16.createElement(Search2, null) : /* @__PURE__ */ React16.createElement(search_default, {
@@ -1716,7 +1716,7 @@ function ToC({
       style: indent(heading.depth)
     }, /* @__PURE__ */ React17.createElement("a", {
       href: `#${slug}`,
-      className: cn7("no-underline hover:text-gray-900 dark:hover:text-gray-100", state && state.isActive ? "text-gray-900 dark:text-gray-100 font-semibold" : "text-gray-600")
+      className: cn7("no-underline hover:text-slate-900 dark:hover:text-slate-100", state && state.isActive ? "text-slate-900 dark:text-slate-100 font-semibold" : "text-slate-600")
     }, text));
   })) : null);
 }

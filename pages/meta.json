@@ -1,4 +1,15 @@
 {
-  "index": "Home",
-  "docs": "Documentation"
+  "index": {
+    "title": "Introduction",
+    "type": "nav",
+    "hidden": true
+  },
+  "docs": {
+    "title": "Docs",
+    "type": "nav"
+  },
+  "guides": {
+    "title": "Guides",
+    "type": "nav"
+  }
 }

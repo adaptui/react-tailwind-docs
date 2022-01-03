@@ -1,7 +1,7 @@
 /* eslint-disable import/no-anonymous-default-export */
 export default {
   // Project Repo
-  repository: "https://github.com/timelessco/renderlesskit-react-tailwind",
+  github: "https://github.com/timelessco/renderlesskit-react-tailwind",
   // Docs Repo
   docsRepositoryBase:
     "https://github.com/timelessco/renderlesskit-tailwind-docs",

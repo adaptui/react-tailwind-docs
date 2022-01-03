@@ -1,9 +1,9 @@
 {
-  "input": "Input",
-  "form-field": "FormField",
-  "checkbox": "Checkbox",
   "radio": "Radio",
+  "checkbox": "Checkbox",
   "switch": "Switch",
   "slider": "Slider",
+  "input": "Input",
+  "select": "Select",
   "textarea": "Textarea"
 }
