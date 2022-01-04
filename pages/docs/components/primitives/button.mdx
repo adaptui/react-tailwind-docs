@@ -1,6 +1,7 @@
 import Callout from "nextra-renderlesskit-theme-docs/callout";
-
+import InteractiveCodeblock from "@/components/InteractiveCodeblock";
 import ComponentLinks from "@/components/ComponentLinks";
+import PropsTable from "@/components/PropsTable";
 
 # Button
 
@@ -20,6 +21,16 @@ import { Button, ButtonGroup, IconButton } from "@renderlesskit/react-tailwind";
 - **ButtonGroup:** Used to group related buttons together in a horizontal stack,
   can also be set as `attached`
 - **IconButton:** Accessible button to show an icon
+
+## Usage
+
+Default Button
+
+<InteractiveCodeblock
+  children={({ spreadProps }) => `<Button${spreadProps}>Click me</Button>`}
+  booleanProps={["loading"]}
+  themeProps={{ size: "button.size.common", variant: "button.variant.common" }}
+/>
 
 ## Button sizes
 
@@ -142,3 +153,91 @@ You can also put IconButton inside IconButton
   </IconButton>
 </ButtonGroup>
 ```
+
+## API Reference
+
+### Button
+
+<PropsTable
+  data={[
+    {
+      name: "size",
+      default: "md",
+      themeKey: "button.size.common",
+      description: "Size of the button",
+    },
+    {
+      name: "variant",
+      default: "solid",
+      themeKey: "button.variant.common",
+      description: "Variant of the button",
+    },
+    {
+      name: "prefix",
+      type: "React.ReactNode",
+      description:
+        "If added, the button will show an element before the button's label",
+    },
+    {
+      name: "suffix",
+      type: "React.ReactNode",
+      description:
+        "If added, the button will show an element after the button's label",
+    },
+    {
+      name: "loading",
+      type: "boolean",
+      description: "If `true`, the button will show a spinner",
+    },
+    {
+      name: "spinner",
+      type: "React.ReactElement",
+      description: "If added, the button will show this spinner components",
+    },
+  ]}
+/>
+
+### ButtonGroup
+
+<PropsTable
+  data={[
+    {
+      name: "size",
+      default: "md",
+      themeKey: "button.size.common",
+      description: "Size of the button",
+    },
+    {
+      name: "variant",
+      default: "solid",
+      themeKey: "button.variant.common",
+      description: "Variant of the button",
+    },
+    {
+      name: "attached",
+      default: "false",
+      type: "boolean",
+      description:
+        "If true, Buttons inside the group will be collapsed together.",
+    },
+  ]}
+/>
+
+### IconButton
+
+<PropsTable
+  data={[
+    {
+      name: "size",
+      default: "md",
+      themeKey: "button.size.common",
+      description: "Size of the button",
+    },
+    {
+      name: "variant",
+      default: "solid",
+      themeKey: "button.variant.common",
+      description: "Variant of the button",
+    },
+  ]}
+/>

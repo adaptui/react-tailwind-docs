@@ -1,24 +1,4 @@
 /// <reference types="react" />
-import { Heading } from "mdast";
-export interface PageMapItem {
-    name: string;
-    route: string;
-    locale?: string;
-    children?: PageMapItem[];
-    frontMatter?: Record<string, any>;
-    meta?: Record<string, any>;
-    active?: boolean;
-}
-export interface PageOpt {
-    filename: string;
-    route: string;
-    meta: Record<string, any>;
-    pageMap: PageMapItem[];
-    titleText: string | null;
-    headings?: Heading[];
-    hasH1: boolean;
-}
-export { Heading };
 export interface DocsThemeConfig {
     docsRepositoryBase?: string;
     titleSuffix?: string | React.FC<{

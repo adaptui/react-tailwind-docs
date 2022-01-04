@@ -29,6 +29,9 @@
     },
     "./bleed": {
       "import": "./dist/bleed.js"
+    },
+    "./codeblock": {
+      "import": "./dist/codeblock.js"
     }
   },
   "main": "dist/index.js",
@@ -70,8 +73,10 @@
     ]
   },
   "dependencies": {
+    "@chakra-ui/hooks": "1.7.1",
     "@mdx-js/react": "2.0.0-rc.2",
     "@reach/skip-nav": "0.16.0",
+    "@renderlesskit/react-tailwind": "0.0.1-alpha.37",
     "classnames": "2.3.1",
     "focus-visible": "5.2.0",
     "github-slugger": "1.4.0",
@@ -81,6 +86,7 @@
     "next-themes": "0.0.15",
     "parse-git-url": "1.0.1",
     "prism-react-renderer": "1.2.1",
+    "react-live": "2.3.0",
     "title": "3.4.3"
   },
   "peerDependencies": {
@@ -94,5 +100,5 @@
     "emoji": "emoji",
     "editor": false
   },
-  "yalcSig": "ecdf36723a243c305d9261fd73b2c6b3"
+  "yalcSig": "0a6245f7e065a391412a9662a582e25b"
 }

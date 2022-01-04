@@ -1,5 +1,6 @@
 import Callout from "nextra-renderlesskit-theme-docs/callout";
 import ComponentLinks from "@/components/ComponentLinks";
+import PropsTable from "@/components/PropsTable";
 
 # Badge
 
@@ -56,3 +57,22 @@ corners you can set the `Badge` component to be `floating`
   </Badge>
 </Button>
 ```
+
+## API Reference
+
+<PropsTable
+  data={[
+    {
+      name: "size",
+      default: "md",
+      themeKey: "badge.size.common",
+      description: "Size of the badge",
+    },
+    {
+      name: "variant",
+      default: "solid",
+      themeKey: "badge.variant",
+      description: "Variant of the badge",
+    },
+  ]}
+/>

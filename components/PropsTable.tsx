@@ -80,7 +80,7 @@ const PropsTable: React.FC<PropsTableProps> = ({
                 </code>
                 {description && (
                   <Tooltip content={description}>
-                    {/* <TooltipWrapper className="z-30" /> */}
+                    <TooltipWrapper className="z-30" />
                     <Button
                       size="sm"
                       variant="subtle"
@@ -95,19 +95,22 @@ const PropsTable: React.FC<PropsTableProps> = ({
                   {themeKey ? "union" : Boolean(typeSimple) ? typeSimple : type}
                 </code>
                 {!!(typeSimple || themeKey) && (
-                  // <Popover
-                  //   content={
-                  //     <code className={typeStyles}>
-                  //       {themeKey
-                  //         ? Object.keys(get(theme, themeKey)).join(" | ")
-                  //         : type}
-                  //     </code>
-                  //   }
-                  // >
-                  //   <InfoCircleIcon aria-label="See full type" />
-                  // </Popover>
-                  <Tooltip content="Add your information">
-                    <Button>Tooltip</Button>
+                  <Tooltip
+                    content={
+                      <code className={typeStyles}>
+                        {themeKey
+                          ? Object.keys(get(theme, themeKey)).join(" | ")
+                          : type}
+                      </code>
+                    }
+                  >
+                    <TooltipWrapper className="z-30" />
+                    <Button
+                      size="sm"
+                      variant="subtle"
+                      iconOnly={<ErrorIcon />}
+                      className="ml-2"
+                    />
                   </Tooltip>
                 )}
               </Box>
