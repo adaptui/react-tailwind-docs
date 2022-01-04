@@ -7,6 +7,7 @@ import {
   useTheme,
 } from "@renderlesskit/react-tailwind";
 import { get } from "lodash";
+// @ts-ignore
 import { CodeBlock } from "nextra-renderlesskit-theme-docs/codeblock";
 
 type TemplateFunctionProps = {
