@@ -10,6 +10,7 @@ export declare type CopyButtonProps = {
 };
 export declare const CopyButton: React.FC<CopyButtonProps>;
 export declare type CodeBlockProps = {
+    code?: string;
     className?: string;
     live?: boolean;
     render?: boolean;
@@ -17,3 +18,4 @@ export declare type CodeBlockProps = {
     noInline?: boolean;
 };
 export declare const CodeBlock: React.FC<CodeBlockProps>;
+export default CodeBlock;

@@ -1,4 +1,11 @@
-/// <reference types="react" />
+import React from "react";
+import { PageOpt } from "nextra";
+import "focus-visible";
+declare const DocsLayout: (opts: PageOpt, config: DocsThemeConfig) => (props: any) => JSX.Element;
+export default DocsLayout;
+export { Bleed } from "./bleed";
+export { Callout } from "./callout";
+export { CodeBlock } from "./codeblock";
 export interface DocsThemeConfig {
     docsRepositoryBase?: string;
     titleSuffix?: string | React.FC<{

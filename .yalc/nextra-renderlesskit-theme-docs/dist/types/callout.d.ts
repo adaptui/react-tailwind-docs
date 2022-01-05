@@ -10,5 +10,5 @@ interface CalloutProps {
     /** default emoji 💡*/
     emoji: string;
 }
-declare const Callout: React.FC<CalloutProps>;
+export declare const Callout: React.FC<CalloutProps>;
 export default Callout;

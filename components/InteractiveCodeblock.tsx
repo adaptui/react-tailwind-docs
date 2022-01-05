@@ -7,8 +7,7 @@ import {
   useTheme,
 } from "@renderlesskit/react-tailwind";
 import { get } from "lodash";
-// @ts-ignore
-import { CodeBlock } from "nextra-renderlesskit-theme-docs/codeblock";
+import { CodeBlock } from "nextra-renderlesskit-theme-docs";
 
 type TemplateFunctionProps = {
   booleanProps: string[];
@@ -17,6 +16,7 @@ type TemplateFunctionProps = {
   spreadProps: string;
   props: Record<string, any>;
 };
+
 type TemplateFunction = (props: TemplateFunctionProps) => string;
 
 type InteractiveCodeblockProps = {

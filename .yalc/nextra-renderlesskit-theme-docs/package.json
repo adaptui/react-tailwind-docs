@@ -20,25 +20,16 @@
   "license": "MIT",
   "author": "Navin Moorthy <navin007.a@gmail.com>",
   "exports": {
-    "./style.css": "./style.css",
     ".": {
       "import": "./dist/index.js"
     },
-    "./callout": {
-      "import": "./dist/callout.js"
-    },
-    "./bleed": {
-      "import": "./dist/bleed.js"
-    },
-    "./codeblock": {
-      "import": "./dist/codeblock.js"
-    }
+    "./style.css": "./style.css"
   },
   "main": "dist/index.js",
   "module": "dist/index.js",
   "source": "src/index.ts",
-  "types": "./dist/types.d.ts",
-  "typings": "./dist/types.d.ts",
+  "types": "./dist/types/index.d.ts",
+  "typings": "./dist/types/index.d.ts",
   "files": [
     "dist/*",
     "style.css"
@@ -46,9 +37,10 @@
   "scripts": {
     "postinstall": "husky install",
     "dev": "node scripts/dev.js",
+    "prebuild": "rimraf dist",
     "build": "yarn build:pkg && yarn build:types",
     "build:pkg": "node scripts/build.js",
-    "build:types": "tsc -p tsconfig.types.json",
+    "build:types": "tsc --project tsconfig.types.json --declarationDir dist/types",
     "lint": "eslint --color --ext .js,.jsx,.ts,.tsx .",
     "lint:fix": "eslint --color --ext .js,.jsx,.ts,.tsx . --fix",
     "format": "prettier -wl \"./**/*.{html,css,js,jsx,ts,tsx,md,json}\"",
@@ -100,5 +92,5 @@
     "emoji": "emoji",
     "editor": false
   },
-  "yalcSig": "0a6245f7e065a391412a9662a582e25b"
+  "yalcSig": "4464d2e91e1615036505dc20e320df3b"
 }
