@@ -287,9 +287,10 @@ var init_wasm_loader = __esm({
 });
 
 // src/index.tsx
-import React21, { useMemo as useMemo5, useState as useState6 } from "react";
+import React18, { useMemo as useMemo5, useState as useState6 } from "react";
+import { RenderlesskitProvider } from "@renderlesskit/react-tailwind";
 import { SkipNavContent } from "@reach/skip-nav";
-import cn9 from "classnames";
+import cn8 from "classnames";
 import { useRouter as useRouter7 } from "next/router";
 import { ThemeProvider } from "next-themes";
 
@@ -1388,10 +1389,10 @@ function Search2() {
 import React14 from "react";
 import { useTheme } from "next-themes";
 function ThemeSwitch() {
-  const { theme: theme2, setTheme } = useTheme();
+  const { theme, setTheme } = useTheme();
   const mounted = use_mounted_default();
   const toggleTheme = () => {
-    setTheme(theme2 === "dark" ? "light" : "dark");
+    setTheme(theme === "dark" ? "light" : "dark");
   };
   return /* @__PURE__ */ React14.createElement("button", {
     className: "text-current p-2 cursor-pointer focus:ring outline-none",
@@ -1401,7 +1402,7 @@ function ThemeSwitch() {
       if (e.key === "Enter")
         toggleTheme();
     }
-  }, mounted && theme2 === "dark" ? /* @__PURE__ */ React14.createElement("svg", {
+  }, mounted && theme === "dark" ? /* @__PURE__ */ React14.createElement("svg", {
     fill: "none",
     viewBox: "0 0 24 24",
     width: "24",
@@ -1413,7 +1414,7 @@ function ThemeSwitch() {
     strokeLinejoin: "round",
     strokeWidth: 2,
     d: "M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"
-  })) : mounted && theme2 === "light" ? /* @__PURE__ */ React14.createElement("svg", {
+  })) : mounted && theme === "light" ? /* @__PURE__ */ React14.createElement("svg", {
     fill: "none",
     viewBox: "0 0 24 24",
     width: "24",
@@ -1724,180 +1725,6 @@ function ToC({
 
 // src/index.tsx
 import "focus-visible";
-
-// src/bleed.tsx
-import React18 from "react";
-import cn8 from "classnames";
-var Bleed = ({ full, children }) => {
-  return /* @__PURE__ */ React18.createElement("div", {
-    className: cn8("bleed relative mt-6 -mx-6 md:-mx-8 2xl:-mx-24", { full })
-  }, children);
-};
-
-// src/callout.tsx
-import React19 from "react";
-var themes = {
-  default: "bg-orange-100 text-orange-800 dark:text-orange-300 dark:bg-orange-200 dark:bg-opacity-10",
-  error: "bg-red-200 text-red-900 dark:text-red-200 dark:bg-red-600 dark:bg-opacity-30",
-  warning: "bg-yellow-200 text-yellow-900 dark:text-yellow-200 dark:bg-yellow-700 dark:bg-opacity-30"
-};
-var Callout = ({
-  children,
-  type = "default",
-  emoji = "\u{1F4A1}"
-}) => {
-  return /* @__PURE__ */ React19.createElement("div", {
-    className: `${themes[type]} flex rounded-lg callout mt-6`
-  }, /* @__PURE__ */ React19.createElement("div", {
-    className: "pl-3 pr-2 py-2 select-none text-xl",
-    style: {
-      fontFamily: '"Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol"'
-    }
-  }, emoji), /* @__PURE__ */ React19.createElement("div", {
-    className: "pr-4 py-2"
-  }, children));
-};
-
-// src/codeblock.tsx
-import React20 from "react";
-import { LiveEditor, LiveError, LivePreview, LiveProvider } from "react-live";
-import * as Renderlesskit from "@renderlesskit/react-tailwind";
-import { RenderlesskitProvider } from "@renderlesskit/react-tailwind";
-import { useClipboard } from "@chakra-ui/hooks";
-import Highlight2, {
-  defaultProps as defaultProps2
-} from "prism-react-renderer";
-import theme from "prism-react-renderer/themes/palenight";
-var THEME2 = {
-  plain: {
-    backgroundColor: "transparent"
-  },
-  styles: [
-    {
-      types: ["keyword", "builtin"],
-      style: {
-        color: "#ff0078",
-        fontWeight: "bold"
-      }
-    },
-    {
-      types: ["comment"],
-      style: {
-        color: "#999",
-        fontStyle: "italic"
-      }
-    },
-    {
-      types: ["variable", "language-javascript"],
-      style: {
-        color: "#0076ff"
-      }
-    },
-    {
-      types: ["attr-name"],
-      style: {
-        color: "#d9931e",
-        fontStyle: "normal"
-      }
-    },
-    {
-      types: ["boolean", "regex"],
-      style: {
-        color: "#d9931e"
-      }
-    }
-  ]
-};
-var StaticCode = (props) => {
-  const _a = props, { children, className, highlight, noCopy } = _a, rest = __objRest(_a, ["children", "className", "highlight", "noCopy"]);
-  if (!className)
-    return /* @__PURE__ */ React20.createElement("code", __spreadValues({}, rest), children);
-  const highlightedLines = highlight ? highlight.split(",").map(Number) : [];
-  const language = className.replace(/language-/, "");
-  return /* @__PURE__ */ React20.createElement("div", {
-    className: "relative"
-  }, /* @__PURE__ */ React20.createElement(Highlight2, __spreadProps(__spreadValues({}, defaultProps2), {
-    code: children.trim(),
-    language,
-    theme: THEME2
-  }), ({ className: className2, style, tokens, getLineProps, getTokenProps }) => /* @__PURE__ */ React20.createElement("code", {
-    className: className2,
-    style: __spreadValues({}, style)
-  }, tokens.map((line, i) => /* @__PURE__ */ React20.createElement("div", __spreadProps(__spreadValues({
-    key: i
-  }, getLineProps({ line, key: i })), {
-    style: highlightedLines.includes(i + 1) ? {
-      background: "var(--c-highlight)",
-      margin: "0 -1rem",
-      padding: "0 1rem"
-    } : {}
-  }), line.map((token, key) => /* @__PURE__ */ React20.createElement("span", __spreadValues({
-    key
-  }, getTokenProps({ token, key })))))))), !noCopy && /* @__PURE__ */ React20.createElement(CopyButton, {
-    code: children.trim()
-  }));
-};
-var CopyButton = ({ code }) => {
-  const { hasCopied, onCopy } = useClipboard(code);
-  return /* @__PURE__ */ React20.createElement("button", {
-    className: "absolute right-0 px-4 py-1 text-xs text-gray-800 transform -translate-x-2 translate-y-4 bg-white rounded-md -top-2",
-    onClick: onCopy
-  }, hasCopied ? "COPIED!" : "COPY");
-};
-var transformer = (rawCode, language, noInline) => {
-  const code = rawCode.replace(/((^|)import[^;]+[; ]+)+/gi, "").replace(/export default \(\) => {((.|\n)*)};/, "render(() => {$1});").replace(/export default \(\) => \(((.|\n)*)\);/, "render($1);").replace(/export default \(\) => ((.|\n)*);/, "render($1);").replace(/export default ((.|\n)*);/, "render($1);");
-  return language === "jsx" && !noInline ? `<>${code}</>` : code;
-};
-var CodeBlock = (props) => {
-  const _a = props, { code, className, live, render, noCopy, noInline } = _a, rest = __objRest(_a, ["code", "className", "live", "render", "noCopy", "noInline"]);
-  const language = className == null ? void 0 : className.replace(/language-/, "");
-  const [editorCode, setEditorCode] = React20.useState(code.trim());
-  React20.useEffect(() => {
-    console.log("%ccode", "color: #e57373", code);
-    if (code)
-      setEditorCode(code.trim());
-  }, [code]);
-  console.log("%ceditorCode", "color: #f200e2", editorCode);
-  const scope = __spreadValues({
-    React: React20
-  }, Renderlesskit);
-  const liveProviderProps = __spreadValues({
-    theme,
-    language,
-    code: editorCode,
-    scope,
-    noInline
-  }, rest);
-  console.log("%cliveProviderProps", "color: #731d1d", liveProviderProps);
-  if (live) {
-    return /* @__PURE__ */ React20.createElement(RenderlesskitProvider, null, /* @__PURE__ */ React20.createElement(LiveProvider, __spreadValues({
-      transformCode: (rawCode) => transformer(rawCode, language, props.noInline)
-    }, liveProviderProps), /* @__PURE__ */ React20.createElement(LivePreview, {
-      className: "p-6 bg-white border border-gray-600 rounded-md rounded-b-none"
-    }), /* @__PURE__ */ React20.createElement("div", {
-      className: "relative"
-    }, /* @__PURE__ */ React20.createElement(LiveEditor, {
-      className: "font-mono text-sm rounded-md rounded-t-none"
-    }), /* @__PURE__ */ React20.createElement(CopyButton, {
-      code: editorCode
-    })), /* @__PURE__ */ React20.createElement(LiveError, {
-      className: "mt-0 text-xs text-red-500 bg-red-100 rounded-md rounded-t-none"
-    })));
-  }
-  if (render) {
-    return /* @__PURE__ */ React20.createElement("div", null, /* @__PURE__ */ React20.createElement(RenderlesskitProvider, null, /* @__PURE__ */ React20.createElement(LiveProvider, __spreadValues({
-      transformCode: (rawCode) => transformer(rawCode, language, props.noInline)
-    }, liveProviderProps), /* @__PURE__ */ React20.createElement(LivePreview, {
-      style: { fontFamily: "'Inter', sans-serif" }
-    }))));
-  }
-  return /* @__PURE__ */ React20.createElement(StaticCode, __spreadValues({
-    noCopy,
-    className
-  }, props), editorCode);
-};
-
-// src/index.tsx
 function useDirectoryInfo(pageMap) {
   const { locale, defaultLocale, asPath } = useRouter7();
   return useMemo5(() => {
@@ -1911,13 +1738,13 @@ function useDirectoryInfo(pageMap) {
   }, [pageMap, locale, defaultLocale, asPath]);
 }
 function Body({ meta, toc, filepathWithName, navLinks, children }) {
-  return /* @__PURE__ */ React21.createElement(React21.Fragment, null, /* @__PURE__ */ React21.createElement(SkipNavContent, null), meta.full ? /* @__PURE__ */ React21.createElement("article", {
+  return /* @__PURE__ */ React18.createElement(React18.Fragment, null, /* @__PURE__ */ React18.createElement(SkipNavContent, null), meta.full ? /* @__PURE__ */ React18.createElement("article", {
     className: "relative pt-16 w-full overflow-x-hidden"
-  }, children) : /* @__PURE__ */ React21.createElement("article", {
+  }, children) : /* @__PURE__ */ React18.createElement("article", {
     className: "docs-container relative pt-16 pb-16 px-6 md:px-8 w-full max-w-full flex min-w-0"
-  }, /* @__PURE__ */ React21.createElement("main", {
+  }, /* @__PURE__ */ React18.createElement("main", {
     className: "max-w-screen-md mx-auto pt-4 z-10 min-w-0 w-full"
-  }, /* @__PURE__ */ React21.createElement(theme_default, null, children), /* @__PURE__ */ React21.createElement(footer_default, {
+  }, /* @__PURE__ */ React18.createElement(theme_default, null, children), /* @__PURE__ */ React18.createElement(footer_default, {
     filepathWithName
   }, navLinks)), toc));
 }
@@ -1945,71 +1772,71 @@ var Layout = (props) => {
   }, [config.i18n, locale]);
   const [menu, setMenu] = useState6(false);
   if (activeType === "nav") {
-    return /* @__PURE__ */ React21.createElement(React21.Fragment, null, /* @__PURE__ */ React21.createElement(Head, {
+    return /* @__PURE__ */ React18.createElement(React18.Fragment, null, /* @__PURE__ */ React18.createElement(Head, {
       title,
       locale,
       meta
-    }), /* @__PURE__ */ React21.createElement(MenuContext.Provider, {
+    }), /* @__PURE__ */ React18.createElement(MenuContext.Provider, {
       value: {
         menu,
         setMenu,
         defaultMenuCollapsed: !!config.defaultMenuCollapsed
       }
-    }, /* @__PURE__ */ React21.createElement("div", {
-      className: cn9("nextra-container main-container flex flex-col", {
+    }, /* @__PURE__ */ React18.createElement("div", {
+      className: cn8("nextra-container main-container flex flex-col", {
         rtl: isRTL,
         page: true
       })
-    }, /* @__PURE__ */ React21.createElement(Navbar, {
+    }, /* @__PURE__ */ React18.createElement(Navbar, {
       isRTL,
       flatDirectories,
       flatPageDirectories
-    }), /* @__PURE__ */ React21.createElement(ActiveAnchor, null, /* @__PURE__ */ React21.createElement("div", {
+    }), /* @__PURE__ */ React18.createElement(ActiveAnchor, null, /* @__PURE__ */ React18.createElement("div", {
       className: "flex flex-1 h-full"
-    }, /* @__PURE__ */ React21.createElement(Sidebar, {
+    }, /* @__PURE__ */ React18.createElement(Sidebar, {
       directories: flatPageDirectories,
       flatDirectories,
       fullDirectories: directories,
       mdShow: false,
       headings
-    }), /* @__PURE__ */ React21.createElement(Body, {
+    }), /* @__PURE__ */ React18.createElement(Body, {
       meta,
       filepathWithName,
       navLinks: null
     }, children))))));
   }
-  return /* @__PURE__ */ React21.createElement(React21.Fragment, null, /* @__PURE__ */ React21.createElement(Head, {
+  return /* @__PURE__ */ React18.createElement(React18.Fragment, null, /* @__PURE__ */ React18.createElement(Head, {
     title,
     locale,
     meta
-  }), /* @__PURE__ */ React21.createElement(MenuContext.Provider, {
+  }), /* @__PURE__ */ React18.createElement(MenuContext.Provider, {
     value: {
       menu,
       setMenu,
       defaultMenuCollapsed: !!config.defaultMenuCollapsed
     }
-  }, /* @__PURE__ */ React21.createElement("div", {
-    className: cn9("nextra-container main-container flex flex-col", {
+  }, /* @__PURE__ */ React18.createElement("div", {
+    className: cn8("nextra-container main-container flex flex-col", {
       rtl: isRTL
     })
-  }, /* @__PURE__ */ React21.createElement(Navbar, {
+  }, /* @__PURE__ */ React18.createElement(Navbar, {
     isRTL,
     flatDirectories,
     flatPageDirectories
-  }), /* @__PURE__ */ React21.createElement(ActiveAnchor, null, /* @__PURE__ */ React21.createElement("div", {
+  }), /* @__PURE__ */ React18.createElement(ActiveAnchor, null, /* @__PURE__ */ React18.createElement("div", {
     className: "flex flex-1 h-full"
-  }, /* @__PURE__ */ React21.createElement(Sidebar, {
+  }, /* @__PURE__ */ React18.createElement(Sidebar, {
     directories: docsDirectories,
     flatDirectories,
     fullDirectories: directories,
     headings
-  }), /* @__PURE__ */ React21.createElement(Body, {
+  }), /* @__PURE__ */ React18.createElement(Body, {
     meta,
     filepathWithName,
-    toc: /* @__PURE__ */ React21.createElement(ToC, {
+    toc: /* @__PURE__ */ React18.createElement(ToC, {
       headings: config.floatTOC ? headings : null
     }),
-    navLinks: /* @__PURE__ */ React21.createElement(NavLinks, {
+    navLinks: /* @__PURE__ */ React18.createElement(NavLinks, {
       flatDirectories: flatDocsDirectories,
       currentIndex: activeIndex,
       isRTL
@@ -2019,17 +1846,14 @@ var Layout = (props) => {
 var DocsLayout = (opts, config) => {
   const extendedConfig = Object.assign({}, default_config_default, config);
   return (props) => {
-    return /* @__PURE__ */ React21.createElement(ThemeConfigContext.Provider, {
+    return /* @__PURE__ */ React18.createElement(ThemeConfigContext.Provider, {
       value: extendedConfig
-    }, /* @__PURE__ */ React21.createElement(ThemeProvider, {
+    }, /* @__PURE__ */ React18.createElement(ThemeProvider, {
       attribute: "class"
-    }, /* @__PURE__ */ React21.createElement(Layout, __spreadValues(__spreadValues({}, opts), props))));
+    }, /* @__PURE__ */ React18.createElement(RenderlesskitProvider, null, /* @__PURE__ */ React18.createElement(Layout, __spreadValues(__spreadValues({}, opts), props)))));
   };
 };
 var src_default = DocsLayout;
 export {
-  Bleed,
-  Callout,
-  CodeBlock,
   src_default as default
 };

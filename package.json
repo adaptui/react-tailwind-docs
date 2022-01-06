@@ -71,7 +71,8 @@
     "nextra-renderlesskit-theme-docs": "link:.yalc/nextra-renderlesskit-theme-docs",
     "react": "17.0.2",
     "react-dom": "17.0.2",
-    "react-live": "2.3.0"
+    "react-live": "2.2.3",
+    "twind": "^0.16.16"
   },
   "devDependencies": {
     "@babel/core": "7.16.7",

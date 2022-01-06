@@ -8,7 +8,7 @@ type ComponentLinkProps = {
   theme: string;
 };
 
-const ComponentLinks: React.FC<ComponentLinkProps> = ({
+export const ComponentLinks: React.FC<ComponentLinkProps> = ({
   github,
   story,
   theme,

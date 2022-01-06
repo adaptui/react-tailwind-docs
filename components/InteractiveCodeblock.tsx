@@ -1,13 +1,18 @@
 import React from "react";
+import { LiveEditor, LiveError, LivePreview, LiveProvider } from "react-live";
 import {
+  Button,
   Checkbox,
   runIfFn,
   Select,
   useHasMounted,
   useTheme,
 } from "@renderlesskit/react-tailwind";
+import * as Renderlesskit from "@renderlesskit/react-tailwind";
+import { useClipboard } from "@chakra-ui/hooks";
 import { get } from "lodash";
-import { CodeBlock } from "nextra-renderlesskit-theme-docs";
+import prismTheme from "prism-react-renderer/themes/palenight";
+import { tw } from "twind";
 
 type TemplateFunctionProps = {
   booleanProps: string[];
@@ -28,7 +33,7 @@ type InteractiveCodeblockProps = {
 
 const wrapperStyles = "mt-2 flex items-center flex-wrap space-x-4";
 
-const InteractiveCodeblock = (props: InteractiveCodeblockProps) => {
+export const InteractiveCodeblock = (props: InteractiveCodeblockProps) => {
   const {
     children = "",
     themeProps = {},
@@ -40,15 +45,12 @@ const InteractiveCodeblock = (props: InteractiveCodeblockProps) => {
   const [booleanStates, onBooleanStateChange] = React.useState<
     Record<string, boolean>
   >({});
-  console.log("%cbooleanStates", "color: #00a3cc", booleanStates);
   const [themeStates, setThemeStates] = React.useState<Record<string, string>>(
     {},
   );
-  console.log("%cthemeStates", "color: #ff0000", themeStates);
   const [choiceStates, setChoiceState] = React.useState<Record<string, any>>(
     {},
   );
-  console.log("%cchoiceStates", "color: #00e600", choiceStates);
 
   const finalBooleanProps = Object.keys(booleanStates).filter(
     key => booleanStates[key],
@@ -74,13 +76,31 @@ const InteractiveCodeblock = (props: InteractiveCodeblockProps) => {
     props: { ...themeStates, ...booleanStates, ...choiceStates },
   });
 
+  const scope = {
+    React,
+    ...Renderlesskit,
+    tw,
+  };
+
   const mounted = useHasMounted();
 
   if (!mounted) return null;
 
   return (
     <div className="mt-6">
-      <CodeBlock live code={code} />
+      <LiveProvider
+        transformCode={rawCode => transformer(rawCode)}
+        code={code}
+        scope={scope}
+        theme={prismTheme}
+      >
+        <div className="relative">
+          <LivePreview className="p-6 bg-white border border-gray-600 rounded-md rounded-b-none" />
+          <CopyButton code={code} />
+        </div>
+        <LiveEditor className="font-mono text-sm rounded-md rounded-t-none" />
+        <LiveError className="mt-0 text-xs text-red-500 bg-red-100 rounded-md rounded-t-none" />
+      </LiveProvider>
       <div className={wrapperStyles}>
         {booleanProps.map(name => {
           return (
@@ -168,3 +188,34 @@ const printProps = (props: string[]) => {
 function capitalizeFirstLetter(string: string) {
   return string.charAt(0).toUpperCase() + string.slice(1);
 }
+
+export type CopyButtonProps = {
+  code: string;
+};
+
+export const CopyButton: React.FC<CopyButtonProps> = ({ code }) => {
+  const { hasCopied, onCopy } = useClipboard(code);
+
+  return (
+    <span className="absolute right-0 transform -translate-x-2 translate-y-4 -top-2">
+      <Button size="sm" onClick={onCopy}>
+        {hasCopied ? "COPIED!" : "COPY"}
+      </Button>
+    </span>
+  );
+};
+
+const transformer = (rawCode: string) => {
+  const code = rawCode
+    // remove imports
+    .replace(/((^|)import[^;]+[; ]+)+/gi, "")
+    // replace `export default => {*};` with `render(() => {*});`
+    .replace(/export default \(\) => {((.|\n)*)};/, "render(() => {$1});")
+    // replace `export default => (*);` with `render(*);`
+    .replace(/export default \(\) => \(((.|\n)*)\);/, "render($1);")
+    // replace `export default => *;` with `render(*);`
+    .replace(/export default \(\) => ((.|\n)*);/, "render($1);")
+    .replace(/export default ((.|\n)*);/, "render($1);");
+
+  return `<>${code}</>`;
+};

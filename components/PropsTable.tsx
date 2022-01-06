@@ -27,7 +27,7 @@ type PropsTableProps = {
   "aria-labelledby"?: string;
 };
 
-const PropsTable: React.FC<PropsTableProps> = ({
+export const PropsTable: React.FC<PropsTableProps> = ({
   data,
   "aria-label": ariaLabel,
   "aria-labelledby": ariaLabelledBy,
