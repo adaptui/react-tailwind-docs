@@ -364,10 +364,16 @@ var default_config_default = defaultTheme;
 
 // src/misc/theme.tsx
 import React3, { useContext as useContext2, useEffect, useMemo, useRef } from "react";
+import { LiveEditor, LiveError, LivePreview, LiveProvider } from "react-live";
+import { Button } from "@renderlesskit/react-tailwind";
+import * as Renderlesskit from "@renderlesskit/react-tailwind";
+import { useClipboard } from "@chakra-ui/hooks";
 import { MDXProvider } from "@mdx-js/react";
 import Slugger from "github-slugger";
 import Link from "next/link";
 import Highlight, { defaultProps } from "prism-react-renderer";
+import prismTheme from "prism-react-renderer/themes/palenight";
+import { tw } from "twind";
 import "intersection-observer";
 var THEME = {
   plain: {
@@ -571,11 +577,14 @@ var Pre = (_a) => {
     value: props
   }, /* @__PURE__ */ React3.createElement("pre", null, children));
 };
-var Code = ({
-  children,
-  className
-}) => {
-  const { highlight } = useContext2(PreContext);
+var Code = (props) => {
+  const { children, className } = props;
+  const {
+    highlight,
+    live = false,
+    render = false,
+    noInline = false
+  } = useContext2(PreContext);
   const highlightedRanges = useMemo(() => {
     return highlight ? highlight.split(",").map((r) => {
       if (r.includes("-")) {
@@ -589,7 +598,30 @@ var Code = ({
   if (typeof children !== "string")
     return /* @__PURE__ */ React3.createElement("code", null, children);
   const language = className.replace(/language-/, "");
-  return /* @__PURE__ */ React3.createElement(Highlight, __spreadProps(__spreadValues({}, defaultProps), {
+  const scope = __spreadProps(__spreadValues({ React: React3 }, Renderlesskit), { tw });
+  if (live) {
+    return /* @__PURE__ */ React3.createElement(LiveProvider, {
+      transformCode: (rawCode) => transformer(rawCode, language, noInline),
+      code: children.trim(),
+      scope,
+      language,
+      theme: prismTheme
+    }, /* @__PURE__ */ React3.createElement("div", {
+      className: "relative px-2 py-4"
+    }, /* @__PURE__ */ React3.createElement(LivePreview, null), /* @__PURE__ */ React3.createElement(CopyButton, {
+      code: children.trim()
+    })), /* @__PURE__ */ React3.createElement(LiveEditor, null), /* @__PURE__ */ React3.createElement(LiveError, null));
+  }
+  if (render) {
+    return /* @__PURE__ */ React3.createElement(LiveProvider, {
+      transformCode: (rawCode) => transformer(rawCode, language, noInline),
+      code: children.trim(),
+      scope,
+      language,
+      theme: prismTheme
+    }, /* @__PURE__ */ React3.createElement(LivePreview, null));
+  }
+  return /* @__PURE__ */ React3.createElement(React3.Fragment, null, /* @__PURE__ */ React3.createElement(Highlight, __spreadProps(__spreadValues({}, defaultProps), {
     code: children.trim(),
     language,
     theme: THEME
@@ -606,7 +638,10 @@ var Code = ({
     } : {}
   }), line.map((token, key) => /* @__PURE__ */ React3.createElement("span", __spreadValues({
     key
-  }, getTokenProps({ token, key }))))))));
+  }, getTokenProps({ token, key })))))))), /* @__PURE__ */ React3.createElement(CopyButton, {
+    variant: "subtle",
+    code: children.trim()
+  }));
 };
 var Table = ({ children }) => {
   return /* @__PURE__ */ React3.createElement("div", {
@@ -632,6 +667,20 @@ var MDXTheme = ({ children }) => {
   }, children);
 };
 var theme_default = MDXTheme;
+var CopyButton = (_a) => {
+  var _b = _a, { code } = _b, props = __objRest(_b, ["code"]);
+  const { hasCopied, onCopy } = useClipboard(code);
+  return /* @__PURE__ */ React3.createElement("span", {
+    className: "absolute right-0 transform -translate-x-2 translate-y-4 -top-2"
+  }, /* @__PURE__ */ React3.createElement(Button, __spreadValues({
+    size: "sm",
+    onClick: onCopy
+  }, props), hasCopied ? "COPIED!" : "COPY"));
+};
+var transformer = (rawCode, language, noInline) => {
+  const code = rawCode.replace(/((^|)import[^;]+[; ]+)+/gi, "").replace(/export default \(\) => {((.|\n)*)};/, "render(() => {$1});").replace(/export default \(\) => \(((.|\n)*)\);/, "render($1);").replace(/export default \(\) => ((.|\n)*);/, "render($1);").replace(/export default ((.|\n)*);/, "render($1);");
+  return language === "jsx" && !noInline ? `<>${code}</>` : code;
+};
 
 // src/utils/get-fs-route.ts
 var getFSRoute = (asPath, locale) => {

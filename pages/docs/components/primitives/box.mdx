@@ -14,8 +14,6 @@ component internally.
 import { Box } from "@renderlesskit/react-tailwind";
 ```
 
-- **Box** - Only root component
-
 ## Usage
 
 ```jsx live
@@ -41,20 +39,20 @@ You can either pass string elements or pass ReactNodes to the as prop.
 ## Card example
 
 ```jsx live
-<Box as="dl" class="grid grid-cols-1 gap-5 mt-5 sm:grid-cols-2">
-  <Box class="px-4 py-5 overflow-hidden bg-white rounded-lg shadow sm:p-6">
-    <Box as="dt" class="text-sm font-medium text-gray-500 truncate">
+<Box as="dl" className="grid grid-cols-1 gap-5 mt-5 sm:grid-cols-2">
+  <Box className="px-4 py-5 overflow-hidden bg-white rounded-lg shadow sm:p-6">
+    <Box as="dt" className="text-sm font-medium text-gray-500 truncate">
       Total Subscribers
     </Box>
-    <Box as="dd" class="mt-1 text-3xl font-semibold text-gray-900">
+    <Box as="dd" className="mt-1 text-3xl font-semibold text-gray-900">
       71,897
     </Box>
   </Box>
-  <Box class="px-4 py-5 overflow-hidden bg-white rounded-lg shadow sm:p-6">
-    <Box as="dt" class="text-sm font-medium text-gray-500 truncate">
+  <Box className="px-4 py-5 overflow-hidden bg-white rounded-lg shadow sm:p-6">
+    <Box as="dt" className="text-sm font-medium text-gray-500 truncate">
       Avg. Open Rate
     </Box>
-    <Box as="dd" class="mt-1 text-3xl font-semibold text-gray-900">
+    <Box as="dd" className="mt-1 text-3xl font-semibold text-gray-900">
       58.16%
     </Box>
   </Box>

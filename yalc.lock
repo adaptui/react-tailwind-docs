@@ -2,7 +2,7 @@
   "version": "v1",
   "packages": {
     "nextra-renderlesskit-theme-docs": {
-      "signature": "2c850273244d7f6958f42b9d89733f00",
+      "signature": "f4da515a772c57b0ff0c0ad7aa71f63c",
       "link": true
     },
     "nextra": {

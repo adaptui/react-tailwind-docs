@@ -294,6 +294,10 @@ table tr td {
   @apply mr-1;
 }
 
+pre {
+  position: relative;
+}
+
 pre .prism-code {
   --c-highlight: #cce0f5;
 }

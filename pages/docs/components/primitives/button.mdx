@@ -26,11 +26,9 @@ import { Button, ButtonGroup, IconButton } from "@renderlesskit/react-tailwind";
 
 ## Usage
 
-Default Button
-
 <InteractiveCodeblock
   children={({ spreadProps }) => `<Button${spreadProps}>Click me</Button>`}
-  booleanProps={["loading"]}
+  booleanProps={["loading", "disabled"]}
   themeProps={{ size: "button.size.common", variant: "button.variant.common" }}
 />
 
@@ -49,8 +47,8 @@ Default Button
 
 ```jsx live
 <div className="space-x-2">
-  <Button variant="primary">Primary</Button>
-  <Button variant="secondary">secondary</Button>
+  <Button variant="solid">Primary</Button>
+  <Button variant="subtle">secondary</Button>
   <Button variant="outline">Outline</Button>
   <Button variant="ghost">Ghost</Button>
 </div>
@@ -61,99 +59,39 @@ Default Button
   guide](/docs/theming).
 </Callout>
 
-## Button prefix & suffix
+## Button prefix, suffix & iconOnly
 
 You can pass prefix and suffix props to the button to append or prepend any
 content inside of button.
 
 ```jsx live
 <div className="space-x-2">
-  <Button prefix={<SearchIcon />} suffix={<CaretDownIcon />}>
+  <Button iconOnly={<SlotIcon />} />
+  <Button prefix={<SlotIcon />}>Search</Button>
+  <Button suffix={<SlotIcon />}>Search</Button>
+  <Button prefix={<SlotIcon />} suffix={<SlotIcon />}>
     Search
-  </Button>
-  <Button variant="outline" prefix={<CheckIcon />}>
-    Valid
   </Button>
 </div>
 ```
 
-## Button spinner
-
-You can pass `loading` prop to indicate that the button is loading.
+# Close Button
 
 ```jsx live
-<Button loading prefix={<SearchIcon />} suffix={<CaretDownIcon />}>
-  Loading
-</Button>
-```
-
-You can also add custom loading spinner by passing a `spinner` prop
-
-```jsx live
-<Button
-  loading
-  spinner={
-    <div className="flex space-x-3">
-      <span>Loading</span>
-      <div className="animate-spin">.</div>
-    </div>
-  }
-  suffix={<SearchIcon />}
->
-  Click me
-</Button>
-```
-
-## IconButton
-
-Icon button provides an accessible way to render an icon within a button. It
-sets it's children's role to `img` & sets `aria-hidden` to true.
-
-```jsx live
-<IconButton>
-  <SearchIcon />
-</IconButton>
-```
-
-## ButtonGroup
-
-ButtonGroup can be used to group together multiple buttons & also collapse their
-border radius & gap via the `attached` prop
-
-Button group accepts `size` & `variant` prop which is passed down to all the
-child buttons automatically.
-
-```jsx live
-<ButtonGroup size="xl" variant="outline">
-  <Button>Reply</Button>
-  <Button>Ignore</Button>
-</ButtonGroup>
-```
-
-Attached button group, when set to `true` it collapses border radius of the
-buttons.
-
-```jsx live
-<ButtonGroup attached size="xl" variant="outline">
-  <Button>Reply</Button>
-  <Button>Ignore</Button>
-</ButtonGroup>
-```
-
-You can also put IconButton inside IconButton
-
-```jsx live
-<ButtonGroup>
-  <IconButton aria-label="search">
-    <SearchIcon />
-  </IconButton>
-  <IconButton aria-label="info">
-    <InfoCircleIcon />
-  </IconButton>
-  <IconButton aria-label="settings">
-    <WheelIcon />
-  </IconButton>
-</ButtonGroup>
+<div className="space-y-2">
+  <div className="space-x-2">
+    <CloseButton size="sm" />
+    <CloseButton size="md" />
+    <CloseButton size="lg" />
+    <CloseButton size="xl" />
+  </div>
+  <div className="space-x-2">
+    <CloseButton variant="solid" />
+    <CloseButton variant="subtle" />
+    <CloseButton variant="outline" />
+    <CloseButton variant="ghost" />
+  </div>
+</div>
 ```
 
 ## API Reference
@@ -175,6 +113,18 @@ You can also put IconButton inside IconButton
       description: "Variant of the button",
     },
     {
+      name: "loading",
+      default: "false",
+      type: "boolean",
+      description: "If `true`, the button will show a spinner",
+    },
+    {
+      name: "disabled",
+      default: "false",
+      type: "boolean",
+      description: "If `true`, the button will be disabled",
+    },
+    {
       name: "prefix",
       type: "React.ReactNode",
       description:
@@ -187,59 +137,15 @@ You can also put IconButton inside IconButton
         "If added, the button will show an element after the button's label",
     },
     {
-      name: "loading",
-      type: "boolean",
-      description: "If `true`, the button will show a spinner",
+      name: "iconOnly",
+      type: "React.ReactNode",
+      description:
+        "If added, the button will show an icon only, no label, and no prefix/suffix",
     },
     {
       name: "spinner",
-      type: "React.ReactElement",
+      type: "React.ReactNode",
       description: "If added, the button will show this spinner components",
     },
-  ]}
-/>
 
-### ButtonGroup
-
-<PropsTable
-  data={[
-    {
-      name: "size",
-      default: "md",
-      themeKey: "button.size.common",
-      description: "Size of the button",
-    },
-    {
-      name: "variant",
-      default: "solid",
-      themeKey: "button.variant.common",
-      description: "Variant of the button",
-    },
-    {
-      name: "attached",
-      default: "false",
-      type: "boolean",
-      description:
-        "If true, Buttons inside the group will be collapsed together.",
-    },
-  ]}
-/>
-
-### IconButton
-
-<PropsTable
-  data={[
-    {
-      name: "size",
-      default: "md",
-      themeKey: "button.size.common",
-      description: "Size of the button",
-    },
-    {
-      name: "variant",
-      default: "solid",
-      themeKey: "button.variant.common",
-      description: "Variant of the button",
-    },
-  ]}
-/>
+]} />

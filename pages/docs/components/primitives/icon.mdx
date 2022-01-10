@@ -25,14 +25,6 @@ If no children is provided Icon will render a fallback icon.
 <Icon />
 ```
 
-## Focusable Icon
-
-By passing `focusable` prop we can make the icon keyboard focusable.
-
-```jsx live
-<Icon focusable />
-```
-
 ## `createIcon` utility
 
 To create icons more easily we provide a `createIcon` utility which takes few
@@ -40,7 +32,7 @@ props and returns a React component;
 
 Basic usage:
 
-```js live noInline
+```js noInline
 const CheckIcon = createIcon({
   displayName: "CheckIcon",
   viewBox: "0 0 12 12",
