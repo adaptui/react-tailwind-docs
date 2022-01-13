@@ -18,19 +18,17 @@ After setting up tailwind in your project, all you need to do inside your
 `tailwind.config.js` is import our `preset` function and use it.
 
 ```js
-const { preset } = require("@renderlesskit/react-tailwind/preset");
-
 module.exports = preset({
-  /* your normal tailwind config */
+  presets: [require("@renderlesskit/react-tailwind/preset")],
   purge: [
-    // Make sure to add this purge
-    "./node_modules/\\@renderlesskit/react-tailwind/dist/esm/theme/defaultTheme/*.js",
+    // Make sure to add this purge to generate the component's default styling
+    "node_modules/@renderlesskit/react-tailwind/**/*",
   ],
 });
 ```
 
 <Callout>
-  `preset()` merges your taiwind config with renderlesskit's internal tailwind
+  `presets` merges your taiwind config with renderlesskit's internal tailwind
   configs and enables certain plugins
 </Callout>
 

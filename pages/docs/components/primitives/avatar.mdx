@@ -1,4 +1,8 @@
-import { ComponentLinks } from "@/components/index";
+import {
+  ComponentLinks,
+  InteractiveCodeblock,
+  PropsTable,
+} from "@/components/index";
 
 # Avatar
 
@@ -11,15 +15,30 @@ import { ComponentLinks } from "@/components/index";
 ```js
 import {
   Avatar,
-  Avatarbadge,
-  AvatarGroup,
-  AvatarContents,
+  AvatarIcon,
+  AvatarImage,
+  AvatarInitials,
+  AvatarStatusIndicator,
+  AvatarWrapper,
+  useAvatarProps,
+  useAvatarState,
+  AvatarDefaultStatusIndicators,
 } from "@renderlesskit/react-tailwind";
 ```
 
+## Usage
+
+<InteractiveCodeblock
+  children={({ spreadProps }) =>
+    `<Avatar src="https://bit.ly/dan-abramov" name="Dan Abramov" circular={false} ${spreadProps} />`
+  }
+  booleanProps={["circular"]}
+  themeProps={{ size: "avatar.icon.size", status: "avatar.statusIndicators" }}
+/>
+
 ## Avatar sizes
 
-Avatar has 5 sizes `xs` `sm` `md` `lg` `xl`
+Avatar has 5 sizes `xs` `sm` `md` `lg` `xl` `2xl` `3xl`
 
 ```jsx live
 <div className="flex space-x-2">
@@ -28,18 +47,23 @@ Avatar has 5 sizes `xs` `sm` `md` `lg` `xl`
   <Avatar size="md" src="https://bit.ly/kent-c-dodds" name="Kent Dodds" />
   <Avatar size="lg" src="https://bit.ly/dan-abramov" name="Dan Abramov" />
   <Avatar size="xl" src="https://bit.ly/31ycy7V" name="Timelessco" />
+  <Avatar
+    size="2xl"
+    src="https://i.pravatar.cc/300??img=61"
+    name="Clint Barton"
+  />
+  <Avatar size="3xl" src="https://i.pravatar.cc/300??img=42" name="Jhon Snow" />
 </div>
 ```
 
 ## Avatar with badge
 
-By using `AvatarBadge` component you can show status icons at the right corner
-of the Avatar.
+You can show status icons at the right corner of the Avatar using `status` prop.
 
 ```jsx live
 <div className="flex space-x-2">
   <Avatar
-    status="online"
+    status="active"
     size="xl"
     name="Code Beast"
     src="https://bit.ly/code-beast"
@@ -51,26 +75,24 @@ of the Avatar.
     name="Timelessco"
   />
   <Avatar
+    status="away"
+    size="xl"
+    src="https://bit.ly/ryan-florence"
+    name="Rayan Florence"
+  />
+  <Avatar
     status="typing"
     size="xl"
     src="https://bit.ly/dan-abramov"
     name="Dan Abramov"
   />
+  <Avatar
+    status="org"
+    size="xl"
+    src="https://bit.ly/kent-c-dodds"
+    name="Kent Dodds"
+  />
 </div>
-```
-
-### Custom badge
-
-You can also customize the badge, by providing `<Avatar />` with children &
-using AvatarContens, AvatarBadge components.
-
-```jsx live
-<Avatar size="xl" src="https://bit.ly/ryan-florence" name="Rayan Florence">
-  <AvatarContents />
-  <AvatarBadge>
-    <SearchIcon />
-  </AvatarBadge>
-</Avatar>
 ```
 
 ## Avatar fallbacks
@@ -80,33 +102,84 @@ If there is an error loading the src of the avatar, there are 2 fallbacks:
 - If there's a name prop, we use it to generate the initials.
 - If there's no name prop, we use a default avatar.
 
-If both name and src are not provided you can pass a `fallback` prop to show any
-content, `fallback` has the lowest priority thus if name or src is provided
-fallback will be ignored.
+If both name and src are not provided you can pass a `icon` prop to show any
+content, `icon` has the lowest priority thus if name or src is provided fallback
+will be ignored.
 
 ```jsx live
 <div className="flex space-x-2">
   <Avatar size="xl" name="Navin Moorthy" src="https://bit.ly/broken-link" />
   <Avatar size="xl" name="Anurag Hazra" src="https://bit.ly/broken-link" />
   <Avatar size="xl" src="https://bit.ly/broken-link" />
-  <Avatar size="xl" fallback={<InfoCircleIcon />} />
+  <Avatar size="xl" icon={<InfoCircleIcon />} />
 </div>
 ```
 
-## AvatarGroup
+## API Reference
 
-`AvatarGroup` renders its children as a stack, and you can:
+### Avatar
 
-- `limit` the total number of amount rendered and truncating the excess ones.
-- adjust size of all the avatars inside the AvatarGroup equally via the `size`
-  prop.
-
-```jsx live
-<AvatarGroup size="xl" limit={2}>
-  <Avatar name="Ryan Florence" src="https://bit.ly/ryan-florence" />
-  <Avatar name="Timelessco" src="https://bit.ly/31ycy7V" />
-  <Avatar name="Kent Dodds" src="https://bit.ly/kent-c-dodds" />
-  <Avatar name="Wes bos" src="https://bit.ly/wes-bos" />
-  <Avatar name="Christian Nwamba" src="https://bit.ly/code-beast" />
-</AvatarGroup>
-```
+<PropsTable
+  data={[
+    { name: "src", type: "string", description: "URL for the avatar image" },
+    {
+      name: "name",
+      type: "string",
+      description: "Name prop used for `alt` & calculate placeholder initials.",
+    },
+    {
+      name: "circular",
+      type: "boolean",
+      description: "If `true`, Avatar looks like a round.",
+      default: "true",
+    },
+    {
+      name: "size",
+      themeKey: "avatar.icon.size",
+      description: "Size of the avatar",
+      default: "xl",
+    },
+    {
+      name: "status",
+      themeKey: "avatar.statusIndicators",
+      description: "Shows AvatarBadge with the given type",
+      default: "none",
+    },
+    {
+      name: "icon",
+      type: "React.ReactNode",
+      description:
+        "The default avatar used as fallback when `name`, and `src` is not specified.",
+    },
+    {
+      name: "statusIndicators",
+      type: "React.ReactNode",
+      description: "The custom indicatos to pass to Avatar",
+    },
+    {
+      name: "showRing",
+      type: "boolean",
+      description: "If `true`, the `Avatar` will show a `border` around it.",
+      default: "false",
+    },
+    {
+      name: "ringColor",
+      type: "string",
+      description: "Color of the `border` to match it's parent background.",
+      default: "ring-white",
+    },
+    {
+      name: "getInitialsFromName",
+      typeSimple: "string",
+      type: "(name?: string) => string | undefined",
+      description: "Function called when image failed to load",
+    },
+    {
+      name: "parentsBackground",
+      type: "string[]",
+      description:
+        "Avatar containers background to match the StatusIndicator's background & ring color.",
+      default: `["bg-white", "ring-white"]`,
+    },
+  ]}
+/>

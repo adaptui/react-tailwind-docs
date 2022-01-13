@@ -2,8 +2,8 @@ import { Callout } from "@/components/index";
 
 # Getting Started
 
-Renderlesskit uses tailwind to provide you better styling, so you'll need to
-setup a tailwind project using thier
+Renderlesskit uses tailwind to provide better styling at one place, so you'll
+need to setup a tailwind project using thier
 [installation](https://tailwindcss.com/docs/installation) guide.
 
 ## Installation
@@ -21,13 +21,12 @@ yarn add @renderlesskit/react-tailwind
 After setting up tailwind in your project, import our `preset` function inside
 your `tailwind.config.js` and use it.
 
-```js noCopy
-const { preset } = require("@renderlesskit/react-tailwind/preset");
-
+```js
 module.exports = preset({
+  presets: [require("@renderlesskit/react-tailwind/preset")],
   purge: [
     // Make sure to add this purge to generate the component's default styling
-    "./node_modules/\\@renderlesskit/react-tailwind/dist/esm/theme/defaultTheme/*.js",
+    "node_modules/@renderlesskit/react-tailwind/**/*",
   ],
 });
 ```

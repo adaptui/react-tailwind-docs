@@ -1,10 +1,15 @@
-import { Callout, ComponentLinks, PropsTable } from "@/components/index";
+import {
+  Callout,
+  ComponentLinks,
+  PropsTable,
+  InteractiveCodeblock,
+} from "@/components/index";
 
 # Badge
 
 Display an indicator that requires attention.
 
-<ComponentLinks github="badge" theme="badge" story="primitives-badge" />
+<ComponentLinks github="badge" themeColor="badge" story="primitives-badge" />
 
 ## Imports
 
@@ -12,23 +17,28 @@ Display an indicator that requires attention.
 import { Badge } from "@renderlesskit/react-tailwind";
 ```
 
-## Badge Variants
+## Usage
 
-Badge has 4 variants `primary` `secondary` `outline` `ghost`
+<InteractiveCodeblock
+  children={({ spreadProps }) => `<Badge${spreadProps}>Click me</Badge>`}
+  themeProps={{
+    size: "badge.size.common",
+    variant: "badge.variant",
+    themeColor: "badge.variant.solid",
+  }}
+/>
+
+## Badge variants
+
+Badge has 4 variants `solid` `subtle` `outline`
 
 ```jsx live
 <div className="space-x-2">
-  <Badge variant="primary">primary</Badge>
-  <Badge variant="secondary">secondary</Badge>
-  <Badge variant="outline">outline</Badge>
-  <Badge variant="ghost">ghost</Badge>
+  <Badge variant="solid">Solid</Badge>
+  <Badge variant="subtle">Subtle</Badge>
+  <Badge variant="outline">Outline</Badge>
 </div>
 ```
-
-<Callout>
-  You can add extra variants & sizes via the theme file. Checkout [theming
-  guide](/docs/theming).
-</Callout>
 
 ## Badge Sizes
 
@@ -42,18 +52,33 @@ Badge comes with 3 sizes `sm` `md` `lg`
 </div>
 ```
 
-## Floating Badge
+## Badge Themes
 
-In some scenarioes where you want to add a floating badge on an element's
-corners you can set the `Badge` component to be `floating`
+Badge comes with 5 themes `default` `primary` `secondary` `success` `danger`
 
 ```jsx live
-<Button variant="outline">
-  Hello world
-  <Badge size="sm" position="top-right" floating>
-    20
-  </Badge>
-</Button>
+<div className="space-x-2">
+  <Badge themeColor="default">Default</Badge>
+  <Badge themeColor="primary">Primary</Badge>
+  <Badge themeColor="secondary">Secondary</Badge>
+  <Badge themeColor="success">Success</Badge>
+  <Badge themeColor="danger">Danger</Badge>
+</div>
+```
+
+<Callout>
+  You can add extra variants, themeColor & sizes via the theme file. Checkout
+  [theming guide](/docs/theming).
+</Callout>
+
+## Badge prefix
+
+You can pass prefix props to the badge to prepend any content inside of badge.
+
+```jsx live
+<div className="space-x-2">
+  <Badge prefix={<SlotIcon />}>Search</Badge>
+</div>
 ```
 
 ## API Reference
@@ -72,5 +97,11 @@ corners you can set the `Badge` component to be `floating`
       themeKey: "badge.variant",
       description: "Variant of the badge",
     },
-  ]}
-/>
+    {
+      name: "themeColor",
+      default: "default",
+      themeKey: "badge.variant.solid",
+      description: "Theme of the badge",
+    },
+
+]} />

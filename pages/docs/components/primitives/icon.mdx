@@ -1,4 +1,8 @@
-import { ComponentLinks, PropsTable } from "@/components/index";
+import {
+  ComponentLinks,
+  PropsTable,
+  InteractiveCodeblock,
+} from "@/components/index";
 
 # Icon
 
@@ -6,18 +10,24 @@ import { ComponentLinks, PropsTable } from "@/components/index";
 
 <ComponentLinks github="icon" story="primitives-icon" theme="icon" />
 
+## Imports
+
+```js
+import { Icon, createIcon } from "@renderlesskit/react-tailwind";
+```
+
 ## Usage
 
-Basic usage for Icon component.
-
-```jsx live
-<Icon viewBox="0 0 200 200" className="text-red-500">
+<InteractiveCodeblock
+  children={({
+    spreadProps,
+  }) => `<Icon viewBox="0 0 200 200" className="text-red-500" ${spreadProps}>
   <path
     fill="currentColor"
     d="M 100, 100 m -75, 0 a 75,75 0 1,0 150,0 a 75,75 0 1,0 -150,0"
   />
-</Icon>
-```
+</Icon>`}
+/>
 
 If no children is provided Icon will render a fallback icon.
 
@@ -32,23 +42,25 @@ props and returns a React component;
 
 Basic usage:
 
-```js noInline
-const CheckIcon = createIcon({
-  displayName: "CheckIcon",
-  viewBox: "0 0 12 12",
-  path: (
-    <path
-      fill="none"
-      stroke="currentColor"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-      strokeWidth="1.3"
-      d="M2.25 6.214l2.41 2.679L9.75 3"
-    />
-  ),
-});
+```jsx live noInline
+() => {
+  const CheckIcon = createIcon({
+    displayName: "CheckIcon",
+    viewBox: "0 0 12 12",
+    path: (
+      <path
+        fill="none"
+        stroke="currentColor"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        strokeWidth="1.3"
+        d="M2.25 6.214l2.41 2.679L9.75 3"
+      />
+    ),
+  });
 
-export default () => <CheckIcon />;
+  return <CheckIcon />;
+};
 ```
 
 ## API Reference

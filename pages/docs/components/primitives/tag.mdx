@@ -1,4 +1,9 @@
-import { Callout, ComponentLinks } from "@/components/index";
+import {
+  Callout,
+  ComponentLinks,
+  InteractiveCodeblock,
+  PropsTable,
+} from "@/components/index";
 
 # Tag
 
@@ -10,22 +15,44 @@ keywords that describe them.
 ## Imports
 
 ```js
-import { Tag, TagGroup } from "@renderlesskit/react-tailwind";
+import { Tag } from "@renderlesskit/react-tailwind";
 ```
 
 - **Tag** Standalone tag component
-- **TagGroup** Used to group related tags together in a horizontal stack.
 
-## Tag Variants
+## Usage
 
-Tag has 4 variants `primary` `secondary` `outline` `ghost`
+<InteractiveCodeblock
+  children={({ spreadProps }) => `<Tag${spreadProps}>Click me</Tag>`}
+  booleanProps={["disabled"]}
+  themeProps={{
+    size: "tag.size.default",
+    variant: "tag.variant.default",
+  }}
+/>
+
+## Tag sizes
+
+Tag has 4 sizes `sm` `md` `lg` `xl`
 
 ```jsx live
 <div className="space-x-2">
-  <Tag variant="primary">primary</Tag>
-  <Tag variant="secondary">secondary</Tag>
-  <Tag variant="outline">outline</Tag>
-  <Tag variant="ghost">ghost</Tag>
+  <Tag size="sm">Small</Tag>
+  <Tag size="md">Medium</Tag>
+  <Tag size="lg">Large</Tag>
+  <Tag size="xl">Extra Large</Tag>
+</div>
+```
+
+## Tag variants
+
+Tag has 4 variants `solid` `subtle` `outline` `ghost`
+
+```jsx live
+<div className="space-x-2">
+  <Tag variant="solid">Solid</Tag>
+  <Tag variant="subtle">Subtle</Tag>
+  <Tag variant="outline">Outline</Tag>
 </div>
 ```
 
@@ -34,69 +61,68 @@ Tag has 4 variants `primary` `secondary` `outline` `ghost`
   guide](/docs/theming).
 </Callout>
 
-## Tag Sizes
-
-Tag comes with 3 sizes `sm` `md` `lg`
-
-```jsx live
-<div className="space-x-2">
-  <Tag size="sm">Small</Tag>
-  <Tag size="md">Medium</Tag>
-  <Tag size="lg">Large</Tag>
-</div>
-```
-
 ## Closable Tag
 
 Tags can be closable or removable. If `closable` prop is passed tag will show a
-close icon in the suffix.
+close icon in the `suffix`. You can override the default icon inside `suffix`.
+Tag is by default renders a button component so you can pass the clickable props
+directly.
 
 ```jsx live
-<Tag closable onClose={() => alert("removed")}>
-  Removable
-</Tag>
+<Tag closable>Removable</Tag>
 ```
 
-## Tag Prefix/Suffix
+## Tag Prefix & suffix
 
 Same as buttons Tag also accepts prefix, suffix props which can be used to
 append or prepend content in the tag.
 
 ```jsx live
 <div className="space-x-2">
-  <Tag prefix={<Avatar src="https://bit.ly/dan-abramov" />}>Dan abramov</Tag>
-  <Tag prefix={<BoltIcon />}>Charge</Tag>
-  <Tag prefix={<ClockIcon />} suffix={<SearchIcon />} closable>
-    Copy
+  <Tag prefix={<SlotIcon />}>Search</Tag>
+  <Tag closable suffix={<SlotIcon />}>
+    Search
   </Tag>
 </div>
 ```
 
 <Callout>Suffix will only be rendered if `closable` is set to `true`</Callout>
 
-## TagGroup
+## API Reference
 
-TagGroup can be used to group multiple tags together & can pass down `size`,
-`variant` props.
+### Tag
 
-While using TagGroup, we will add roving index to the closable icons that means
-you can move the focus with the arrow keys.
-
-```jsx live
-<TagGroup size="sm" variant="outline" className="flex items-center gap-1">
-  <Tag closable>Tag 1</Tag>
-  <Tag closable>Tag 2</Tag>
-  <Tag closable>Tag 3</Tag>
-</TagGroup>
-```
-
-To disable roving index on the tag closable icons you can set
-`allowArrowNavigation=false`
-
-```jsx live
-<TagGroup allowArrowNavigation={false} className="flex items-center gap-1">
-  <Tag closable>Tag 1</Tag>
-  <Tag closable>Tag 2</Tag>
-  <Tag closable>Tag 3</Tag>
-</TagGroup>
-```
+<PropsTable
+  data={[
+    {
+      name: "size",
+      default: "md",
+      themeKey: "tag.size.default",
+      description: "Size of the tag",
+    },
+    {
+      name: "variant",
+      default: "solid",
+      themeKey: "tag.variant.default",
+      description: "Variant of the tag",
+    },
+    {
+      name: "disabled",
+      default: "false",
+      type: "boolean",
+      description: "If `true`, the tag will be disabled",
+    },
+    {
+      name: "prefix",
+      type: "React.ReactNode",
+      description:
+        "If added, the tag will show an element before the tag's label",
+    },
+    {
+      name: "suffix",
+      type: "React.ReactNode",
+      description:
+        "If added, the tag will show an element after the tag's label",
+    },
+  ]}
+/>

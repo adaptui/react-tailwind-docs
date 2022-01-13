@@ -1,4 +1,8 @@
-import { ComponentLinks, PropsTable } from "@/components/index";
+import {
+  ComponentLinks,
+  PropsTable,
+  InteractiveCodeblock,
+} from "@/components/index";
 
 # Box
 
@@ -16,9 +20,9 @@ import { Box } from "@renderlesskit/react-tailwind";
 
 ## Usage
 
-```jsx live
-<Box>This is a box</Box>
-```
+<InteractiveCodeblock
+  children={({ spreadProps }) => `<Box${spreadProps}>Click me</Box>`}
+/>
 
 ## `As` prop
 
@@ -26,6 +30,9 @@ By using the `as` prop you can control which element should be rendered, if you
 are using typescript Box is fully typesafe too.
 
 You can either pass string elements or pass ReactNodes to the as prop.
+
+Follows all the Reakit composition rules
+[Reakit Composition Docs](https://reakit.io/docs/composition/)
 
 ```jsx live
 <Box className="space-x-4">

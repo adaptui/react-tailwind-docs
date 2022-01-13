@@ -34,6 +34,8 @@ import { Button, ButtonGroup, IconButton } from "@renderlesskit/react-tailwind";
 
 ## Button sizes
 
+Button has 4 sizes `sm` `md` `lg` `xl`
+
 ```jsx live
 <div className="space-x-2">
   <Button size="sm">Small</Button>
@@ -45,10 +47,12 @@ import { Button, ButtonGroup, IconButton } from "@renderlesskit/react-tailwind";
 
 ## Button variants
 
+Button has 4 variants `solid` `subtle` `outline` `ghost`
+
 ```jsx live
 <div className="space-x-2">
-  <Button variant="solid">Primary</Button>
-  <Button variant="subtle">secondary</Button>
+  <Button variant="solid">Solid</Button>
+  <Button variant="subtle">Subtle</Button>
   <Button variant="outline">Outline</Button>
   <Button variant="ghost">Ghost</Button>
 </div>
@@ -61,8 +65,8 @@ import { Button, ButtonGroup, IconButton } from "@renderlesskit/react-tailwind";
 
 ## Button prefix, suffix & iconOnly
 
-You can pass prefix and suffix props to the button to append or prepend any
-content inside of button.
+You can pass iconOnly, prefix and suffix props to the button to append or
+prepend any content inside of button.
 
 ```jsx live
 <div className="space-x-2">
