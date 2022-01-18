@@ -8,8 +8,10 @@ export default {
   // Docs Path in the above repo
   titleSuffix: " – Timeless",
   search: true,
-  UNSTABLE_stork: false,
+  unstable_flexsearch: true,
   floatTOC: true,
+  feedbackLink: "Question? Give us feedback →",
+  feedbackLabels: "feedback",
   logo: (
     <span className="hidden mr-2 font-extrabold md:inline">
       RenderlessKit React Tailwind
@@ -25,7 +27,7 @@ export default {
     </>
   ),
   footer: true,
-  footerEditLink: "Edit this page on GitHub",
+  footerEditLink: "Edit this page on GitHub →",
   footerText: <>MIT {new Date().getFullYear()} © Timeless.</>,
   darkMode: true,
   nextLinks: true,

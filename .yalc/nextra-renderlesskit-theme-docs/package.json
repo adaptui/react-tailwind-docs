@@ -66,19 +66,21 @@
   },
   "dependencies": {
     "@chakra-ui/hooks": "^1.7.2",
+    "@headlessui/react": "^1.4.3",
     "@mdx-js/react": "2.0.0-rc.2",
     "@reach/skip-nav": "0.16.0",
     "@renderlesskit/react-tailwind": "^0.0.1-alpha.37",
     "classnames": "2.3.1",
+    "flexsearch": "^0.7.21",
     "focus-visible": "5.2.0",
     "github-slugger": "1.4.0",
-    "grapheme-splitter": "1.0.4",
     "intersection-observer": "0.12.0",
     "match-sorter": "6.3.1",
     "next-themes": "0.0.15",
     "parse-git-url": "1.0.1",
     "prism-react-renderer": "1.2.1",
-    "react-live": "^2.3.0",
+    "react-innertext": "^1.1.5",
+    "react-live": "^2.4.0",
     "title": "3.4.3",
     "twind": "^0.16.16"
   },
@@ -93,5 +95,5 @@
     "emoji": "emoji",
     "editor": false
   },
-  "yalcSig": "c3783295e317c37bfdce305433552e0b"
+  "yalcSig": "5c59a22afbd167bc63e999604e286788"
 }

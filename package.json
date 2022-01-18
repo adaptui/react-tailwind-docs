@@ -71,6 +71,7 @@
     "nextra-renderlesskit-theme-docs": "link:.yalc/nextra-renderlesskit-theme-docs",
     "react": "17.0.2",
     "react-dom": "17.0.2",
+    "react-innertext": "^1.1.5",
     "react-live": "2.2.3",
     "twind": "^0.16.16"
   },

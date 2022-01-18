@@ -39,45 +39,15 @@ var __async = (__this, __arguments, generator) => {
 };
 
 // src/loader.ts
-import path2 from "path";
-import gracefulFs2 from "graceful-fs";
-import grayMatter from "gray-matter";
-import slash from "slash";
-
-// src/filter-route-locale.ts
-function filterRouteLocale(pageMap, locale, defaultLocale) {
-  const isDefaultLocale = !locale || locale === defaultLocale;
-  const filteredPageMap = [];
-  const fallbackPages = {};
-  for (const page of pageMap) {
-    if (page.children) {
-      filteredPageMap.push(__spreadProps(__spreadValues({}, page), {
-        children: filterRouteLocale(page.children, locale, defaultLocale)
-      }));
-      continue;
-    }
-    const localDoesMatch = !page.locale && isDefaultLocale || page.locale === locale || page.name === "meta.json";
-    if (localDoesMatch) {
-      fallbackPages[page.name] = null;
-      filteredPageMap.push(page);
-    } else {
-      if (fallbackPages[page.name] !== null && (!page.locale || page.locale === defaultLocale)) {
-        fallbackPages[page.name] = page;
-      }
-    }
-  }
-  for (const name2 in fallbackPages) {
-    if (fallbackPages[name2]) {
-      filteredPageMap.push(fallbackPages[name2]);
-    }
-  }
-  return filteredPageMap;
-}
+import path4 from "path";
+import grayMatter2 from "gray-matter";
+import slash2 from "slash";
 
 // src/content-dump.ts
-import gracefulFs from "graceful-fs";
+import fs from "graceful-fs";
 import path from "path";
-var { promises: fs, statSync, mkdirSync } = gracefulFs;
+import { promisify } from "util";
+var { statSync, mkdirSync } = fs;
 var assetDir = path.join(process.cwd(), "public", ".nextra");
 var asset = {};
 try {
@@ -101,7 +71,7 @@ function addPage(_0) {
       data: structurizedData
     };
     const dataFile = path.join(assetDir, `data-${fileLocale}.json`);
-    yield fs.writeFile(dataFile, JSON.stringify(asset[fileLocale]));
+    yield promisify(fs.writeFile)(dataFile, JSON.stringify(asset[fileLocale]));
   });
 }
 
@@ -118,12 +88,12 @@ function removeExtension(name2) {
   const match = name2.match(/^([^.]+)/);
   return match !== null ? match[1] : "";
 }
-var parseJsonFile = (content, path3) => {
+var parseJsonFile = (content, path5) => {
   let parsed = {};
   try {
     parsed = JSON.parse(content);
   } catch (err) {
-    console.error(`Error parsing ${path3}, make sure it's a valid JSON 
+    console.error(`Error parsing ${path5}, make sure it's a valid JSON 
 ` + err);
   }
   return parsed;
@@ -138,9 +108,9 @@ var existsSync = (f) => {
 };
 
 // src/compile.ts
-import { compile } from "@mdx-js/mdx";
+import { createProcessor } from "@mdx-js/mdx";
 import remarkGfm from "remark-gfm";
-import rehypePrettyCode from "@shuding/rehype-pretty-code";
+import rehypePrettyCode from "rehype-pretty-code";
 
 // src/mdx-plugins/static-image.js
 var relative = /^\.{1,2}\//;
@@ -252,13 +222,24 @@ function visit2(node, handler) {
 function getFlattenedValue(node) {
   return node.children.map((child) => "children" in child ? getFlattenedValue(child) : "value" in child ? child.value : "").join("");
 }
-function getHeaders(headers) {
-  return () => (tree, _file, done) => {
+function remarkHeadings(headers) {
+  const data = this.data();
+  return (tree, _file, done) => {
     visit2(tree, (node) => {
       const heading = __spreadProps(__spreadValues({}, node), {
         value: getFlattenedValue(node)
       });
-      headers.push(heading);
+      const headingMeta = data.headingMeta;
+      if (node.depth === 1) {
+        headingMeta.hasH1 = true;
+        if (Array.isArray(node.children) && node.children.length === 1) {
+          const child = node.children[0];
+          if (child.type === "text") {
+            headingMeta.titleText = child.value;
+          }
+        }
+      }
+      headingMeta.headings.push(heading);
     });
     done();
   };
@@ -565,6 +546,14 @@ var theme_default = {
 };
 
 // src/compile.ts
+var createCompiler = (mdxOptions) => {
+  const compiler = createProcessor(mdxOptions);
+  compiler.data("headingMeta", {
+    hasH1: false,
+    headings: []
+  });
+  return compiler;
+};
 var rehypePrettyCodeOptions = {
   theme: theme_default,
   onVisitHighlightedLine(node) {
@@ -585,15 +574,14 @@ function compileMdx(_0) {
     unstable_staticImage: false,
     unstable_contentDump: false
   }) {
-    let headings = [];
     let structurizedData = {};
-    const result = yield compile(source, {
+    const compiler = createCompiler({
       jsx: true,
       providerImportSource: "@mdx-js/react",
       remarkPlugins: [
         ...mdxOptions.remarkPlugins || [],
         remarkGfm,
-        getHeaders(headings),
+        remarkHeadings,
         ...nextraOptions.unstable_staticImage ? [remarkStaticImage] : [],
         ...nextraOptions.unstable_contentDump ? [structurize_default(structurizedData)] : []
       ].filter(Boolean),
@@ -604,41 +592,51 @@ function compileMdx(_0) {
         attachCodeMeta
       ].filter(Boolean)
     });
-    if (Array.isArray(headings) && headings.length > 0) {
-      const h1 = headings.find((v) => v.depth === 1);
-      if (h1 && Array.isArray(h1.children) && h1.children.length === 1) {
-        const child = h1.children[0];
-        if (child.type === "text") {
-          return {
-            result: String(result),
-            titleText: child.value,
-            headings,
-            hasH1: true,
-            structurizedData
-          };
-        }
-      }
-      return {
-        result: String(result),
-        headings,
-        hasH1: h1 ? true : false,
-        structurizedData
-      };
-    }
-    return {
-      result: String(result),
-      hasH1: false,
+    const result = yield compiler.process(source);
+    return __spreadProps(__spreadValues({
+      result: String(result)
+    }, compiler.data("headingMeta")), {
       structurizedData
-    };
+    });
   });
 }
 
-// src/loader.ts
-var { promises: fs3 } = gracefulFs2;
+// src/page-map.ts
+import path2 from "path";
+
+// src/filter-route-locale.ts
+function filterRouteLocale(pageMap, locale, defaultLocale) {
+  const isDefaultLocale = !locale || locale === defaultLocale;
+  const filteredPageMap = [];
+  const fallbackPages = {};
+  for (const page of pageMap) {
+    if (page.children) {
+      filteredPageMap.push(__spreadProps(__spreadValues({}, page), {
+        children: filterRouteLocale(page.children, locale, defaultLocale)
+      }));
+      continue;
+    }
+    const localDoesMatch = !page.locale && isDefaultLocale || page.locale === locale || page.name === "meta.json";
+    if (localDoesMatch) {
+      fallbackPages[page.name] = null;
+      filteredPageMap.push(page);
+    } else {
+      if (fallbackPages[page.name] !== null && (!page.locale || page.locale === defaultLocale)) {
+        fallbackPages[page.name] = page;
+      }
+    }
+  }
+  for (const name2 in fallbackPages) {
+    if (fallbackPages[name2]) {
+      filteredPageMap.push(fallbackPages[name2]);
+    }
+  }
+  return filteredPageMap;
+}
+
+// src/page-map.ts
 var extension = /\.mdx?$/;
 var metaExtension = /meta\.?([a-zA-Z-]+)?\.json/;
-var isProductionBuild = process.env.NODE_ENV === "production";
-var indexContentEmitted = /* @__PURE__ */ new Set();
 function findPagesDir(dir = process.cwd()) {
   if (existsSync(path2.join(dir, "pages")))
     return "pages";
@@ -646,98 +644,120 @@ function findPagesDir(dir = process.cwd()) {
     return "src/pages";
   throw new Error("> Couldn't find a `pages` directory. Please create one under the project root");
 }
-var pagesDir = findPagesDir();
-function getPageMap(currentResourcePath) {
-  return __async(this, null, function* () {
-    const activeRouteLocale = getLocaleFromFilename(currentResourcePath);
-    let activeRoute = "";
-    let activeRouteTitle = "";
-    function getFiles(dir, route) {
-      return __async(this, null, function* () {
-        const files = yield fs3.readdir(dir, { withFileTypes: true });
-        let dirMeta = {};
-        const items = (yield Promise.all(files.map((f) => __async(this, null, function* () {
-          const filePath = path2.resolve(dir, f.name);
-          const fileRoute = slash(path2.join(route, removeExtension(f.name).replace(/^index$/, "")));
-          if (f.isDirectory()) {
-            if (fileRoute === "/api")
-              return null;
-            const children = yield getFiles(filePath, fileRoute);
-            if (!children || !children.length)
-              return null;
-            return {
-              name: f.name,
-              children,
-              route: fileRoute
-            };
-          } else if (extension.test(f.name)) {
-            const locale = getLocaleFromFilename(f.name);
-            if (filePath === currentResourcePath) {
-              activeRoute = fileRoute;
-            }
-            const fileContents = yield fs3.readFile(filePath, "utf-8");
-            const { data } = grayMatter(fileContents);
-            if (Object.keys(data).length) {
-              return {
-                name: removeExtension(f.name),
-                route: fileRoute,
-                frontMatter: data,
-                locale
-              };
-            }
-            return {
-              name: removeExtension(f.name),
-              route: fileRoute,
-              locale
-            };
-          } else if (metaExtension.test(f.name)) {
-            const content = yield fs3.readFile(filePath, "utf-8");
-            const meta = parseJsonFile(content, filePath);
-            const locale = f.name.match(metaExtension)[1];
-            if (!activeRouteLocale || locale === activeRouteLocale) {
-              dirMeta = meta;
-            }
-            return {
-              name: "meta.json",
-              meta,
-              locale
-            };
-          }
-        })))).map((item) => {
-          if (!item)
-            return;
-          if (item.route === activeRoute) {
-            const metadata = dirMeta[item.name];
-            activeRouteTitle = (typeof metadata === "string" ? metadata : metadata == null ? void 0 : metadata.title) || item.name;
-          }
-          return __spreadValues({}, item);
-        }).filter(Boolean);
-        return items;
-      });
-    }
+function getPageMap(currentResourcePath, pageMaps, fileMap, defaultLocale) {
+  var _a, _b;
+  const activeRouteLocale = getLocaleFromFilename(currentResourcePath);
+  const pageItem = fileMap[currentResourcePath];
+  const metaName = path2.dirname(currentResourcePath);
+  const pageMeta = (_b = (_a = fileMap[`${metaName}/meta.${activeRouteLocale}.json`]) == null ? void 0 : _a.meta) == null ? void 0 : _b[pageItem.name];
+  const title = (typeof pageMeta === "string" ? pageMeta : pageMeta == null ? void 0 : pageMeta.title) || pageItem.name;
+  if (activeRouteLocale) {
     return [
-      yield getFiles(path2.join(process.cwd(), pagesDir), "/"),
-      activeRoute,
-      activeRouteTitle
+      filterRouteLocale(pageMaps, activeRouteLocale, defaultLocale),
+      fileMap[currentResourcePath].route,
+      title
     ];
+  }
+  return [pageMaps, fileMap[currentResourcePath].route, title];
+}
+
+// src/plugin.ts
+import fs3 from "graceful-fs";
+import util from "util";
+import path3 from "path";
+import slash from "slash";
+import grayMatter from "gray-matter";
+var { readdir, readFile } = fs3;
+function collectFiles(_0) {
+  return __async(this, arguments, function* (dir, route = "/", fileMap = {}) {
+    const files = yield util.promisify(readdir)(dir, { withFileTypes: true });
+    const items = (yield Promise.all(files.map((f) => __async(this, null, function* () {
+      const filePath = path3.resolve(dir, f.name);
+      const fileRoute = slash(path3.join(route, removeExtension(f.name).replace(/^index$/, "")));
+      if (f.isDirectory()) {
+        if (fileRoute === "/api")
+          return null;
+        const { items: children } = yield collectFiles(filePath, fileRoute, fileMap);
+        if (!children || !children.length)
+          return null;
+        return {
+          name: f.name,
+          children,
+          route: fileRoute
+        };
+      } else if (extension.test(f.name)) {
+        const locale = getLocaleFromFilename(f.name);
+        const fileContents = yield util.promisify(readFile)(filePath, "utf-8");
+        const { data } = grayMatter(fileContents);
+        if (Object.keys(data).length) {
+          fileMap[filePath] = {
+            name: removeExtension(f.name),
+            route: fileRoute,
+            frontMatter: data,
+            locale
+          };
+          return fileMap[filePath];
+        }
+        fileMap[filePath] = {
+          name: removeExtension(f.name),
+          route: fileRoute,
+          locale
+        };
+        return fileMap[filePath];
+      } else if (metaExtension.test(f.name)) {
+        const content = yield util.promisify(readFile)(filePath, "utf-8");
+        const meta = parseJsonFile(content, filePath);
+        const locale = f.name.match(metaExtension)[1];
+        fileMap[filePath] = {
+          name: "meta.json",
+          meta,
+          locale
+        };
+        return fileMap[filePath];
+      }
+    })))).filter(Boolean);
+    return {
+      items,
+      fileMap
+    };
   });
 }
-function loader_default(source) {
+var PageMapCache = class {
+  constructor() {
+    this.cache = { items: [], fileMap: {} };
+  }
+  set(data) {
+    this.cache.items = data.items;
+    this.cache.fileMap = data.fileMap;
+  }
+  clear() {
+    this.cache = null;
+  }
+  get() {
+    return this.cache;
+  }
+};
+var pageMapCache = new PageMapCache();
+
+// src/loader.ts
+var extension2 = /\.mdx?$/;
+var isProductionBuild = process.env.NODE_ENV === "production";
+var indexContentEmitted = /* @__PURE__ */ new Set();
+function loader_default(source, callback) {
   return __async(this, null, function* () {
-    const callback = this.async();
     this.cacheable(true);
     if (!isProductionBuild) {
-      this.addContextDependency(path2.resolve(pagesDir));
+      this.addContextDependency(path4.resolve(findPagesDir()));
     }
     const options = this.getOptions();
     let {
       theme,
       themeConfig,
-      locales,
       defaultLocale,
       unstable_contentDump,
       unstable_staticImage,
-      mdxOptions
+      mdxOptions,
+      pageMapCache: pageMapCache2
     } = options;
     const { resourcePath } = this;
     const filename = resourcePath.slice(resourcePath.lastIndexOf("/") + 1);
@@ -745,21 +765,25 @@ function loader_default(source) {
     if (!theme) {
       throw new Error("No Nextra theme found!");
     }
-    let [pageMap, route, title] = yield getPageMap(resourcePath);
-    if (locales) {
-      const locale = getLocaleFromFilename(filename);
-      if (locale) {
-        pageMap = filterRouteLocale(pageMap, locale, defaultLocale);
-      }
+    let pageMapResult, fileMap;
+    if (isProductionBuild) {
+      const data2 = pageMapCache2.get();
+      pageMapResult = data2.items;
+      fileMap = data2.fileMap;
+    } else {
+      const data2 = yield collectFiles(path4.join(process.cwd(), findPagesDir()), "/");
+      pageMapResult = data2.items;
+      fileMap = data2.fileMap;
     }
-    let { data, content } = grayMatter(source);
+    const [pageMap, route, title] = getPageMap(resourcePath, pageMapResult, fileMap, defaultLocale);
+    let { data, content } = grayMatter2(source);
     let layout = theme;
     let layoutConfig = themeConfig || null;
     if (theme.startsWith(".") || theme.startsWith("/")) {
-      layout = path2.resolve(theme);
+      layout = path4.resolve(theme);
     }
     if (layoutConfig) {
-      layoutConfig = slash(path2.resolve(layoutConfig));
+      layoutConfig = slash2(path4.resolve(layoutConfig));
     }
     if (isProductionBuild && indexContentEmitted.has(filename)) {
       unstable_contentDump = false;
@@ -771,7 +795,7 @@ function loader_default(source) {
     content = result;
     content = content.replace("export default MDXContent;", "");
     if (unstable_contentDump) {
-      if (extension.test(filename)) {
+      if (extension2.test(filename)) {
         yield addPage({
           fileLocale,
           route,
@@ -787,8 +811,8 @@ import { withSSG } from 'nextra/ssg'
 ${layoutConfig ? `import layoutConfig from '${layoutConfig}'` : ""}`;
     const suffix = `export default function NextraPage (props) {
     return withSSG(withLayout({
-      filename: "${slash(filename)}",
-      route: "${slash(route)}",
+      filename: "${slash2(filename)}",
+      route: "${slash2(route)}",
       meta: ${JSON.stringify(data)},
       pageMap: ${JSON.stringify(pageMap)},
       titleText: ${JSON.stringify(titleText)},

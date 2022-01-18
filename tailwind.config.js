@@ -1,3 +1,5 @@
+const colors = require("tailwindcss/colors");
+
 module.exports = {
   presets: [require("@renderlesskit/react-tailwind/preset")],
   content: [
@@ -8,6 +10,19 @@ module.exports = {
   ],
   darkMode: "class",
   theme: {
+    colors: {
+      transparent: "transparent",
+      current: "currentColor",
+      black: "#000",
+      white: "#fff",
+      gray: colors.gray,
+      slate: colors.slate,
+      neutral: colors.neutral,
+      red: colors.red,
+      orange: colors.orange,
+      yellow: colors.yellow,
+      prime: colors.blue,
+    },
     extend: {
       colors: {
         dark: "#111",
