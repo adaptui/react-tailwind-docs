@@ -328,11 +328,11 @@ var CopyButton = (_a) => {
   var _b = _a, { code } = _b, props = __objRest(_b, ["code"]);
   const { hasCopied, onCopy } = useClipboard("");
   return /* @__PURE__ */ React3.createElement("span", {
-    className: "absolute right-0 transform -translate-x-2 translate-y-4 -top-2"
+    className: "absolute right-0 top-0"
   }, /* @__PURE__ */ React3.createElement(Button, __spreadValues({
     size: "sm",
     onClick: onCopy
-  }, props), hasCopied ? "COPIED!" : "COPY"));
+  }, props), hasCopied ? "Copied!" : "Copy"));
 };
 
 // src/utils/get-fs-route.ts
