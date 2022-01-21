@@ -78,11 +78,8 @@
     "match-sorter": "6.3.1",
     "next-themes": "0.0.15",
     "parse-git-url": "1.0.1",
-    "prism-react-renderer": "1.2.1",
     "react-innertext": "^1.1.5",
-    "react-live": "^2.4.0",
-    "title": "3.4.3",
-    "twind": "^0.16.16"
+    "title": "3.4.3"
   },
   "peerDependencies": {
     "next": ">=9.5.3",
@@ -95,5 +92,5 @@
     "emoji": "emoji",
     "editor": false
   },
-  "yalcSig": "5c59a22afbd167bc63e999604e286788"
+  "yalcSig": "62a95a023871639cbe552324cb5dbb0f"
 }

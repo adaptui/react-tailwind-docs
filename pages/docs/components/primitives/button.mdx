@@ -3,6 +3,7 @@ import {
   ComponentLinks,
   InteractiveCodeblock,
   PropsTable,
+  Codeblock,
 } from "@/components/index";
 
 # Button
@@ -36,27 +37,33 @@ import { Button, ButtonGroup, IconButton } from "@renderlesskit/react-tailwind";
 
 Button has 4 sizes `sm` `md` `lg` `xl`
 
-```jsx live
+<Codeblock
+  live
+  children={`
 <div className="space-x-2">
   <Button size="sm">Small</Button>
   <Button size="md">Medium</Button>
   <Button size="lg">Large</Button>
   <Button size="xl">Extra Large</Button>
 </div>
-```
+`}
+/>
 
 ## Button variants
 
 Button has 4 variants `solid` `subtle` `outline` `ghost`
 
-```jsx live
+<Codeblock
+  live
+  children={`
 <div className="space-x-2">
   <Button variant="solid">Solid</Button>
   <Button variant="subtle">Subtle</Button>
   <Button variant="outline">Outline</Button>
   <Button variant="ghost">Ghost</Button>
 </div>
-```
+`}
+/>
 
 <Callout>
   You can add extra variants & sizes via the theme file. Checkout [theming
@@ -68,7 +75,9 @@ Button has 4 variants `solid` `subtle` `outline` `ghost`
 You can pass iconOnly, prefix and suffix props to the button to append or
 prepend any content inside of button.
 
-```jsx live
+<Codeblock
+  live
+  children={`
 <div className="space-x-2">
   <Button iconOnly={<SlotIcon />} />
   <Button prefix={<SlotIcon />}>Search</Button>
@@ -77,11 +86,14 @@ prepend any content inside of button.
     Search
   </Button>
 </div>
-```
+`}
+/>
 
 # Close Button
 
-```jsx live
+<Codeblock
+  live
+  children={`
 <div className="space-y-2">
   <div className="space-x-2">
     <CloseButton size="sm" />
@@ -96,7 +108,8 @@ prepend any content inside of button.
     <CloseButton variant="ghost" />
   </div>
 </div>
-```
+`}
+/>
 
 ## API Reference
 

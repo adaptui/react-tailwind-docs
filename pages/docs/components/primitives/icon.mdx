@@ -2,6 +2,7 @@ import {
   ComponentLinks,
   PropsTable,
   InteractiveCodeblock,
+  Codeblock,
 } from "@/components/index";
 
 # Icon
@@ -31,9 +32,12 @@ import { Icon, createIcon } from "@renderlesskit/react-tailwind";
 
 If no children is provided Icon will render a fallback icon.
 
-```jsx live
+<Codeblock
+  live
+  children={`
 <Icon />
-```
+`}
+/>
 
 ## `createIcon` utility
 
@@ -42,8 +46,10 @@ props and returns a React component;
 
 Basic usage:
 
-```jsx live noInline
-() => {
+<Codeblock
+  live
+  noInline
+  children={`
   const CheckIcon = createIcon({
     displayName: "CheckIcon",
     viewBox: "0 0 12 12",
@@ -59,9 +65,7 @@ Basic usage:
     ),
   });
 
-  return <CheckIcon />;
-};
-```
+render (<CheckIcon />)`} />
 
 ## API Reference
 
@@ -114,3 +118,4 @@ Basic usage:
     },
   ]}
 />
+```

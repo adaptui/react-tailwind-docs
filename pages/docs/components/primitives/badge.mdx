@@ -3,6 +3,7 @@ import {
   ComponentLinks,
   PropsTable,
   InteractiveCodeblock,
+  Codeblock,
 } from "@/components/index";
 
 # Badge
@@ -32,31 +33,39 @@ import { Badge } from "@renderlesskit/react-tailwind";
 
 Badge has 4 variants `solid` `subtle` `outline`
 
-```jsx live
+<Codeblock
+  live
+  children={`
 <div className="space-x-2">
   <Badge variant="solid">Solid</Badge>
   <Badge variant="subtle">Subtle</Badge>
   <Badge variant="outline">Outline</Badge>
 </div>
-```
+`}
+/>
 
 ## Badge Sizes
 
 Badge comes with 3 sizes `sm` `md` `lg`
 
-```jsx live
+<Codeblock
+  live
+  children={`
 <div className="space-x-2">
   <Badge size="sm">Small</Badge>
   <Badge size="md">Medium</Badge>
   <Badge size="lg">Large</Badge>
 </div>
-```
+`}
+/>
 
 ## Badge Themes
 
 Badge comes with 5 themes `default` `primary` `secondary` `success` `danger`
 
-```jsx live
+<Codeblock
+  live
+  children={`
 <div className="space-x-2">
   <Badge themeColor="default">Default</Badge>
   <Badge themeColor="primary">Primary</Badge>
@@ -64,7 +73,8 @@ Badge comes with 5 themes `default` `primary` `secondary` `success` `danger`
   <Badge themeColor="success">Success</Badge>
   <Badge themeColor="danger">Danger</Badge>
 </div>
-```
+`}
+/>
 
 <Callout>
   You can add extra variants, themeColor & sizes via the theme file. Checkout
@@ -75,11 +85,14 @@ Badge comes with 5 themes `default` `primary` `secondary` `success` `danger`
 
 You can pass prefix props to the badge to prepend any content inside of badge.
 
-```jsx live
+<Codeblock
+  live
+  children={`
 <div className="space-x-2">
   <Badge prefix={<SlotIcon />}>Search</Badge>
 </div>
-```
+`}
+/>
 
 ## API Reference
 

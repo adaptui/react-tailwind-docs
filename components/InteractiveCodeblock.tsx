@@ -6,12 +6,14 @@ import {
   runIfFn,
   Select,
   useHasMounted,
-  useTheme,
+  useTheme as useRenderlessTheme,
 } from "@renderlesskit/react-tailwind";
 import * as Renderlesskit from "@renderlesskit/react-tailwind";
 import { useClipboard } from "@chakra-ui/hooks";
 import { get } from "lodash";
-import prismTheme from "prism-react-renderer/themes/palenight";
+import { useTheme } from "next-themes";
+import darkTheme from "prism-react-renderer/themes/vsDark";
+import lightTheme from "prism-react-renderer/themes/vsLight";
 import { tw } from "twind";
 
 type TemplateFunctionProps = {
@@ -41,7 +43,7 @@ export const InteractiveCodeblock = (props: InteractiveCodeblockProps) => {
     booleanProps = [],
   } = props;
 
-  const theme = useTheme();
+  const renderlessTheme = useRenderlessTheme();
   const [booleanStates, onBooleanStateChange] = React.useState<
     Record<string, boolean>
   >({});
@@ -76,6 +78,9 @@ export const InteractiveCodeblock = (props: InteractiveCodeblockProps) => {
     props: { ...themeStates, ...booleanStates, ...choiceStates },
   });
 
+  const { theme, systemTheme } = useTheme();
+  const renderedTheme = theme === "system" ? systemTheme : theme;
+
   const scope = {
     React,
     ...Renderlesskit,
@@ -92,13 +97,15 @@ export const InteractiveCodeblock = (props: InteractiveCodeblockProps) => {
         transformCode={rawCode => transformer(rawCode)}
         code={code}
         scope={scope}
-        theme={prismTheme}
+        theme={renderedTheme === "dark" ? darkTheme : lightTheme}
       >
-        <div className="relative">
-          <LivePreview className="p-6 bg-white border border-gray-600 rounded-md rounded-b-none" />
-          <CopyButton code={code} />
+        <div className="mt-6 bg-transparent border border-gray-500 rounded-md">
+          <LivePreview className="p-6" />
+          <div className="relative">
+            <LiveEditor className="!font-mono !bg-slate-100 dark:!bg-prime-300 dark:!bg-opacity-10 text-sm leading-6 tracking-tighter rounded-md rounded-t-none" />
+            <CopyButton code={code} />
+          </div>
         </div>
-        <LiveEditor className="font-mono text-sm rounded-md rounded-t-none" />
         <LiveError className="mt-0 text-xs text-red-500 bg-red-100 rounded-md rounded-t-none" />
       </LiveProvider>
       <div className={wrapperStyles}>
@@ -132,7 +139,7 @@ export const InteractiveCodeblock = (props: InteractiveCodeblockProps) => {
             >
               <option value="">Choose {name}</option>
 
-              {Object.keys(get(theme, themeKey)).map(size => (
+              {Object.keys(get(renderlessTheme, themeKey)).map(size => (
                 <option key={size} value={size}>
                   {size}
                 </option>
@@ -189,17 +196,17 @@ function capitalizeFirstLetter(string: string) {
   return string.charAt(0).toUpperCase() + string.slice(1);
 }
 
-export type CopyButtonProps = {
+type CopyButtonProps = {
   code: string;
 };
 
-export const CopyButton: React.FC<CopyButtonProps> = ({ code }) => {
+const CopyButton: React.FC<CopyButtonProps> = ({ code }) => {
   const { hasCopied, onCopy } = useClipboard(code);
 
   return (
     <span className="absolute right-0 transform -translate-x-2 translate-y-4 -top-2">
       <Button size="sm" onClick={onCopy}>
-        {hasCopied ? "COPIED!" : "COPY"}
+        {hasCopied ? "Copied!" : "Copy"}
       </Button>
     </span>
   );

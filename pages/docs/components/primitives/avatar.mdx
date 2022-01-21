@@ -2,6 +2,7 @@ import {
   ComponentLinks,
   InteractiveCodeblock,
   PropsTable,
+  Codeblock,
 } from "@/components/index";
 
 # Avatar
@@ -40,7 +41,9 @@ import {
 
 Avatar has 5 sizes `xs` `sm` `md` `lg` `xl` `2xl` `3xl`
 
-```jsx live
+<Codeblock
+  live
+  children={`
 <div className="flex space-x-2">
   <Avatar size="xs" src="https://bit.ly/code-beast" name="Code Beast" />
   <Avatar size="sm" src="https://bit.ly/ryan-florence" name="Rayan Florence" />
@@ -54,13 +57,16 @@ Avatar has 5 sizes `xs` `sm` `md` `lg` `xl` `2xl` `3xl`
   />
   <Avatar size="3xl" src="https://i.pravatar.cc/300??img=42" name="Jhon Snow" />
 </div>
-```
+`}
+/>
 
 ## Avatar with badge
 
 You can show status icons at the right corner of the Avatar using `status` prop.
 
-```jsx live
+<Codeblock
+  live
+  children={`
 <div className="flex space-x-2">
   <Avatar
     status="active"
@@ -93,7 +99,8 @@ You can show status icons at the right corner of the Avatar using `status` prop.
     name="Kent Dodds"
   />
 </div>
-```
+`}
+/>
 
 ## Avatar fallbacks
 
@@ -106,14 +113,17 @@ If both name and src are not provided you can pass a `icon` prop to show any
 content, `icon` has the lowest priority thus if name or src is provided fallback
 will be ignored.
 
-```jsx live
+<Codeblock
+  live
+  children={`
 <div className="flex space-x-2">
   <Avatar size="xl" name="Navin Moorthy" src="https://bit.ly/broken-link" />
   <Avatar size="xl" name="Anurag Hazra" src="https://bit.ly/broken-link" />
   <Avatar size="xl" src="https://bit.ly/broken-link" />
   <Avatar size="xl" icon={<InfoCircleIcon />} />
 </div>
-```
+`}
+/>
 
 ## API Reference
 

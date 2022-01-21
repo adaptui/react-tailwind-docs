@@ -3,6 +3,7 @@ import {
   ComponentLinks,
   InteractiveCodeblock,
   PropsTable,
+  Codeblock,
 } from "@/components/index";
 
 # Tag
@@ -35,26 +36,32 @@ import { Tag } from "@renderlesskit/react-tailwind";
 
 Tag has 4 sizes `sm` `md` `lg` `xl`
 
-```jsx live
+<Codeblock
+  live
+  children={`
 <div className="space-x-2">
   <Tag size="sm">Small</Tag>
   <Tag size="md">Medium</Tag>
   <Tag size="lg">Large</Tag>
   <Tag size="xl">Extra Large</Tag>
 </div>
-```
+`}
+/>
 
 ## Tag variants
 
 Tag has 4 variants `solid` `subtle` `outline` `ghost`
 
-```jsx live
+<Codeblock
+  live
+  children={`
 <div className="space-x-2">
   <Tag variant="solid">Solid</Tag>
   <Tag variant="subtle">Subtle</Tag>
   <Tag variant="outline">Outline</Tag>
 </div>
-```
+`}
+/>
 
 <Callout>
   You can add extra variants & sizes via the theme file. Checkout [theming
@@ -68,23 +75,29 @@ close icon in the `suffix`. You can override the default icon inside `suffix`.
 Tag is by default renders a button component so you can pass the clickable props
 directly.
 
-```jsx live
+<Codeblock
+  live
+  children={`
 <Tag closable>Removable</Tag>
-```
+`}
+/>
 
 ## Tag Prefix & suffix
 
 Same as buttons Tag also accepts prefix, suffix props which can be used to
 append or prepend content in the tag.
 
-```jsx live
+<Codeblock
+  live
+  children={`
 <div className="space-x-2">
   <Tag prefix={<SlotIcon />}>Search</Tag>
   <Tag closable suffix={<SlotIcon />}>
     Search
   </Tag>
 </div>
-```
+`}
+/>
 
 <Callout>Suffix will only be rendered if `closable` is set to `true`</Callout>
 

@@ -52,6 +52,7 @@ var __async = (__this, __arguments, generator) => {
 
 // src/index.tsx
 import React23, { useMemo as useMemo3, useState as useState6 } from "react";
+import { RenderlesskitProvider } from "@renderlesskit/react-tailwind";
 import { SkipNavContent } from "@reach/skip-nav";
 import cn8 from "classnames";
 import { useRouter as useRouter8 } from "next/router";
@@ -123,6 +124,8 @@ var default_config_default = defaultTheme;
 // src/misc/theme.tsx
 import React3, { useEffect, useRef } from "react";
 import innerText from "react-innertext";
+import { Button } from "@renderlesskit/react-tailwind";
+import { useClipboard } from "@chakra-ui/hooks";
 import Slugger from "github-slugger";
 import Link from "next/link";
 import "intersection-observer";
@@ -293,6 +296,14 @@ var Table = ({ children }) => {
     className: "table-container"
   }, /* @__PURE__ */ React3.createElement("table", null, children));
 };
+var Code = (props) => {
+  const { children } = props;
+  if (typeof children == "string")
+    return /* @__PURE__ */ React3.createElement("code", null, children);
+  return /* @__PURE__ */ React3.createElement("code", {
+    className: "relative"
+  }, children, /* @__PURE__ */ React3.createElement(CopyButton, null));
+};
 var getComponents = (args) => ({
   h2: H2(args),
   h3: H3(args),
@@ -301,6 +312,7 @@ var getComponents = (args) => ({
   h6: H6(args),
   a: A,
   pre: Pre,
+  code: Code,
   table: Table
 });
 var MDXTheme = ({
@@ -311,6 +323,16 @@ var MDXTheme = ({
   return /* @__PURE__ */ React3.createElement(MDXContent, {
     components: getComponents({ slugger })
   });
+};
+var CopyButton = (_a) => {
+  var _b = _a, { code } = _b, props = __objRest(_b, ["code"]);
+  const { hasCopied, onCopy } = useClipboard("");
+  return /* @__PURE__ */ React3.createElement("span", {
+    className: "absolute right-0 transform -translate-x-2 translate-y-4 -top-2"
+  }, /* @__PURE__ */ React3.createElement(Button, __spreadValues({
+    size: "sm",
+    onClick: onCopy
+  }, props), hasCopied ? "COPIED!" : "COPY"));
 };
 
 // src/utils/get-fs-route.ts
@@ -1770,7 +1792,7 @@ var src_default = (opts, config) => {
     }, /* @__PURE__ */ React23.createElement(ThemeProvider, {
       attribute: "class",
       disableTransitionOnChange: true
-    }, /* @__PURE__ */ React23.createElement(Layout, __spreadValues(__spreadValues({}, opts), props))));
+    }, /* @__PURE__ */ React23.createElement(RenderlesskitProvider, null, /* @__PURE__ */ React23.createElement(Layout, __spreadValues(__spreadValues({}, opts), props)))));
   };
 };
 export {

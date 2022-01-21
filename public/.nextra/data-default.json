@@ -1,67 +1,16 @@
 {
-  "/": {
-    "title": "index",
+  "/docs/components/primitives/tag": {
+    "title": "tag",
     "data": {
-      "": "A React UI library built using low level headless\nRenderleskit components &\nTailwind."
-    }
-  },
-  "/docs/getting-started": {
-    "title": "getting-started",
-    "data": {
-      "": "Renderlesskit uses tailwind to provide better styling at one place, so you'll\nneed to setup a tailwind project using thier\ninstallation guide.",
-      "installation#Installation": "\nnpm i @renderlesskit/react-tailwind\n\nyarn add @renderlesskit/react-tailwind\n",
-      "tailwind-setup#Tailwind setup": "After setting up tailwind in your project, import our preset function inside\nyour tailwind.config.js and use it.\nmodule.exports = preset({\n  presets: [require(\"@renderlesskit/react-tailwind/preset\")],\n  purge: [\n    // Make sure to add this purge to generate the component's default styling\n    \"node_modules/@renderlesskit/react-tailwind/**/*\",\n  ],\n});\n\nCheckout our integration guides for CRA & Next.js\n",
-      "setting-up-provider#Setting up provider": "Renderlesskit needs a theme provider to pass down all the neccesary styling for\nthe components.Go to the root of your application and add this:\nimport * as React from \"react\";\n// 1. import `RenderlesskitProvider` component\nimport { RenderlesskitProvider } from \"@renderlesskit/react-tailwind\";\n\nfunction App() {\n  // 2. Use at the root of your app\n  return (\n    <RenderlesskitProvider>\n      <App />\n    </RenderlesskitProvider>\n  );\n}\n"
-    }
-  },
-  "/docs/components/primitives/box": {
-    "title": "box",
-    "data": {
-      "": "Box is the most abstract component on top of which all other Renderlesskit\ncomponents are built. It uses reakit's Role\ncomponent internally.\n\n",
-      "imports#Imports": "\nimport { Box } from \"@renderlesskit/react-tailwind\";\n",
+      "": "Tag is used when items need to be labelled, categorized, and organized using\nkeywords that describe them.\n\n",
+      "imports#Imports": "\nimport { Tag } from \"@renderlesskit/react-tailwind\";\n\nTag Standalone tag component\n\n",
       "usage#Usage": "\n\n",
-      "as-prop#As prop": "By using the as prop you can control which element should be rendered, if you\nare using typescript Box is fully typesafe too.You can either pass string elements or pass ReactNodes to the as prop.Follows all the Reakit composition rules\nReakit Composition Docs\n<Box className=\"space-x-4\">\n  <Box as=\"a\" href=\"#\">\n    Link\n  </Box>\n  <Box as={Button}>Renderlesskit Button</Box>\n</Box>\n",
-      "card-example#Card example": "\n<Box as=\"dl\" className=\"grid grid-cols-1 gap-5 mt-5 sm:grid-cols-2\">\n  <Box className=\"px-4 py-5 overflow-hidden bg-white rounded-lg shadow sm:p-6\">\n    <Box as=\"dt\" className=\"text-sm font-medium text-gray-500 truncate\">\n      Total Subscribers\n    </Box>\n    <Box as=\"dd\" className=\"mt-1 text-3xl font-semibold text-gray-900\">\n      71,897\n    </Box>\n  </Box>\n  <Box className=\"px-4 py-5 overflow-hidden bg-white rounded-lg shadow sm:p-6\">\n    <Box as=\"dt\" className=\"text-sm font-medium text-gray-500 truncate\">\n      Avg. Open Rate\n    </Box>\n    <Box as=\"dd\" className=\"mt-1 text-3xl font-semibold text-gray-900\">\n      58.16%\n    </Box>\n  </Box>\n</Box>\n",
-      "api-reference#API Reference": "\n\n"
-    }
-  },
-  "/guides/usage-with-cra": {
-    "title": "usage-with-cra",
-    "data": {
-      "": "First let's create a new CRA project.\nnpx create-react-app my-website\n",
-      "setup-tailwindcss#Setup TailwindCSS": "To get started with renderlesskit first step is to setup Tailwind CSS in your\nCRA project. Refer to tailwind documentation for\nSetting up Tailwind CSS in a Create React App projectAfter setting up tailwind in your project, all you need to do inside your\ntailwind.config.js is import our preset function and use it.\nmodule.exports = preset({\n  presets: [require(\"@renderlesskit/react-tailwind/preset\")],\n  purge: [\n    // Make sure to add this purge to generate the component's default styling\n    \"node_modules/@renderlesskit/react-tailwind/**/*\",\n  ],\n});\n\npresets merges your taiwind config with renderlesskit's internal tailwind\nconfigs and enables certain plugins\n",
-      "renderlesskit-setup#Renderlesskit Setup": "After following all the steps and correctly setting up tailwind, now let's add\nthe RenderlesskitProviderFollow Setting Up Provider to setup\nthe provider for your app.Follow Extending Theme Tokens to extend\nyour theme tokens",
-      "typescript-setup#TypeScript Setup": "Follow TypeScript Guide"
-    }
-  },
-  "/guides/usage-with-nextjs": {
-    "title": "usage-with-nextjs",
-    "data": {
-      "": "First let's create a new Nextjs project.\nnpx create-next-app my-website\n",
-      "setup-tailwindcss#Setup TailwindCSS": "To get started with renderlesskit first step is to setup Tailwind CSS in your\nCRA project. Refer to tailwind documentation for\nSetting up Tailwind CSS in a Next.js projectAfter setting up tailwind in your project, all you need to do inside your\ntailwind.config.js is import our preset function and use it.\nmodule.exports = preset({\n  presets: [require(\"@renderlesskit/react-tailwind/preset\")],\n  purge: [\n    // Make sure to add this purge to generate the component's default styling\n    \"node_modules/@renderlesskit/react-tailwind/**/*\",\n  ],\n});\n\npresets merges your taiwind config with renderlesskit's internal tailwind\nconfigs and enables certain plugins\n",
-      "renderlesskit-setup#Renderlesskit Setup": "After following all the steps and correctly setting up tailwind, now let's add\nthe RenderlesskitProviderFollow Setting Up Provider",
-      "typescript-setup#TypeScript Setup": "Follow TypeScript Guide"
-    }
-  },
-  "/guides/typescript-guide": {
-    "title": "typescript-guide",
-    "data": {
-      "": "Renderlesskit provides a full typesafe theming system which can help you get\nbetter intellisense while working with the components.In this guide we are going to see how to setup TypeScript, and see how we can\nadd extra typesafe variants to component themes.First, we need to extract our custom theme object into it's own file so that\nwe can infer it's types.",
-      "creating-theme-file#Creating theme file": "extendTheme is an\nidentity function\nwhich helps us infer the type of the customTheme, and provide intellisense.\n// renderlesskit.config.ts\nimport { extendTheme } from \"@renderlesski/react-tailwind\";\n\nexport const customTheme = extendTheme({\n  extend: {\n    buttton: {\n      variants: {\n        red: \"bg-red-300 text-white\",\n      },\n    },\n  },\n});\n",
-      "creating-declaration-file#Creating declaration file": "TypeScript definitions for the Renderlesskit's theme can be extended by using\ndeclaration merging.\nSo the first step is creating a declarations file. Let's name it global.d.ts\nfor example.\n// global.d.ts\nimport { DefaultTheme } from \"@renderlesskit/react-tailwind\";\nimport { customTheme } from \"./my-theme\";\n\ntype UserTheme = typeof customTheme.extend;\n\ndeclare global {\n  namespace Renderlesskit {\n    interface Theme {\n      components: MergeTheme<DefaultTheme, UserTheme>;\n    }\n  }\n}\nFor CRA projects you can put this content inside react-app-env.d.tsThats It!Now if you can create a new Button & you'll see that there is a new variant\ncalled red\n\n\n\n"
-    }
-  },
-  "/docs/components/primitives/button": {
-    "title": "button",
-    "data": {
-      "": "The Button component can be used to trigger various kinds of user events such as\nsuch as submitting a form, opening a dialog, canceling an action, or performing\na delete operation.\n\n",
-      "imports#Imports": "\nimport { Button, ButtonGroup, IconButton } from \"@renderlesskit/react-tailwind\";\n\nButton: The button which has prefix/suffix icons support, variants & size.\nButtonGroup: Used to group related buttons together in a horizontal stack,\ncan also be set as attached\nIconButton: Accessible button to show an icon\n\n",
-      "usage#Usage": "\n\n",
-      "button-sizes#Button sizes": "Button has 4 sizes sm md lg xl\n<div className=\"space-x-2\">\n  <Button size=\"sm\">Small</Button>\n  <Button size=\"md\">Medium</Button>\n  <Button size=\"lg\">Large</Button>\n  <Button size=\"xl\">Extra Large</Button>\n</div>\n",
-      "button-variants#Button variants": "Button has 4 variants solid subtle outline ghost\n<div className=\"space-x-2\">\n  <Button variant=\"solid\">Solid</Button>\n  <Button variant=\"subtle\">Subtle</Button>\n  <Button variant=\"outline\">Outline</Button>\n  <Button variant=\"ghost\">Ghost</Button>\n</div>\n\nYou can add extra variants & sizes via the theme file. Checkout theming\nguide.\n",
-      "button-prefix-suffix--icononly#Button prefix, suffix & iconOnly": "You can pass iconOnly, prefix and suffix props to the button to append or\nprepend any content inside of button.\n<div className=\"space-x-2\">\n  <Button iconOnly={<SlotIcon />} />\n  <Button prefix={<SlotIcon />}>Search</Button>\n  <Button suffix={<SlotIcon />}>Search</Button>\n  <Button prefix={<SlotIcon />} suffix={<SlotIcon />}>\n    Search\n  </Button>\n</div>\n\n<div className=\"space-y-2\">\n  <div className=\"space-x-2\">\n    <CloseButton size=\"sm\" />\n    <CloseButton size=\"md\" />\n    <CloseButton size=\"lg\" />\n    <CloseButton size=\"xl\" />\n  </div>\n  <div className=\"space-x-2\">\n    <CloseButton variant=\"solid\" />\n    <CloseButton variant=\"subtle\" />\n    <CloseButton variant=\"outline\" />\n    <CloseButton variant=\"ghost\" />\n  </div>\n</div>\n",
+      "tag-sizes#Tag sizes": "Tag has 4 sizes sm md lg xl\n\n",
+      "tag-variants#Tag variants": "Tag has 4 variants solid subtle outline ghost\n\n\nYou can add extra variants & sizes via the theme file. Checkout theming\nguide.\n",
+      "closable-tag#Closable Tag": "Tags can be closable or removable. If closable prop is passed tag will show a\nclose icon in the suffix. You can override the default icon inside suffix.\nTag is by default renders a button component so you can pass the clickable props\ndirectly.\n\n",
+      "tag-prefix--suffix#Tag Prefix & suffix": "Same as buttons Tag also accepts prefix, suffix props which can be used to\nappend or prepend content in the tag.\n\n\nSuffix will only be rendered if closable is set to true\n",
       "api-reference#API Reference": "",
-      "button#Button": "\n\n"
+      "tag#Tag": "\n\n"
     }
   }
 }
