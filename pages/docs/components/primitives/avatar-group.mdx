@@ -106,10 +106,13 @@ const AvatarGroupBasic = props => {
 
 const AvatarGroupStack = props => { return (
 
-<Reakit.Group aria-label="group of avatar groups" className="flex flex-col space-y-2">
+<Reakit.Group
+  aria-label="group of avatar groups"
+  className="flex flex-col space-y-2"
+>
   <AvatarGroupBasic size="xl" {...props} />
   <AvatarGroupBasic size="xl" circular={false} {...props} />
-</Group>
+</Reakit.Group>
 ); };
 
 render (<AvatarGroupStack/>); `} />
