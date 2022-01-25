@@ -1,0 +1,156 @@
+import {
+  ComponentLinks,
+  InteractiveCodeblock,
+  PropsTable,
+  Codeblock,
+  Callout,
+} from "@/components/index";
+
+# AvatarGroup
+
+`AvatarGroup` component is used to display a set of avatars closed together.
+
+<ComponentLinks
+  github="avatar-group"
+  theme="avatar"
+  story="primitives-avatargroup"
+/>
+
+## Imports
+
+```js
+import {
+  AvatarGroup,
+  useAvatarGroupProps,
+  useAvatarGroupState,
+  AvatarGroupWrapper,
+} from "@renderlesskit/react-tailwind";
+```
+
+## Usage
+
+<InteractiveCodeblock
+  children={({ spreadProps }) => `
+<AvatarGroup circular={false} ${spreadProps}>
+  <Avatar name="Leanne Graham" src="https://i.pravatar.cc/300?img=1" />
+  <Avatar name="Ervin Howell" src="https://i.pravatar.cc/300?img=11" />
+  <Avatar name="Clementine Bauch" src="https://i.pravatar.cc/300?img=21" />
+  <Avatar name="Patricia Lebsack" src="https://i.pravatar.cc/300?img=31" />
+  <Avatar name="Chelsey Dietrich" src="https://i.pravatar.cc/300?img=41" />
+  <Avatar name="Dennis Schulist" src="https://i.pravatar.cc/300?img=51" />
+</AvatarGroup>
+`}
+  booleanProps={["circular"]}
+  themeProps={{ size: "avatar.icon.size" }}
+/>
+
+## AvatarGroup sizes
+
+AvatarGroup has all 7 avatar sizes `xs` `sm` `md` `lg` `xl` `2xl` `3xl`
+
+<Codeblock
+  live
+  noInline
+  children={`
+const AvatarGroupBasic = props => {
+  return (
+    <AvatarGroup {...props}>
+      <Avatar name="Leanne Graham" src="https://i.pravatar.cc/300?img=1" />
+      <Avatar name="Ervin Howell" src="https://i.pravatar.cc/300?img=11" />
+      <Avatar name="Clementine Bauch" src="https://i.pravatar.cc/300?img=21" />
+      <Avatar name="Patricia Lebsack" src="https://i.pravatar.cc/300?img=31" />
+      <Avatar name="Chelsey Dietrich" src="https://i.pravatar.cc/300?img=41" />
+      <Avatar name="Dennis Schulist" src="https://i.pravatar.cc/300?img=51" />
+    </AvatarGroup>
+  );
+};
+
+const AvatarGroupStack = props => { return (
+
+<Reakit.Group
+  aria-label="group of avatar groups"
+  className="flex flex-col space-y-2"
+>
+  <AvatarGroupBasic size="xs" {...props} />
+  <AvatarGroupBasic size="sm" {...props} />
+  <AvatarGroupBasic size="md" {...props} />
+  <AvatarGroupBasic size="lg" {...props} />
+  <AvatarGroupBasic size="xl" {...props} />
+  <AvatarGroupBasic size="2xl" {...props} />
+  <AvatarGroupBasic size="3xl" {...props} />
+</Reakit.Group>
+); };
+
+render (<AvatarGroupStack/>); `} />
+
+## AvatarGroup styles
+
+AvatarGroup also comes in two styles of avatara, `rounded` & `squared`
+
+<Codeblock
+  live
+  noInline
+  children={`
+const AvatarGroupBasic = props => {
+  return (
+    <AvatarGroup {...props}>
+      <Avatar name="Leanne Graham" src="https://i.pravatar.cc/300?img=1" />
+      <Avatar name="Ervin Howell" src="https://i.pravatar.cc/300?img=11" />
+      <Avatar name="Clementine Bauch" src="https://i.pravatar.cc/300?img=21" />
+      <Avatar name="Patricia Lebsack" src="https://i.pravatar.cc/300?img=31" />
+      <Avatar name="Chelsey Dietrich" src="https://i.pravatar.cc/300?img=41" />
+      <Avatar name="Dennis Schulist" src="https://i.pravatar.cc/300?img=51" />
+    </AvatarGroup>
+  );
+};
+
+const AvatarGroupStack = props => { return (
+
+<Reakit.Group aria-label="group of avatar groups" className="flex flex-col space-y-2">
+  <AvatarGroupBasic size="xl" {...props} />
+  <AvatarGroupBasic size="xl" circular={false} {...props} />
+</Group>
+); };
+
+render (<AvatarGroupStack/>); `} />
+
+<Callout>Avatar Group doesn't come with any status indicators</Callout>
+
+## API Reference
+
+<PropsTable
+  data={[
+    {
+      name: "circular",
+      type: "boolean",
+      description: "If `true`, Avatar looks like a round.",
+      default: "true",
+    },
+    {
+      name: "size",
+      themeKey: "avatar.icon.size",
+      description: "Size of the avatar",
+      default: "xl",
+    },
+    {
+      name: "max",
+      type: "number",
+      description:
+        "Maximum number of avatars to be displayed within the group.",
+      default: "none",
+    },
+    {
+      name: "showRing",
+      type: "boolean",
+      type: "boolean",
+      description: "If `true`, the `Avatar` will show a `border` around it.",
+      default: "false",
+    },
+    {
+      name: "ringColor",
+      type: "string",
+      description: "Color of the `border` to match it's parent background.",
+      default: "ring-white",
+    },
+  ]}
+/>

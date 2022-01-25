@@ -1,5 +1,6 @@
 import React from "react";
 import { LiveEditor, LiveError, LivePreview, LiveProvider } from "react-live";
+import * as Reakit from "reakit";
 import {
   Button,
   Checkbox,
@@ -84,6 +85,7 @@ export const InteractiveCodeblock = (props: InteractiveCodeblockProps) => {
   const scope = {
     React,
     ...Renderlesskit,
+    Reakit,
     tw,
   };
 

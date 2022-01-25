@@ -7,7 +7,8 @@ import {
 
 # Avatar
 
-`Avatar` component is used to display user's profile picture, initials or icons.
+`Avatar` component is used to display user's profile picture or initials or
+icons along with badges.
 
 <ComponentLinks github="avatar" theme="avatar" story="primitives-avatar" />
 
@@ -16,14 +17,14 @@ import {
 ```js
 import {
   Avatar,
+  AvatarDefaultStatusIndicators,
   AvatarIcon,
   AvatarImage,
   AvatarInitials,
-  AvatarStatusIndicator,
-  AvatarWrapper,
   useAvatarProps,
   useAvatarState,
-  AvatarDefaultStatusIndicators,
+  AvatarStatusIndicator,
+  AvatarWrapper,
 } from "@renderlesskit/react-tailwind";
 ```
 
@@ -31,7 +32,7 @@ import {
 
 <InteractiveCodeblock
   children={({ spreadProps }) =>
-    `<Avatar src="https://bit.ly/dan-abramov" name="Dan Abramov" circular={false} ${spreadProps} />`
+    `<Avatar name="Leanne Graham" src="https://i.pravatar.cc/300?img=61" circular={false} ${spreadProps} />`
   }
   booleanProps={["circular"]}
   themeProps={{ size: "avatar.icon.size", status: "avatar.statusIndicators" }}
@@ -39,65 +40,33 @@ import {
 
 ## Avatar sizes
 
-Avatar has 5 sizes `xs` `sm` `md` `lg` `xl` `2xl` `3xl`
+Avatar has 7 sizes `xs` `sm` `md` `lg` `xl` `2xl` `3xl`
 
 <Codeblock
   live
   children={`
 <div className="flex space-x-2">
-  <Avatar size="xs" src="https://bit.ly/code-beast" name="Code Beast" />
-  <Avatar size="sm" src="https://bit.ly/ryan-florence" name="Rayan Florence" />
-  <Avatar size="md" src="https://bit.ly/kent-c-dodds" name="Kent Dodds" />
-  <Avatar size="lg" src="https://bit.ly/dan-abramov" name="Dan Abramov" />
-  <Avatar size="xl" src="https://bit.ly/31ycy7V" name="Timelessco" />
-  <Avatar
-    size="2xl"
-    src="https://i.pravatar.cc/300??img=61"
-    name="Clint Barton"
-  />
-  <Avatar size="3xl" src="https://i.pravatar.cc/300??img=42" name="Jhon Snow" />
+  <Avatar size="xs" name="Leanne Graham" src="https://i.pravatar.cc/300?img=1" />
+  <Avatar size="sm" name="Ervin Howell" src="https://i.pravatar.cc/300?img=11" />
+  <Avatar size="md" name="Clementine Bauch" src="https://i.pravatar.cc/300?img=21" />
+  <Avatar size="lg" name="Patricia Lebsack" src="https://i.pravatar.cc/300?img=31" />
+  <Avatar size="xl" name="Chelsey Dietrich" src="https://i.pravatar.cc/300?img=41" />
+  <Avatar size="2xl" name="Dennis Schulist" src="https://i.pravatar.cc/300?img=51" />
+  <Avatar size="3xl" name="Chris Evans" src="https://i.pravatar.cc/300?img=61" />
 </div>
 `}
 />
 
-## Avatar with badge
+## Avatar styles
 
-You can show status icons at the right corner of the Avatar using `status` prop.
+Avatar comes in two styles, `rounded` & `squared`
 
 <Codeblock
   live
   children={`
 <div className="flex space-x-2">
-  <Avatar
-    status="active"
-    size="xl"
-    name="Code Beast"
-    src="https://bit.ly/code-beast"
-  />
-  <Avatar
-    status="sleep"
-    size="xl"
-    src="https://bit.ly/31ycy7V"
-    name="Timelessco"
-  />
-  <Avatar
-    status="away"
-    size="xl"
-    src="https://bit.ly/ryan-florence"
-    name="Rayan Florence"
-  />
-  <Avatar
-    status="typing"
-    size="xl"
-    src="https://bit.ly/dan-abramov"
-    name="Dan Abramov"
-  />
-  <Avatar
-    status="org"
-    size="xl"
-    src="https://bit.ly/kent-c-dodds"
-    name="Kent Dodds"
-  />
+  <Avatar size="xl" name="Chelsey Dietrich" src="https://i.pravatar.cc/300?img=41" />
+  <Avatar size="xl" name="Dennis Schulist" src="https://i.pravatar.cc/300?img=51" circular={false} />
 </div>
 `}
 />
@@ -117,17 +86,53 @@ will be ignored.
   live
   children={`
 <div className="flex space-x-2">
-  <Avatar size="xl" name="Navin Moorthy" src="https://bit.ly/broken-link" />
-  <Avatar size="xl" name="Anurag Hazra" src="https://bit.ly/broken-link" />
+  <Avatar size="xl" name="Chelsey Dietrich" src="https://bit.ly/broken-link" />
+  <Avatar size="xl" name="Dennis Schulist" src="https://bit.ly/broken-link" />
   <Avatar size="xl" src="https://bit.ly/broken-link" />
   <Avatar size="xl" icon={<InfoCircleIcon />} />
 </div>
 `}
 />
 
-## API Reference
+## Avatar with status indicators
 
-### Avatar
+You can show status icons at the right corner of the Avatar using `status` prop.
+Each avatar sizes has its own status indicators sizes.
+
+<Codeblock
+  live
+  children={`
+<div className="flex space-x-2">
+  <Avatar
+    status="active"
+    size="xl"
+    name="Leanne Graham"
+    src="https://i.pravatar.cc/300?img=1"
+  />
+  <Avatar
+    status="sleep"
+    size="xl"
+    name="Ervin Howell"
+    src="https://i.pravatar.cc/300?img=11"
+  />
+  <Avatar
+    status="away"
+    size="xl"
+    name="Clementine Bauch"
+    src="https://i.pravatar.cc/300?img=21"
+  />
+  <Avatar
+    status="typing"
+    size="xl"
+    name="Patricia Lebsack"
+    src="https://i.pravatar.cc/300?img=31"
+  />
+  <Avatar status="org" size="xl" name="Chelsey Dietrich" src="https://i.pravatar.cc/300?img=41" />
+</div>
+`}
+/>
+
+## API Reference
 
 <PropsTable
   data={[
@@ -164,7 +169,7 @@ will be ignored.
     {
       name: "statusIndicators",
       type: "React.ReactNode",
-      description: "The custom indicatos to pass to Avatar",
+      description: "The custom indicators to pass to Avatar",
     },
     {
       name: "showRing",

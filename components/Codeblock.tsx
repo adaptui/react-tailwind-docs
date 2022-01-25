@@ -1,5 +1,6 @@
 import React from "react";
 import { LiveEditor, LiveError, LivePreview, LiveProvider } from "react-live";
+import * as Reakit from "reakit";
 import * as Renderlesskit from "@renderlesskit/react-tailwind";
 import { RenderlesskitProvider } from "@renderlesskit/react-tailwind";
 import { useClipboard } from "@chakra-ui/hooks";
@@ -126,6 +127,7 @@ export const Codeblock: React.FC<CodeblockProps> = props => {
   const scope = {
     React,
     ...Renderlesskit,
+    Reakit,
     tw,
   };
   const liveProviderProps = {

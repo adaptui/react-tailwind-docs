@@ -66,12 +66,62 @@ Badge comes with 5 themes `default` `primary` `secondary` `success` `danger`
 <Codeblock
   live
   children={`
-<div className="space-x-2">
-  <Badge themeColor="default">Default</Badge>
-  <Badge themeColor="primary">Primary</Badge>
-  <Badge themeColor="secondary">Secondary</Badge>
-  <Badge themeColor="success">Success</Badge>
-  <Badge themeColor="danger">Danger</Badge>
+<div className="flex flex-col space-y-1">
+  <div className="space-x-2">
+    <Badge size="md" variant="solid" themeColor="default">
+      Beta
+    </Badge>
+    <Badge size="md" variant="subtle" themeColor="default">
+      Beta
+    </Badge>
+    <Badge size="md" variant="outline" themeColor="default">
+      Beta
+    </Badge>
+  </div>
+  <div className="space-x-2">
+    <Badge size="md" variant="solid" themeColor="primary">
+      Beta
+    </Badge>
+    <Badge size="md" variant="subtle" themeColor="primary">
+      Beta
+    </Badge>
+    <Badge size="md" variant="outline" themeColor="primary">
+      Beta
+    </Badge>
+  </div>
+  <div className="space-x-2">
+    <Badge size="md" variant="solid" themeColor="secondary">
+      Beta
+    </Badge>
+    <Badge size="md" variant="subtle" themeColor="secondary">
+      Beta
+    </Badge>
+    <Badge size="md" variant="outline" themeColor="secondary">
+      Beta
+    </Badge>
+  </div>
+  <div className="space-x-2">
+    <Badge size="md" variant="solid" themeColor="success">
+      Beta
+    </Badge>
+    <Badge size="md" variant="subtle" themeColor="success">
+      Beta
+    </Badge>
+    <Badge size="md" variant="outline" themeColor="success">
+      Beta
+    </Badge>
+  </div>
+  <div className="space-x-2">
+    <Badge size="md" variant="solid" themeColor="danger">
+      Beta
+    </Badge>
+    <Badge size="md" variant="subtle" themeColor="danger">
+      Beta
+    </Badge>
+    <Badge size="md" variant="outline" themeColor="danger">
+      Beta
+    </Badge>
+  </div>
 </div>
 `}
 />
@@ -116,5 +166,11 @@ You can pass prefix props to the badge to prepend any content inside of badge.
       themeKey: "badge.variant.solid",
       description: "Theme of the badge",
     },
-
-]} />
+    {
+      name: "prefix",
+      type: "React.ReactNode",
+      description:
+        "If added, the badge will show an element before the badge's text",
+    },
+  ]}
+/>

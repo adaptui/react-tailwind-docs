@@ -103,8 +103,6 @@ append or prepend content in the tag.
 
 ## API Reference
 
-### Tag
-
 <PropsTable
   data={[
     {
@@ -124,6 +122,13 @@ append or prepend content in the tag.
       default: "false",
       type: "boolean",
       description: "If `true`, the tag will be disabled",
+    },
+    {
+      name: "closable",
+      default: "false",
+      type: "boolean",
+      description:
+        "If added, the tag will allow to show an icon before the tag's text",
     },
     {
       name: "prefix",

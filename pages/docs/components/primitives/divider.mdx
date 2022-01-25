@@ -1,0 +1,77 @@
+import {
+  ComponentLinks,
+  PropsTable,
+  InteractiveCodeblock,
+  Codeblock,
+} from "@/components/index";
+
+# Divider
+
+`Divider` is a static structure that provides a visible boundary for elements.
+It uses reakit's [Separator](https://reakit.io/docs/separator/) component
+internally.
+
+<ComponentLinks github="divider" story="primitives-divider" />
+
+## Imports
+
+```js
+import { Divider } from "@renderlesskit/react-tailwind";
+```
+
+## Usage
+
+<InteractiveCodeblock
+  children={({ spreadProps }) => `<Divider${spreadProps} />`}
+/>
+
+## Divider direction
+
+Divider comes with two directions: `horizontal` and `vertical`.
+
+<Codeblock
+  live
+  children={`
+<div className="flex flex-col space-y-2">
+  <div className="w-80">
+    <Divider orientation="horizontal" />
+  </div>
+  <div className="flex items-center justify-center h-80">
+    <Divider orientation="vertical" />
+  </div>
+</div>
+`}
+/>
+
+## Divider label
+
+Divider can have a label at the center to mark it as a section.
+
+<Codeblock
+  live
+  children={`
+<div className="flex flex-col space-y-2">
+ <Divider />
+ <Divider label={<Button variant="outline">Continue</Button>} />
+</div>
+`}
+/>
+
+## API Reference
+
+<PropsTable
+  data={[
+    {
+      name: "orientation",
+      default: "horizontal",
+      type: "string",
+      description: "If `vertical`, divider will be shown vertically",
+    },
+    {
+      name: "label",
+      type: "React.ReactNode",
+      description:
+        "If provided, it will be placed at the center of the divider to mark it a section start/end",
+    },
+  ]}
+/>
