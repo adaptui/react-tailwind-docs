@@ -1,4 +1,9 @@
-import { ComponentLinks } from "@/components/index";
+import {
+  ComponentLinks,
+  InteractiveCodeblock,
+  PropsTable,
+  Codeblock,
+} from "@/components/index";
 
 # Progress
 
@@ -13,71 +18,94 @@ time or consists of several steps.
 import {
   Progress,
   ProgressBar,
+  ProgressHint,
+  ProgressLabel,
+  useProgressProps,
+  useProgressState,
   ProgressTrack,
+  ProgressWrapper,
 } from "@renderlesskit/react-tailwind";
 ```
 
-- **Progress** - main progress component
-- **ProgressBar** - progress bar component
-- **ProgressTrack** - progress track component
-
 ## Usage
 
-```jsx live
-<Progress value={40} />
-```
+<InteractiveCodeblock
+  children={({ spreadProps }) => `<Progress value={40} ${spreadProps} />`}
+  themeProps={{ size: "progress.track.size" }}
+/>
 
 ## Min max values
 
-```jsx live
-<Progress min={10} max={40} value={35} />
-```
+<Codeblock live children={`<Progress min={10} max={40} value={35} />`} />
 
 ## Indeterminate progress
 
 By setting the value prop to null, progress' state becomes indeterminate
 
-```jsx live
-<Progress value={null} />
-```
+<Codeblock live children={`<Progress value={null} />`} />
 
 ## Progress sizes
 
 Progress comes with 4 sizes `sm` `md` `lg` & `xl`
 
-```jsx live
+<Codeblock
+  live
+  children={`
 <div className="flex flex-col space-y-2">
   <Progress size="sm" value={20} />
   <Progress size="md" value={30} />
   <Progress size="lg" value={40} />
   <Progress size="xl" value={50} />
 </div>
-```
+`}
+/>
+
+## Progress Label
+
+Progress also comes with A11y label that can also be used to describe the
+progress status
+
+<Codeblock live children={`<Progress value={50} label="Loading..."/>`} />
+
+## Progress Hint
+
+Progress comes with A11y hint that can be used with label to indicate the
+progress status.
+
+<Codeblock
+  live
+  children={`<Progress value={50} label="Loading..." hint={50}/>`}
+/>
 
 ## Customizing Progress
 
 To customize the appearance of the Progress component we can simply pass down
 children components (ProgressTrack, ProgressBar) for more control.
 
-```jsx live noInline
-const CustomProgress = () => {
-  const [value, setValue] = React.useState(10);
+<Codeblock
+  live
+  children={`
+<Progress value={40}>
+  <ProgressTrack className="bg-red-300" />
+  <ProgressBar className="bg-red-800" />
+</Progress>
+`}
+/>
 
-  return (
-    <>
-      <Progress value={value} size="md">
-        <ProgressTrack style={{ background: "orange" }}>
-          <ProgressBar />
-        </ProgressTrack>
-      </Progress>
+## API Reference
 
-      <ButtonGroup size="sm">
-        <Button onClick={() => setValue(prev => prev + 10)}>+</Button>
-        <Button onClick={() => setValue(prev => prev - 10)}>-</Button>
-      </ButtonGroup>
-    </>
-  );
-};
+<PropsTable
+  data={[
+    { name: "size", themeKey: "progress.track.size", default: "md" },
+    {
+      name: "hint",
+      type: "React.ReactNode",
+      description: "Hint component to display info center of the progressbar",
+    },
+    {
+      name: "label",
+      type: "React.ReactNode",
+      description: "Label slot to pass the label",
+    },
 
-export default CustomProgress;
-```
+]} />

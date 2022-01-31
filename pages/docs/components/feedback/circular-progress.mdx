@@ -1,4 +1,9 @@
-import { ComponentLinks } from "@/components/index";
+import {
+  ComponentLinks,
+  InteractiveCodeblock,
+  PropsTable,
+  Codeblock,
+} from "@/components/index";
 
 # CircularProgress
 
@@ -17,75 +22,90 @@ and indeterminate processes.
 import {
   CircularProgress,
   CircularProgressBar,
-  CircularProgressWrapper,
+  CircularProgressBarWrapper,
+  CircularProgressHint,
+  useCircularProgressProps,
+  useCircularProgressState,
+  CircularProgressTrack,
+  CircularProgressTrackWrapper,
 } from "@renderlesskit/react-tailwind";
 ```
 
-- **CircularProgress** - main progress component
-- **CircularProgressBar** - progress bar component
-- **CircularProgressWrapper** - progress track component
-
 ## Usage
 
-```jsx live
-<CircularProgress value={40} />
-```
+<InteractiveCodeblock
+  children={({ spreadProps }) =>
+    `<CircularProgress value={40} ${spreadProps} />`
+  }
+  themeProps={{ size: "circularProgress.barWrapper.common.size" }}
+/>
 
 ## Min max values
 
-```jsx live
-<CircularProgress min={10} max={40} value={35} />
-```
+<Codeblock
+  live
+  children={`<CircularProgress min={10} max={40} value={35} />`}
+/>
 
 ## Indeterminate progress
 
 By setting the value prop to null, progress' state becomes indeterminate
 
-```jsx live
-<CircularProgress value={null} />
-```
+<Codeblock live children={`<CircularProgress value={null} />`} />
 
 ## CircularProgress sizes
 
-CircularProgress comes with 3 sizes `sm` `md` & `lg`
+CircularProgress comes with 3 sizes `sm` `md` `lg` & `xl`
 
-```jsx live
+<Codeblock
+  live
+  children={`
 <div className="flex items-center space-x-2">
   <CircularProgress size="sm" value={20} />
   <CircularProgress size="md" value={30} />
   <CircularProgress size="lg" value={40} />
+  <CircularProgress size="xl" value={50} />
 </div>
-```
+`}
+/>
+
+## CircularProgress Hint
+
+CircularProgress comes with A11y hint that can be used with label to indicate
+the progress status.
+
+<Codeblock live children={`<CircularProgress value={50} hint={50}/>`} />
 
 ## Customizing CircularProgress
 
 To customize the appearance of the CircularProgress component we can simply pass
-down children components (CircularProgressWrapper, CircularProgressBar) for more
-control.
+down children components (CircularProgressTrack, CircularProgressBar,
+CircularProgressHint) for more control.
 
-```jsx live noInline
-const CustomProgress = () => {
-  const [value, setValue] = React.useState(10);
+<Codeblock
+  live
+  children={`
+<CircularProgress value={40}>
+  <CircularProgressTrack className="text-red-300" />
+  <CircularProgressBar className="text-red-700" />
+  <CircularProgressHint className="text-red-900" />
+</CircularProgress>
+`}
+/>
 
-  return (
-    <>
-      <CircularProgress value={value} size="lg">
-        <CircularProgressWrapper>
-          <CircularProgressBar
-            trackStyle="text-red-300"
-            innerTrackStyle="text-red-800"
-          />
-        </CircularProgressWrapper>
-      </CircularProgress>
+## API Reference
 
-      <br />
-      <ButtonGroup size="sm">
-        <Button onClick={() => setValue(prev => prev + 10)}>+</Button>
-        <Button onClick={() => setValue(prev => prev - 10)}>-</Button>
-      </ButtonGroup>
-    </>
-  );
-};
-
-export default CustomProgress;
-```
+<PropsTable
+  data={[
+    {
+      name: "size",
+      themeKey: "circularProgress.barWrapper.common.size",
+      default: "md",
+    },
+    {
+      name: "hint",
+      type: "React.ReactNode",
+      description: "Hint component to display info center of the progressbar",
+    },
+  ]}
+/>
