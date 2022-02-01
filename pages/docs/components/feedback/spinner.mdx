@@ -1,4 +1,9 @@
-import { ComponentLinks } from "@/components/index";
+import {
+  ComponentLinks,
+  InteractiveCodeblock,
+  PropsTable,
+  Codeblock,
+} from "@/components/index";
 
 # Spinner
 
@@ -15,29 +20,68 @@ import { Spinner } from "@renderlesskit/react-tailwind";
 
 ## Usage
 
-```jsx live
-<Spinner />
-```
+<InteractiveCodeblock
+  children={({ spreadProps }) => `<Spinner ${spreadProps} />`}
+  themeProps={{ size: "spinner.size", stroke: "spinner.stroke" }}
+/>
 
 ## Spinner sizes
 
-Spinner comes with 5 sizes `xs` `sm` `md` `lg` & `xl`
+Spinner comes with 5 sizes `xs` `sm` `md` `lg` & `em`
 
-```jsx live
+<Codeblock
+  live
+  children={`
 <div className="flex items-center space-x-2">
   <Spinner size="xs" />
   <Spinner size="sm" />
   <Spinner size="md" />
   <Spinner size="lg" />
-  <Spinner size="xl" />
+  <Spinner size="em" />
 </div>
-```
+`}
+/>
 
 ## Show stroke
 
 To show the subtle stroke around the spinner we can use the `stroke` which
 accepts `visible` or `transparent` values
 
-```jsx live
-<Spinner size="lg" stroke="visible" />
-```
+<Codeblock
+  live
+  children={`
+<div className="flex items-center space-x-2">
+  <Spinner size="md" stroke="visible" />
+  <Spinner size="md" stroke="transparent" />
+</div>
+`}
+/>
+
+## With Label
+
+Spinner has a `label` prop to provide an customized A11y label which is only
+visible to the screen readers.
+
+<Codeblock
+  live
+  children={`
+<div className="flex items-center space-x-2">
+  <Spinner size="md" label="spinning" />
+</div>
+`}
+/>
+
+## API Reference
+
+<PropsTable
+  data={[
+    { name: "size", themeKey: "spinner.size", default: "md" },
+    { name: "stroke", themeKey: "spinner.stroke", default: "transparent" },
+    {
+      name: "label",
+      type: "string",
+      default: "Loading...",
+      description: "For accessibility, it is important to add a fallback loading text. This text will be visible to screen readers.",
+    },
+
+]} />

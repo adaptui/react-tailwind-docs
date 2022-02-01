@@ -1,83 +1,91 @@
-import { ComponentLinks } from "@/components/index";
+import {
+  ComponentLinks,
+  InteractiveCodeblock,
+  Codeblock,
+} from "@/components/index";
 
-# Progress
+# ShowMore
 
-Progress is used to display the progress status for a task that takes a long
+ShowMore is used to display the progress status for a task that takes a long
 time or consists of several steps.
 
-<ComponentLinks github="progress" theme="progress" story="feedback-progress" />
+<ComponentLinks github="show-more" story="feedback-showmore" />
 
 ## Imports
 
 ```js
 import {
-  Progress,
-  ProgressBar,
-  ProgressTrack,
+  ShowMore,
+  ShowMoreButton,
+  ShowMoreContent,
+  useShowMoreProps,
+  useShowMoreState,
 } from "@renderlesskit/react-tailwind";
 ```
 
-- **Progress** - main progress component
-- **ProgressBar** - progress bar component
-- **ProgressTrack** - progress track component
-
 ## Usage
 
-```jsx live
-<Progress value={40} />
-```
-
-## Min max values
-
-```jsx live
-<Progress min={10} max={40} value={35} />
-```
-
-## Indeterminate progress
-
-By setting the value prop to null, progress' state becomes indeterminate
-
-```jsx live
-<Progress value={null} />
-```
-
-## Progress sizes
-
-Progress comes with 4 sizes `sm` `md` `lg` & `xl`
-
-```jsx live
-<div className="flex flex-col space-y-2">
-  <Progress size="sm" value={20} />
-  <Progress size="md" value={30} />
-  <Progress size="lg" value={40} />
-  <Progress size="xl" value={50} />
+<InteractiveCodeblock
+  children={({ spreadProps }) => `
+<div className="w-96 overflow-x-scroll">
+  <div className="flex h-10 w-fit flex-row items-center space-x-2">
+    <div>Apple</div>
+    <div>Orange</div>
+    <div>Watermelon</div>
+    <ShowMore direction="horizontal" className="flex flex-row space-x-2" ${spreadProps}>
+      <div>Sapota</div>
+      <div>Papaya</div>
+      <div>Avocado</div>
+      <div>Strawberry</div>
+      <div>Cherry</div>
+      <div>Fig</div>
+      <div>Guava</div>
+      <div>Mango</div>
+    </ShowMore>
+  </div>
 </div>
-```
+`}
+/>
 
-## Customizing Progress
+## ShowMore Directions
 
-To customize the appearance of the Progress component we can simply pass down
-children components (ProgressTrack, ProgressBar) for more control.
+ShowMore component comes with two directions `vertical` & `horizontal`
 
-```jsx live noInline
-const CustomProgress = () => {
-  const [value, setValue] = React.useState(10);
+<Codeblock
+  live
+  children={`
+<div className="h-80 overflow-y-scroll">
+  <div className="flex flex-col items-start space-y-2">
+    <div>Apple</div>
+    <div>Orange</div>
+    <div>Watermelon</div>
+    <div>Grapes</div>
+    <div>Banana</div>
+    <div>Blueberry</div>
+    <ShowMore direction="vertical" className="flex flex-col space-y-2">
+      <div>Sapota</div>
+      <div>Papaya</div>
+      <div>Avocado</div>
+      <div>Strawberry</div>
+      <div>Cherry</div>
+      <div>Fig</div>
+      <div>Guava</div>
+      <div>Mango</div>
+    </ShowMore>
+  </div>
+</div>
+`}
+/>
 
-  return (
-    <>
-      <Progress value={value} size="md">
-        <ProgressTrack style={{ background: "orange" }}>
-          <ProgressBar />
-        </ProgressTrack>
-      </Progress>
+## API Reference
 
-      <ButtonGroup size="sm">
-        <Button onClick={() => setValue(prev => prev + 10)}>+</Button>
-        <Button onClick={() => setValue(prev => prev - 10)}>-</Button>
-      </ButtonGroup>
-    </>
-  );
-};
+<PropsTable
+  data={[
+    {
+      name: "Button",
+      type: "React.ReactNode",
+      default: "Show more",
+      description: "User defined Button element.",
+    },
 
-export default CustomProgress;
-```
+]} />

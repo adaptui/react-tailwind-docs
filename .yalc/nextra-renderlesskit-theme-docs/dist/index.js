@@ -117,7 +117,15 @@ var defaultTheme = {
   }), /* @__PURE__ */ React2.createElement("meta", {
     name: "apple-mobile-web-app-title",
     content: "Nextra"
-  }))
+  })),
+  searchPlaceholder: ({ locale }) => {
+    if (locale === "zh-CN")
+      return "\u641C\u7D22\u6587\u6863...";
+    return "Search documentation...";
+  },
+  unstable_searchResultEmpty: () => /* @__PURE__ */ React2.createElement("span", {
+    className: "block p-8 text-center text-gray-400 text-sm select-none"
+  }, "No results found.")
 };
 var default_config_default = defaultTheme;
 
@@ -126,6 +134,7 @@ import React3, { useEffect, useRef } from "react";
 import innerText from "react-innertext";
 import { Button } from "@renderlesskit/react-tailwind";
 import { useClipboard } from "@chakra-ui/hooks";
+import { MDXProvider } from "@mdx-js/react";
 import Slugger from "github-slugger";
 import Link from "next/link";
 import "intersection-observer";
@@ -280,29 +289,10 @@ var A = (_a) => {
     href: props.href
   }, /* @__PURE__ */ React3.createElement("a", __spreadValues({}, props), children)) : /* @__PURE__ */ React3.createElement(React3.Fragment, null);
 };
-var PreContext = React3.createContext({});
-var Pre = (_a) => {
-  var _b = _a, {
-    children
-  } = _b, props = __objRest(_b, [
-    "children"
-  ]);
-  return /* @__PURE__ */ React3.createElement(PreContext.Provider, {
-    value: props
-  }, /* @__PURE__ */ React3.createElement("pre", null, children));
-};
 var Table = ({ children }) => {
   return /* @__PURE__ */ React3.createElement("div", {
     className: "table-container"
   }, /* @__PURE__ */ React3.createElement("table", null, children));
-};
-var Code = (props) => {
-  const { children } = props;
-  if (typeof children == "string")
-    return /* @__PURE__ */ React3.createElement("code", null, children);
-  return /* @__PURE__ */ React3.createElement("code", {
-    className: "relative"
-  }, children, /* @__PURE__ */ React3.createElement(CopyButton, null));
 };
 var getComponents = (args) => ({
   h2: H2(args),
@@ -315,14 +305,31 @@ var getComponents = (args) => ({
   code: Code,
   table: Table
 });
-var MDXTheme = ({
-  MDXContent
-}) => {
+var MDXTheme = ({ children }) => {
   const slugger = new Slugger();
   slugger.index = 0;
-  return /* @__PURE__ */ React3.createElement(MDXContent, {
+  return /* @__PURE__ */ React3.createElement(MDXProvider, {
     components: getComponents({ slugger })
-  });
+  }, children);
+};
+var PreContext = React3.createContext({});
+var Pre = (_a) => {
+  var _b = _a, {
+    children
+  } = _b, props = __objRest(_b, [
+    "children"
+  ]);
+  return /* @__PURE__ */ React3.createElement(PreContext.Provider, {
+    value: props
+  }, /* @__PURE__ */ React3.createElement("pre", null, children));
+};
+var Code = (props) => {
+  const { children } = props;
+  if (typeof children == "string")
+    return /* @__PURE__ */ React3.createElement("code", null, children);
+  return /* @__PURE__ */ React3.createElement("code", {
+    className: "relative"
+  }, children, /* @__PURE__ */ React3.createElement(CopyButton, null));
 };
 var CopyButton = (_a) => {
   var _b = _a, { code } = _b, props = __objRest(_b, ["code"]);
@@ -561,10 +568,12 @@ var arrow_right_default = ArrowRight;
 
 // src/utils/render-component.tsx
 import React6 from "react";
-var renderComponent = (ComponentOrNode, props) => {
+var renderComponent = (ComponentOrNode, props, functionOnly) => {
   if (!ComponentOrNode)
     return null;
   if (typeof ComponentOrNode === "function") {
+    if (functionOnly)
+      return ComponentOrNode(props);
     return /* @__PURE__ */ React6.createElement(ComponentOrNode, __spreadValues({}, props));
   }
   return ComponentOrNode;
@@ -643,9 +652,7 @@ function LocaleSwitch({ options }) {
     onChange: (option) => {
       const date = new Date(Date.now() + 365 * 24 * 60 * 60 * 1e3);
       document.cookie = `NEXT_LOCALE=${option.key}; expires=${date.toUTCString()}; path=/`;
-      router.push(asPath, void 0, {
-        locale: option.key
-      });
+      window.location.href = asPath;
     },
     selected: {
       key: selected.locale,
@@ -896,21 +903,21 @@ import cn3 from "classnames";
 import FlexSearch from "flexsearch";
 import Link3 from "next/link";
 import Router, { useRouter as useRouter3 } from "next/router";
-var Item = ({ page, title, active, href, onMouseOver, excerpt }) => {
-  return /* @__PURE__ */ React18.createElement(Link3, {
+var Item = ({ page, first, title, active, href, onHover, excerpt }) => {
+  return /* @__PURE__ */ React18.createElement(React18.Fragment, null, first ? /* @__PURE__ */ React18.createElement("div", {
+    className: "mx-2.5 px-2.5 pb-1.5 mb-2 mt-6 first:mt-0 border-b font-semibold uppercase text-xs text-gray-500 select-none dark:text-gray-300 dark:border-opacity-10"
+  }, page) : null, /* @__PURE__ */ React18.createElement(Link3, {
     href
   }, /* @__PURE__ */ React18.createElement("a", {
     className: "block no-underline",
-    onMouseOver
+    onMouseMove: onHover
   }, /* @__PURE__ */ React18.createElement("li", {
     className: cn3({ active })
   }, /* @__PURE__ */ React18.createElement("div", {
-    className: "font-bold uppercase text-xs text-gray-400"
-  }, page), /* @__PURE__ */ React18.createElement("div", {
-    className: "font-semibold dark:text-white"
+    className: "font-semibold dark:text-white leading-5"
   }, title), excerpt ? /* @__PURE__ */ React18.createElement("div", {
     className: "excerpt mt-1 text-gray-600 text-sm leading-[1.35rem] dark:text-gray-400"
-  }, excerpt) : null)));
+  }, excerpt) : null))));
 };
 var MemoedStringWithMatchHighlights = memo(function StringWithMatchHighlights({ content, search }) {
   const splittedText = content.split("");
@@ -937,21 +944,36 @@ var MemoedStringWithMatchHighlights = memo(function StringWithMatchHighlights({ 
 });
 var indexes = {};
 function Search() {
+  const config = useConfig();
   const router = useRouter3();
+  const [loading, setLoading] = useState2(false);
   const [show, setShow] = useState2(false);
   const [search, setSearch] = useState2("");
   const [active, setActive] = useState2(0);
   const [results, setResults] = useState2([]);
   const input = useRef2(null);
-  useEffect2(() => {
+  const doSearch = () => {
     if (!search)
       return;
     const localeCode = Router.locale || "default";
     const index = indexes[localeCode];
     if (!index)
       return;
-    const results2 = [].concat(...index.search(search, { enrich: true, limit: 10, suggest: true }).map((r) => r.result)).map((item) => {
+    const pages = {};
+    const results2 = [].concat(...index.search(search, { enrich: true, limit: 10, suggest: true }).map((r) => r.result)).map((r, i) => __spreadProps(__spreadValues({}, r), {
+      index: i,
+      matchTitle: r.doc.content.indexOf(search) > r.doc.content.indexOf(" _NEXTRA_ ")
+    })).sort((a, b) => {
+      if (a.matchTitle !== b.matchTitle)
+        return a.matchTitle ? -1 : 1;
+      if (a.doc.page !== b.doc.page)
+        return a.doc.page > b.doc.page ? 1 : -1;
+      return a.index - b.index;
+    }).map((item) => {
+      const firstItemOfPage = !pages[item.doc.page];
+      pages[item.doc.page] = true;
       return {
+        first: firstItemOfPage,
         route: item.doc.url,
         page: item.doc.page,
         title: /* @__PURE__ */ React18.createElement(MemoedStringWithMatchHighlights, {
@@ -965,16 +987,20 @@ function Search() {
       };
     });
     setResults(results2);
-  }, [search]);
+  };
+  useEffect2(doSearch, [search]);
   const handleKeyDown = useCallback((e) => {
     switch (e.key) {
       case "ArrowDown": {
         e.preventDefault();
         if (active + 1 < results.length) {
           setActive(active + 1);
-          const activeElement = document.querySelector(`.nextra-flexsearch ul > :nth-child(${active + 2})`);
-          if (activeElement && activeElement.scrollIntoViewIfNeeded) {
-            activeElement.scrollIntoViewIfNeeded();
+          const activeElement = document.querySelector(`.nextra-flexsearch ul > a:nth-of-type(${active + 2})`);
+          if (activeElement && activeElement.scrollIntoView) {
+            activeElement.scrollIntoView({
+              behavior: "smooth",
+              block: "nearest"
+            });
           }
         }
         break;
@@ -983,9 +1009,12 @@ function Search() {
         e.preventDefault();
         if (active - 1 >= 0) {
           setActive(active - 1);
-          const activeElement = document.querySelector(`.nextra-flexsearch ul > :nth-child(${active})`);
-          if (activeElement && activeElement.scrollIntoViewIfNeeded) {
-            activeElement.scrollIntoViewIfNeeded();
+          const activeElement = document.querySelector(`.nextra-flexsearch ul > a:nth-of-type(${active})`);
+          if (activeElement && activeElement.scrollIntoView) {
+            activeElement.scrollIntoView({
+              behavior: "smooth",
+              block: "nearest"
+            });
           }
         }
         break;
@@ -1000,8 +1029,9 @@ function Search() {
   }, [active, results, router]);
   const load = () => __async(this, null, function* () {
     const localeCode = Router.locale || "default";
-    if (!indexes[localeCode]) {
-      const data = yield (yield fetch(`/.nextra/data-${localeCode}.json`)).json();
+    if (!indexes[localeCode] && !loading) {
+      setLoading(true);
+      const data = yield (yield fetch(`/_next/static/chunks/nextra-data-${localeCode}.json`)).json();
       const index = new FlexSearch.Document({
         cache: 100,
         tokenize: "full",
@@ -1044,6 +1074,8 @@ function Search() {
         }
       }
       indexes[localeCode] = index;
+      setLoading(false);
+      setSearch((s) => s ? s + " " : s);
     }
   });
   useEffect2(() => {
@@ -1079,7 +1111,9 @@ function Search() {
     },
     className: "block w-full px-3 py-2 leading-tight rounded-lg appearance-none focus:outline-none focus:ring-1 focus:ring-gray-200 focus:bg-white hover:bg-opacity-5 transition-colors dark:focus:bg-dark dark:focus:ring-gray-100 dark:focus:ring-opacity-20",
     type: "search",
-    placeholder: "Search documentation...",
+    placeholder: render_component_default(config.searchPlaceholder, {
+      locale: router.locale
+    }, true),
     onKeyDown: handleKeyDown,
     onFocus: () => {
       load();
@@ -1098,18 +1132,37 @@ function Search() {
     leaveFrom: "opacity-100",
     leaveTo: "opacity-0"
   }, /* @__PURE__ */ React18.createElement("ul", {
-    className: "absolute z-20 p-0 m-0 mt-2 top-full"
-  }, results.length === 0 ? /* @__PURE__ */ React18.createElement("span", {
-    className: "block p-4 text-center text-gray-400 text-sm select-none"
-  }, "No results found.") : results.map((res, i) => {
+    className: "absolute z-20 p-0 m-0 mt-2 top-full py-2.5"
+  }, loading ? /* @__PURE__ */ React18.createElement("span", {
+    className: "p-8 text-center text-gray-400 text-sm select-none flex justify-center"
+  }, /* @__PURE__ */ React18.createElement("svg", {
+    className: "animate-spin -ml-1 mr-2 h-5 w-5 text-gray-400",
+    xmlns: "http://www.w3.org/2000/svg",
+    fill: "none",
+    viewBox: "0 0 24 24"
+  }, /* @__PURE__ */ React18.createElement("circle", {
+    className: "opacity-25",
+    cx: "12",
+    cy: "12",
+    r: "10",
+    stroke: "currentColor",
+    strokeWidth: "4"
+  }), /* @__PURE__ */ React18.createElement("path", {
+    className: "opacity-75",
+    fill: "currentColor",
+    d: "M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
+  })), /* @__PURE__ */ React18.createElement("span", null, "Loading...")) : results.length === 0 ? render_component_default(config.unstable_searchResultEmpty, {
+    locale: router.locale
+  }) : results.map((res, i) => {
     return /* @__PURE__ */ React18.createElement(Item, {
+      first: res.first,
       key: `search-item-${i}`,
       page: res.page,
       title: res.title,
       href: res.route,
       excerpt: res.excerpt,
       active: i === active,
-      onMouseOver: () => setActive(i)
+      onHover: () => setActive(i)
     });
   }))));
 }
@@ -1143,6 +1196,7 @@ var UP = true;
 var DOWN = false;
 var Search2 = ({ directories = [] }) => {
   const router = useRouter4();
+  const config = useConfig();
   const [show, setShow] = useState3(false);
   const [search, setSearch] = useState3("");
   const [active, setActive] = useState3(0);
@@ -1206,7 +1260,9 @@ var Search2 = ({ directories = [] }) => {
     },
     className: "block w-full px-3 py-2 leading-tight bg-black bg-opacity-[.03] rounded-lg appearance-none focus:outline-none focus:ring hover:bg-opacity-5 transition-colors",
     type: "search",
-    placeholder: "Search documentation...",
+    placeholder: render_component_default(config.searchPlaceholder, {
+      locale: router.locale
+    }, true),
     onKeyDown: handleKeyDown,
     onFocus: () => setShow(true),
     onBlur: () => setShow(false),
@@ -1217,7 +1273,7 @@ var Search2 = ({ directories = [] }) => {
   }, /* @__PURE__ */ React19.createElement("kbd", {
     className: "inline-flex items-center px-2 font-mono text-sm font-medium bg-white text-gray-400 dark:text-gray-800 dark:border-gray-400 border rounded"
   }, "/"))), renderList && /* @__PURE__ */ React19.createElement("ul", {
-    className: "absolute left-0 z-20 w-full p-0 m-0 mt-1 list-none border divide-y rounded shadow-md md:right-0 top-100 md:w-auto"
+    className: "absolute left-0 z-20 w-full p-0 py-2.5 m-0 mt-1 list-none border divide-y rounded shadow-md md:right-0 top-100 md:w-auto"
   }, results.map((res, i) => {
     return /* @__PURE__ */ React19.createElement(Item2, {
       key: `search-item-${i}`,
@@ -1336,7 +1392,7 @@ function Folder({ item, anchors }) {
     if (active) {
       TreeState[item.route] = true;
     }
-  }, [active, item.route]);
+  }, [active]);
   return /* @__PURE__ */ React21.createElement("li", {
     className: open ? "active" : ""
   }, /* @__PURE__ */ React21.createElement("button", {
@@ -1448,7 +1504,7 @@ function Sidebar({
     }
   }, [menu]);
   return /* @__PURE__ */ React21.createElement("aside", {
-    className: cn6("fixed flex-shrink-0 w-full md:w-64 md:sticky z-[15] top-[4rem] self-start overflow-y-auto h-full md:h-auto bg-white dark:bg-dark md:bg-transparent", menu ? "" : "hidden", asPopover ? "md:hidden" : "md:block"),
+    className: cn6("fixed flex-shrink-0 w-full md:w-64 md:sticky z-[15] top-[4rem] self-start overflow-y-auto h-full md:h-auto", menu ? "bg-white dark:bg-dark" : "bg-transparent hidden", asPopover ? "md:hidden" : "md:block"),
     style: {
       height: "calc(var(--vh) - 4rem)"
     }
@@ -1520,7 +1576,7 @@ var createEditUrl = (repository, filepath) => {
   }
   return "#";
 };
-var createFeedbackUrl = (repository, filepath, labels) => {
+var useCreateFeedbackUrl = (repository, filepath, labels) => {
   const mounted = use_mounted_default();
   if (!mounted)
     return "#";
@@ -1558,7 +1614,7 @@ var FeedbackLink = ({
   filepath,
   labels
 }) => {
-  const url = createFeedbackUrl(repository, filepath, labels);
+  const url = useCreateFeedbackUrl(repository, filepath, labels);
   const { locale } = useRouter7();
   return /* @__PURE__ */ React22.createElement("a", {
     className: "text-xs font-medium no-underline block text-gray-500 mb-2 hover:text-gray-900 dark:text-gray-400 dark:hover:text-gray-100",
@@ -1661,24 +1717,22 @@ function useDirectoryInfo(pageMap) {
     });
   }, [pageMap, locale, defaultLocale, asPath]);
 }
-function Body({ meta, toc, navLinks, MDXContent }) {
+var Body = ({ meta, toc, navLinks, children }) => {
   return /* @__PURE__ */ React23.createElement(React23.Fragment, null, /* @__PURE__ */ React23.createElement(SkipNavContent, null), meta.full ? /* @__PURE__ */ React23.createElement("article", {
     className: "relative w-full overflow-x-hidden"
-  }, /* @__PURE__ */ React23.createElement(MDXContent, null)) : /* @__PURE__ */ React23.createElement("article", {
+  }, /* @__PURE__ */ React23.createElement(MDXTheme, null, children)) : /* @__PURE__ */ React23.createElement("article", {
     className: "docs-container relative pb-8 w-full max-w-full flex min-w-0 pr-[calc(env(safe-area-inset-right)-1.5rem)]"
   }, /* @__PURE__ */ React23.createElement("main", {
     className: "mx-auto max-w-4xl px-6 md:px-8 pt-4 z-10 min-w-0 w-full"
-  }, /* @__PURE__ */ React23.createElement(MDXTheme, {
-    MDXContent
-  }), navLinks), toc));
-}
+  }, /* @__PURE__ */ React23.createElement(MDXTheme, null, children), navLinks), toc));
+};
 var Layout = ({
   filename,
   pageMap,
   meta,
   titleText,
-  MDXContent,
-  headings
+  headings,
+  children
 }) => {
   const { route, locale } = useRouter8();
   const config = useConfig();
@@ -1734,9 +1788,8 @@ var Layout = ({
       asPopover: true
     }), /* @__PURE__ */ React23.createElement(Body, {
       meta,
-      navLinks: null,
-      MDXContent
-    })))), config.footer ? /* @__PURE__ */ React23.createElement(footer_default, {
+      navLinks: null
+    }, children)))), config.footer ? /* @__PURE__ */ React23.createElement(footer_default, {
       menu: true
     }) : null)));
   }
@@ -1778,9 +1831,8 @@ var Layout = ({
       flatDirectories: flatDocsDirectories,
       currentIndex: activeIndex,
       isRTL
-    }),
-    MDXContent
-  })))), config.footer ? /* @__PURE__ */ React23.createElement(footer_default, {
+    })
+  }, children)))), config.footer ? /* @__PURE__ */ React23.createElement(footer_default, {
     menu: false
   }) : null)));
 };

@@ -22,9 +22,9 @@ export const Callout: React.FC<CalloutProps> = ({
   emoji = "💡",
 }) => {
   return (
-    <div className={`${themes[type]} flex rounded-lg callout mt-6`}>
+    <div className={`${themes[type]} callout mt-6 flex rounded-lg`}>
       <div
-        className="py-2 pl-3 pr-2 text-xl select-none"
+        className="select-none py-2 pl-3 pr-2 text-xl"
         style={{
           fontFamily:
             '"Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol"',

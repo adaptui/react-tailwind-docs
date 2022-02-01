@@ -41,7 +41,7 @@ export const PropsTable: React.FC<PropsTableProps> = ({
 
   return (
     <RegionTable
-      className="w-full border-collapse p-left"
+      className="p-left w-full border-collapse"
       aria-label={hasAriaLabel ? ariaLabel : "Component Props"}
       aria-labelledby={ariaLabelledBy}
     >

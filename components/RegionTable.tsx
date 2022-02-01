@@ -13,7 +13,7 @@ export const RegionTable = ({
       aria-label={ariaLabel}
       aria-labelledby={ariaLabelledBy}
       tabIndex={0}
-      className="relative mt-8 region-table"
+      className="region-table relative mt-8"
     >
       <Box as="table" className="border-0 outline-none" {...props} />
     </Box>

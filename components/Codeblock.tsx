@@ -76,7 +76,7 @@ export const CopyButton: React.FC<CopyButtonProps> = ({ code }) => {
 
   return (
     <button
-      className="absolute right-0 px-4 py-1 text-xs text-gray-800 transform -translate-x-2 translate-y-4 bg-white rounded-md -top-2"
+      className="absolute right-0 -top-2 -translate-x-2 translate-y-4 transform rounded-md bg-white px-4 py-1 text-xs text-gray-800"
       onClick={onCopy}
     >
       {hasCopied ? "Copied!" : "Copy"}
@@ -148,14 +148,14 @@ export const Codeblock: React.FC<CodeblockProps> = props => {
           }
           {...liveProviderProps}
         >
-          <div className="mt-6 bg-transparent border border-gray-500 rounded-md">
+          <div className="mt-6 rounded-md border border-gray-500 bg-transparent">
             <LivePreview className="p-6" />
             <div className="relative">
-              <LiveEditor className="!font-mono !bg-slate-100 dark:!bg-prime-300 dark:!bg-opacity-10 text-sm leading-6 tracking-tighter rounded-md rounded-t-none" />
+              <LiveEditor className="rounded-md rounded-t-none !bg-slate-100 !font-mono text-sm leading-6 tracking-tighter dark:!bg-prime-300 dark:!bg-opacity-10" />
               <CopyButton code={editorCode} />
             </div>
           </div>
-          <LiveError className="mt-0 text-xs text-red-500 bg-red-100 rounded-md rounded-t-none" />
+          <LiveError className="mt-0 rounded-md rounded-t-none bg-red-100 text-xs text-red-500" />
         </LiveProvider>
       </RenderlesskitProvider>
     );

@@ -21,7 +21,7 @@ export const ComponentLinks: React.FC<ComponentLinkProps> = ({
     "https://renderlesskit-react-tailwind.vercel.app/?path=/story/";
 
   return (
-    <ButtonGroup size="md" variant="outline" className="mt-5 component-links">
+    <ButtonGroup size="md" variant="outline" className="component-links mt-5">
       {github && (
         <Button
           as={Link}

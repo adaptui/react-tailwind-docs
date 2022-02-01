@@ -1,7 +1,7 @@
 /* eslint-disable import/no-anonymous-default-export */
 export default {
   // Project Repo
-  github: "https://github.com/timelessco/renderlesskit-react-tailwind",
+  projectLink: "https://github.com/timelessco/renderlesskit-react-tailwind",
   // Docs Repo
   docsRepositoryBase:
     "https://github.com/timelessco/renderlesskit-tailwind-docs",
@@ -13,7 +13,7 @@ export default {
   feedbackLink: "Question? Give us feedback →",
   feedbackLabels: "feedback",
   logo: (
-    <span className="hidden mr-2 font-extrabold md:inline">
+    <span className="mr-2 hidden font-extrabold md:inline">
       RenderlessKit React Tailwind
     </span>
   ),
@@ -29,7 +29,4 @@ export default {
   footer: true,
   footerEditLink: "Edit this page on GitHub →",
   footerText: <>MIT {new Date().getFullYear()} © Timeless.</>,
-  darkMode: true,
-  nextLinks: true,
-  prevLinks: true,
 };

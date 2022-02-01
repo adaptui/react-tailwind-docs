@@ -14,5 +14,9 @@ declare const defaultTheme: {
     footerEditLink: string;
     logo: JSX.Element;
     head: JSX.Element;
+    searchPlaceholder: ({ locale }: {
+        locale?: string | undefined;
+    }) => "搜索文档..." | "Search documentation...";
+    unstable_searchResultEmpty: () => JSX.Element;
 };
 export default defaultTheme;
