@@ -1176,7 +1176,7 @@ import React19, {
   useState as useState3
 } from "react";
 import cn4 from "classnames";
-import matchSorter from "match-sorter";
+import { matchSorter } from "match-sorter";
 import Link4 from "next/link";
 import { useRouter as useRouter4 } from "next/router";
 var Item2 = ({ title, active, href, onMouseOver, search }) => {

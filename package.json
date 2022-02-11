@@ -42,11 +42,6 @@
       "@commitlint/config-conventional"
     ]
   },
-  "lint-staged": {
-    "**/*.{html,css,js,jsx,ts,tsx,md,json}": [
-      "yarn format"
-    ]
-  },
   "browserslist": {
     "production": [
       ">0.2%",

@@ -56,14 +56,6 @@
       "@commitlint/config-conventional"
     ]
   },
-  "lint-staged": {
-    "**/*.{js,jsx,tx,tsx}": [
-      "yarn lint:fix"
-    ],
-    "**/*.{html,css,js,jsx,ts,tsx,md,json}": [
-      "yarn format"
-    ]
-  },
   "dependencies": {
     "@chakra-ui/hooks": "1.7.2",
     "@headlessui/react": "1.4.3",
