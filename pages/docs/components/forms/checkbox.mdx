@@ -1,6 +1,9 @@
-import { Callout } from "@/components/index";
-
-import { ComponentLinks } from "@/components/index";
+import {
+  ComponentLinks,
+  InteractiveCodeblock,
+  PropsTable,
+  Codeblock,
+} from "@/components/index";
 
 # Checkbox
 
@@ -15,18 +18,15 @@ several options. Checkbox composes
 ```js
 import {
   Checkbox,
-  CheckboxInput,
-  CheckboxLabel,
+  CheckboxDescription,
   CheckboxIcon,
+  CheckboxInput
+  CheckboxLabel,
+  useCheckboxProps,
+  useCheckboxState,
   CheckboxText,
 } from "@renderlesskit/react-tailwind";
 ```
-
-- **Checkbox** - main checkbox component
-- **CheckboxInput** - checkbox's input component
-- **CheckboxLabel** - label for checkbox
-  - **CheckboxIcon** - renders checkbox's icon
-  - **FormHelperText** - text for the checkbox label
 
 ## Usage
 
@@ -36,127 +36,117 @@ automatically handle all the accessibility & props.
 
 Basic usage.
 
+<InteractiveCodeblock
+  children={({ spreadProps }) =>
+    `<Checkbox${spreadProps}>Label text</Checkbox>`
+  }
+  booleanProps={["disabled"]}
+  themeProps={{ size: "checkbox.icon.size" }}
+  choiceProps={{ defaultState: ["true", "false", "'indeterminate'"] }}
+/>
+
 ## Checkbox sizes
 
 Checkbox comes with 3 sizes `sm` `md` `lg`
 
-```jsx live
-<Checkbox size="sm">Label text</Checkbox>
-```
+<Codeblock
+  live
+  children={`
+<div className="flex flex-col space-y-2">
+  <Checkbox size="sm" defaultState={false} />
+  <Checkbox size="md" defaultState={false} />
+  <Checkbox size="lg" defaultState={false} />
+</div>
+`}
+/>
 
-## Controlled Checkbox
+## Checkbox Uncontrolled
 
-```jsx noInline live
-const ControlledCheckbox = () => {
-  const [state, onStateChange] = React.useState(false);
+Uncontrolled checkbox can be used with `defaultState` prop.
 
-  return (
-    <>
-      <Checkbox state={state} onStateChange={onStateChange}>
-        Checkbox
-      </Checkbox>
-      <div>{`Checked: ${state}`}</div>
-    </>
-  );
-};
+<Codeblock
+  live
+  children={`
+<div className="flex flex-col space-y-2">
+  <Checkbox size="md" defaultState={true} />
+  <Checkbox size="md" defaultState={false} />
+  <Checkbox size="md" defaultState="indeterminate" />
+</div>
+`}
+/>
 
-export default ControlledCheckbox;
-```
+## Checkbox UI states
 
-## Checkbox Groups
+<Codeblock
+  live
+  children={`
+<div className="flex flex-col space-y-2">
+  <Checkbox size="md" defaultState={false} label="Checkbox" className="w-72" />
+  <Checkbox size="md" defaultState={false} label="Multilined label Checkbox, just for demonstration" className="w-72" />
+  <Checkbox size="md" defaultState={false} label="Checkbox" description="Used when the checkbox is selected and will use its value for the form submission." className="w-72"/>
+</div>
+`}
+/>
 
-We can keep track of multiple checkbox states and use them as a group.
+## Checkbox Disabled states
 
-```jsx noInline live
-const GroupedCheckbox = () => {
-  const [state, onStateChange] = React.useState([]);
+<Codeblock
+  live
+  children={`
+<div className="flex flex-col space-y-2">
+  <Checkbox size="md" disabled defaultState={false} />
+  <Checkbox size="md" disabled defaultState={false} label="Checkboxs" />
+  <Checkbox size="md" disabled defaultState={false} label="Used when the checkbox is selected and will use its value for the form submission." className="w-72" />
+  <Checkbox size="md" disabled defaultState={false} label="Checkboxs" description="Used when the checkbox is selected and will use its value for the form submission."/>
+</div>
+`}
+/>
 
-  return (
-    <>
-      <div className="mb-4">Choices: {state.join(", ")}</div>
-      <div className="space-x-2">
-        <Checkbox state={state} onStateChange={onStateChange} value="apple">
-          Apple
-        </Checkbox>
-        <Checkbox state={state} onStateChange={onStateChange} value="orange">
-          Orange
-        </Checkbox>
-        <Checkbox state={state} onStateChange={onStateChange} value="mango">
-          Mango
-        </Checkbox>
-      </div>
-    </>
-  );
-};
+## API Reference
 
-export default GroupedCheckbox;
-```
+### Checkbox
 
-## Indeterminate checkboxes
+<PropsTable
+  data={[
+    { name: "size", themeKey: "checkbox.icon.size", default: "md" },
+    {
+      name: "disabled",
+      type: "boolean",
+      description: "If `true`, the `Checkbox` will be disabled.",
+      default: "false",
+    },
+    {
+      name: "isChecked",
+      type: "boolean",
+      description: "If `true`, Checkbox is checked.",
+      default: "false",
+    },
+    {
+      name: "isUnchecked",
+      type: "boolean",
+      description: "If `true`, Checkbox is unchecked.",
+      default: "false",
+    },
+    {
+      name: "isIndeterminate",
+      type: "boolean",
+      description: "If `true`, Checkbox is indeterminate.",
+      default: "false",
+    },
+    {
+      name: "label",
+      type: "React.ReactNode",
+      description: "Label for the Checkbox.",
+    },
+    {
+      name: "desctioption",
+      type: "React.ReactNode",
+      description: "Description for the Checkbox.",
+    },
+    {
+      name: "icon",
+      type: "React.ReactNode",
+      description: "Provide custom icons as a replacement for the default ones.",
+    },
 
-```jsx noInline live
-const IndeterminateExample = () => {
-  const [checkedItems, setCheckedItems] = React.useState([false, false]);
-
-  const allChecked = checkedItems.every(Boolean);
-  const isIndeterminate = checkedItems.some(Boolean) && !allChecked;
-
-  return (
-    <>
-      <Checkbox
-        state={isIndeterminate ? "indeterminate" : allChecked}
-        onStateChange={value => setCheckedItems([value, value])}
-      >
-        Parent Checkbox
-      </Checkbox>
-      <div className="flex flex-col pl-6 mt-1">
-        <Checkbox
-          state={checkedItems[0]}
-          onStateChange={value => setCheckedItems([value, checkedItems[1]])}
-        >
-          Child Checkbox 1
-        </Checkbox>
-        <Checkbox
-          state={checkedItems[1]}
-          onStateChange={value => setCheckedItems([checkedItems[0], value])}
-        >
-          Child Checkbox 2
-        </Checkbox>
-      </div>
-    </>
-  );
-};
-
-export default IndeterminateExample;
-```
-
-<Callout>
-  Checkout our storybook source code to [see more
-  examples](https://github.com/timelessco/renderlesskit-react-tailwind/blob/main/src/checkbox/stories/Checkbox.stories.tsx#L136)
-</Callout>
-
-## Customizing Checkboxes
-
-To customize the checkbox we can use render props api to access the internal
-state of the checkbox & change it's appearance as we like with composing
-`CheckboxInput`, `CheckboxLabel` etc etc components like so:
-
-```jsx noInline live
-const CustomCheckbox = () => {
-  return (
-    <Checkbox size="lg">
-      {({ state }) => (
-        <CheckboxLabel>
-          <CheckboxInput />
-          <CheckboxIcon className="bg-transparent border-none">
-            {state ? "😃" : "😢"}
-          </CheckboxIcon>
-          <CheckboxText>Checkbox</CheckboxText>
-        </CheckboxLabel>
-      )}
-    </Checkbox>
-  );
-};
-
-export default CustomCheckbox;
-```
+]} />
