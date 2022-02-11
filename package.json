@@ -43,9 +43,6 @@
     ]
   },
   "lint-staged": {
-    "**/*.{js,jsx,tx,tsx}": [
-      "yarn lint:fix"
-    ],
     "**/*.{html,css,js,jsx,ts,tsx,md,json}": [
       "yarn format"
     ]
