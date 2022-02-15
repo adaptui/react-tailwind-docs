@@ -1,6 +1,8 @@
 {
   "radio": "Radio",
+  "radio-group": "Radio Group",
   "checkbox": "Checkbox",
+  "checkbox-group": "Checkbox Group",
   "switch": "Switch",
   "slider": "Slider",
   "input": "Input",

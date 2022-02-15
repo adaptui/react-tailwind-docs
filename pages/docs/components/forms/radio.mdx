@@ -1,11 +1,14 @@
-import { Callout } from "@/components/index";
-
-import { ComponentLinks } from "@/components/index";
+import {
+  ComponentLinks,
+  InteractiveCodeblock,
+  PropsTable,
+  Codeblock,
+} from "@/components/index";
 
 # Radio
 
-Radios are used when only one choice may be selected in a series of options.
-Radio composes [reakit's checkbox](https://reakit.io/docs/radio/) component.
+Radio composes [reakit's radio](https://reakit.io/docs/radio/) component. A
+Single Radio doesn't make sense without `RadioGroup`.
 
 <ComponentLinks github="radio" theme="radio" story="forms-radio" />
 
@@ -14,117 +17,113 @@ Radio composes [reakit's checkbox](https://reakit.io/docs/radio/) component.
 ```js
 import {
   Radio,
+  RadioDescription,
   RadioIcon,
-  RadioInput,
-  RadioGroup,
+  RadioInput
   RadioLabel,
+  useRadioProps,
+  useRadioState,
+  RadioText,
 } from "@renderlesskit/react-tailwind";
 ```
 
-- **Radio** - main radio component
-- **RadioInput** - radio's internal input component
-- **RadioLabel** - label for radio
-  - **RadioIcon** - renders radio's icon
-- **RadioGroup** - groups multiple radios together
-
 ## Usage
 
-Basic usage.
-
-```jsx live
-<RadioGroup ariaLabel="fruits" className="flex flex-col space-y-2">
-  <Radio value="apple">apple</Radio>
-  <Radio value="orange">Orange</Radio>
-  <Radio value="mango">Mango</Radio>
-</RadioGroup>
-```
+<InteractiveCodeblock
+  children={({ spreadProps }) =>
+    `<Radio value="apple" label="Apple" ${spreadProps} />`
+  }
+  booleanProps={["disabled"]}
+  themeProps={{ size: "radio.icon.size" }}
+/>
 
 ## Radio sizes
 
 Radio comes with 3 sizes `sm` `md` `lg`
 
-## Disabled radios
+<Codeblock
+  live
+  children={`
+<div className="flex flex-col space-y-2">
+  <Radio value="apple" label="Apple" size="sm" />
+  <Radio value="apple" label="Apple" size="md" />
+  <Radio value="apple" label="Apple"size="lg" />
+</div>
+`}
+/>
 
-```jsx live
-<RadioGroup ariaLabel="fruits" className="flex space-x-2">
-  <Radio value="apple">apple</Radio>
-  <Radio value="orange">Orange</Radio>
-  <Radio disabled value="mango">
-    Mango
-  </Radio>
-</RadioGroup>
-```
+## Radio UI states
 
-## Default selected
+Radio can be controlled using `state` prop.
 
-You can pass `defaultState` to initialize the radio group with a default
-selected value.
+<Codeblock
+  live
+  children={`
+<div className="flex flex-col space-y-2">
+  <Radio size="md" value="apple" label="Apple" />
+  <Radio size="md" value="apple" label="Apple" state="apple" />
+</div>
+`}
+/>
 
-```jsx live
-<RadioGroup defaultState="orange" ariaLabel="fruits" className="flex space-x-2">
-  <Radio value="apple">apple</Radio>
-  <Radio value="orange">Orange</Radio>
-  <Radio value="mango">Mango</Radio>
-</RadioGroup>
-```
+## Radio Disabled states
 
-## Controlled radio
+<Codeblock
+  live
+  children={`
+<div className="flex flex-col space-y-2">
+  <Radio size="md" value="apple" label="Apple" disabled />
+  <Radio size="md" value="apple" label="Apple" state="apple" disabled />
+</div>
+`}
+/>
 
-```jsx noInline live
-const Controlled = () => {
-  const [state, setState] = React.useState("mango");
-  return (
-    <Box>
-      <RadioGroup
-        state={state}
-        onStateChange={value => setState(value)}
-        ariaLabel="fruits"
-        className="flex space-x-2"
-      >
-        <Radio value="apple">apple</Radio>
-        <Radio value="orange">Orange</Radio>
-        <Radio value="mango">Mango</Radio>
-      </RadioGroup>
-      <Button
-        size="sm"
-        className="bg-orange-500 mt-2"
-        onClick={() => setState("orange")}
-      >
-        Change to Orange
-      </Button>
-    </Box>
-  );
-};
+## Radio Label & Description
 
-export default Controlled;
-```
+<Codeblock
+  live
+  children={`
+<div className="flex flex-col space-y-2">
+  <Radio size="md" value="apple" label="Apple" className="w-72" />
+  <Radio size="md" value="apple" label="Used when the Radio is selected and will use its value for the form submission." className="w-72" />
+  <Radio size="md" value="apple" label="Apple" description="Used when the Radio is selected and will use its value for the form submission." className="w-72" />
+</div>
+`}
+/>
 
-## Customizing radio
+## API Reference
 
-To customize the appearance of the `Radio` component we can simply pass down
-children components (RadioLabel, RadioInput, RadioIcon) for more control.
+### Radio
 
-```jsx noInline live
-const CustomRadio = props => {
-  return (
-    <Radio {...props}>
-      <RadioLabel className="px-2 py-1 rounded hover:bg-gray-100 focus-within:outline-none focus-within:ring-2 focus-within:ring-gray-600">
-        <RadioInput />
-        <RadioIcon checkedIcon={<CheckCircleIcon />} />
-        {props.children}
-      </RadioLabel>
-    </Radio>
-  );
-};
+<PropsTable
+  data={[
+    { name: "size", themeKey: "radio.icon.size", default: "md" },
+    {
+      name: "disabled",
+      type: "boolean",
+      description: "If `true`, the `Radio` will be disabled.",
+      default: "false",
+    },
+    {
+      name: "isChecked",
+      type: "boolean",
+      description: "If `true`, Radio is checked.",
+      default: "false",
+    },
+    {
+      name: "label",
+      type: "React.ReactNode",
+      description: "Label for the Radio.",
+    },
+    {
+      name: "desctioption",
+      type: "React.ReactNode",
+      description: "Description for the Radio.",
+    },
+    {
+      name: "icon",
+      type: "React.ReactNode",
+      description: "Provide custom icons as a replacement for the default ones.",
+    },
 
-export default () => (
-  <RadioGroup ariaLabel="fruits" className="flex flex-col space-y-2 w-36">
-    <CustomRadio value="apple">apple</CustomRadio>
-    <CustomRadio value="orange">Orange</CustomRadio>
-    <CustomRadio value="watermelon">Watermelon</CustomRadio>
-    <CustomRadio value="grapes" disabled>
-      Grapes
-    </CustomRadio>
-  </RadioGroup>
-);
-```
+]} />

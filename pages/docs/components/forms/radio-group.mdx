@@ -1,0 +1,149 @@
+import {
+  ComponentLinks,
+  InteractiveCodeblock,
+  PropsTable,
+  Codeblock,
+} from "@/components/index";
+
+# RadioGroup
+
+RadiosGroup are used when only one choice may be selected in a series of
+options. RadioGroup composes `Radio` component.
+
+<ComponentLinks github="radio-group" theme="radio" story="forms-radiogroup" />
+
+## Imports
+
+```js
+import {
+  RadioGroup,
+  useRadioGroupProps,
+  useRadioGroupState,
+  RadioGroupWrapper,
+  RadioShowMore,
+} from "@renderlesskit/react-tailwind";
+```
+
+## Usage
+
+<InteractiveCodeblock
+  children={({ spreadProps }) => `
+<RadioGroup aria-label="fruits" ${spreadProps}>
+  <Radio value="apple" label="Apple" />
+  <Radio value="orange" label="Orange" />
+  <Radio value="watermelon" label="Watermelon" />
+  <Radio value="grapes" label="Grapes" />
+</RadioGroup>
+`}
+  themeProps={{ size: "radio.icon.size" }}
+/>
+
+## RadioGroup sizes
+
+RadioGroup comes with 3 sizes `sm` `md` `lg`
+
+<Codeblock
+  live
+  noInline
+  children={`
+const RadioGroupBasic = props => {
+  return (
+    <RadioGroup aria-label="fruits" {...props}>
+      <Radio value="apple" label="Apple" />
+      <Radio value="orange" label="Orange" />
+      <Radio value="watermelon" label="Watermelon" />
+      <Radio value="grapes" label="Grapes" />
+    </RadioGroup>
+  );
+};
+
+const RadioGroupStack = props => { return (
+
+<div className="flex space-x-2">
+  <RadioGroupBasic size="sm" />
+  <RadioGroupBasic size="md" />
+  <RadioGroupBasic size="lg" />
+</div>
+); };
+
+render (<RadioGroupStack/>); `} />
+
+## RadioGroup Stack
+
+RadioGroup can be arranged `vertical` or `horizontal`
+
+<Codeblock
+  live
+  noInline
+  children={`
+const RadioGroupBasic = props => {
+  return (
+    <RadioGroup aria-label="fruits" {...props}>
+      <Radio value="apple" label="Apple" />
+      <Radio value="orange" label="Orange" />
+      <Radio value="watermelon" label="Watermelon" />
+      <Radio value="grapes" label="Grapes" />
+    </RadioGroup>
+  );
+};
+
+const RadioGroupStack = props => { return (
+
+<div className="flex flex-col space-y-2">
+  <RadioGroupBasic size="md" stack="vertical" />
+  <RadioGroupBasic size="md" stack="horizontal" />
+</div>
+); };
+
+render (<RadioGroupStack/>); `} />
+
+## RadioGroup Show More
+
+RadioGroup with more Radios can be made hidden by adding `maxVisibleItems` prop
+
+<Codeblock
+  live
+  noInline
+  children={`
+const RadioGroupBasic = props => {
+  return (
+    <RadioGroup aria-label="fruits" maxVisibleItems={2} {...props}>
+      <Radio value="apple" label="Apple" />
+      <Radio value="orange" label="Orange" />
+      <Radio value="watermelon" label="Watermelon" />
+      <Radio value="grapes" label="Grapes" />
+    </RadioGroup>
+  );
+};
+
+const RadioGroupStack = props => { return (
+
+<div className="flex flex-col space-y-2">
+  <RadioGroupBasic size="md" stack="vertical" className="w-32" />
+  <RadioGroupBasic size="md" stack="horizontal" />
+</div>
+); };
+
+render (<RadioGroupStack/>); `} />
+
+## API Reference
+
+### Radio
+
+<PropsTable
+  data={[
+    { name: "size", themeKey: "radio.icon.size", default: "md" },
+    {
+      name: "stack",
+      type: "string",
+      description: "Controls how the group of radios are arranged",
+      default: "vertical",
+    },
+    {
+      name: "maxVisibleItems",
+      type: "number",
+      description: "Informs the Radio Group & Radio that Show More is used.",
+      default: "null",
+    },
+
+]} />

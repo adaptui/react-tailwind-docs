@@ -1,0 +1,154 @@
+import {
+  ComponentLinks,
+  InteractiveCodeblock,
+  PropsTable,
+  Codeblock,
+} from "@/components/index";
+
+# CheckboxGroup
+
+CheckboxGroup are used when multiple choices may be selected in a series of
+options. CheckboxGroup composes `Checkbox` component.
+
+<ComponentLinks
+  github="checkbox-group"
+  theme="checkbox"
+  story="forms-checkboxgroup"
+/>
+
+## Imports
+
+```js
+import {
+  CheckboxGroup,
+  useCheckboxGroupProps,
+  useCheckboxGroupState,
+  CheckboxGroupWrapper,
+  CheckboxShowMore,
+} from "@renderlesskit/react-tailwind";
+```
+
+## Usage
+
+<InteractiveCodeblock
+  children={({ spreadProps }) => `
+<CheckboxGroup aria-label="fruits" ${spreadProps}>
+  <Checkbox value="apple" label="Apple" />
+  <Checkbox value="orange" label="Orange" />
+  <Checkbox value="watermelon" label="Watermelon" />
+  <Checkbox value="grapes" label="Grapes" />
+</CheckboxGroup>
+`}
+  themeProps={{ size: "checkbox.icon.size" }}
+/>
+
+## CheckboxGroup sizes
+
+CheckboxGroup comes with 3 sizes `sm` `md` `lg`
+
+<Codeblock
+  live
+  noInline
+  children={`
+const CheckboxGroupBasic = props => {
+  return (
+    <CheckboxGroup aria-label="fruits" {...props}>
+      <Checkbox value="apple" label="Apple" />
+      <Checkbox value="orange" label="Orange" />
+      <Checkbox value="watermelon" label="Watermelon" />
+      <Checkbox value="grapes" label="Grapes" />
+    </CheckboxGroup>
+  );
+};
+
+const CheckboxGroupStack = props => { return (
+
+<div className="flex space-x-2">
+  <CheckboxGroupBasic size="sm" />
+  <CheckboxGroupBasic size="md" />
+  <CheckboxGroupBasic size="lg" />
+</div>
+); };
+
+render (<CheckboxGroupStack/>); `} />
+
+## CheckboxGroup Stack
+
+CheckboxGroup can be arranged `vertical` or `horizontal`
+
+<Codeblock
+  live
+  noInline
+  children={`
+const CheckboxGroupBasic = props => {
+  return (
+    <CheckboxGroup aria-label="fruits" {...props}>
+      <Checkbox value="apple" label="Apple" />
+      <Checkbox value="orange" label="Orange" />
+      <Checkbox value="watermelon" label="Watermelon" />
+      <Checkbox value="grapes" label="Grapes" />
+    </CheckboxGroup>
+  );
+};
+
+const CheckboxGroupStack = props => { return (
+
+<div className="flex flex-col space-y-2">
+  <CheckboxGroupBasic size="md" stack="vertical" />
+  <CheckboxGroupBasic size="md" stack="horizontal" />
+</div>
+); };
+
+render (<CheckboxGroupStack/>); `} />
+
+## CheckboxGroup Show More
+
+CheckboxGroup with more Checkboxs can be made hidden by adding `maxVisibleItems`
+prop
+
+<Codeblock
+  live
+  noInline
+  children={`
+const CheckboxGroupBasic = props => {
+  return (
+    <CheckboxGroup aria-label="fruits" maxVisibleItems={2} {...props}>
+      <Checkbox value="apple" label="Apple" />
+      <Checkbox value="orange" label="Orange" />
+      <Checkbox value="watermelon" label="Watermelon" />
+      <Checkbox value="grapes" label="Grapes" />
+    </CheckboxGroup>
+  );
+};
+
+const CheckboxGroupStack = props => { return (
+
+<div className="flex flex-col space-y-2">
+  <CheckboxGroupBasic size="md" stack="vertical" className="w-32" />
+  <CheckboxGroupBasic size="md" stack="horizontal" />
+</div>
+); };
+
+render (<CheckboxGroupStack/>); `} />
+
+## API Reference
+
+### Checkbox
+
+<PropsTable
+  data={[
+    { name: "size", themeKey: "checkbox.icon.size", default: "md" },
+    {
+      name: "stack",
+      type: "string",
+      description: "Controls how the group of checkboxs are arranged",
+      default: "vertical",
+    },
+    {
+      name: "maxVisibleItems",
+      type: "number",
+      description: "Informs the Checkbox Group & Checkbox that Show More is used.",
+      default: "null",
+    },
+
+]} />
