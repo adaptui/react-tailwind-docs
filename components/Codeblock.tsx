@@ -8,13 +8,40 @@ import { useTheme } from "next-themes";
 import Highlight, { defaultProps, Language } from "prism-react-renderer";
 import darkTheme from "prism-react-renderer/themes/vsDark";
 import lightTheme from "prism-react-renderer/themes/vsLight";
-import { tw } from "twind";
+import { setup, tw } from "twind";
+import * as colors from "twind/colors";
 
 export type StaticCodeProps = {
   className?: string;
   highlight?: string;
   noCopy?: boolean;
 };
+
+setup({
+  preflight: false, // do not include base style reset (default: use tailwind preflight)
+  theme: {
+    extend: {
+      colors: {
+        dark: "#111",
+        oldGray: {
+          100: "#f7fafc",
+          200: "#edf2f7",
+          300: "#e2e8f0",
+          400: "#cbd5e0",
+          500: "#a0aec0",
+          600: "#718096",
+          700: "#4a5568",
+          800: "#2d3748",
+          900: "#1a202c",
+        },
+        transparent: "transparent",
+        current: "currentColor",
+        ...colors,
+      },
+    },
+  }, // define custom theme values (default: tailwind theme)
+  darkMode: "class", // use a different dark mode strategy (default: 'media')
+});
 
 export const StaticCode: React.FC<StaticCodeProps> = props => {
   const { children, className, highlight, noCopy, ...rest } = props;

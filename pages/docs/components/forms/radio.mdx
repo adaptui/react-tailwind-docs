@@ -44,7 +44,7 @@ Radio comes with 3 sizes `sm` `md` `lg`
 <Codeblock
   live
   children={`
-<div className="flex flex-col space-y-2">
+<div className="inline-flex flex-col space-y-2">
   <Radio value="apple" label="Apple" size="sm" />
   <Radio value="apple" label="Apple" size="md" />
   <Radio value="apple" label="Apple"size="lg" />
@@ -59,7 +59,7 @@ Radio can be controlled using `state` prop.
 <Codeblock
   live
   children={`
-<div className="flex flex-col space-y-2">
+<div className="inline-flex flex-col space-y-2">
   <Radio size="md" value="apple" label="Apple" />
   <Radio size="md" value="apple" label="Apple" state="apple" />
 </div>
@@ -71,7 +71,7 @@ Radio can be controlled using `state` prop.
 <Codeblock
   live
   children={`
-<div className="flex flex-col space-y-2">
+<div className="inline-flex flex-col space-y-2">
   <Radio size="md" value="apple" label="Apple" disabled />
   <Radio size="md" value="apple" label="Apple" state="apple" disabled />
 </div>
@@ -83,10 +83,10 @@ Radio can be controlled using `state` prop.
 <Codeblock
   live
   children={`
-<div className="flex flex-col space-y-2">
-  <Radio size="md" value="apple" label="Apple" className="w-72" />
-  <Radio size="md" value="apple" label="Used when the Radio is selected and will use its value for the form submission." className="w-72" />
-  <Radio size="md" value="apple" label="Apple" description="Used when the Radio is selected and will use its value for the form submission." className="w-72" />
+<div className="inline-flex flex-col space-y-2 w-72">
+  <Radio size="md" value="apple" label="Apple" />
+  <Radio size="md" value="apple" label="Used when the Radio is selected and will use its value for the form submission." />
+  <Radio size="md" value="apple" label="Apple" description="Used when the Radio is selected and will use its value for the form submission." />
 </div>
 `}
 />
