@@ -1,7 +1,15 @@
-import { ComponentLinks } from "@/components/index";
-import { Callout } from "@/components/index";
+import {
+  ComponentLinks,
+  InteractiveCodeblock,
+  PropsTable,
+  Codeblock,
+  Callout,
+} from "@/components/index";
 
 # Switch
+
+Switch component is same as the Switch component but used separately & used to
+toggle a single value.
 
 <ComponentLinks github="switch" theme="switch" story="forms-switch" />
 
@@ -10,76 +18,116 @@ import { Callout } from "@/components/index";
 ```js
 import {
   Switch,
-  SwitchLabel,
+  SwitchDescription,
+  SwitchIcon,
   SwitchInput,
+  SwitchLabel,
+  useSwitchProps,
+  useSwitchState,
+  SwitchText,
 } from "@renderlesskit/react-tailwind";
 ```
 
-- **Switch** - main switch component
-- **SwitchLabel** - label for switch
-- **SwitchInput** - native input element for switch
+<Callout>
+  A complex component that supports customization as per the
+  [composition](/docs/composition) guide.
+</Callout>
+
+## Usage
+
+<InteractiveCodeblock
+  children={({ spreadProps }) => `<Switch ${spreadProps}>Label text</Switch>`}
+  booleanProps={["disabled"]}
+  themeProps={{ size: "switch.icon.size" }}
+/>
 
 ## Switch sizes
 
-Switch comes with 4 sizes `sm` `md` `lg` `xl`
+Switch comes with 3 sizes `sm` `md` & `lg`
 
-```jsx live
-<Switch size="sm" />
-```
+<Codeblock
+  live
+  children={`
+<div className="inline-flex flex-col space-y-2">
+  <Switch size="sm" defaultState={false} />
+  <Switch size="md" defaultState={false} />
+  <Switch size="lg" defaultState={false} />
+</div>
+`}
+/>
 
-## Switch with label
+## Switch Uncontrolled
 
-If we pass a string children in switch it will automatically render it inside
-the SwitchLabel.
+Uncontrolled switch can be used with `defaultState` prop.
 
-```jsx live
-<Switch>Label text</Switch>
-```
+<Codeblock
+  live
+  children={`
+<div className="inline-flex flex-col space-y-2">
+  <Switch size="md" defaultState={true} />
+  <Switch size="md" defaultState={false} />
+</div>
+`}
+/>
 
-## Usage with FormField
+## Switch UI states
 
-```jsx live
-<FormField id="notif-alerts">
-  <FormLabel>Enable notifications?</FormLabel>
-  <Switch />
-</FormField>
-```
+<Codeblock
+  live
+  children={`
+<div className="inline-flex flex-col space-y-2 w-72">
+  <Switch size="md" defaultState={false} label="Switch" />
+  <Switch size="md" defaultState={false} label="Multilined label Switch, just for demonstration" />
+  <Switch size="md" defaultState={false} label="Switch" description="Used when the switch is selected and will use its value for the form submission."/>
+</div>
+`}
+/>
 
-## Controlled switch
+## Switch Disabled states
 
-```jsx noInline live
-const ControlledExample = () => {
-  const [state, setState] = React.useState(false);
+<Codeblock
+  live
+  children={`
+<div className="flex flex-col space-y-2 w-72">
+  <Switch size="md" disabled defaultState={false} />
+  <Switch size="md" disabled defaultState={false} label="Switchs" />
+  <Switch size="md" disabled defaultState={false} label="Used when the switch is selected and will use its value for the form submission." />
+  <Switch size="md" disabled defaultState={false} label="Switchs" description="Used when the switch is selected and will use its value for the form submission."/>
+</div>
+`}
+/>
 
-  return (
-    <Switch state={state} onStateChange={() => setState(!state)}>
-      {state ? "On" : "Off"}
-    </Switch>
-  );
-};
+## API Reference
 
-export default ControlledExample;
-```
+<PropsTable
+  data={[
+    { name: "size", themeKey: "switch.icon.size", default: "md" },
+    {
+      name: "disabled",
+      type: "boolean",
+      description: "If `true`, the `Switch` will be disabled.",
+      default: "false",
+    },
+    {
+      name: "isChecked",
+      type: "boolean",
+      description: "If `true`, Switch is checked.",
+      default: "false",
+    },
+    {
+      name: "label",
+      type: "React.ReactNode",
+      description: "Label for the Switch.",
+    },
+    {
+      name: "description",
+      type: "React.ReactNode",
+      description: "Description for the Switch.",
+    },
+    {
+      name: "icon",
+      type: "React.ReactNode",
+      description: "Provide custom icons as a replacement for the default ones.",
+    },
 
-## Customizing
-
-To customize the switch we can use render props api to access the internal state
-of the checkbox & change it's appearance as we like by composing `SwitchInput`,
-`SwitchLabel`.
-
-If you don't need to access the internal state of the switch, it's also possible
-to directly pass all the jsx inside of the children without the render function.
-
-```jsx live
-<Switch>
-  {({ state }) => (
-    <SwitchLabel className="inline-flex items-center p-2 bg-gray-100 rounded-lg">
-      <SwitchInput />
-      <SwitchIcon />
-      <span className="ml-2 text-sm text-gray-800 select-none">
-        {state ? "Dark Mode" : "Light Mode"}
-      </span>
-    </SwitchLabel>
-  )}
-</Switch>
-```
+]} />

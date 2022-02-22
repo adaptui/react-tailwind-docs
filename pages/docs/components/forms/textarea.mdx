@@ -1,67 +1,157 @@
-import { ComponentLinks } from "@/components/index";
-import { Callout } from "@/components/index";
+import {
+  ComponentLinks,
+  InteractiveCodeblock,
+  PropsTable,
+  Codeblock,
+  Callout,
+} from "@/components/index";
 
 # Textarea
 
-The Textarea component allows you to easily create multi-line text inputs.
+The Textarea component is a text field used to get textarea from the user.
 
 <ComponentLinks github="textarea" theme="textarea" story="forms-textarea" />
 
 ## Imports
 
 ```js
-import { Textarea } from "@renderlesskit/react-tailwind";
+import {
+  Textarea,
+  TextareaBase,
+  TextareaGhost,
+  TextareaIcon,
+  useTextareaProps,
+  useTextareaState,
+  TextareaWrapper,
+} from "@renderlesskit/react-tailwind";
 ```
 
-- **Textarea** - main textarea component
+<Callout>
+  A complex component that supports customization as per the
+  [composition](/docs/composition) guide.
+</Callout>
 
-## Auto Resize
+## Usage
 
-By setting autoSize prop the textarea will increase it's size according to the
+<InteractiveCodeblock
+  children={({ spreadProps }) =>
+    `<Textarea placeholder="Search" aria-label="Textarea Story Default Example" rowsMin={3} col={30} ${spreadProps}/>`
+  }
+  booleanProps={["disabled", "invalid", "loading"]}
+  themeProps={{ variant: "textarea.base.variant", size: "textarea.base.size" }}
+/>
+
+## Textarea Variants
+
+Textarea comes with 3 variants `outline` `subtle` & `underline`.
+
+<Codeblock
+  live
+  children={`
+<div className="inline-flex flex-col space-y-2">
+  <Textarea placeholder="Search" aria-label="Textarea Story Default Example" rowsMin={3} col={30} variant="outline" />
+  <Textarea placeholder="Search" aria-label="Textarea Story Default Example" rowsMin={3} col={30} variant="subtle" />
+  <Textarea placeholder="Search" aria-label="Textarea Story Default Example" rowsMin={3} col={30} variant="underline" />
+</div>
+`}
+/>
+
+## Textarea sizes
+
+Textarea comes with 4 sizes `sm` `md` `lg` & `xl`.
+
+<Codeblock
+  live
+  children={`
+<div className="inline-flex flex-col space-y-2">
+  <Textarea placeholder="Search" aria-label="Textarea Story Default Example" rowsMin={3} col={30} size="sm" />
+  <Textarea placeholder="Search" aria-label="Textarea Story Default Example" rowsMin={3} col={30} size="md" />
+  <Textarea placeholder="Search" aria-label="Textarea Story Default Example" rowsMin={3} col={30} size="lg" />
+  <Textarea placeholder="Search" aria-label="Textarea Story Default Example" rowsMin={3} col={30} size="xl" />
+</div>
+`}
+/>
+
+## Textarea autoSize
+
+By setting `autoSize` prop the textarea will increase it's size according to the
 content.
 
-```jsx live
-<Textarea autoSize />
-```
+<Codeblock
+  live
+  children={`
+<div className="inline-flex flex-col space-y-2 w-72" >
+  <Textarea placeholder="Search" autoSize={true} defaultValue="Velit voluptatem a veritatis nam ducimus ut corporis. Iure dolorem perspiciatis nihil quam laudantium ea magnam est voluptatem. Quam repellat pariatur quasi accusantium aut architecto ut est. Ab totam voluptate beatae et alias quod vero enim tempora. Corporis laboriosam velit eveniet eos ut repellat pariatur ipsam." />
+</div>
+`}
+/>
 
-## Resize direction
+## Textarea Resize
 
-`resize` prop contarints the resize direction of the textarea, It can accept 3
+`resize` prop contarints the resize direction of the textarea, It can accept 4
 values `both | vertical | horizontal | none`
 
-```jsx live
-<Textarea resize="none" defaultValue="Not Resizable" />
-<Textarea resize="both" defaultValue="Resizable on both axis" />
-<Textarea resize="vertical" defaultValue="Resizable only on Y axis" />
-<Textarea resize="horizontal" defaultValue="Resizable only on X axis" />
-```
-
-## Cols and Rows
-
-The following example show a textarea, with a set numbers of rows and columns
-and some default content. Notice that even when autoSize is enabled the textarea
-won't expand more than 5 rows.
-
-```jsx live
-<Textarea
-  autoSize
-  rowsMax="5"
-  rowsMin="2"
-  cols="50"
-  defaultValue="Set numbers of rows and cols"
+<Codeblock
+  live
+  children={`
+<div className="inline-flex flex-col space-y-2">
+  <Textarea placeholder="None" aria-label="Textarea Story Default Example" rowsMin={3} col={30} resize="none" />
+  <Textarea placeholder="Both" aria-label="Textarea Story Default Example" rowsMin={3} col={30} resize="both" />
+  <Textarea placeholder="Horizontal" aria-label="Textarea Story Default Example" rowsMin={3} col={30} resize="horizontal" />
+  <Textarea placeholder="Vertical" aria-label="Textarea Story Default Example" rowsMin={3} col={30} resize="vertical" />
+</div>
+`}
 />
-```
 
-## Integrations
+## API Reference
 
-### React Hook Form
+<PropsTable
+  data={[
+    { name: "size", themeKey: "textarea.base.size", default: "md" },
+    { name: "variant", themeKey: "textarea.base.variant", default: "outline" },
+    {
+      name: "rowsMin",
+      type: "number",
+      description: "Minimum number of rows to be displayed.",
+    },
+    {
+      name: "rowsMax",
+      type: "number",
+      description: "Maximum number of rows to be displayed.",
+    },
+    {
+      name: "autoSize",
+      type: "boolean",
+      description: "Whether the textarea should autosize on typing.",
+      default: "false",
+    },
+    {
+      name: "disabled",
+      type: "boolean",
+      description: "If `true`, the `Textarea` will be disabled.",
+      default: "false",
+    },
+    {
+      name: "invalid",
+      type: "boolean",
+      description: "True, if the value of the textarea is invalid.",
+      default: "false",
+    },
+    {
+      name: "loading",
+      type: "boolean",
+      description: "True, if the textarea is loading.",
+      default: "false",
+    },
+    {
+      name: "icon",
+      type: "React.ReactNode",
+      description: "Icon for the Textarea",
+    },
+    {
+      name: "spinner",
+      type: "React.ReactNode",
+      description: "Spinner component to display when loading.",
+    },
 
-This example shows how to integrate renderlesskit Input with react-hook-form
-
-[Explore on CodeSandbox](https://codesandbox.io/s/renderlesskit-react-hook-form-textarea-9b39v?file=/src/App.js)
-
-### Formik
-
-This example shows how to integrate renderlesskit Input with Formik
-
-[Explore on CodeSandbox](https://codesandbox.io/s/renderlesskit-formik-textarea-oqif8)
+]} />

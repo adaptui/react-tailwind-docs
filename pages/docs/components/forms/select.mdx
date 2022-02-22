@@ -1,164 +1,183 @@
-import { ComponentLinks } from "@/components/index";
-import { Callout } from "@/components/index";
+import {
+  ComponentLinks,
+  InteractiveCodeblock,
+  PropsTable,
+  Codeblock,
+  Callout,
+} from "@/components/index";
 
-# Input
+# Select
 
-<ComponentLinks github="input" theme="input" story="forms-input" />
+The Select component with collection of predefined options is used to pick a
+value.
+
+<ComponentLinks github="select" theme="select" story="forms-select" />
 
 ## Imports
 
 ```js
 import {
-  Input,
-  InputGroup,
-  InputPrefix,
-  InputSuffix,
-  InputGroupSuffix,
-  InputGroupPrefix,
+  Select,
+  SelectBase,
+  SelectPrefix,
+  SelectSuffix,
+  useSelectProps,
+  useSelectState,
+  SelectWrapper,
 } from "@renderlesskit/react-tailwind";
 ```
 
-- **Input** - main input component
-- **InputGroup** - input group is a wrapper to hold InputGroupPrefix/Suffix
-- **InputPrefix** - prefix of the input element
-- **InputSuffix** - suffix of the input element
-- **InputGroupSuffix** - prefix of the input group
-- **InputGroupPrefix** - suffix of the input group
-
-## Input Prefix/Suffix
-
-You can append or prepend any element inside input. By default we don't give
-spacing to the elements so you have to add spacing as needed.
-
-`InputPrefix` is positioned absolutely within the input.
-
-```jsx live
-<Input>
-  <InputPrefix className="pl-2">https://</InputPrefix>
-  <InputSuffix className="pr-2">.com</InputSuffix>
-</Input>
-```
-
-As you can see clicking on the input's prefix/suffix will focus the input, but
-that might not what you want in all scenarios if you want to render a button or
-something interactive. To disable this behaviour you can use
-`allowPointerEvents`
-
-For example if you want to add a select inside the suffix you can do so like
-this:
-
-```jsx live
-<Input>
-  <InputPrefix className="pl-2">https://</InputPrefix>
-  <InputSuffix allowPointerEvents className="pr-2">
-    <select className="focus:outline-none">
-      <option value=".com">.com</option>
-      <option value=".org">.org</option>
-    </select>
-  </InputSuffix>
-</Input>
-```
-
-## InputGroup
-
-`InputGroup` is used to add addons before or after the `Input` component.
-
-And by using `InputGroupPrefix` we can specify the prefix or suffix.
-
-The main difference between InputGroupPrefix & InputPrefix is that:
-
-- `InputPrefix` is positioned absolutely within the input.
-- `InputGroupPrefix` is positioned adjacent to the input.
-
-```jsx live
-<InputGroup>
-  <InputGroupPrefix className="px-2" children="https://" />
-  <Input />
-  <InputGroupSuffix className="px-2" children=".com" />
-</InputGroup>
-```
-
-Unlike `InputPrefix` where you had to add `allowPointerEvents` to make the
-`InputGroupPrefix` interactive, in InputGroupPrefix you can directly pass any
-interactive components (eg: Button).
-
-Here's a password input example using InputGroupSuffix to attach a toggle
-button.
-
-```jsx noInline live
-const PasswordExample = () => {
-  const [show, setShow] = React.useState(false);
-  const toggle = () => setShow(!show);
-
-  return (
-    <InputGroup>
-      <Input type={show ? "text" : "password"} placeholder="Enter password" />
-      <InputGroupSuffix>
-        <Button
-          size="sm"
-          variant="ghost"
-          className="focus:outline-none hover:bg-transparent"
-          onClick={toggle}
-        >
-          {show ? <EyeClose /> : <EyeOpen />}
-        </Button>
-      </InputGroupSuffix>
-    </InputGroup>
-  );
-};
-
-export default PasswordExample;
-```
-
-Here's an example with all the components combined:
-
-```jsx noInline live
-const InputButton = props => {
-  return (
-    <Button
-      size="sm"
-      variant="ghost"
-      className="transition-none focus:outline-none hover:bg-transparent"
-      {...props}
-    />
-  );
-};
-
-export default () => (
-  <InputGroup>
-    <InputGroupPrefix>
-      <InputButton>Group Prefix</InputButton>
-    </InputGroupPrefix>
-    <Input placeholder="Enter some stuff">
-      <InputPrefix allowPointerEvents>
-        <InputButton>Prefix</InputButton>
-      </InputPrefix>
-      <InputSuffix allowPointerEvents>
-        <InputButton>Suffix</InputButton>
-      </InputSuffix>
-    </Input>
-    <InputGroupSuffix>
-      <InputButton>Group Suffix</InputButton>
-    </InputGroupSuffix>
-  </InputGroup>,
-);
-```
-
 <Callout>
-  If you want to see more demos checkout our [storybook
-  examples](https://renderlesskit-react-tailwind.vercel.app/?path=/story/forms-input--input-kitchen-sink)
+  A complex component that supports customization as per the
+  [composition](/docs/composition) guide.
 </Callout>
 
-## Integrations
+## Usage
 
-### React Hook Form
+<InteractiveCodeblock
+  children={({ spreadProps }) => `
+<Select ${spreadProps}>
+  <option value="">Select anyone</option>
+  <option value="dog">Dog</option>
+  <option value="cat">Cat</option>
+  <option value="hamster">Hamster</option>
+  <option value="parrot">Parrot</option>
+  <option value="spider">Spider</option>
+  <option value="goldfish">Goldfish</option>
+</Select>`}
+  booleanProps={["disabled", "invalid", "loading"]}
+  themeProps={{ variant: "select.base.variant", size: "select.base.size" }}
+/>
 
-This example shows how to integrate renderlesskit Input with react-hook-form
+## Select Variants
 
-[Explore on CodeSandbox](https://codesandbox.io/s/renderlesskit-react-hook-form-rw5c5?file=/src/App.js)
+Select comes with 4 variants `outline` `subtle` `underline` & `ghost`.
 
-### Formik
+<Codeblock
+  live
+  children={`
+<div className="inline-flex flex-col space-y-2">
+  <Select variant="outline">
+    <option value="">Select anyone</option>
+    <option value="dog">Dog</option>
+    <option value="cat">Cat</option>
+    <option value="hamster">Hamster</option>
+  </Select>
+  <Select variant="subtle">
+    <option value="">Select anyone</option>
+    <option value="dog">Dog</option>
+    <option value="cat">Cat</option>
+    <option value="hamster">Hamster</option>
+  </Select>
+  <Select variant="underline">
+    <option value="">Select anyone</option>
+    <option value="dog">Dog</option>
+    <option value="cat">Cat</option>
+    <option value="hamster">Hamster</option>
+  </Select>
+  <Select variant="ghost">
+    <option value="">Select anyone</option>
+    <option value="dog">Dog</option>
+    <option value="cat">Cat</option>
+    <option value="hamster">Hamster</option>
+  </Select>
+</div>
+`}
+/>
 
-This example shows how to integrate renderlesskit Input with Formik
+## Select sizes
 
-[Explore on CodeSandbox](https://codesandbox.io/s/renderlesskit-formik-k1k9w)
+Select comes with 4 sizes `sm` `md` `lg` & `xl`.
+
+<Codeblock
+  live
+  children={`
+<div className="inline-flex flex-col space-y-2">
+  <Select size="sm">
+    <option value="">Select anyone</option>
+    <option value="dog">Dog</option>
+    <option value="cat">Cat</option>
+    <option value="hamster">Hamster</option>
+  </Select>
+  <Select size="md">
+    <option value="">Select anyone</option>
+    <option value="dog">Dog</option>
+    <option value="cat">Cat</option>
+    <option value="hamster">Hamster</option>
+  </Select>
+  <Select size="lg">
+    <option value="">Select anyone</option>
+    <option value="dog">Dog</option>
+    <option value="cat">Cat</option>
+    <option value="hamster">Hamster</option>
+  </Select>
+  <Select size="xl">
+    <option value="">Select anyone</option>
+    <option value="dog">Dog</option>
+    <option value="cat">Cat</option>
+    <option value="hamster">Hamster</option>
+  </Select>
+</div>
+`}
+/>
+
+## Select Prefix
+
+Select comes only with `prefix` component but you can change the default
+`suffix` component aswell.
+
+<Codeblock
+  live
+  children={`
+<div className="inline-flex flex-col space-y-2">
+  <Select prefix={<SlotIcon />}>
+    <option value="">Select anyone</option>
+    <option value="dog">Dog</option>
+    <option value="cat">Cat</option>
+    <option value="hamster">Hamster</option>
+  </Select>
+</div>
+`}
+/>
+
+## API Reference
+
+<PropsTable
+  data={[
+    { name: "size", themeKey: "select.base.size", default: "md" },
+    { name: "variant", themeKey: "select.base.variant", default: "outline" },
+    {
+      name: "disabled",
+      type: "boolean",
+      description: "If `true`, the `Select` will be disabled.",
+      default: "false",
+    },
+    {
+      name: "invalid",
+      type: "boolean",
+      description: "True, if the value of the select is invalid.",
+      default: "false",
+    },
+    {
+      name: "loading",
+      type: "boolean",
+      description: "True, if the select is loading.",
+      default: "false",
+    },
+    {
+      name: "prefix",
+      type: "React.ReactNode",
+      description: "Prefix for the Select",
+    },
+    {
+      name: "suffix",
+      type: "React.ReactNode",
+      description: "Suffix for the Select",
+    },
+    {
+      name: "spinner",
+      type: "React.ReactNode",
+      description: "Spinner component to display when loading.",
+    },
+
+]} />

@@ -3,6 +3,7 @@ import {
   InteractiveCodeblock,
   PropsTable,
   Codeblock,
+  Callout,
 } from "@/components/index";
 
 # Checkbox
@@ -20,13 +21,18 @@ import {
   Checkbox,
   CheckboxDescription,
   CheckboxIcon,
-  CheckboxInput
+  CheckboxInput,
   CheckboxLabel,
   useCheckboxProps,
   useCheckboxState,
   CheckboxText,
 } from "@renderlesskit/react-tailwind";
 ```
+
+<Callout>
+  A complex component that supports customization as per the
+  [composition](/docs/composition) guide.
+</Callout>
 
 ## Usage
 
@@ -41,7 +47,7 @@ import {
 
 ## Checkbox sizes
 
-Checkbox comes with 3 sizes `sm` `md` `lg`
+Checkbox comes with 3 sizes `sm` `md` & `lg`
 
 <Codeblock
   live
@@ -98,8 +104,6 @@ Uncontrolled checkbox can be used with `defaultState` prop.
 
 ## API Reference
 
-### Checkbox
-
 <PropsTable
   data={[
     { name: "size", themeKey: "checkbox.icon.size", default: "md" },
@@ -133,7 +137,7 @@ Uncontrolled checkbox can be used with `defaultState` prop.
       description: "Label for the Checkbox.",
     },
     {
-      name: "desctioption",
+      name: "description",
       type: "React.ReactNode",
       description: "Description for the Checkbox.",
     },

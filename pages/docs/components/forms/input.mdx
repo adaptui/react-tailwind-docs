@@ -1,7 +1,14 @@
-import { ComponentLinks } from "@/components/index";
-import { Callout } from "@/components/index";
+import {
+  ComponentLinks,
+  InteractiveCodeblock,
+  PropsTable,
+  Codeblock,
+  Callout,
+} from "@/components/index";
 
 # Input
+
+The Input component is a text field used to get input from the user.
 
 <ComponentLinks github="input" theme="input" story="forms-input" />
 
@@ -10,155 +17,116 @@ import { Callout } from "@/components/index";
 ```js
 import {
   Input,
-  InputGroup,
+  InputBase,
   InputPrefix,
   InputSuffix,
-  InputGroupSuffix,
-  InputGroupPrefix,
+  useInputProps,
+  useInputState,
+  InputWrapper,
 } from "@renderlesskit/react-tailwind";
 ```
 
-- **Input** - main input component
-- **InputGroup** - input group is a wrapper to hold InputGroupPrefix/Suffix
-- **InputPrefix** - prefix of the input element
-- **InputSuffix** - suffix of the input element
-- **InputGroupSuffix** - prefix of the input group
-- **InputGroupPrefix** - suffix of the input group
+<Callout>
+  A complex component that supports customization as per the
+  [composition](/docs/composition) guide.
+</Callout>
+
+## Usage
+
+<InteractiveCodeblock
+  children={({ spreadProps }) => `<Input placeholder="Search" ${spreadProps}/>`}
+  booleanProps={["disabled", "invalid", "loading"]}
+  themeProps={{ variant: "input.base.variant", size: "input.base.size" }}
+/>
+
+## Input Variants
+
+Input comes with 4 variants `outline` `subtle` `underline` & `ghost`.
+
+<Codeblock
+  live
+  children={`
+<div className="inline-flex flex-col space-y-2">
+  <Input placeholder="Search" size="md" variant="outline" />
+  <Input placeholder="Search" size="md" variant="subtle" />
+  <Input placeholder="Search" size="md" variant="underline" />
+  <Input placeholder="Search" size="md" variant="ghost" />
+</div>
+`}
+/>
+
+## Input sizes
+
+Input comes with 4 sizes `sm` `md` `lg` & `xl`.
+
+<Codeblock
+  live
+  children={`
+<div className="inline-flex flex-col space-y-2">
+  <Input placeholder="Search" size="sm" />
+  <Input placeholder="Search" size="md" />
+  <Input placeholder="Search" size="lg" />
+  <Input placeholder="Search" size="xl" />
+</div>
+`}
+/>
 
 ## Input Prefix/Suffix
 
 You can append or prepend any element inside input. By default we don't give
 spacing to the elements so you have to add spacing as needed.
 
-`InputPrefix` is positioned absolutely within the input.
+Prefix is positioned absolutely within the input.
 
-```jsx live
-<Input>
-  <InputPrefix className="pl-2">https://</InputPrefix>
-  <InputSuffix className="pr-2">.com</InputSuffix>
-</Input>
-```
+<Codeblock
+  live
+  children={`
+<div className="inline-flex flex-col space-y-2">
+  <Input placeholder="Search" prefix={<SlotIcon />} />
+  <Input placeholder="Search" suffix={<SlotIcon />} />
+  <Input placeholder="Search" prefix={<SlotIcon />} suffix={<SlotIcon />} />
+</div>
+`}
+/>
 
-As you can see clicking on the input's prefix/suffix will focus the input, but
-that might not what you want in all scenarios if you want to render a button or
-something interactive. To disable this behaviour you can use
-`allowPointerEvents`
+## API Reference
 
-For example if you want to add a select inside the suffix you can do so like
-this:
+<PropsTable
+  data={[
+    { name: "size", themeKey: "input.base.size", default: "md" },
+    { name: "variant", themeKey: "input.base.variant", default: "outline" },
+    {
+      name: "disabled",
+      type: "boolean",
+      description: "If `true`, the `Input` will be disabled.",
+      default: "false",
+    },
+    {
+      name: "invalid",
+      type: "boolean",
+      description: "True, if the value of the input is invalid.",
+      default: "false",
+    },
+    {
+      name: "loading",
+      type: "boolean",
+      description: "True, if the input is loading.",
+      default: "false",
+    },
+    {
+      name: "prefix",
+      type: "React.ReactNode",
+      description: "Prefix for the Input",
+    },
+    {
+      name: "suffix",
+      type: "React.ReactNode",
+      description: "Suffix for the Input",
+    },
+    {
+      name: "spinner",
+      type: "React.ReactNode",
+      description: "Spinner component to display when loading.",
+    },
 
-```jsx live
-<Input>
-  <InputPrefix className="pl-2">https://</InputPrefix>
-  <InputSuffix allowPointerEvents className="pr-2">
-    <select className="focus:outline-none">
-      <option value=".com">.com</option>
-      <option value=".org">.org</option>
-    </select>
-  </InputSuffix>
-</Input>
-```
-
-## InputGroup
-
-`InputGroup` is used to add addons before or after the `Input` component.
-
-And by using `InputGroupPrefix` we can specify the prefix or suffix.
-
-The main difference between InputGroupPrefix & InputPrefix is that:
-
-- `InputPrefix` is positioned absolutely within the input.
-- `InputGroupPrefix` is positioned adjacent to the input.
-
-```jsx live
-<InputGroup>
-  <InputGroupPrefix className="px-2" children="https://" />
-  <Input />
-  <InputGroupSuffix className="px-2" children=".com" />
-</InputGroup>
-```
-
-Unlike `InputPrefix` where you had to add `allowPointerEvents` to make the
-`InputGroupPrefix` interactive, in InputGroupPrefix you can directly pass any
-interactive components (eg: Button).
-
-Here's a password input example using InputGroupSuffix to attach a toggle
-button.
-
-```jsx noInline live
-const PasswordExample = () => {
-  const [show, setShow] = React.useState(false);
-  const toggle = () => setShow(!show);
-
-  return (
-    <InputGroup>
-      <Input type={show ? "text" : "password"} placeholder="Enter password" />
-      <InputGroupSuffix>
-        <Button
-          size="sm"
-          variant="ghost"
-          className="focus:outline-none hover:bg-transparent"
-          onClick={toggle}
-        >
-          {show ? <EyeClose /> : <EyeOpen />}
-        </Button>
-      </InputGroupSuffix>
-    </InputGroup>
-  );
-};
-
-export default PasswordExample;
-```
-
-Here's an example with all the components combined:
-
-```jsx noInline live
-const InputButton = props => {
-  return (
-    <Button
-      size="sm"
-      variant="ghost"
-      className="transition-none focus:outline-none hover:bg-transparent"
-      {...props}
-    />
-  );
-};
-
-export default () => (
-  <InputGroup>
-    <InputGroupPrefix>
-      <InputButton>Group Prefix</InputButton>
-    </InputGroupPrefix>
-    <Input placeholder="Enter some stuff">
-      <InputPrefix allowPointerEvents>
-        <InputButton>Prefix</InputButton>
-      </InputPrefix>
-      <InputSuffix allowPointerEvents>
-        <InputButton>Suffix</InputButton>
-      </InputSuffix>
-    </Input>
-    <InputGroupSuffix>
-      <InputButton>Group Suffix</InputButton>
-    </InputGroupSuffix>
-  </InputGroup>,
-);
-```
-
-<Callout>
-  If you want to see more demos checkout our [storybook
-  examples](https://renderlesskit-react-tailwind.vercel.app/?path=/story/forms-input--input-kitchen-sink)
-</Callout>
-
-## Integrations
-
-### React Hook Form
-
-This example shows how to integrate renderlesskit Input with react-hook-form
-
-[Explore on CodeSandbox](https://codesandbox.io/s/renderlesskit-react-hook-form-rw5c5?file=/src/App.js)
-
-### Formik
-
-This example shows how to integrate renderlesskit Input with Formik
-
-[Explore on CodeSandbox](https://codesandbox.io/s/renderlesskit-formik-k1k9w)
+]} />

@@ -3,6 +3,7 @@ import {
   InteractiveCodeblock,
   PropsTable,
   Codeblock,
+  Callout,
 } from "@/components/index";
 
 # Radio
@@ -19,13 +20,18 @@ import {
   Radio,
   RadioDescription,
   RadioIcon,
-  RadioInput
+  RadioInput,
   RadioLabel,
   useRadioProps,
   useRadioState,
   RadioText,
 } from "@renderlesskit/react-tailwind";
 ```
+
+<Callout>
+  A complex component that supports customization as per the
+  [composition](/docs/composition) guide.
+</Callout>
 
 ## Usage
 
@@ -93,8 +99,6 @@ Radio can be controlled using `state` prop.
 
 ## API Reference
 
-### Radio
-
 <PropsTable
   data={[
     { name: "size", themeKey: "radio.icon.size", default: "md" },
@@ -116,7 +120,7 @@ Radio can be controlled using `state` prop.
       description: "Label for the Radio.",
     },
     {
-      name: "desctioption",
+      name: "description",
       type: "React.ReactNode",
       description: "Description for the Radio.",
     },

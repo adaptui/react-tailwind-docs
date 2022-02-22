@@ -4,8 +4,8 @@
   "checkbox": "Checkbox",
   "checkbox-group": "Checkbox Group",
   "switch": "Switch",
-  "slider": "Slider",
   "input": "Input",
   "select": "Select",
-  "textarea": "Textarea"
+  "textarea": "Textarea",
+  "slider": "Slider"
 }

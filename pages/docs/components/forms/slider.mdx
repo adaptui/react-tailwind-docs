@@ -1,6 +1,10 @@
-import { Callout } from "@/components/index";
-
-import { ComponentLinks } from "@/components/index";
+import {
+  ComponentLinks,
+  InteractiveCodeblock,
+  PropsTable,
+  Codeblock,
+  Callout,
+} from "@/components/index";
 
 # Slider
 
@@ -13,122 +17,126 @@ The Slider is used to allow users to make selections from a range of values.
 ```js
 import {
   Slider,
+  SliderFilledTrack,
+  useSliderProps,
+  useSliderState,
   SliderThumb,
+  SliderThumbContainer,
+  SliderThumbInput,
+  useSliderThumbProps,
+  useSliderThumbState,
+  SliderThumbWrapper,
   SliderTrack,
+  SliderTrackWrapper,
+  SliderWrapper,
 } from "@renderlesskit/react-tailwind";
 ```
 
-- **Slider** - The wrapper that provides context and functionality for all
-  children.
-- **SliderThumb** - The handle that's used to change the slider value..
-- **SliderTrack** - Slider track element.
+<Callout>
+  A complex component that supports customization as per the
+  [composition](/docs/composition) guide.
+</Callout>
 
 ## Usage
 
-Basic usage.
-
-```jsx live
-<Slider />
-```
+<InteractiveCodeblock
+  children={({ spreadProps }) =>
+    `<Slider defaultValue={[50]} ${spreadProps} />`
+  }
+  booleanProps={["tooltip", "isDisabled"]}
+  themeProps={{ size: "slider.track.base.size" }}
+/>
 
 ## Slider sizes
 
-Slider comes with 3 sizes `sm` `md` `lg`
+Slider comes with 3 sizes `sm` `md` `lg` & `xl`
 
-## Reversed Slider
-
-By setting the `reversed` prop to true, the slider value is reversed.
-
-```jsx live
-<Slider reversed />
-```
-
-## Thumb content
-
-To change the contents inside of the thumb we can pass `thumbContent` prop.
-
-```jsx live
-<Slider thumbContent={<BoltIcon />} />
-```
-
-`thumbIcon` also accepts a function which can be used to get the value of the
-slider, it returns an array which can contain multiple values if slider has
-multiple thumbs.
-
-```jsx live
-<Slider
-  thumbContent={value => <small className="text-[0.625rem]">{value[0]}</small>}
-/>
-```
-
-## Multi Slider & Range Slider
-
-If slider is provided with more than one value, it will be rendered as a range
-or multi slider.
-
-Range slider
-
-```jsx live
-<Slider defaultValues={[10, 40]} />
-```
-
-Multi slider
-
-```jsx live
-<Slider defaultValues={[10, 25, 40, 70]} />
-```
-
-## Changing the slider orientation
-
-```jsx live
-<div style={{ height: 150 }}>
-  <Slider orientation="vertical" />
+<Codeblock
+  live
+  children={`
+<div className="inline-flex flex-col space-y-2">
+  <Slider size="sm" defaultValue={[50]} />
+  <Slider size="md" defaultValue={[50]} />
+  <Slider size="lg" defaultValue={[50]} />
+  <Slider size="xl" defaultValue={[50]} />
 </div>
-```
+`}
+/>
 
-## Slider steps
+## Slider KnobIcon
 
-```jsx live
-<Slider max={50} step={10} />
-```
+The knob icon can be customized by passing a custom icon for the SliderThumb.
 
-## Customizing Slider
+<Codeblock
+  live
+  children={`
+<div className="inline-flex flex-col space-y-2">
+  <Slider size="md" defaultValue={[50]} knobIcon={SliderDefaultKnobIcon} />
+</div>
+`}
+/>
 
-To customize the appearance of the `Radio` component we can simply pass down
-children components (SliderThumb, SliderTrack) for more control.
+## Slider states
 
-Note that we can also use the render prop pattern to get internal state of the
-slider.
+Slider can have `min` and `max` values, `step`, `isDisabled` & `formatOptions`
+as well.
 
-```jsx noInline live
-const CustomSlider = props => {
-  return (
-    <div role="group" aria-labelledby="styled-slider" style={{ width: 400 }}>
-      <Slider size="md">
-        {({ state, trackRef, thumbRef }) => (
-          <>
-            <span>
-              {state.isThumbDragging(0) ? "Dragging" : "Not dragging"}
-            </span>
-            <SliderTrack ref={trackRef}>
-              <SliderThumb ref={thumbRef} />
-            </SliderTrack>
-          </>
-        )}
-      </Slider>
-    </div>
-  );
-};
+<Codeblock
+  live
+  children={`
+<div className="inline-flex flex-col space-y-2">
+  <Slider size="md" defaultValue={[50]} minValue={20} maxValue={80} />
+  <Slider size="md" defaultValue={[50]} minValue={20} maxValue={80} step={10} />
+  <Slider size="md" defaultValue={[50]} minValue={20} maxValue={80} step={10} isDisabled={true} />
+  <Slider size="md" defaultValue={[50]} formatOptions={{
+      style: "unit",
+      unit: "celsius",
+      unitDisplay: "narrow",
+    }} />
+</div>
+`}
+/>
 
-export default CustomSlider;
-```
+## Range Slider
 
-## Integrations
+Single Slider can be converted to a range slider using `range` prop.
 
-### React Hook Form
-
-This example shows how to integrate renderlesskit Input with react-hook-form
-
-[Explore on CodeSandbox](https://codesandbox.io/s/renderlesskit-react-hook-form-slider-jrxc1)
+<Codeblock
+  live
+  children={`
+<div className="inline-flex flex-col space-y-2">
+  <Slider size="md" defaultValue={[33, 66]} range />
+</div>
+`}
+/>
 
 ## API Reference
+
+<PropsTable
+  data={[
+    { name: "size", themeKey: "slider.track.base.size", default: "md" },
+    {
+      name: "isDisabled",
+      type: "boolean",
+      description: "If `true`, the `Slider` will be disabled.",
+      default: "false",
+    },
+    {
+      name: "tooltip",
+      type: "boolean",
+      description: "True, if your slider needs a tooltip.",
+      default: "true",
+    },
+    {
+      name: "range",
+      type: "boolean",
+      description: "True, if you need a range slider.",
+      default: "false",
+    },
+    {
+      name: "knobIcon",
+      type: "React.ReactNode",
+      description: "Provide custom icons as a replacement for the default ones.",
+    },
+
+]} />

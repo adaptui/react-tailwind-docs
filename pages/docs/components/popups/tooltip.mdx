@@ -1,0 +1,139 @@
+import {
+  ComponentLinks,
+  InteractiveCodeblock,
+  PropsTable,
+  Codeblock,
+  Callout,
+} from "@/components/index";
+
+# Tooltip
+
+Tooltip is a popup that displays information related to an element when the
+element receives keyboard focus or the mouse hovers over it. Tooltip can be used
+in combination with other components, such as Button or Icon. Tooltip composes
+[reakit's Tooltip](https://reakit.io/docs/tooltip/) component.
+
+<ComponentLinks github="tooltip" theme="tooltip" story="popups-tooltip" />
+
+## Imports
+
+```js
+import {
+  Tooltip,
+  TooltipAnchor,
+  TooltipArrow,
+  TooltipArrowContent,
+  TooltipContent,
+  useTooltipProps,
+  TooltipReference,
+  useTooltipState,
+  TooltipTrigger,
+  TooltipWrapper,
+} from "@renderlesskit/react-tailwind";
+```
+
+<Callout>
+  A complex component that supports customization as per the
+  [composition](/docs/composition) guide.
+</Callout>
+
+## Usage
+
+<InteractiveCodeblock
+  children={({ spreadProps }) => `
+  <Tooltip content="Add your information" ${spreadProps}>
+    <TooltipWrapper className="z-50" />
+    <Button>Tooltip</Button>
+  </Tooltip>`}
+  booleanProps={["withArrow"]}
+  choiceProps={{ side: ["'top'", "'right'", "'bottom'", "'left'"] }}
+/>
+
+## Tooltip Sides
+
+Sides can be set by passing the `side` prop to the Tooltip component. 4 `side`
+options are available: `top`, `right`, `bottom`, `left`.By default, the tooltip
+is displayed from the `bottom`.
+
+`withArrow` prop is used to toggle the arrow.
+
+<Codeblock
+  live
+  children={`
+<div className="inline-flex flex-row space-x-2">
+  <Tooltip content="Add your information" side="top">
+    <TooltipWrapper className="z-50" />
+    <Button>Tooltip</Button>
+  </Tooltip>
+  <Tooltip content="Add your information" side="bottom">
+    <TooltipWrapper className="z-50" />
+    <Button>Tooltip</Button>
+  </Tooltip>
+  <Tooltip content="Add your information" side="left">
+    <TooltipWrapper className="z-50" />
+    <Button>Tooltip</Button>
+  </Tooltip>
+  <Tooltip content="Add your information" side="right">
+    <TooltipWrapper className="z-50" />
+    <Button>Tooltip</Button>
+  </Tooltip>
+</div>
+`}
+/>
+
+## Tooltip Prefix/Suffix
+
+`prefix` and `suffix` props are used to add a prefix or suffix to the tooltip.
+
+<Codeblock
+  live
+  children={`
+<div className="inline-flex flex-row space-x-2">
+  <Tooltip content="Add your information" prefix={<SlotIcon />}>
+    <TooltipWrapper className="z-50" />
+    <Button>Tooltip</Button>
+  </Tooltip>
+  <Tooltip content="Add your information" suffix={<SlotIcon />}>
+    <TooltipWrapper className="z-50" />
+    <Button>Tooltip</Button>
+  </Tooltip>
+  <Tooltip content="Add your information" prefix={<SlotIcon />} suffix={<SlotIcon />}>
+    <TooltipWrapper className="z-50" />
+    <Button>Tooltip</Button>
+  </Tooltip>
+</div>
+`}
+/>
+
+## API Reference
+
+<PropsTable
+  data={[
+    {
+      name: "withArrow",
+      type: "boolean",
+      description: "If `true`, Tooltip will render an arrow.",
+      default: "false",
+    },
+    {
+      name: "content",
+      type: "React.ReactNode",
+      description: "Label for the Tooltip.",
+    },
+    {
+      name: "prefix",
+      type: "React.ReactNode",
+      description: "Prefix for the Tooltip",
+    },
+    {
+      name: "suffix",
+      type: "React.ReactNode",
+      description: "Suffix for the Tooltip",
+    },
+    {
+      name: "arrowIcon",
+      type: "React.ReactNode",
+      description: "Provide custom arrow icon as a replacement for the default one.",
+    },
+
+]} />
