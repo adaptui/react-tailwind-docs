@@ -1,15 +1,39 @@
 {
   "index": {
     "title": "Introduction",
-    "type": "nav",
-    "hidden": true
+    "type": "page",
+    "hidden": true,
+    "theme": {
+      "navbar": true,
+      "toc": true,
+      "sidebar": true,
+      "pagination": true,
+      "footer": true,
+      "full": false
+    }
   },
   "docs": {
     "title": "Docs",
-    "type": "nav"
+    "type": "page",
+    "theme": {
+      "navbar": true,
+      "toc": true,
+      "sidebar": true,
+      "pagination": true,
+      "footer": true,
+      "full": false
+    }
   },
   "guides": {
     "title": "Guides",
-    "type": "nav"
+    "type": "page",
+    "theme": {
+      "navbar": true,
+      "toc": true,
+      "sidebar": true,
+      "pagination": true,
+      "footer": true,
+      "full": false
+    }
   }
 }

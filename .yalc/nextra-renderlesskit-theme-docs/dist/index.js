@@ -363,6 +363,19 @@ function useMenuContext() {
 
 // src/utils/normalize-pages.tsx
 import getTitle from "title";
+
+// src/misc/theme-context.tsx
+var themeContext = {
+  navbar: true,
+  sidebar: true,
+  toc: true,
+  pagination: true,
+  footer: true,
+  full: false
+};
+var theme_context_default = themeContext;
+
+// src/utils/normalize-pages.tsx
 function getMetaTitle(meta) {
   if (typeof meta === "string")
     return meta;
@@ -373,7 +386,7 @@ function getMetaTitle(meta) {
 function getMetaItemType(meta) {
   if (typeof meta === "object")
     return meta.type;
-  return "docs";
+  return "doc";
 }
 function getMetaHidden(meta) {
   if (typeof meta === "object")
@@ -385,7 +398,8 @@ function normalizePages({
   locale,
   defaultLocale,
   route,
-  docsRoot = ""
+  docsRoot = "",
+  pageThemeContext = theme_context_default
 }) {
   let meta = "";
   for (let item of list) {
@@ -415,6 +429,7 @@ function normalizePages({
   const flatPageDirectories = [];
   let activeType = void 0;
   let activeIndex = 0;
+  let activeThemeContext = pageThemeContext;
   list.filter((a) => a.name !== "meta.json" && !a.name.startsWith("_") && (a.locale === locale || (a.locale === defaultLocale || !a.locale) && !hasLocale.get(a.name))).sort((a, b) => {
     const indexA = metaKeys.indexOf(a.name);
     const indexB = metaKeys.indexOf(b.name);
@@ -426,19 +441,21 @@ function normalizePages({
       return -1;
     return indexA - indexB;
   }).forEach((a) => {
+    var _a;
     if (typeof meta !== "object")
       return;
     const title = getMetaTitle(meta[a.name]) || getTitle(a.name);
-    const type = getMetaItemType(meta[a.name]) || "docs";
+    const type = getMetaItemType(meta[a.name]) || "doc";
     const hidden = getMetaHidden(meta[a.name]);
-    const isCurrentDocsTree = type === "docs" && route.startsWith(docsRoot);
+    const extendedPageThemeContext = __spreadValues(__spreadValues({}, pageThemeContext), (_a = meta[a.name]) == null ? void 0 : _a.theme);
+    const isCurrentDocsTree = type === "doc" && route.startsWith(docsRoot);
     if (a.route === route) {
       activeType = type;
       switch (type) {
-        case "nav":
+        case "page":
           activeIndex = flatPageDirectories.length;
           break;
-        case "docs":
+        case "doc":
         default:
           if (isCurrentDocsTree) {
             activeIndex = flatDocsDirectories.length;
@@ -454,12 +471,13 @@ function normalizePages({
     }) : void 0;
     if (normalizedChildren) {
       if (normalizedChildren.activeIndex !== void 0 && normalizedChildren.activeType !== void 0) {
+        activeThemeContext = extendedPageThemeContext;
         activeType = normalizedChildren.activeType;
         switch (activeType) {
-          case "nav":
+          case "page":
             activeIndex = flatPageDirectories.length + normalizedChildren.activeIndex;
             break;
-          case "docs":
+          case "doc":
             activeIndex = flatDocsDirectories.length + normalizedChildren.activeIndex;
             break;
         }
@@ -483,7 +501,7 @@ function normalizePages({
     });
     if (normalizedChildren) {
       switch (type) {
-        case "nav":
+        case "page":
           pageItem.children.push(...normalizedChildren.pageDirectories);
           docsDirectories.push(...normalizedChildren.docsDirectories);
           if (!normalizedChildren.flatPageDirectories.length && normalizedChildren.flatDirectories.length) {
@@ -491,7 +509,7 @@ function normalizePages({
             flatPageDirectories.push(pageItem);
           }
           break;
-        case "docs":
+        case "doc":
         default:
           if (isCurrentDocsTree) {
             Array.isArray(docsItem.children) && docsItem.children.push(...normalizedChildren.docsDirectories);
@@ -505,10 +523,10 @@ function normalizePages({
     } else {
       flatDirectories.push(item);
       switch (type) {
-        case "nav":
+        case "page":
           flatPageDirectories.push(pageItem);
           break;
-        case "docs":
+        case "doc":
         default:
           if (isCurrentDocsTree) {
             flatDocsDirectories.push(docsItem);
@@ -517,10 +535,10 @@ function normalizePages({
     }
     directories.push(item);
     switch (type) {
-      case "nav":
+      case "page":
         pageDirectories.push(pageItem);
         break;
-      case "docs":
+      case "doc":
       default:
         if (isCurrentDocsTree) {
           docsDirectories.push(docsItem);
@@ -530,6 +548,7 @@ function normalizePages({
   return {
     activeType,
     activeIndex,
+    activeThemeContext,
     directories,
     flatDirectories,
     docsDirectories,
@@ -1176,7 +1195,7 @@ import React19, {
   useState as useState3
 } from "react";
 import cn4 from "classnames";
-import { matchSorter } from "match-sorter";
+import matchSorter from "match-sorter";
 import Link4 from "next/link";
 import { useRouter as useRouter4 } from "next/router";
 var Item2 = ({ title, active, href, onMouseOver, search }) => {
@@ -1717,9 +1736,14 @@ function useDirectoryInfo(pageMap) {
     });
   }, [pageMap, locale, defaultLocale, asPath]);
 }
-var Body = ({ meta, toc, navLinks, children }) => {
-  return /* @__PURE__ */ React23.createElement(React23.Fragment, null, /* @__PURE__ */ React23.createElement(SkipNavContent, null), meta.full ? /* @__PURE__ */ React23.createElement("article", {
-    className: "relative w-full overflow-x-hidden"
+var Body = ({
+  themeContext: themeContext2,
+  toc,
+  navLinks,
+  children
+}) => {
+  return /* @__PURE__ */ React23.createElement(React23.Fragment, null, /* @__PURE__ */ React23.createElement(SkipNavContent, null), themeContext2.full ? /* @__PURE__ */ React23.createElement("article", {
+    className: cn8("full relative overflow-x-hidden", !themeContext2.sidebar ? "expand" : "")
   }, /* @__PURE__ */ React23.createElement(MDXTheme, null, children)) : /* @__PURE__ */ React23.createElement("article", {
     className: "docs-container relative pb-8 w-full max-w-full flex min-w-0 pr-[calc(env(safe-area-inset-right)-1.5rem)]"
   }, /* @__PURE__ */ React23.createElement("main", {
@@ -1739,6 +1763,7 @@ var Layout = ({
   const {
     activeType,
     activeIndex,
+    activeThemeContext,
     flatPageDirectories,
     docsDirectories,
     flatDirectories,
@@ -1755,44 +1780,7 @@ var Layout = ({
     return localeConfig && localeConfig.direction === "rtl";
   }, [config.i18n, locale]);
   const [menu, setMenu] = useState6(false);
-  if (activeType === "nav") {
-    return /* @__PURE__ */ React23.createElement(React23.Fragment, null, /* @__PURE__ */ React23.createElement(Head, {
-      title,
-      locale,
-      meta
-    }), /* @__PURE__ */ React23.createElement(MenuContext.Provider, {
-      value: {
-        menu,
-        setMenu,
-        defaultMenuCollapsed: !!config.defaultMenuCollapsed
-      }
-    }, /* @__PURE__ */ React23.createElement("div", {
-      className: cn8("nextra-container main-container flex flex-col", {
-        rtl: isRTL,
-        page: true
-      })
-    }, /* @__PURE__ */ React23.createElement(Navbar, {
-      isRTL,
-      flatDirectories,
-      flatPageDirectories
-    }), /* @__PURE__ */ React23.createElement(ActiveAnchor, null, /* @__PURE__ */ React23.createElement("div", {
-      className: "max-w-[90rem] w-full mx-auto"
-    }, /* @__PURE__ */ React23.createElement("div", {
-      className: "flex flex-1 h-full"
-    }, /* @__PURE__ */ React23.createElement(Sidebar, {
-      directories: flatPageDirectories,
-      flatDirectories,
-      fullDirectories: directories,
-      headings,
-      isRTL,
-      asPopover: true
-    }), /* @__PURE__ */ React23.createElement(Body, {
-      meta,
-      navLinks: null
-    }, children)))), config.footer ? /* @__PURE__ */ React23.createElement(footer_default, {
-      menu: true
-    }) : null)));
-  }
+  const themeContext2 = __spreadValues(__spreadValues({}, activeThemeContext), meta);
   return /* @__PURE__ */ React23.createElement(React23.Fragment, null, /* @__PURE__ */ React23.createElement(Head, {
     title,
     locale,
@@ -1807,33 +1795,34 @@ var Layout = ({
     className: cn8("nextra-container main-container flex flex-col", {
       rtl: isRTL
     })
-  }, /* @__PURE__ */ React23.createElement(Navbar, {
+  }, themeContext2.navbar ? /* @__PURE__ */ React23.createElement(Navbar, {
     isRTL,
     flatDirectories,
     flatPageDirectories
-  }), /* @__PURE__ */ React23.createElement(ActiveAnchor, null, /* @__PURE__ */ React23.createElement("div", {
+  }) : null, /* @__PURE__ */ React23.createElement(ActiveAnchor, null, /* @__PURE__ */ React23.createElement("div", {
     className: "max-w-[90rem] w-full mx-auto"
   }, /* @__PURE__ */ React23.createElement("div", {
     className: "flex flex-1 h-full"
-  }, /* @__PURE__ */ React23.createElement(Sidebar, {
+  }, themeContext2.sidebar ? /* @__PURE__ */ React23.createElement(Sidebar, {
     directories: docsDirectories,
     flatDirectories,
     fullDirectories: directories,
     headings,
-    isRTL
-  }), /* @__PURE__ */ React23.createElement(Body, {
-    meta,
-    toc: /* @__PURE__ */ React23.createElement(ToC, {
+    isRTL,
+    asPopover: activeType === "page"
+  }) : null, /* @__PURE__ */ React23.createElement(Body, {
+    themeContext: themeContext2,
+    toc: activeType === "page" ? null : themeContext2.toc ? /* @__PURE__ */ React23.createElement(ToC, {
       headings: config.floatTOC ? headings : null,
       filepathWithName
-    }),
-    navLinks: /* @__PURE__ */ React23.createElement(NavLinks, {
+    }) : null,
+    navLinks: activeType === "page" ? null : themeContext2.pagination ? /* @__PURE__ */ React23.createElement(NavLinks, {
       flatDirectories: flatDocsDirectories,
       currentIndex: activeIndex,
       isRTL
-    })
-  }, children)))), config.footer ? /* @__PURE__ */ React23.createElement(footer_default, {
-    menu: false
+    }) : null
+  }, children)))), themeContext2.footer && config.footer ? /* @__PURE__ */ React23.createElement(footer_default, {
+    menu: activeType === "page" || !themeContext2.sidebar
   }) : null)));
 };
 var src_default = (opts, config) => {
