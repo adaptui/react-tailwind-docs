@@ -8,7 +8,7 @@ import {
 
 # AvatarGroup
 
-`AvatarGroup` component is used to display a set of avatars closed together.
+AvatarGroup is a component that displays a group of avatars.
 
 <ComponentLinks
   github="avatar-group"
@@ -36,7 +36,7 @@ import {
 
 <InteractiveCodeblock
   children={({ spreadProps }) => `
-<AvatarGroup circular={false} ${spreadProps}>
+<AvatarGroup circular={false} showRing={false} ${spreadProps}>
   <Avatar name="Leanne Graham" src="https://i.pravatar.cc/300?img=1" />
   <Avatar name="Ervin Howell" src="https://i.pravatar.cc/300?img=11" />
   <Avatar name="Clementine Bauch" src="https://i.pravatar.cc/300?img=21" />
@@ -45,13 +45,14 @@ import {
   <Avatar name="Dennis Schulist" src="https://i.pravatar.cc/300?img=51" />
 </AvatarGroup>
 `}
-  booleanProps={["circular"]}
+  booleanProps={["circular", "showRing"]}
   themeProps={{ size: "avatar.icon.size" }}
 />
 
 ## AvatarGroup sizes
 
-AvatarGroup has all 7 avatar sizes `xs` `sm` `md` `lg` `xl` `2xl` `3xl`
+Sizes can be set using the `size` prop. The default size is `"xl"`. The
+available sizes are: `xs` `sm` `md` `lg` `xl` `2xl` `3xl`
 
 <Codeblock
   live
@@ -90,7 +91,7 @@ render (<AvatarGroupStack/>); `} />
 
 ## AvatarGroup styles
 
-AvatarGroup also comes in two styles of avatara, `rounded` & `squared`
+AvatarGroup also comes in two styles of avatar, `rounded` & `squared`
 
 <Codeblock
   live
@@ -123,6 +124,49 @@ const AvatarGroupStack = props => { return (
 render (<AvatarGroupStack/>); `} />
 
 <Callout>Avatar Group doesn't come with any status indicators</Callout>
+
+## AvatarGroup props
+
+### `max`
+
+Set `max` to limit the number of avatars in the group. By default AvatarGroup
+will display all avatars.
+
+<Codeblock
+  live
+  children={`
+<AvatarGroup max={3}>
+  <Avatar name="Leanne Graham" src="https://i.pravatar.cc/300?img=1" />
+  <Avatar name="Ervin Howell" src="https://i.pravatar.cc/300?img=11" />
+  <Avatar name="Clementine Bauch" src="https://i.pravatar.cc/300?img=21" />
+  <Avatar name="Patricia Lebsack" src="https://i.pravatar.cc/300?img=31" />
+  <Avatar name="Chelsey Dietrich" src="https://i.pravatar.cc/300?img=41" />
+  <Avatar name="Dennis Schulist" src="https://i.pravatar.cc/300?img=51" />
+</AvatarGroup>
+`}
+/>
+
+### `ringColor`
+
+Set `ringColor` to change the color of the ring around the avatars. By default
+it is `"ring-white"`. This props can be used to match the parent's background to
+the AvatarGroup.
+
+<Codeblock
+  live
+  children={`
+<div className="flex h-20 w-40 items-center justify-center bg-orange-200">
+  <AvatarGroup max={3} ringColor="ring-orange-200">
+    <Avatar name="Leanne Graham" src="https://i.pravatar.cc/300?img=1" />
+    <Avatar name="Ervin Howell" src="https://i.pravatar.cc/300?img=11" />
+    <Avatar name="Clementine Bauch" src="https://i.pravatar.cc/300?img=21" />
+    <Avatar name="Patricia Lebsack" src="https://i.pravatar.cc/300?img=31" />
+    <Avatar name="Chelsey Dietrich" src="https://i.pravatar.cc/300?img=41" />
+    <Avatar name="Dennis Schulist" src="https://i.pravatar.cc/300?img=51" />
+  </AvatarGroup>
+</div>
+`}
+/>
 
 ## API Reference
 

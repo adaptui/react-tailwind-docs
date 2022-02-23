@@ -1,9 +1,9 @@
 {
-  "radio": "Radio",
-  "radio-group": "Radio Group",
+  "switch": "Switch",
   "checkbox": "Checkbox",
   "checkbox-group": "Checkbox Group",
-  "switch": "Switch",
+  "radio": "Radio",
+  "radio-group": "Radio Group",
   "input": "Input",
   "select": "Select",
   "textarea": "Textarea",

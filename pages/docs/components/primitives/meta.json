@@ -1,11 +1,11 @@
 {
-  "avatar-group": "Avatar Group",
-  "avatar": "Avatar",
-  "badge": "Badge",
   "box": "Box",
-  "button-group": "Button Group",
-  "button": "Button",
   "icon": "Icon",
+  "button": "Button",
+  "button-group": "Button Group",
+  "badge": "Badge",
+  "tag": "Tag",
   "divider": "Divider",
-  "tag": "Tag"
+  "avatar": "Avatar",
+  "avatar-group": "Avatar Group"
 }

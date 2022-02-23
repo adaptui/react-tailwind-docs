@@ -43,13 +43,10 @@ import {
   themeProps={{ size: "meter.track.size" }}
 />
 
-## Min max values
-
-<Codeblock live children={`<Meter value={35} max={100} />`} />
-
 ## Meter sizes
 
-Meter comes with 4 sizes `sm` `md` `lg` & `xl`
+Sizes can be set using the `size` prop. The default size is `md`. The available
+sizes are: `sm` `md` `lg` `xl`
 
 <Codeblock
   live
@@ -62,6 +59,12 @@ Meter comes with 4 sizes `sm` `md` `lg` & `xl`
 </div>
 `}
 />
+
+## Min max values
+
+Set the `min` and `max` values of the progress bar.
+
+<Codeblock live children={`<Meter value={35} max={100} />`} />
 
 ## Meter Label
 

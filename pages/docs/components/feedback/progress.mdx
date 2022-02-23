@@ -40,19 +40,10 @@ import {
   themeProps={{ size: "progress.track.size" }}
 />
 
-## Min max values
-
-<Codeblock live children={`<Progress min={10} max={40} value={35} />`} />
-
-## Indeterminate progress
-
-By setting the value prop to null, progress' state becomes indeterminate
-
-<Codeblock live children={`<Progress value={null} />`} />
-
 ## Progress sizes
 
-Progress comes with 4 sizes `sm` `md` `lg` & `xl`
+Sizes can be set using the `size` prop. The default size is `md`. The available
+sizes are: `sm` `md` `lg` `xl`
 
 <Codeblock
   live
@@ -65,6 +56,18 @@ Progress comes with 4 sizes `sm` `md` `lg` & `xl`
 </div>
 `}
 />
+
+## Min max values
+
+Set the `min` and `max` values of the progress bar.
+
+<Codeblock live children={`<Progress min={10} max={40} value={35} />`} />
+
+## Indeterminate progress
+
+By setting the value prop to `null`, progress state becomes indeterminate
+
+<Codeblock live children={`<Progress value={null} />`} />
 
 ## Progress Label
 

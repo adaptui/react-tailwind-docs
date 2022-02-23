@@ -1,7 +1,7 @@
 {
+  "spinner": "Spinner",
+  "progress": "Progress",
   "circular-progress": "CircularProgress",
   "meter": "Meter",
-  "progress": "Progress",
-  "show-more": "Show More",
-  "spinner": "Spinner"
+  "show-more": "Show More"
 }

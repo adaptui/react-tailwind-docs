@@ -46,22 +46,10 @@ import {
   themeProps={{ size: "circularProgress.barWrapper.common.size" }}
 />
 
-## Min max values
-
-<Codeblock
-  live
-  children={`<CircularProgress min={10} max={40} value={35} />`}
-/>
-
-## Indeterminate progress
-
-By setting the value prop to null, progress' state becomes indeterminate
-
-<Codeblock live children={`<CircularProgress value={null} />`} />
-
 ## CircularProgress sizes
 
-CircularProgress comes with 3 sizes `sm` `md` `lg` & `xl`
+Sizes can be set using the `size` prop. The default size is `md`. The available
+sizes are: `sm` `md` `lg` `xl`
 
 <Codeblock
   live
@@ -74,6 +62,21 @@ CircularProgress comes with 3 sizes `sm` `md` `lg` & `xl`
 </div>
 `}
 />
+
+## Min max values
+
+Set the `min` and `max` values of the progress bar.
+
+<Codeblock
+  live
+  children={`<CircularProgress min={10} max={40} value={35} />`}
+/>
+
+## Indeterminate progress
+
+By setting the value prop to `null`, progress state becomes indeterminate
+
+<Codeblock live children={`<CircularProgress value={null} />`} />
 
 ## CircularProgress Hint
 

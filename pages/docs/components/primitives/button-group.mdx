@@ -23,9 +23,6 @@ type to perform the a set of actions.
 import { ButtonGroup } from "@renderlesskit/react-tailwind";
 ```
 
-- **ButtonGroup:** Used to group related buttons together in a horizontal stack,
-  can also be set as `collapsed`
-
 ## Usage
 
 <InteractiveCodeblock
@@ -43,9 +40,9 @@ import { ButtonGroup } from "@renderlesskit/react-tailwind";
   themeProps={{ size: "button.size.common", variant: "button.variant.common" }}
 />
 
-## ButtonGroup sizes
+## ButtonGroup Styles
 
-ButtonGruop also has 4 button sizes `sm` `md` `lg` `xl`
+Buttons can be grouped together using `collapsed` prop.
 
 <Codeblock
   live
@@ -66,7 +63,37 @@ const ButtonGroupBasic = props => {
 
 render(
 
-<div className="space-y-2 flex flex-col">
+<div className="flex flex-col space-y-2">
+  <ButtonGroupBasic size="md" collapsed={true} />
+  <ButtonGroupBasic size="md" />
+</div>
+) `} />
+
+## ButtonGroup sizes
+
+Sizes can be set using the `size` prop. The default size is `md`. The available
+sizes are: `sm` `md` `lg` `xl`
+
+<Codeblock
+  live
+  noInline
+  children={`
+const ButtonGroupBasic = props => {
+  return (
+    <ButtonGroup {...props}>
+      <Button>Undo</Button>
+      <Button>Redo</Button>
+      <Button>Copy</Button>
+      <Button>Paste</Button>
+      <Button>Delete</Button>
+      <Button>Close</Button>
+    </ButtonGroup>
+  );
+};
+
+render(
+
+<div className="flex flex-col space-y-2">
   <ButtonGroupBasic size="sm" />
   <ButtonGroupBasic size="md" />
   <ButtonGroupBasic size="lg" />
@@ -76,7 +103,8 @@ render(
 
 ## ButtonGroup variants
 
-ButtonGroup also has 4 button variants `solid` `subtle` `outline` `ghost`
+Variants can be set using the `variant` prop. The default variant is `solid`.
+The available variants are: `solid` `subtle` `outline` `ghost`
 
 <Codeblock
   live
@@ -97,11 +125,11 @@ const ButtonGroupBasic = props => {
 
 render(
 
-<div className="space-y-2 flex flex-col">
-  <ButtonGroupBasic size="md" variant="solid" />
-  <ButtonGroupBasic size="md" variant="subtle" />
-  <ButtonGroupBasic size="md" variant="outline" />
-  <ButtonGroupBasic size="md" variant="ghost" />
+<div className="flex flex-col space-y-2">
+  <ButtonGroupBasic size="md" variant="solid" collapsed={true} />
+  <ButtonGroupBasic size="md" variant="subtle" collapsed={true} />
+  <ButtonGroupBasic size="md" variant="outline" collapsed={true} />
+  <ButtonGroupBasic size="md" variant="ghost" collapsed={true} />
 </div>
 ) `} />
 
@@ -109,38 +137,6 @@ render(
   You can add extra variants & sizes via the theme file. Checkout [theming
   guide](/docs/theming).
 </Callout>
-
-## Button prefix, suffix & iconOnly
-
-You can pass iconOnly, prefix and suffix props to the button to append or
-prepend any content inside of button.
-
-<Codeblock
-  live
-  noInline
-  children={`
-const ButtonGroupBasic = props => {
-  return (
-    <ButtonGroup size="md" variant="solid">
-      <Button {...props}>Undo</Button>
-      <Button {...props}>Redo</Button>
-      <Button {...props}>Copy</Button>
-      <Button {...props}>Paste</Button>
-      <Button {...props}>Delete</Button>
-      <Button {...props}>Close</Button>
-    </ButtonGroup>
-  );
-};
-
-render(
-
-<div className="space-y-2 flex flex-col">
-  <ButtonGroupBasic iconOnly={<SlotIcon />} />
-  <ButtonGroupBasic prefix={<SlotIcon />} />
-  <ButtonGroupBasic suffix={<SlotIcon />} />
-  <ButtonGroupBasic prefix={<SlotIcon />} suffix={<SlotIcon />} />
-</div>
-) `} />
 
 ## API Reference
 
