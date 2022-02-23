@@ -3,19 +3,14 @@ import { LiveEditor, LiveError, LivePreview, LiveProvider } from "react-live";
 import * as Reakit from "reakit";
 import * as Renderlesskit from "@renderlesskit/react-tailwind";
 import { RenderlesskitProvider } from "@renderlesskit/react-tailwind";
-import { useClipboard } from "@chakra-ui/hooks";
 import { useTheme } from "next-themes";
-import Highlight, { defaultProps, Language } from "prism-react-renderer";
+import Highlight, { defaultProps } from "prism-react-renderer";
 import darkTheme from "prism-react-renderer/themes/vsDark";
 import lightTheme from "prism-react-renderer/themes/vsLight";
 import { setup, tw } from "twind";
 import * as colors from "twind/colors";
 
-export type StaticCodeProps = {
-  className?: string;
-  highlight?: string;
-  noCopy?: boolean;
-};
+import CopyButton from "./CopyButton";
 
 setup({
   preflight: false, // do not include base style reset (default: use tailwind preflight)
@@ -43,25 +38,25 @@ setup({
   darkMode: "class", // use a different dark mode strategy (default: 'media')
 });
 
+export type StaticCodeProps = {
+  highlight?: string;
+  noCopy?: boolean;
+};
+
 export const StaticCode: React.FC<StaticCodeProps> = props => {
-  const { children, className, highlight, noCopy, ...rest } = props;
+  const { children, highlight, noCopy } = props;
 
   const { theme, systemTheme } = useTheme();
   const renderedTheme = theme === "system" ? systemTheme : theme;
 
-  if (!className) return <code {...rest}>{children}</code>;
-
   const highlightedLines = highlight ? highlight.split(",").map(Number) : [];
-
-  // https://mdxjs.com/guides/syntax-highlighting#all-together
-  const language = className.replace(/language-/, "") as Language;
 
   return (
     <div className="relative">
       <Highlight
         {...defaultProps}
+        language="jsx"
         code={(children as string).trim()}
-        language={language}
         theme={renderedTheme === "dark" ? darkTheme : lightTheme}
       >
         {({ className, style, tokens, getLineProps, getTokenProps }) => (
@@ -94,44 +89,7 @@ export const StaticCode: React.FC<StaticCodeProps> = props => {
   );
 };
 
-export type CopyButtonProps = {
-  code: string;
-};
-
-export const CopyButton: React.FC<CopyButtonProps> = ({ code }) => {
-  const { hasCopied, onCopy } = useClipboard(code);
-
-  return (
-    <button
-      className="absolute right-0 -top-2 -translate-x-2 translate-y-4 transform rounded-md bg-white px-4 py-1 text-xs text-gray-800"
-      onClick={onCopy}
-    >
-      {hasCopied ? "Copied!" : "Copy"}
-    </button>
-  );
-};
-
-const transformer = (
-  rawCode: string,
-  language: Language,
-  noInline?: boolean,
-) => {
-  const code = rawCode
-    // remove imports
-    .replace(/((^|)import[^;]+[; ]+)+/gi, "")
-    // replace `export default => {*};` with `render(() => {*});`
-    .replace(/export default \(\) => {((.|\n)*)};/, "render(() => {$1});")
-    // replace `export default => (*);` with `render(*);`
-    .replace(/export default \(\) => \(((.|\n)*)\);/, "render($1);")
-    // replace `export default => *;` with `render(*);`
-    .replace(/export default \(\) => ((.|\n)*);/, "render($1);")
-    .replace(/export default ((.|\n)*);/, "render($1);");
-
-  return language === "jsx" && !noInline ? `<>${code}</>` : code;
-};
-
 export type CodeblockProps = {
-  className?: string;
   live?: boolean;
   render?: boolean;
   noCopy?: boolean;
@@ -139,10 +97,8 @@ export type CodeblockProps = {
 };
 
 export const Codeblock: React.FC<CodeblockProps> = props => {
-  const { children, className, live, render, noCopy, noInline, ...rest } =
-    props;
+  const { children, live, render, noCopy, noInline, ...rest } = props;
   const code = children;
-  const language = className?.replace(/language-/, "") as Language;
   const [editorCode, setEditorCode] = React.useState((code as string).trim());
   const { theme, systemTheme } = useTheme();
   const renderedTheme = theme === "system" ? systemTheme : theme;
@@ -159,7 +115,6 @@ export const Codeblock: React.FC<CodeblockProps> = props => {
   };
   const liveProviderProps = {
     theme: renderedTheme === "dark" ? darkTheme : lightTheme,
-    language,
     code: editorCode,
     scope,
     noInline,
@@ -169,12 +124,7 @@ export const Codeblock: React.FC<CodeblockProps> = props => {
   if (live) {
     return (
       <RenderlesskitProvider>
-        <LiveProvider
-          transformCode={rawCode =>
-            transformer(rawCode, language, props.noInline)
-          }
-          {...liveProviderProps}
-        >
+        <LiveProvider {...liveProviderProps}>
           <div className="mt-6 rounded-md border border-gray-500 bg-transparent">
             <LivePreview className="p-6" />
             <div className="relative">
@@ -190,23 +140,16 @@ export const Codeblock: React.FC<CodeblockProps> = props => {
 
   if (render) {
     return (
-      <div>
-        <RenderlesskitProvider>
-          <LiveProvider
-            transformCode={rawCode =>
-              transformer(rawCode, language, props.noInline)
-            }
-            {...liveProviderProps}
-          >
-            <LivePreview style={{ fontFamily: "'Inter', sans-serif" }} />
-          </LiveProvider>
-        </RenderlesskitProvider>
-      </div>
+      <RenderlesskitProvider>
+        <LiveProvider {...liveProviderProps}>
+          <LivePreview style={{ fontFamily: "'Inter', sans-serif" }} />
+        </LiveProvider>
+      </RenderlesskitProvider>
     );
   }
 
   return (
-    <StaticCode noCopy={noCopy} className={className} {...props}>
+    <StaticCode noCopy={noCopy} {...props}>
       {editorCode}
     </StaticCode>
   );

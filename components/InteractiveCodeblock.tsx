@@ -2,15 +2,14 @@ import React from "react";
 import { LiveEditor, LiveError, LivePreview, LiveProvider } from "react-live";
 import * as Reakit from "reakit";
 import {
-  Button,
   Checkbox,
+  RenderlesskitProvider,
   runIfFn,
   Select,
   useHasMounted,
   useTheme as useRenderlessTheme,
 } from "@renderlesskit/react-tailwind";
 import * as Renderlesskit from "@renderlesskit/react-tailwind";
-import { useClipboard } from "@chakra-ui/hooks";
 import { get } from "lodash";
 import { useTheme } from "next-themes";
 import darkTheme from "prism-react-renderer/themes/vsDark";
@@ -18,13 +17,7 @@ import lightTheme from "prism-react-renderer/themes/vsLight";
 import { setup, tw } from "twind";
 import * as colors from "twind/colors";
 
-type TemplateFunctionProps = {
-  booleanProps: string[];
-  themeProps: string[];
-  choiceProps: string[];
-  spreadProps: string;
-  props: Record<string, any>;
-};
+import CopyButton from "./CopyButton";
 
 setup({
   preflight: false, // do not include base style reset (default: use tailwind preflight)
@@ -51,6 +44,14 @@ setup({
   }, // define custom theme values (default: tailwind theme)
   darkMode: "class", // use a different dark mode strategy (default: 'media')
 });
+
+type TemplateFunctionProps = {
+  booleanProps: string[];
+  themeProps: string[];
+  choiceProps: string[];
+  spreadProps: string;
+  props: Record<string, any>;
+};
 
 type TemplateFunction = (props: TemplateFunctionProps) => string;
 
@@ -122,21 +123,22 @@ export const InteractiveCodeblock = (props: InteractiveCodeblockProps) => {
 
   return (
     <div className="mt-6">
-      <LiveProvider
-        transformCode={rawCode => transformer(rawCode)}
-        code={code}
-        scope={scope}
-        theme={renderedTheme === "dark" ? darkTheme : lightTheme}
-      >
-        <div className="mt-6 rounded-md border border-gray-500 bg-transparent">
-          <LivePreview className="p-6" />
-          <div className="relative">
-            <LiveEditor className="rounded-md rounded-t-none !bg-slate-100 !font-mono text-sm leading-6 tracking-tighter dark:!bg-prime-300 dark:!bg-opacity-10" />
-            <CopyButton code={code} />
+      <RenderlesskitProvider>
+        <LiveProvider
+          code={code}
+          scope={scope}
+          theme={renderedTheme === "dark" ? darkTheme : lightTheme}
+        >
+          <div className="mt-6 rounded-md border border-gray-500 bg-transparent">
+            <LivePreview className="p-6" />
+            <div className="relative">
+              <LiveEditor className="rounded-md rounded-t-none !bg-slate-100 !font-mono text-sm leading-6 tracking-tighter dark:!bg-prime-300 dark:!bg-opacity-10" />
+              <CopyButton code={code} />
+            </div>
           </div>
-        </div>
-        <LiveError className="mt-0 rounded-md rounded-t-none bg-red-100 text-xs text-red-500" />
-      </LiveProvider>
+          <LiveError className="mt-0 rounded-md rounded-t-none bg-red-100 text-xs text-red-500" />
+        </LiveProvider>
+      </RenderlesskitProvider>
       <div className={wrapperStyles}>
         {booleanProps.map(name => {
           return (
@@ -224,34 +226,3 @@ const printProps = (props: string[]) => {
 function capitalizeFirstLetter(string: string) {
   return string.charAt(0).toUpperCase() + string.slice(1);
 }
-
-type CopyButtonProps = {
-  code: string;
-};
-
-const CopyButton: React.FC<CopyButtonProps> = ({ code }) => {
-  const { hasCopied, onCopy } = useClipboard(code);
-
-  return (
-    <span className="absolute right-0 -top-2 -translate-x-2 translate-y-4 transform">
-      <Button size="sm" onClick={onCopy}>
-        {hasCopied ? "Copied!" : "Copy"}
-      </Button>
-    </span>
-  );
-};
-
-const transformer = (rawCode: string) => {
-  const code = rawCode
-    // remove imports
-    .replace(/((^|)import[^;]+[; ]+)+/gi, "")
-    // replace `export default => {*};` with `render(() => {*});`
-    .replace(/export default \(\) => {((.|\n)*)};/, "render(() => {$1});")
-    // replace `export default => (*);` with `render(*);`
-    .replace(/export default \(\) => \(((.|\n)*)\);/, "render($1);")
-    // replace `export default => *;` with `render(*);`
-    .replace(/export default \(\) => ((.|\n)*);/, "render($1);")
-    .replace(/export default ((.|\n)*);/, "render($1);");
-
-  return `<>${code}</>`;
-};

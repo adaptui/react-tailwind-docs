@@ -21,13 +21,17 @@ export const ComponentLinks: React.FC<ComponentLinkProps> = ({
     "https://renderlesskit-react-tailwind.vercel.app/?path=/story/";
 
   return (
-    <ButtonGroup size="md" variant="outline" className="component-links mt-5">
+    <ButtonGroup
+      size="md"
+      variant="outline"
+      className="component-links mt-5 flex-wrap"
+    >
       {github && (
         <Button
           as={Link}
           isExternal
           variant="outline"
-          className="no-underline"
+          className="my-2 no-underline"
           prefix={<SiGithub />}
           href={`${githubBase}${github}`}
         >
@@ -40,7 +44,7 @@ export const ComponentLinks: React.FC<ComponentLinkProps> = ({
           as={Link}
           isExternal
           variant="outline"
-          className="no-underline"
+          className="my-2 no-underline"
           prefix={<SiGithub />}
           href={`${themeBase}${theme}.ts`}
         >
@@ -53,7 +57,7 @@ export const ComponentLinks: React.FC<ComponentLinkProps> = ({
           as={Link}
           isExternal
           variant="outline"
-          className="no-underline"
+          className="my-2 no-underline"
           prefix={<SiStorybook />}
           href={`${storybookBase}${story}`}
         >

@@ -12,15 +12,14 @@ const themes = {
 interface CalloutProps {
   /** Callout Theme default to 'default'  */
   type?: keyof typeof themes;
+
   /** default emoji 💡*/
   emoji: string;
 }
 
-export const Callout: React.FC<CalloutProps> = ({
-  children,
-  type = "default",
-  emoji = "💡",
-}) => {
+export const Callout: React.FC<CalloutProps> = props => {
+  const { children, type = "default", emoji = "💡" } = props;
+
   return (
     <div className={`${themes[type]} callout mt-6 flex rounded-lg`}>
       <div
