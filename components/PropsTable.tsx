@@ -4,12 +4,23 @@ import {
   Button,
   ErrorIcon,
   Tooltip,
-  TooltipWrapper,
   useTheme,
-} from "@renderlesskit/react-tailwind";
+} from "@adaptui/react-tailwind";
 import { get } from "lodash";
 
 import { RegionTable } from "./RegionTable";
+
+const TooltipButton: React.FC = props => {
+  return (
+    <Button
+      size="sm"
+      variant="subtle"
+      iconOnly={<ErrorIcon />}
+      className="ml-2"
+      {...props}
+    />
+  );
+};
 
 type PropDef = {
   name: string;
@@ -79,15 +90,7 @@ export const PropsTable: React.FC<PropsTableProps> = ({
                   {required ? "*" : null}
                 </code>
                 {description && (
-                  <Tooltip content={description}>
-                    <TooltipWrapper className="z-30" />
-                    <Button
-                      size="sm"
-                      variant="subtle"
-                      iconOnly={<ErrorIcon />}
-                      className="ml-2"
-                    />
-                  </Tooltip>
+                  <Tooltip as={TooltipButton} content={description} />
                 )}
               </Box>
               <Box as="td" className={tdStyles}>
@@ -96,6 +99,7 @@ export const PropsTable: React.FC<PropsTableProps> = ({
                 </code>
                 {!!(typeSimple || themeKey) && (
                   <Tooltip
+                    as={TooltipButton}
                     content={
                       <code className={typeStyles}>
                         {themeKey
@@ -103,15 +107,7 @@ export const PropsTable: React.FC<PropsTableProps> = ({
                           : type}
                       </code>
                     }
-                  >
-                    <TooltipWrapper className="z-30" />
-                    <Button
-                      size="sm"
-                      variant="subtle"
-                      iconOnly={<ErrorIcon />}
-                      className="ml-2"
-                    />
-                  </Tooltip>
+                  />
                 )}
               </Box>
               <Box as="td" className={tdStyles}>

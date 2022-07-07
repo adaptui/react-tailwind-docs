@@ -1,6 +1,6 @@
 import { SiGithub, SiStorybook } from "react-icons/si";
-import { Link } from "@renderlesskit/react";
-import { Button, ButtonGroup } from "@renderlesskit/react-tailwind";
+import { Link } from "@adaptui/react";
+import { Button, ButtonGroup } from "@adaptui/react-tailwind";
 
 type ComponentLinkProps = {
   github: string;
@@ -13,12 +13,11 @@ export const ComponentLinks: React.FC<ComponentLinkProps> = ({
   story,
   theme,
 }) => {
-  const githubBase =
-    "https://github.com/timelessco/renderlesskit-react-tailwind/tree/main/src/";
+  const githubBase = "https://github.com/adaptui/react-tailwind/tree/main/src/";
   const themeBase =
-    "https://github.com/timelessco/renderlesskit-react-tailwind/tree/main/src/theme/defaultTheme/";
+    "https://github.com/adaptui/react-tailwind/tree/main/src/theme/defaultTheme/";
   const storybookBase =
-    "https://renderlesskit-react-tailwind.vercel.app/?path=/story/";
+    "https://adaptui-react-tailwind.vercel.app/?path=/story/";
 
   return (
     <ButtonGroup

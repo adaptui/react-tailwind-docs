@@ -11,6 +11,13 @@ export interface DocsThemeConfig {
     prevLinks?: boolean;
     search?: boolean;
     darkMode?: boolean;
+    /**
+     * A subset of configurations for https://github.com/pacocoursey/next-themes#themeprovider
+     * - defaultTheme
+     * - storageKey
+     * - forcedTheme
+     */
+    nextThemes?: object;
     defaultMenuCollapsed?: boolean;
     font?: boolean;
     footer?: boolean;
@@ -44,7 +51,21 @@ export interface DocsThemeConfig {
     projectChatLinkIcon?: React.FC<{
         locale: string;
     }>;
+    sidebarSubtitle?: React.FC<{
+        title: string;
+    }>;
     floatTOC?: boolean;
+    banner?: React.FC<{
+        locale: string;
+    }>;
+    bannerKey?: string;
+    gitTimestamp?: string | React.FC<{
+        locale: string;
+        timestamp: Date;
+    }>;
+    tocExtraContent?: React.FC<{
+        locale: string;
+    }>;
     unstable_faviconGlyph?: string;
     unstable_flexsearch?: boolean;
     unstable_searchResultEmpty?: React.ReactNode | React.FC<{

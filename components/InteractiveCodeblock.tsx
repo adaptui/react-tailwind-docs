@@ -1,15 +1,15 @@
 import React from "react";
 import { LiveEditor, LiveError, LivePreview, LiveProvider } from "react-live";
-import * as Reakit from "reakit";
+import * as ariakit from "ariakit";
+import * as AdaptUICore from "@adaptui/react";
 import {
+  AdaptUIProvider,
   Checkbox,
-  RenderlesskitProvider,
   runIfFn,
   Select,
-  useHasMounted,
   useTheme as useRenderlessTheme,
-} from "@renderlesskit/react-tailwind";
-import * as Renderlesskit from "@renderlesskit/react-tailwind";
+} from "@adaptui/react-tailwind";
+import * as AdaptUI from "@adaptui/react-tailwind";
 import { get } from "lodash";
 import { useTheme } from "next-themes";
 import darkTheme from "prism-react-renderer/themes/vsDark";
@@ -18,6 +18,7 @@ import { setup, tw } from "twind";
 import * as colors from "twind/colors";
 
 import CopyButton from "./CopyButton";
+import useMounted from "./useMounted";
 
 setup({
   preflight: false, // do not include base style reset (default: use tailwind preflight)
@@ -105,25 +106,26 @@ export const InteractiveCodeblock = (props: InteractiveCodeblockProps) => {
     choiceProps: finalChoiceProps,
     booleanProps: finalBooleanProps,
     props: { ...themeStates, ...booleanStates, ...choiceStates },
-  });
+  }) as string;
 
   const { theme, systemTheme } = useTheme();
   const renderedTheme = theme === "system" ? systemTheme : theme;
 
   const scope = {
     React,
-    ...Renderlesskit,
-    Reakit,
+    ...AdaptUI,
+    AdaptUICore,
+    ariakit,
     tw,
   };
 
-  const mounted = useHasMounted();
+  const mounted = useMounted();
 
   if (!mounted) return null;
 
   return (
     <div className="mt-6">
-      <RenderlesskitProvider>
+      <AdaptUIProvider>
         <LiveProvider
           code={code}
           scope={scope}
@@ -132,21 +134,21 @@ export const InteractiveCodeblock = (props: InteractiveCodeblockProps) => {
           <div className="mt-6 rounded-md border border-gray-500 bg-transparent">
             <LivePreview className="p-6" />
             <div className="relative">
-              <LiveEditor className="rounded-md rounded-t-none !bg-slate-100 !font-mono text-sm leading-6 tracking-tighter dark:!bg-prime-300 dark:!bg-opacity-10" />
+              <LiveEditor className="dark:!bg-prime-300 rounded-md rounded-t-none !bg-slate-100 !font-mono text-sm leading-6 tracking-tighter dark:!bg-opacity-10" />
               <CopyButton code={code} />
             </div>
           </div>
           <LiveError className="mt-0 rounded-md rounded-t-none bg-red-100 text-xs text-red-500" />
         </LiveProvider>
-      </RenderlesskitProvider>
+      </AdaptUIProvider>
       <div className={wrapperStyles}>
         {booleanProps.map(name => {
           return (
             <Checkbox
               key={name}
               label={capitalizeFirstLetter(name as string)}
-              state={booleanStates.loading}
-              onStateChange={value => {
+              value={booleanStates.loading}
+              setValue={value => {
                 onBooleanStateChange(prev => ({ ...prev, [name]: !!value }));
               }}
             />

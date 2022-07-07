@@ -1,8 +1,9 @@
 import React from "react";
 import { LiveEditor, LiveError, LivePreview, LiveProvider } from "react-live";
-import * as Reakit from "reakit";
-import * as Renderlesskit from "@renderlesskit/react-tailwind";
-import { RenderlesskitProvider } from "@renderlesskit/react-tailwind";
+import * as Araikit from "ariakit";
+import * as AdaptUICore from "@adaptui/react";
+import * as AdaptUI from "@adaptui/react-tailwind";
+import { AdaptUIProvider } from "@adaptui/react-tailwind";
 import { useTheme } from "next-themes";
 import Highlight, { defaultProps } from "prism-react-renderer";
 import darkTheme from "prism-react-renderer/themes/vsDark";
@@ -41,6 +42,7 @@ setup({
 export type StaticCodeProps = {
   highlight?: string;
   noCopy?: boolean;
+  children: string;
 };
 
 export const StaticCode: React.FC<StaticCodeProps> = props => {
@@ -94,6 +96,7 @@ export type CodeblockProps = {
   render?: boolean;
   noCopy?: boolean;
   noInline?: boolean;
+  children?: string;
 };
 
 export const Codeblock: React.FC<CodeblockProps> = props => {
@@ -109,8 +112,9 @@ export const Codeblock: React.FC<CodeblockProps> = props => {
 
   const scope = {
     React,
-    ...Renderlesskit,
-    Reakit,
+    ...Araikit,
+    ...AdaptUICore,
+    ...AdaptUI,
     tw,
   };
   const liveProviderProps = {
@@ -123,28 +127,28 @@ export const Codeblock: React.FC<CodeblockProps> = props => {
 
   if (live) {
     return (
-      <RenderlesskitProvider>
+      <AdaptUIProvider>
         <LiveProvider {...liveProviderProps}>
           <div className="mt-6 rounded-md border border-gray-500 bg-transparent">
             <LivePreview className="p-6" />
             <div className="relative">
-              <LiveEditor className="rounded-md rounded-t-none !bg-slate-100 !font-mono text-sm leading-6 tracking-tighter dark:!bg-prime-300 dark:!bg-opacity-10" />
+              <LiveEditor className="dark:!bg-prime-300 rounded-md rounded-t-none !bg-slate-100 !font-mono text-sm leading-6 tracking-tighter dark:!bg-opacity-10" />
               <CopyButton code={editorCode} />
             </div>
           </div>
           <LiveError className="mt-0 rounded-md rounded-t-none bg-red-100 text-xs text-red-500" />
         </LiveProvider>
-      </RenderlesskitProvider>
+      </AdaptUIProvider>
     );
   }
 
   if (render) {
     return (
-      <RenderlesskitProvider>
+      <AdaptUIProvider>
         <LiveProvider {...liveProviderProps}>
           <LivePreview style={{ fontFamily: "'Inter', sans-serif" }} />
         </LiveProvider>
-      </RenderlesskitProvider>
+      </AdaptUIProvider>
     );
   }
 

@@ -8,6 +8,7 @@ interface SideBarProps {
     asPopover?: boolean;
     headings?: Heading[];
     isRTL?: boolean;
+    includePlaceholder: boolean;
 }
-export default function Sidebar({ directories, flatDirectories, fullDirectories, asPopover, headings, }: SideBarProps): JSX.Element;
+export default function Sidebar({ directories, flatDirectories, fullDirectories, asPopover, headings, includePlaceholder, }: SideBarProps): JSX.Element;
 export {};

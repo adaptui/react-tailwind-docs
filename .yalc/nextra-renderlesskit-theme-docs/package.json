@@ -1,6 +1,6 @@
 {
   "name": "nextra-renderlesskit-theme-docs",
-  "version": "1.0.0",
+  "version": "2.0.0-alpha.59",
   "description": "Nextra Renderlesskit Theme Docs",
   "keywords": [
     "react",
@@ -35,7 +35,6 @@
     "style.css"
   ],
   "scripts": {
-    "postinstall": "husky install",
     "dev": "node scripts/dev.js",
     "prebuild": "rimraf dist",
     "build": "yarn build:pkg && yarn build:types",
@@ -56,22 +55,30 @@
       "@commitlint/config-conventional"
     ]
   },
+  "lint-staged": {
+    "**/*.{js,jsx,tx,tsx}": [
+      "yarn lint:fix"
+    ],
+    "**/*.{html,css,js,jsx,ts,tsx,md,json}": [
+      "yarn format"
+    ]
+  },
   "dependencies": {
-    "@chakra-ui/hooks": "1.7.2",
-    "@headlessui/react": "1.4.3",
-    "@mdx-js/react": "2.0.0-rc.2",
-    "@reach/skip-nav": "0.16.0",
-    "@renderlesskit/react-tailwind": "0.0.1-alpha.37",
+    "@adaptui/react-tailwind": "1.0.0-alpha.1",
+    "@chakra-ui/hooks": "2.0.2",
+    "@headlessui/react": "1.6.5",
+    "@mdx-js/react": "2.1.2",
+    "@reach/skip-nav": "0.17.0",
     "classnames": "2.3.1",
     "flexsearch": "0.7.21",
     "focus-visible": "5.2.0",
     "github-slugger": "1.4.0",
-    "intersection-observer": "0.12.0",
+    "intersection-observer": "0.12.2",
     "match-sorter": "6.3.1",
-    "next-themes": "0.0.15",
+    "next-themes": "0.2.0",
     "parse-git-url": "1.0.1",
-    "react-innertext": "1.1.5",
-    "title": "3.4.3"
+    "scroll-into-view-if-needed": "2.2.29",
+    "title": "3.4.4"
   },
   "peerDependencies": {
     "next": ">=9.5.3",
@@ -84,5 +91,5 @@
     "emoji": "emoji",
     "editor": false
   },
-  "yalcSig": "49de63f0f6424349937349efd1d707d7"
+  "yalcSig": "f396e2608dac3d90103e65521b8537ab"
 }

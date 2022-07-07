@@ -1,7 +1,12 @@
-/// <reference types="react" />
+import React from "react";
 import { PageOpt } from "nextra";
 import { DocsThemeConfig } from "./types";
 import "focus-visible";
 import "./polyfill";
-declare const _default: (opts: PageOpt, config: DocsThemeConfig) => (props: any) => JSX.Element;
-export default _default;
+declare const createLayout: (opts: PageOpt, _config: DocsThemeConfig) => {
+    ({ children }: {
+        children: React.ReactChildren;
+    }): React.ReactChildren;
+    getLayout(page: any): JSX.Element;
+};
+export default createLayout;

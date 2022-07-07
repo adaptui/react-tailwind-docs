@@ -1,4 +1,4 @@
-import { Button } from "@renderlesskit/react-tailwind";
+import { Button } from "@adaptui/react-tailwind";
 import { useClipboard } from "@chakra-ui/hooks";
 
 export type CopyButtonProps = {

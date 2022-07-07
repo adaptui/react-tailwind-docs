@@ -1,3 +1,4 @@
+import { SkipNavLink } from "@reach/skip-nav";
 import Document, { Head, Html, Main, NextScript } from "next/document";
 
 class MyDocument extends Document {
@@ -8,6 +9,7 @@ class MyDocument extends Document {
           <link href="https://rsms.me/inter/inter.css" rel="stylesheet" />
         </Head>
         <body>
+          <SkipNavLink />
           <Main />
           <NextScript />
         </body>

@@ -7,11 +7,16 @@ declare const defaultTheme: {
     prevLinks: boolean;
     search: boolean;
     darkMode: boolean;
+    nextThemes: {
+        defaultTheme: string;
+        storageKey: string;
+        forcedTheme: undefined;
+    };
     defaultMenuCollapsed: boolean;
-    font: boolean;
     footer: boolean;
     footerText: string;
     footerEditLink: string;
+    gitTimestamp: string;
     logo: JSX.Element;
     head: JSX.Element;
     searchPlaceholder: ({ locale }: {

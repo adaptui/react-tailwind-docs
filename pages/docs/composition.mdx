@@ -16,7 +16,7 @@ Let's take the Checkbox component to explain the composition.
 
 ## Basic Usage
 
-<Codeblock live children={`<Checkbox size="md" defaultState={true} />`} />
+<Codeblock live children={`<Checkbox size="md" defaultValue={true} />`} />
 
 ## Simple Composition
 
@@ -28,11 +28,16 @@ childrens or as render prop.
 <Codeblock
   live
   children={`
-<Checkbox label="Checkbox" description="Fruits in the basket">
-  <CheckboxLabel className="p-2 border-2 border-blue-500 rounded" />
+<Checkbox
+  label="Checkbox"
+  description="Fruits in the basket"
+>
+  <CheckboxLabel className="rounded border-2 border-blue-500 p-2" />
   <CheckboxIcon className="bg-red-500" />
-  <CheckboxText className="text-green-500" />
-  <CheckboxDescription className="text-orange-500" />
+  <CheckboxText className="text-green-500">New Checkbox</CheckboxText>
+  <CheckboxDescription className="text-orange-500">
+    New Description
+  </CheckboxDescription>
 </Checkbox>
 `}
 />
@@ -43,20 +48,22 @@ childrens or as render prop.
   live
   children={`
 <Checkbox label="Checkbox" description="Fruits in the basket">
-  {state => {
+  {uiProps => {
     return (
       <>
-        <CheckboxLabel className="p-2 border-2 border-blue-500 rounded" />
+        <CheckboxLabel className="rounded border-2 border-blue-500 p-2" />
         <CheckboxIcon
           className={
-            state.isChecked
+            uiProps.isChecked
               ? "bg-red-500 peer-hover:bg-red-400"
               : "bg-green-500 peer-hover:bg-green-400"
           }
         >
           <>
-            {state.isUnchecked ? withIconA11y(<EyeClose />) : null}
-            {state.isChecked ? withIconA11y(<EyeOpen />) : null}
+            {uiProps.isUnchecked
+              ? withIconA11y(<EyeClose />, {}, {})
+              : null}
+            {uiProps.isChecked ? withIconA11y(<EyeOpen />, {}, {}) : null}
           </>
         </CheckboxIcon>
         <CheckboxText className="text-green-500">
@@ -77,6 +84,11 @@ childrens or as render prop.
 Only compose using the atomic components specific to its complex component
 separately with the help of `useComponentProps` & `useComponentState`.
 
+## Advanced Composition
+
+Only compose using the atomic components specific to its complex component
+separately with the help of `useComponentProps` & `useComponentState`.
+
 ### Using `useComponentProps`
 
 Basic usage that can be used to add additional DOM elements within these atomic
@@ -89,30 +101,30 @@ components but cannot change the state or the libraries behavior.
 const Checkbox = React.forwardRef(
   (props, ref) => {
     const {
-      label,
-      description,
       labelProps,
       inputProps,
       iconProps,
+      textWrapperProps,
       textProps,
       descriptionProps,
-      state
+      uiProps,
     } = useCheckboxProps(props);
+    const { label, description, isChecked, isUnchecked } = uiProps;
 
     return (
       <CheckboxLabel className="p-2 border-2 border-blue-500 rounded" {...labelProps}>
         <CheckboxInput ref={ref} {...inputProps} />
         <CheckboxIcon
           className={
-            state.isChecked
+            isChecked
               ? "bg-red-500 peer-hover:bg-red-400"
               : "bg-green-500 peer-hover:bg-green-400"
           }
            {...iconProps}
         >
           <>
-            {state.isUnchecked ? withIconA11y(<EyeClose />) : null}
-            {state.isChecked ? withIconA11y(<EyeOpen />) : null}
+            {isUnchecked ? withIconA11y(<EyeClose />) : null}
+            {isChecked ? withIconA11y(<EyeOpen />) : null}
           </>
         </CheckboxIcon>
         <div>
@@ -139,73 +151,55 @@ the component that is different from library logic.
   live
   noInline
   children={`
+const Checkbox = () => {
+const state = useCheckboxState({ defaultValue: [] });
+
+return ( <> <CustomCheckbox inputValue="one" state={state}> Button one 😁
+
+</CustomCheckbox>
+<CustomCheckbox className="ml-2" inputValue="two" state={state}> Button two 🤓
+</CustomCheckbox>
+<CustomCheckbox className="ml-2" inputValue="three" state={state}> Button three
+👻 </CustomCheckbox> </> ); };
+
 const CustomCheckbox = props => {
 
-const [stateProps, checkboxProps] = splitProps( props, USE_CHECKBOX_STATE_KEYS,
+const { state, value, defaultValue, setValue, inputValue, size, icon, label,
+description, className, style, children, ...restProps } = props;
+
+const uiState = useCheckboxUIState({ state, inputValue, size, icon, label,
+description, });
+
+const uiProps = React.useMemo( () => ({ state, ...uiState }), [state, uiState],
 );
 
-const state = useCheckboxState(stateProps);
-
-const { className, children, ...inputProps } = checkboxProps;
-
 return (
 
-<CheckboxLabel
-  {...state}
-  className={tcm("rounded border-2 border-blue-500 px-8 py-2", className)}
->
-  <CheckboxInput {...state} {...inputProps} />
-  {state.isChecked ? (
-    <CheckboxIcon className="absolute inset-y-0 left-0 flex items-center pl-1.5 text-blue-500">
-      <svg
-        className="h-5 w-5"
-        xmlns="http://www.w3.org/2000/svg"
-        viewBox="0 0 20 20"
-        fill="currentColor"
-        aria-hidden="true"
-        role="img"
-        focusable={false}
-      >
-        <path
-          fillRule="evenodd"
-          d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
-          clipRule="evenodd"
-        />
-      </svg>
-    </CheckboxIcon>
+<CheckboxLabel {...uiState} className={tcm("rounded border-2 border-blue-500 px-8 py-2", className)} >
 
-) : null}
+<CheckboxInput {...uiProps} {...restProps} value={inputValue} />
 
-  <span className="select-none">{children}</span>
-</CheckboxLabel> ); };
+{uiProps.isChecked ? (
 
-const CheckboxCustomAdvanced= () => {
+  <CheckboxIcon className="absolute inset-y-0 left-0 flex items-center pl-1.5 text-blue-500">
+    <svg
+      className="h-5 w-5"
+      xmlns="http://www.w3.org/2000/svg"
+      viewBox="0 0 20 20"
+      fill="currentColor"
+      aria-hidden="true"
+      role="img"
+      focusable={false}
+    >
+    <path
+        fillRule="evenodd"
+        d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+        clipRule="evenodd"
+      /> 
+    </svg>
+  </CheckboxIcon>
+ ) : null}
 
-const [state, onStateChange] = React.useState([]);
+<span className="select-none">{children}</span> </CheckboxLabel> ); };
 
-return (
-
-<>
-  <CustomCheckbox value="one" state={state} onStateChange={onStateChange}>
-    Button one 😁
-  </CustomCheckbox>
-  <CustomCheckbox
-    className="ml-2"
-    value="two"
-    state={state}
-    onStateChange={onStateChange}
-  >
-    Button two 🤓
-  </CustomCheckbox>
-  <CustomCheckbox
-    className="ml-2"
-    value="three"
-    state={state}
-    onStateChange={onStateChange}
-  >
-    Button three 👻
-  </CustomCheckbox>
-</>
-); };
-
-render (<CheckboxCustomAdvanced />); `} />
+render (<Checkbox />); `} />

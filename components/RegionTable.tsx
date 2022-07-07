@@ -1,5 +1,5 @@
 import React from "react";
-import { Box, BoxProps } from "@renderlesskit/react-tailwind";
+import { Box, BoxProps } from "@adaptui/react-tailwind";
 
 export const RegionTable = ({
   "aria-label": ariaLabel,
