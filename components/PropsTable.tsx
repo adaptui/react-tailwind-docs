@@ -47,7 +47,7 @@ export const PropsTable: React.FC<PropsTableProps> = ({
   const hasAriaLabel = !!(ariaLabel || ariaLabelledBy);
 
   const tdStyles = "border-0 border-b-0 border-gray-500";
-  const thStyles = `px-2 py-2 text-gray-800 ${tdStyles}`;
+  const thStyles = `px-2 py-2 text-gray-800 dark:text-gray-200 ${tdStyles}`;
   const typeStyles = "bg-blue-100 text-blue-800 px-2 py-1";
 
   return (
@@ -94,7 +94,7 @@ export const PropsTable: React.FC<PropsTableProps> = ({
                 )}
               </Box>
               <Box as="td" className={tdStyles}>
-                <code className="text-gray-800">
+                <code className="text-gray-800 dark:text-gray-200">
                   {themeKey ? "union" : Boolean(typeSimple) ? typeSimple : type}
                 </code>
                 {!!(typeSimple || themeKey) && (
@@ -112,7 +112,9 @@ export const PropsTable: React.FC<PropsTableProps> = ({
               </Box>
               <Box as="td" className={tdStyles}>
                 {!!defaultValue ? (
-                  <code className="text-gray-800">{defaultValue}</code>
+                  <code className="text-gray-800 dark:text-gray-200">
+                    {defaultValue}
+                  </code>
                 ) : (
                   "-"
                 )}
