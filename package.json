@@ -1,45 +1,55 @@
 {
-  "name": "renderlesskit-tailwind-docs",
+  "name": "@adaptui/react-tailwind-docs",
   "version": "1.0.0",
   "private": true,
-  "description": "Personal Next React App",
+  "description": "AdaptUI React Tailwind Docs",
   "keywords": [
     "react",
-    "template",
     "next-react-app",
     "typescript",
-    "new-project",
-    "new-repo"
+    "adaptui",
+    "tailwind",
+    "docs"
   ],
   "bugs": {
-    "url": "https://github.com/navin-moorthy/next-react-app/issues"
+    "url": "https://github.com/adaptui/react-tailwind-docs/issues"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/navin-moorthy/next-react-app.git"
+    "url": "git+https://github.com/adaptui/react-tailwind-docs.git"
   },
   "license": "MIT",
-  "author": "Navin Moorthy <navin007.a@gmail.com>",
+  "author": "Timeless <hello@timeless.co>",
   "scripts": {
-    "postinstall": "husky install && patch-package",
+    "postinstall": "concurrently \"husky install\" \"patch-package\"",
     "dev": "next dev",
-    "build": "next build",
-    "start": "next start",
     "test": "jest --watch --watchAll=false",
     "test:ci": "jest --ci",
     "lint": "next lint",
     "lint:fix": "eslint --color --ext .js,.jsx,.ts,.tsx . --fix",
-    "format": "prettier -wl \"./**/*.{html,css,js,jsx,ts,tsx,md,json}\"",
+    "format": "prettier --check \"./**/*.{html,css,js,jsx,ts,tsx,md,json}\"",
+    "format:fix": "prettier --write --list-different --cache \"./**/*.{html,css,js,jsx,ts,tsx,md,json}\"",
     "format:package": "sort-package-json package.json",
+    "build": "next build",
+    "start": "next start",
     "release": "release-it",
+    "postpublish": "pinst --enable",
+    "size": "yarn build && size-limit",
     "commit": "gacp",
-    "contrib:init": "all-contributors init",
-    "contrib:add": "all-contributors add",
-    "contrib:generate": "all-contributors generate"
+    "contributors:add": "all-contributors add",
+    "contributors:generate": "all-contributors generate"
   },
   "commitlint": {
     "extends": [
       "@commitlint/config-conventional"
+    ]
+  },
+  "lint-staged": {
+    "**/*.{js,jsx,tx,tsx}": [
+      "yarn lint:fix"
+    ],
+    "**/*.{html,css,js,jsx,ts,tsx,md,json}": [
+      "yarn format:fix"
     ]
   },
   "browserslist": {
@@ -87,6 +97,7 @@
     "all-contributors-cli": "6.20.0",
     "autoprefixer": "10.4.7",
     "babel-jest": "28.1.3",
+    "concurrently": "^7.2.2",
     "eslint": "8.19.0",
     "eslint-config-prettier": "8.5.0",
     "eslint-config-react-app": "7.0.1",
