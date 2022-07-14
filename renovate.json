@@ -6,7 +6,9 @@
     "react-dom",
     "@types/react",
     "@types/react-dom",
-    "@testing-library/react"
+    "@testing-library/react",
+    "nextra",
+    "nextra-theme-docs"
   ],
   "packageRules": [
     {
