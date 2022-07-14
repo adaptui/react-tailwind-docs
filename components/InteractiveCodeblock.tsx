@@ -172,7 +172,7 @@ export const InteractiveCodeblock = (props: InteractiveCodeblockProps) => {
             >
               <option value="">Choose {name}</option>
 
-              {Object.keys(get(renderlessTheme, themeKey)).map(size => (
+              {Object.keys(get(renderlessTheme, themeKey) ?? []).map(size => (
                 <option key={size} value={size}>
                   {size}
                 </option>

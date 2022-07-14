@@ -2,7 +2,7 @@
   "version": "v1",
   "packages": {
     "nextra-renderlesskit-theme-docs": {
-      "signature": "f396e2608dac3d90103e65521b8537ab",
+      "signature": "7b37a661ea1a5973db2e88dc0655f5a1",
       "file": true,
       "replaced": "link:.yalc/nextra-renderlesskit-theme-docs"
     }

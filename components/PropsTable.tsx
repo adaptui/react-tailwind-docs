@@ -80,7 +80,7 @@ export const PropsTable: React.FC<PropsTableProps> = ({
               required,
               default: defaultValue,
               description,
-            },
+            }: PropDef,
             i,
           ) => (
             <tr className="bg-transparent" key={`${name}-${i}`}>
@@ -103,7 +103,7 @@ export const PropsTable: React.FC<PropsTableProps> = ({
                     content={
                       <code className={typeStyles}>
                         {themeKey
-                          ? Object.keys(get(theme, themeKey)).join(" | ")
+                          ? Object.keys(get(theme, themeKey) ?? []).join(" | ")
                           : type}
                       </code>
                     }

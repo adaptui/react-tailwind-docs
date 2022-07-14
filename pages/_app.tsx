@@ -4,7 +4,7 @@ import type { NextPage } from "next";
 import type { AppProps } from "next/app";
 
 import "@/styles/global.css";
-import "nextra-renderlesskit-theme-docs/style.css";
+import "@/styles/nextra.css";
 
 export type NextPageWithLayout = NextPage & {
   getLayout?: (page: ReactElement) => ReactNode;
