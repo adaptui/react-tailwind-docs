@@ -54,5 +54,5 @@ yarn.lock
 # Library files
 dist
 CHANGELOG.md
-.yalc
+.yalc/
 public
