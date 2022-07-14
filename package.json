@@ -56,7 +56,7 @@
   },
   "dependencies": {
     "@adaptui/react": "1.0.0-alpha.7",
-    "@adaptui/react-tailwind": "0.1.0-alpha.0",
+    "@adaptui/react-tailwind": "0.1.0-alpha.1",
     "@chakra-ui/hooks": "2.0.4",
     "@reach/skip-nav": "0.17.0",
     "ariakit": "2.0.0-next.34",

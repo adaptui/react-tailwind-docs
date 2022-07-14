@@ -2,10 +2,10 @@
 # yarn lockfile v1
 
 
-"@adaptui/react-tailwind@0.1.0-alpha.0":
-  version "0.1.0-alpha.0"
-  resolved "https://registry.yarnpkg.com/@adaptui/react-tailwind/-/react-tailwind-0.1.0-alpha.0.tgz#e25bb3ca6dc27a648897ab0c5b23e504b0bfbcc9"
-  integrity sha512-cqDPqmaVyIkcBz/UuV/oUwIxj7q2m7TmhOpVEKlru/IgRXL1/Y3HFv5bZM9B8uzvXjujAIzACkKlDh7Ipqblzg==
+"@adaptui/react-tailwind@0.1.0-alpha.1":
+  version "0.1.0-alpha.1"
+  resolved "https://registry.yarnpkg.com/@adaptui/react-tailwind/-/react-tailwind-0.1.0-alpha.1.tgz#5e9cb3aa8d5719fa3ca72ab2065423547ae5a87c"
+  integrity sha512-GhOz2mKJwStlW2rdJoYFcNtkq1x7JRmin/pN1cw4TT5qo564/eF11BgrPSvOCfga3ejk5qI84bjJ4sPdURLsuA==
   dependencies:
     "@adaptui/react" "^1.0.0-alpha.7"
     "@react-aria/live-announcer" "^3.1.0"
