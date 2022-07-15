@@ -4,6 +4,8 @@ import {
   Button,
   ErrorIcon,
   Tooltip,
+  TooltipProps,
+  TooltipWrapper,
   useTheme,
 } from "@adaptui/react-tailwind";
 import { get } from "lodash";
@@ -19,6 +21,14 @@ const TooltipButton: React.FC = props => {
       className="ml-2"
       {...props}
     />
+  );
+};
+
+const CustomTooltip: React.FC<TooltipProps> = props => {
+  return (
+    <Tooltip as={TooltipButton} {...props}>
+      <TooltipWrapper style={{ zIndex: 9999 }} />
+    </Tooltip>
   );
 };
 
@@ -89,17 +99,14 @@ export const PropsTable: React.FC<PropsTableProps> = ({
                   {name}
                   {required ? "*" : null}
                 </code>
-                {description && (
-                  <Tooltip as={TooltipButton} content={description} />
-                )}
+                {description && <CustomTooltip content={description} />}
               </Box>
               <Box as="td" className={tdStyles}>
                 <code className="text-gray-800">
                   {themeKey ? "union" : Boolean(typeSimple) ? typeSimple : type}
                 </code>
                 {!!(typeSimple || themeKey) && (
-                  <Tooltip
-                    as={TooltipButton}
+                  <CustomTooltip
                     content={
                       <code className={typeStyles}>
                         {themeKey
