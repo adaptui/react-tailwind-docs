@@ -16,7 +16,7 @@ a delete operation.
 ## Imports
 
 ```jsx
-import { Button, CloseButton } from "@renderlesskit/react-tailwind";
+import { Button } from "@adaptui/react-tailwind";
 ```
 
 - **Button:** The button which has prefix/suffix icons support, variants & size.
@@ -27,7 +27,11 @@ import { Button, CloseButton } from "@renderlesskit/react-tailwind";
 <InteractiveCodeblock
   children={({ spreadProps }) => `<Button${spreadProps}>Click me</Button>`}
   booleanProps={["loading", "disabled"]}
-  themeProps={{ size: "button.size.common", variant: "button.variant.common" }}
+  themeProps={{
+    size: "button.size",
+    variant: "button.themeColor.base",
+    themeColor: "button.themeColor",
+  }}
 />
 
 ## Button sizes
@@ -121,13 +125,19 @@ Component which comes with accessibility to close the dialogs or other actions
     {
       name: "size",
       default: "md",
-      themeKey: "button.size.common",
+      themeKey: "button.size",
       description: "Size of the button",
+    },
+    {
+      name: "themeColor",
+      default: "base",
+      themeKey: "button.themeColor",
+      description: "Theme of the button",
     },
     {
       name: "variant",
       default: "solid",
-      themeKey: "button.variant.common",
+      themeKey: "button.themeColor.base",
       description: "Variant of the button",
     },
     {

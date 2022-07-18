@@ -1,4 +1,4 @@
-# AdaptUI React Dcos
+# AdaptUI React Docs
 
 AdaptUI React docs built using Nextra and Nextra Theme Docs.
 
