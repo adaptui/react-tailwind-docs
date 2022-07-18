@@ -17,7 +17,7 @@ import lightTheme from "prism-react-renderer/themes/vsLight";
 import { setup, tw } from "twind";
 import * as colors from "twind/colors";
 
-import CopyButton from "./CopyButton";
+import CopyCodeBlockButton from "./Codeblock/CopyCodeButton";
 
 setup({
   preflight: false, // do not include base style reset (default: use tailwind preflight)
@@ -106,6 +106,7 @@ export const InteractiveCodeblock = (props: InteractiveCodeblockProps) => {
     booleanProps: finalBooleanProps,
     props: { ...themeStates, ...booleanStates, ...choiceStates },
   }) as string;
+  console.log("%ccode", "color: #cc0088", code);
 
   const { theme, systemTheme } = useTheme();
 
@@ -135,7 +136,7 @@ export const InteractiveCodeblock = (props: InteractiveCodeblockProps) => {
             <LivePreview className="p-6" />
             <div className="relative">
               <LiveEditor className="dark:!bg-prime-300 rounded-md rounded-t-none !bg-slate-100 !font-mono text-sm leading-6 tracking-tighter dark:!bg-opacity-10" />
-              <CopyButton code={code} />
+              <CopyCodeBlockButton code={code} />
             </div>
           </div>
           <LiveError className="mt-0 rounded-md rounded-t-none bg-red-100 text-xs text-red-500" />

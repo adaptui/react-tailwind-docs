@@ -16,7 +16,7 @@ Let's take the Checkbox component to explain the composition.
 
 ## Basic Usage
 
-<Codeblock live children={`<Checkbox size="md" defaultValue={true} />`} />
+<Codeblock live code={`<Checkbox size="md" defaultValue={true} />`} />
 
 ## Simple Composition
 
@@ -27,7 +27,7 @@ childrens or as render prop.
 
 <Codeblock
   live
-  children={`
+  code={`
 <Checkbox
   label="Checkbox"
   description="Fruits in the basket"
@@ -46,7 +46,7 @@ childrens or as render prop.
 
 <Codeblock
   live
-  children={`
+  code={`
 <Checkbox label="Checkbox" description="Fruits in the basket">
   {uiProps => {
     return (
@@ -97,7 +97,7 @@ components but cannot change the state or the libraries behavior.
 <Codeblock
   live
   noInline
-  children={`
+  code={`
 const Checkbox = React.forwardRef(
   (props, ref) => {
     const {
@@ -150,7 +150,7 @@ the component that is different from library logic.
 <Codeblock
   live
   noInline
-  children={`
+  code={`
 const Checkbox = () => {
 const state = Ariakit.useCheckboxState({ defaultValue: [] });
 

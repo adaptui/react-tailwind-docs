@@ -52,7 +52,7 @@ sizes are: `sm` `md` `lg` `xl`
 
 <Codeblock
   live
-  children={`
+  code={`
 <div className="flex items-center space-x-2">
   <CircularProgress size="sm" value={20} />
   <CircularProgress size="md" value={30} />
@@ -68,21 +68,21 @@ Set the `min` and `max` values of the progress bar.
 
 <Codeblock
   live
-  children={`<CircularProgress min={10} max={40} value={35} />`}
+  code={`<CircularProgress min={10} max={40} value={35} />`}
 />
 
 ## Indeterminate progress
 
 By setting the value prop to `null`, progress state becomes indeterminate
 
-<Codeblock live children={`<CircularProgress value={null} />`} />
+<Codeblock live code={`<CircularProgress value={null} />`} />
 
 ## CircularProgress Hint
 
 CircularProgress comes with A11y hint that can be used with label to indicate
 the progress status.
 
-<Codeblock live children={`<CircularProgress value={50} hint={50}/>`} />
+<Codeblock live code={`<CircularProgress value={50} hint={50}/>`} />
 
 ## Customizing CircularProgress
 
@@ -92,7 +92,7 @@ CircularProgressHint) for more control.
 
 <Codeblock
   live
-  children={`
+  code={`
 <CircularProgress value={40}>
   <CircularProgressTrack className="text-red-300" />
   <CircularProgressBar className="text-red-700" />
