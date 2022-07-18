@@ -1,6 +1,6 @@
 import React from "react";
 import { LiveEditor, LiveError, LivePreview, LiveProvider } from "react-live";
-import * as ariakit from "ariakit";
+import * as Ariakit from "ariakit";
 import * as AdaptUICore from "@adaptui/react";
 import {
   AdaptUIProvider,
@@ -115,7 +115,7 @@ export const InteractiveCodeblock = (props: InteractiveCodeblockProps) => {
     React,
     ...AdaptUI,
     AdaptUICore,
-    ariakit,
+    Ariakit,
     tw,
   };
 

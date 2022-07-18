@@ -18,12 +18,7 @@ AvatarGroup is a component that displays a group of avatars.
 ## Imports
 
 ```js
-import {
-  AvatarGroup,
-  useAvatarGroupProps,
-  useAvatarGroupState,
-  AvatarGroupWrapper,
-} from "@renderlesskit/react-tailwind";
+import { Avatar, AvatarGroup } from "@adaptui/react-tailwind";
 ```
 
 <Nextra.Callout>
@@ -35,7 +30,7 @@ import {
 
 <InteractiveCodeblock
   children={({ spreadProps }) => `
-<AvatarGroup circular={false} showRing={false} ${spreadProps}>
+<AvatarGroup squared={false} showRing={false} ${spreadProps}>
   <Avatar name="Leanne Graham" src="https://i.pravatar.cc/300?img=1" />
   <Avatar name="Ervin Howell" src="https://i.pravatar.cc/300?img=11" />
   <Avatar name="Clementine Bauch" src="https://i.pravatar.cc/300?img=21" />
@@ -44,7 +39,7 @@ import {
   <Avatar name="Dennis Schulist" src="https://i.pravatar.cc/300?img=51" />
 </AvatarGroup>
 `}
-  booleanProps={["circular", "showRing"]}
+  booleanProps={["squared", "showRing"]}
   themeProps={{ size: "avatar.icon.size" }}
 />
 
@@ -72,10 +67,7 @@ const AvatarGroupBasic = props => {
 
 const AvatarGroupStack = props => { return (
 
-<Reakit.Group
-  aria-label="group of avatar groups"
-  className="flex flex-col space-y-2"
->
+<Group aria-label="group of avatar groups" className="flex flex-col space-y-2">
   <AvatarGroupBasic size="xs" {...props} />
   <AvatarGroupBasic size="sm" {...props} />
   <AvatarGroupBasic size="md" {...props} />
@@ -83,7 +75,7 @@ const AvatarGroupStack = props => { return (
   <AvatarGroupBasic size="xl" {...props} />
   <AvatarGroupBasic size="2xl" {...props} />
   <AvatarGroupBasic size="3xl" {...props} />
-</Reakit.Group>
+</Group>
 ); };
 
 render (<AvatarGroupStack/>); `} />
@@ -111,18 +103,20 @@ const AvatarGroupBasic = props => {
 
 const AvatarGroupStack = props => { return (
 
-<Reakit.Group
+<AvatarGroup
   aria-label="group of avatar groups"
   className="flex flex-col space-y-2"
 >
   <AvatarGroupBasic size="xl" {...props} />
   <AvatarGroupBasic size="xl" circular={false} {...props} />
-</Reakit.Group>
+</AvatarGroup>
 ); };
 
 render (<AvatarGroupStack/>); `} />
 
-<Nextra.Callout>Avatar Group doesn't come with any status indicators</Nextra.Callout>
+<Nextra.Callout>
+  Avatar Group doesn't come with any status indicators
+</Nextra.Callout>
 
 ## AvatarGroup props
 
@@ -155,7 +149,7 @@ the AvatarGroup.
   live
   children={`
 <div className="flex h-20 w-40 items-center justify-center bg-orange-200">
-  <AvatarGroup max={3} ringColor="ring-orange-200">
+  <AvatarGroup max={3} ringColor="ring-orange-500">
     <Avatar name="Leanne Graham" src="https://i.pravatar.cc/300?img=1" />
     <Avatar name="Ervin Howell" src="https://i.pravatar.cc/300?img=11" />
     <Avatar name="Clementine Bauch" src="https://i.pravatar.cc/300?img=21" />
