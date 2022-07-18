@@ -9,32 +9,15 @@ import Highlight, { defaultProps } from "prism-react-renderer";
 import darkTheme from "prism-react-renderer/themes/vsDark";
 import lightTheme from "prism-react-renderer/themes/vsLight";
 import { setup, tw } from "twind";
-import * as colors from "twind/colors";
+
+import { colors } from "../utils/colors";
 
 import CopyButton from "./CopyButton";
 
 setup({
   preflight: false, // do not include base style reset (default: use tailwind preflight)
   theme: {
-    extend: {
-      colors: {
-        dark: "#111",
-        oldGray: {
-          100: "#f7fafc",
-          200: "#edf2f7",
-          300: "#e2e8f0",
-          400: "#cbd5e0",
-          500: "#a0aec0",
-          600: "#718096",
-          700: "#4a5568",
-          800: "#2d3748",
-          900: "#1a202c",
-        },
-        transparent: "transparent",
-        current: "currentColor",
-        ...colors,
-      },
-    },
+    extend: { colors },
   }, // define custom theme values (default: tailwind theme)
   darkMode: "class", // use a different dark mode strategy (default: 'media')
 });
@@ -106,9 +89,9 @@ export const Codeblock: React.FC<CodeblockProps> = props => {
   const { theme, systemTheme } = useTheme();
   const renderedTheme = theme === "system" ? systemTheme : theme;
 
-  React.useEffect(() => {
-    if (code) setEditorCode((code as string).trim());
-  }, [code]);
+  const handleChange = (code: string) => {
+    setEditorCode(code.trim());
+  };
 
   const scope = {
     React,
@@ -130,9 +113,12 @@ export const Codeblock: React.FC<CodeblockProps> = props => {
       <AdaptUIProvider>
         <LiveProvider {...liveProviderProps}>
           <div className="mt-6 rounded-md border border-gray-500 bg-transparent">
-            <LivePreview className="p-6" />
+            <LivePreview className="bg-white-900 p-6" />
             <div className="relative">
-              <LiveEditor className="dark:!bg-prime-300 rounded-md rounded-t-none !bg-slate-100 !font-mono text-sm leading-6 tracking-tighter dark:!bg-opacity-10" />
+              <LiveEditor
+                onChange={handleChange}
+                className="dark:!bg-prime-300 rounded-md rounded-t-none !bg-slate-100 !font-mono text-sm leading-6 tracking-tighter dark:!bg-opacity-10"
+              />
               <CopyButton code={editorCode} />
             </div>
           </div>
