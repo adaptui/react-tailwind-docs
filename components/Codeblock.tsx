@@ -1,6 +1,6 @@
 import React from "react";
 import { LiveEditor, LiveError, LivePreview, LiveProvider } from "react-live";
-import * as Araikit from "ariakit";
+import * as Ariakit from "ariakit";
 import * as AdaptUICore from "@adaptui/react";
 import * as AdaptUI from "@adaptui/react-tailwind";
 import { AdaptUIProvider } from "@adaptui/react-tailwind";
@@ -112,8 +112,8 @@ export const Codeblock: React.FC<CodeblockProps> = props => {
 
   const scope = {
     React,
-    ...Araikit,
-    ...AdaptUICore,
+    Ariakit,
+    AdaptUICore,
     ...AdaptUI,
     tw,
   };

@@ -67,7 +67,10 @@ const AvatarGroupBasic = props => {
 
 const AvatarGroupStack = props => { return (
 
-<Group aria-label="group of avatar groups" className="flex flex-col space-y-2">
+<Ariakit.Group
+  aria-label="group of avatar groups"
+  className="flex flex-col space-y-2"
+>
   <AvatarGroupBasic size="xs" {...props} />
   <AvatarGroupBasic size="sm" {...props} />
   <AvatarGroupBasic size="md" {...props} />
@@ -75,7 +78,7 @@ const AvatarGroupStack = props => { return (
   <AvatarGroupBasic size="xl" {...props} />
   <AvatarGroupBasic size="2xl" {...props} />
   <AvatarGroupBasic size="3xl" {...props} />
-</Group>
+</Ariakit.Group>
 ); };
 
 render (<AvatarGroupStack/>); `} />
@@ -108,7 +111,7 @@ const AvatarGroupStack = props => { return (
   className="flex flex-col space-y-2"
 >
   <AvatarGroupBasic size="xl" {...props} />
-  <AvatarGroupBasic size="xl" circular={false} {...props} />
+  <AvatarGroupBasic size="xl" squared={true} {...props} />
 </AvatarGroup>
 ); };
 
@@ -149,7 +152,7 @@ the AvatarGroup.
   live
   children={`
 <div className="flex h-20 w-40 items-center justify-center bg-orange-200">
-  <AvatarGroup max={3} ringColor="ring-orange-500">
+  <AvatarGroup max={3} ringColor="ring-orange-200">
     <Avatar name="Leanne Graham" src="https://i.pravatar.cc/300?img=1" />
     <Avatar name="Ervin Howell" src="https://i.pravatar.cc/300?img=11" />
     <Avatar name="Clementine Bauch" src="https://i.pravatar.cc/300?img=21" />
@@ -166,9 +169,9 @@ the AvatarGroup.
 <PropsTable
   data={[
     {
-      name: "circular",
+      name: "squared",
       type: "boolean",
-      description: "If `true`, Avatar looks like a round.",
+      description: "If `true`, Avatar looks like a squared.",
       default: "true",
     },
     {

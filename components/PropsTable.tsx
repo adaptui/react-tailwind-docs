@@ -1,4 +1,4 @@
-import React from "react";
+import React, { forwardRef } from "react";
 import {
   Box,
   Button,
@@ -12,21 +12,22 @@ import { get } from "lodash";
 
 import { RegionTable } from "./RegionTable";
 
-const TooltipButton: React.FC = props => {
+const TooltipButton = forwardRef<HTMLButtonElement, {}>((props, ref) => {
   return (
     <Button
       size="sm"
+      ref={ref}
       variant="subtle"
       iconOnly={<ErrorIcon />}
       className="ml-2"
       {...props}
     />
   );
-};
+});
 
 const CustomTooltip: React.FC<TooltipProps> = props => {
   return (
-    <Tooltip as={TooltipButton} {...props}>
+    <Tooltip as={TooltipButton} withArrow {...props}>
       <TooltipWrapper style={{ zIndex: 9999 }} />
     </Tooltip>
   );
@@ -57,8 +58,8 @@ export const PropsTable: React.FC<PropsTableProps> = ({
   const hasAriaLabel = !!(ariaLabel || ariaLabelledBy);
 
   const tdStyles = "border-0 border-b-0 border-gray-500";
-  const thStyles = `px-2 py-2 text-gray-800 ${tdStyles}`;
-  const typeStyles = "bg-blue-100 text-blue-800 px-2 py-1";
+  const thStyles = `px-2 py-2 text-gray-900 ${tdStyles}`;
+  const typeStyles = "px-2 py-1";
 
   return (
     <RegionTable
@@ -95,14 +96,14 @@ export const PropsTable: React.FC<PropsTableProps> = ({
           ) => (
             <tr className="bg-transparent" key={`${name}-${i}`}>
               <Box as="td" className={tdStyles}>
-                <code>
+                <code className="mr-2">
                   {name}
                   {required ? "*" : null}
                 </code>
                 {description && <CustomTooltip content={description} />}
               </Box>
               <Box as="td" className={tdStyles}>
-                <code className="text-gray-800">
+                <code className="mr-2 text-gray-900">
                   {themeKey ? "union" : Boolean(typeSimple) ? typeSimple : type}
                 </code>
                 {!!(typeSimple || themeKey) && (
@@ -119,7 +120,7 @@ export const PropsTable: React.FC<PropsTableProps> = ({
               </Box>
               <Box as="td" className={tdStyles}>
                 {!!defaultValue ? (
-                  <code className="text-gray-800">{defaultValue}</code>
+                  <code className="text-gray-900">{defaultValue}</code>
                 ) : (
                   "-"
                 )}
