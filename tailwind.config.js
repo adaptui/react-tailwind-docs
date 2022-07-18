@@ -28,7 +28,7 @@ module.exports = {
     "./pages/**/*.{js,ts,jsx,tsx,md,mdx}",
     "./components/**/*.{js,ts,jsx,tsx,md,mdx}",
     "node_modules/@adaptui/react-tailwind/**/*",
-    "./.yalc/nextra-renderlesskit-theme-docs/dist/**/*",
+    "node_modules/nextra-theme-docs/dist**/*",
   ],
   darkMode: "class",
   theme: {

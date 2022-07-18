@@ -1,5 +1,5 @@
 const withNextra = require("nextra")({
-  theme: "nextra-renderlesskit-theme-docs",
+  theme: "nextra-theme-docs",
   themeConfig: "./theme.config.js",
   unstable_flexsearch: {
     codeblocks: true,

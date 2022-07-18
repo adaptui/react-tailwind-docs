@@ -1,6 +1,6 @@
 import React from "react";
 import { LiveEditor, LiveError, LivePreview, LiveProvider } from "react-live";
-import * as ariakit from "ariakit";
+import * as Ariakit from "ariakit";
 import * as AdaptUICore from "@adaptui/react";
 import {
   AdaptUIProvider,
@@ -18,7 +18,6 @@ import { setup, tw } from "twind";
 import * as colors from "twind/colors";
 
 import CopyButton from "./CopyButton";
-import useMounted from "./useMounted";
 
 setup({
   preflight: false, // do not include base style reset (default: use tailwind preflight)
@@ -109,19 +108,20 @@ export const InteractiveCodeblock = (props: InteractiveCodeblockProps) => {
   }) as string;
 
   const { theme, systemTheme } = useTheme();
+
   const renderedTheme = theme === "system" ? systemTheme : theme;
 
   const scope = {
     React,
-    ...AdaptUI,
+    Ariakit,
     AdaptUICore,
-    ariakit,
+    ...AdaptUI,
     tw,
   };
 
-  const mounted = useMounted();
+  // const mounted = useMounted();
 
-  if (!mounted) return null;
+  // if (!mounted) return null;
 
   return (
     <div className="mt-6">
@@ -172,7 +172,7 @@ export const InteractiveCodeblock = (props: InteractiveCodeblockProps) => {
             >
               <option value="">Choose {name}</option>
 
-              {Object.keys(get(renderlessTheme, themeKey)).map(size => (
+              {Object.keys(get(renderlessTheme, themeKey) ?? []).map(size => (
                 <option key={size} value={size}>
                   {size}
                 </option>

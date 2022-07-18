@@ -1,6 +1,15 @@
 {
   "extends": ["config:base"],
   "commitMessageAction": "⬆️ update",
+  "ignoreDeps": [
+    "react",
+    "react-dom",
+    "@types/react",
+    "@types/react-dom",
+    "@testing-library/react",
+    "nextra",
+    "nextra-theme-docs"
+  ],
   "packageRules": [
     {
       "matchDepTypes": ["devDependencies"],

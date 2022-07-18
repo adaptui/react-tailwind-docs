@@ -1,22 +1,46 @@
-# Next.js + Tailwind + TypeScript + Jest
+# AdaptUI React Docs
 
-This includes Next.js' built-in support for Tailwind CSS, Jest and TypeScript.
+AdaptUI React docs built using Nextra and Nextra Theme Docs.
 
-## Getting Started
+## Get Started
 
-First, run the development server:
+[Documentation & Getting Started](https://adaptui-react-docs.vercel.app/docs/getting-started)
 
-```bash
-npm run dev
-# or
-yarn dev
-```
+## development
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the
-result.
+> Start the development server
 
-You can start editing the page by modifying `pages/index.js`. The page
-auto-updates as you edit the file.
+`yarn dev`
+
+## Build
+
+> Build the pages for production
+
+`yarn build`
+
+## Release
+
+> Release a new version
+
+`yarn release`
+
+> **Note:** Before running,
+
+> Create a new Github Token as per the
+> [docs](https://github.com/conventional-changelog/releaser-tools/tree/master/packages/conventional-github-releaser#setup-token-for-cli)
+> and export to the CLI env like `export GITHUB_TOKEN=xxxx`
+
+## Commit
+
+`git add . && yarn commit`
+
+> Uses **[gacp](https://github.com/vivaxy/gacp#readme)**
+
+- Runs [Husky](https://github.com/typicode/husky) to improve the commits.
+- Husky runs [Lint Staged](https://github.com/okonet/lint-staged) as a
+  pre-commit hook to run lintes & formatters
+- Husky lints the commit message with
+  [Commitlint](https://github.com/conventional-changelog/commitlint)
 
 ## Contributors ✨
 

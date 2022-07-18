@@ -18,12 +18,7 @@ AvatarGroup is a component that displays a group of avatars.
 ## Imports
 
 ```js
-import {
-  AvatarGroup,
-  useAvatarGroupProps,
-  useAvatarGroupState,
-  AvatarGroupWrapper,
-} from "@renderlesskit/react-tailwind";
+import { Avatar, AvatarGroup } from "@adaptui/react-tailwind";
 ```
 
 <Nextra.Callout>
@@ -35,7 +30,7 @@ import {
 
 <InteractiveCodeblock
   children={({ spreadProps }) => `
-<AvatarGroup circular={false} showRing={false} ${spreadProps}>
+<AvatarGroup squared={false} showRing={false} ${spreadProps}>
   <Avatar name="Leanne Graham" src="https://i.pravatar.cc/300?img=1" />
   <Avatar name="Ervin Howell" src="https://i.pravatar.cc/300?img=11" />
   <Avatar name="Clementine Bauch" src="https://i.pravatar.cc/300?img=21" />
@@ -44,7 +39,7 @@ import {
   <Avatar name="Dennis Schulist" src="https://i.pravatar.cc/300?img=51" />
 </AvatarGroup>
 `}
-  booleanProps={["circular", "showRing"]}
+  booleanProps={["squared", "showRing"]}
   themeProps={{ size: "avatar.icon.size" }}
 />
 
@@ -72,7 +67,7 @@ const AvatarGroupBasic = props => {
 
 const AvatarGroupStack = props => { return (
 
-<Reakit.Group
+<Ariakit.Group
   aria-label="group of avatar groups"
   className="flex flex-col space-y-2"
 >
@@ -83,7 +78,7 @@ const AvatarGroupStack = props => { return (
   <AvatarGroupBasic size="xl" {...props} />
   <AvatarGroupBasic size="2xl" {...props} />
   <AvatarGroupBasic size="3xl" {...props} />
-</Reakit.Group>
+</Ariakit.Group>
 ); };
 
 render (<AvatarGroupStack/>); `} />
@@ -111,18 +106,20 @@ const AvatarGroupBasic = props => {
 
 const AvatarGroupStack = props => { return (
 
-<Reakit.Group
+<AvatarGroup
   aria-label="group of avatar groups"
   className="flex flex-col space-y-2"
 >
   <AvatarGroupBasic size="xl" {...props} />
-  <AvatarGroupBasic size="xl" circular={false} {...props} />
-</Reakit.Group>
+  <AvatarGroupBasic size="xl" squared={true} {...props} />
+</AvatarGroup>
 ); };
 
 render (<AvatarGroupStack/>); `} />
 
-<Nextra.Callout>Avatar Group doesn't come with any status indicators</Nextra.Callout>
+<Nextra.Callout>
+  Avatar Group doesn't come with any status indicators
+</Nextra.Callout>
 
 ## AvatarGroup props
 
@@ -172,9 +169,9 @@ the AvatarGroup.
 <PropsTable
   data={[
     {
-      name: "circular",
+      name: "squared",
       type: "boolean",
-      description: "If `true`, Avatar looks like a round.",
+      description: "If `true`, Avatar looks like a squared.",
       default: "true",
     },
     {

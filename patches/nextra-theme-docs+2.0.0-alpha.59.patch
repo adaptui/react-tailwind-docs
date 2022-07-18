@@ -1,0 +1,366 @@
+diff --git a/node_modules/nextra-theme-docs/dist/callout.js b/node_modules/nextra-theme-docs/dist/callout.js
+index 56e7d51..93fe152 100644
+--- a/node_modules/nextra-theme-docs/dist/callout.js
++++ b/node_modules/nextra-theme-docs/dist/callout.js
+@@ -1,10 +1,10 @@
+ // src/callout.tsx
+ import React from "react";
+ var themes = {
+-  default: "bg-orange-50 border border-orange-100 text-orange-800 dark:text-orange-300 dark:bg-orange-400 dark:border-orange-400 dark:bg-opacity-20 dark:border-opacity-30",
+-  error: "bg-red-100 border border-red-200 text-red-900 dark:text-red-200 dark:bg-red-900 dark:bg-opacity-30 dark:border-opacity-30",
+-  info: "bg-blue-100 border border-blue-200 text-blue-900 dark:text-blue-200 dark:bg-blue-900 dark:bg-opacity-30 dark:border-opacity-30",
+-  warning: "bg-yellow-50 border border-yellow-100 text-yellow-900 dark:text-yellow-200 dark:bg-yellow-700 dark:bg-opacity-30"
++  default: "bg-theme-orange-50 border border-theme-orange-100 text-theme-orange-800 dark:text-theme-orange-300 dark:bg-theme-orange-400 dark:border-theme-orange-400 dark:bg-opacity-20 dark:border-opacity-30",
++  error: "bg-theme-red-100 border border-theme-red-200 text-theme-red-900 dark:text-theme-red-200 dark:bg-theme-red-900 dark:bg-opacity-30 dark:border-opacity-30",
++  info: "bg-theme-blue-100 border border-theme-blue-200 text-theme-blue-900 dark:text-theme-blue-200 dark:bg-theme-blue-900 dark:bg-opacity-30 dark:border-opacity-30",
++  warning: "bg-theme-yellow-50 border border-theme-yellow-100 text-theme-yellow-900 dark:text-theme-yellow-200 dark:bg-theme-yellow-700 dark:bg-opacity-30"
+ };
+ var Callout = ({
+   children,
+diff --git a/node_modules/nextra-theme-docs/dist/components/tabs.js b/node_modules/nextra-theme-docs/dist/components/tabs.js
+index 15b48d7..6da34e8 100644
+--- a/node_modules/nextra-theme-docs/dist/components/tabs.js
++++ b/node_modules/nextra-theme-docs/dist/components/tabs.js
+@@ -16,13 +16,13 @@ function Tabs({
+   }, /* @__PURE__ */ React.createElement("div", {
+     className: "p-2 -m-2 overscroll-x-contain overflow-x-auto overflow-y-hidden no-scrollbar"
+   }, /* @__PURE__ */ React.createElement(HeadlessTab.List, {
+-    className: "flex mt-4 pb-[1px] border-b border-gray-200 dark:border-neutral-800 w-max min-w-full"
++    className: "flex mt-4 pb-[1px] border-b border-theme-gray-200 dark:border-theme-neutral-800 w-max min-w-full"
+   }, items.map((item, index) => {
+     const disabled = !!(item && typeof item === "object" && "disabled" in item && item.disabled);
+     return /* @__PURE__ */ React.createElement(HeadlessTab, {
+       key: index,
+       disabled,
+-      className: ({ selected }) => cn("p-2 mr-2 leading-5 font-medium text-md transition-colors", "select-none border-b-2 mb-[-2px] focus:outline-none focus-visible:ring ring-offset-2 rounded-[1px]", selected ? "text-primary-500 border-primary-500" : "text-gray-600 dark:text-gray-200 hover:border-gray-200 dark:hover:border-neutral-800 border-transparent hover:text-black dark:hover:text-white", disabled ? "pointer-events-none text-gray-400 dark:text-neutral-600" : "")
++      className: ({ selected }) => cn("p-2 mr-2 leading-5 font-medium text-md transition-colors", "select-none border-b-2 mb-[-2px] focus:outline-none focus-visible:ring ring-offset-2 rounded-[1px]", selected ? "text-theme-primary-500 border-theme-primary-500" : "text-theme-gray-600 dark:text-theme-gray-200 hover:border-theme-gray-200 dark:hover:border-theme-neutral-800 border-transparent hover:text-theme-black dark:hover:text-theme-white", disabled ? "pointer-events-none text-theme-gray-400 dark:text-theme-neutral-600" : "")
+     }, item && typeof item === "object" && "label" in item ? item.label : item);
+   }))), /* @__PURE__ */ React.createElement(HeadlessTab.Panels, null, children));
+ }
+diff --git a/node_modules/nextra-theme-docs/dist/index.js b/node_modules/nextra-theme-docs/dist/index.js
+index 0f5435d..92f8dcf 100644
+--- a/node_modules/nextra-theme-docs/dist/index.js
++++ b/node_modules/nextra-theme-docs/dist/index.js
+@@ -224,7 +224,7 @@ var Search = ({ directories = [] }) => {
+       setSearch(e.target.value);
+       setShow(true);
+     },
+-    className: "block w-full px-3 py-2 leading-tight bg-black bg-opacity-[.03] rounded-lg appearance-none focus:outline-none focus:ring hover:bg-opacity-5 transition-colors",
++    className: "block w-full px-3 py-2 leading-tight bg-theme-black bg-opacity-[.03] rounded-lg appearance-none focus:outline-none focus:ring hover:bg-opacity-5 transition-colors",
+     type: "search",
+     placeholder: render_component_default(config.searchPlaceholder, {
+       locale: router.locale
+@@ -237,7 +237,7 @@ var Search = ({ directories = [] }) => {
+   }), show ? null : /* @__PURE__ */ React4.createElement("div", {
+     className: "hidden sm:flex absolute inset-y-0 right-0 py-1.5 pr-1.5 select-none pointer-events-none"
+   }, /* @__PURE__ */ React4.createElement("kbd", {
+-    className: "inline-flex items-center px-1.5 font-mono text-sm font-medium bg-white text-gray-400 dark:text-gray-800 dark:border-gray-400 border rounded"
++    className: "inline-flex items-center px-1.5 font-mono text-sm font-medium bg-theme-white text-theme-gray-400 dark:text-theme-gray-800 dark:border-theme-gray-400 border rounded"
+   }, "/"))), renderList && /* @__PURE__ */ React4.createElement("ul", {
+     className: "absolute left-0 z-20 w-full p-0 py-2.5 m-0 mt-1 list-none border divide-y rounded shadow-md md:right-0 top-100 md:w-auto"
+   }, results.map((res, i) => {
+@@ -278,7 +278,7 @@ var Item2 = ({
+   excerpt
+ }) => {
+   return /* @__PURE__ */ React5.createElement(React5.Fragment, null, first ? /* @__PURE__ */ React5.createElement("div", {
+-    className: "nextra-search-section mx-2.5 px-2.5 pb-1.5 mb-2 mt-6 first:mt-0 font-semibold uppercase text-xs text-gray-500 select-none dark:text-gray-300"
++    className: "nextra-search-section mx-2.5 px-2.5 pb-1.5 mb-2 mt-6 first:mt-0 font-semibold uppercase text-xs text-theme-gray-500 select-none dark:text-theme-gray-300"
+   }, page) : null, /* @__PURE__ */ React5.createElement(Link2, {
+     href: Router.basePath + href
+   }, /* @__PURE__ */ React5.createElement("a", {
+@@ -288,9 +288,9 @@ var Item2 = ({
+   }, /* @__PURE__ */ React5.createElement("li", {
+     className: cn2({ active })
+   }, /* @__PURE__ */ React5.createElement("div", {
+-    className: "font-semibold dark:text-white leading-5"
++    className: "font-semibold dark:text-theme-white leading-5"
+   }, title), excerpt ? /* @__PURE__ */ React5.createElement("div", {
+-    className: "excerpt mt-1 text-gray-600 text-sm leading-[1.35rem] dark:text-gray-400"
++    className: "excerpt mt-1 text-theme-gray-600 text-sm leading-[1.35rem] dark:text-theme-gray-400"
+   }, excerpt) : null))));
+ };
+ var MemoedStringWithMatchHighlights = memo(function StringWithMatchHighlights({ content, search }) {
+@@ -548,7 +548,7 @@ function Search2() {
+       setSearch(e.target.value);
+       setShow(true);
+     },
+-    className: "block w-full px-3 py-2 leading-tight rounded-lg appearance-none focus:outline-none focus:ring-1 focus:ring-gray-200 focus:bg-white hover:bg-opacity-5 transition-colors dark:focus:bg-dark dark:focus:ring-gray-100 dark:focus:ring-opacity-20",
++    className: "block w-full px-3 py-2 leading-tight rounded-lg appearance-none focus:outline-none focus:ring-1 focus:ring-theme-gray-200 focus:bg-theme-white hover:bg-opacity-5 transition-colors dark:focus:bg-dark dark:focus:ring-theme-gray-100 dark:focus:ring-opacity-20",
+     type: "search",
+     placeholder: render_component_default(config.searchPlaceholder, {
+       locale: router.locale
+@@ -563,7 +563,7 @@ function Search2() {
+   }), renderList ? null : /* @__PURE__ */ React5.createElement("div", {
+     className: "hidden sm:flex absolute inset-y-0 right-0 py-1.5 pr-1.5 select-none pointer-events-none"
+   }, /* @__PURE__ */ React5.createElement("kbd", {
+-    className: "inline-flex items-center px-1.5 font-mono text-sm font-medium bg-white dark:bg-dark dark:bg-opacity-50 text-gray-400 dark:text-gray-500 dark:border-gray-100 dark:border-opacity-20 border rounded"
++    className: "inline-flex items-center px-1.5 font-mono text-sm font-medium bg-theme-white dark:bg-dark dark:bg-opacity-50 text-theme-gray-400 dark:text-theme-gray-500 dark:border-theme-gray-100 dark:border-opacity-20 border rounded"
+   }, "/"))), /* @__PURE__ */ React5.createElement(Transition, {
+     show: renderList,
+     as: React5.Fragment,
+@@ -573,9 +573,9 @@ function Search2() {
+   }, /* @__PURE__ */ React5.createElement("ul", {
+     className: "absolute z-20 px-0 py-2.5 m-0 mt-2 top-full rounded-xl overflow-hidden overscroll-contain shadow-xl list-none"
+   }, loading ? /* @__PURE__ */ React5.createElement("span", {
+-    className: "p-8 text-center text-gray-400 text-sm select-none flex justify-center"
++    className: "p-8 text-center text-theme-gray-400 text-sm select-none flex justify-center"
+   }, /* @__PURE__ */ React5.createElement("svg", {
+-    className: "animate-spin -ml-1 mr-2 h-5 w-5 text-gray-400",
++    className: "animate-spin -ml-1 mr-2 h-5 w-5 text-theme-gray-400",
+     xmlns: "http://www.w3.org/2000/svg",
+     fill: "none",
+     viewBox: "0 0 24 24"
+@@ -655,7 +655,7 @@ function Navbar({ flatDirectories, items }) {
+       __html: `try{if(localStorage.getItem(${JSON.stringify(bannerKey)})==='0'){document.body.classList.add('nextra-banner-hidden')}}catch(e){}`
+     }
+   }), config.banner ? /* @__PURE__ */ React8.createElement("div", {
+-    className: "nextra-banner-container text-sm h-10 sticky top-0 md:relative pl-10 flex items-center text-slate-50 bg-neutral-900  dark:text-white z-20 dark:bg-[linear-gradient(1deg,#383838,#212121)]"
++    className: "nextra-banner-container text-sm h-10 sticky top-0 md:relative pl-10 flex items-center text-theme-slate-50 bg-theme-neutral-900  dark:text-theme-white z-20 dark:bg-[linear-gradient(1deg,#383838,#212121)]"
+   }, /* @__PURE__ */ React8.createElement("div", {
+     className: "max-w-[90rem] mx-auto w-full py-1 text-center font-medium pl-[max(env(safe-area-inset-left),1.5rem)] pr-[max(env(safe-area-inset-right),1.5rem)] truncate whitespace-nowrap"
+   }, render_component_default(config.banner, {
+@@ -681,7 +681,7 @@ function Navbar({ flatDirectories, items }) {
+   })))) : null, /* @__PURE__ */ React8.createElement("div", {
+     className: "nextra-nav-container z-20 sticky bg-transparent w-full top-0"
+   }, /* @__PURE__ */ React8.createElement("div", {
+-    className: "nextra-nav-container-blur absolute w-full h-full bg-white dark:bg-dark pointer-events-none"
++    className: "nextra-nav-container-blur absolute w-full h-full bg-theme-white dark:bg-dark pointer-events-none"
+   }), /* @__PURE__ */ React8.createElement("nav", {
+     className: "flex gap-2 max-w-[90rem] mx-auto items-center left-0 right-0 h-16 pl-[max(env(safe-area-inset-left),1.5rem)] pr-[max(env(safe-area-inset-right),1.5rem)]"
+   }, /* @__PURE__ */ React8.createElement("div", {
+@@ -704,7 +704,7 @@ function Navbar({ flatDirectories, items }) {
+       href,
+       key: page.route
+     }, /* @__PURE__ */ React8.createElement("a", __spreadValues({
+-      className: cn3("nextra-nav-link", "no-underline whitespace-nowrap p-2 -ml-2 hidden md:inline-block", !isActive || page.newWindow ? "text-gray-600 hover:text-gray-800 dark:text-gray-400 dark:hover:text-gray-200" : "active text-current font-medium"),
++      className: cn3("nextra-nav-link", "no-underline whitespace-nowrap p-2 -ml-2 hidden md:inline-block", !isActive || page.newWindow ? "text-theme-gray-600 hover:text-theme-gray-800 dark:text-theme-gray-400 dark:hover:text-theme-gray-200" : "active text-current font-medium"),
+       "aria-selected": isActive
+     }, page.newWindow ? {
+       target: "_blank",
+@@ -814,7 +814,7 @@ function Menu({ options, selected, onChange }) {
+     value: selected,
+     onChange
+   }, ({ open }) => /* @__PURE__ */ React11.createElement(React11.Fragment, null, /* @__PURE__ */ React11.createElement(Listbox.Button, {
+-    className: cn4("rounded-md px-2 w-full text-left font-medium cursor-default text-xs h-7 transition-colors text-gray-600 dark:text-gray-400 focus:outline-none", open ? "bg-gray-200 dark:bg-primary-100 dark:bg-opacity-10 text-gray-900 dark:text-gray-50" : "hover:bg-gray-100 hover:text-gray-900 dark:hover:bg-primary-100 dark:hover:bg-opacity-5 dark:hover:text-gray-50")
++    className: cn4("rounded-md px-2 w-full text-left font-medium cursor-default text-xs h-7 transition-colors text-theme-gray-600 dark:text-theme-gray-400 focus:outline-none", open ? "bg-theme-gray-200 dark:bg-theme-primary-100 dark:bg-opacity-10 text-theme-gray-900 dark:text-theme-gray-50" : "hover:bg-theme-gray-100 hover:text-theme-gray-900 dark:hover:bg-theme-primary-100 dark:hover:bg-opacity-5 dark:hover:text-theme-gray-50")
+   }, selected.name), /* @__PURE__ */ React11.createElement(Transition2, {
+     show: open,
+     as: React11.Fragment,
+@@ -822,11 +822,11 @@ function Menu({ options, selected, onChange }) {
+     leaveFrom: "opacity-100",
+     leaveTo: "opacity-0"
+   }, /* @__PURE__ */ React11.createElement(Listbox.Options, {
+-    className: "menu absolute bottom-[130%] min-w-full z-20 mt-1 bg-white dark:bg-neutral-800 dark:ring-white dark:ring-opacity-20 shadow-lg max-h-64 rounded-md py-1 ring-1 ring-black ring-opacity-5 overflow-auto focus:outline-none text-sm"
++    className: "menu absolute bottom-[130%] min-w-full z-20 mt-1 bg-theme-white dark:bg-theme-neutral-800 dark:ring-theme-white dark:ring-opacity-20 shadow-lg max-h-64 rounded-md py-1 ring-1 ring-theme-black ring-opacity-5 overflow-auto focus:outline-none text-sm"
+   }, options.map((option) => /* @__PURE__ */ React11.createElement(Listbox.Option, {
+     key: option.key,
+     value: option,
+-    className: ({ active }) => cn4(option.key === selected.key ? "" : "", active ? "text-primary-500 bg-primary-50 dark:bg-primary-500 dark:bg-opacity-10" : "text-gray-800 dark:text-gray-100", "cursor-default select-none relative py-1.5 pl-3 pr-9 whitespace-nowrap")
++    className: ({ active }) => cn4(option.key === selected.key ? "" : "", active ? "text-theme-primary-500 bg-theme-primary-50 dark:bg-theme-primary-500 dark:bg-opacity-10" : "text-theme-gray-800 dark:text-theme-gray-100", "cursor-default select-none relative py-1.5 pl-3 pr-9 whitespace-nowrap")
+   }, option.name, option.key === selected.key ? /* @__PURE__ */ React11.createElement("span", {
+     className: cn4("absolute inset-y-0 right-0 flex items-center pr-3")
+   }, /* @__PURE__ */ React11.createElement(Check, null)) : null))))));
+@@ -942,7 +942,7 @@ var NextLink = ({ route, title, isRTL }) => {
+   return /* @__PURE__ */ React17.createElement(Link4, {
+     href: route
+   }, /* @__PURE__ */ React17.createElement("a", {
+-    className: cn5("text-base md:text-lg font-medium p-4 -m-4 no-underline transition-colors text-gray-600 dark:text-gray-300 dark:hover:text-primary-500 hover:text-primary-500 inline-flex items-center justify-end rounded", { "ml-2": !isRTL, "mr-2": isRTL }),
++    className: cn5("text-base md:text-lg font-medium p-4 -m-4 no-underline transition-colors text-theme-gray-600 dark:text-theme-gray-300 dark:hover:text-theme-primary-500 hover:text-theme-primary-500 inline-flex items-center justify-end rounded", { "ml-2": !isRTL, "mr-2": isRTL }),
+     title
+   }, title, /* @__PURE__ */ React17.createElement(arrow_right_default, {
+     height: 20,
+@@ -956,7 +956,7 @@ var PrevLink = ({ route, title, isRTL }) => {
+   return /* @__PURE__ */ React17.createElement(Link4, {
+     href: route
+   }, /* @__PURE__ */ React17.createElement("a", {
+-    className: cn5("text-base md:text-lg font-medium p-4 -m-4 no-underline transition-colors text-gray-600 dark:text-gray-300 dark:hover:text-primary-500 hover:text-primary-500 flex items-center rounded", { "mr-2": !isRTL, "ml-2": isRTL }),
++    className: cn5("text-base md:text-lg font-medium p-4 -m-4 no-underline transition-colors text-theme-gray-600 dark:text-theme-gray-300 dark:hover:text-theme-primary-500 hover:text-theme-primary-500 flex items-center rounded", { "mr-2": !isRTL, "ml-2": isRTL }),
+     title
+   }, /* @__PURE__ */ React17.createElement(arrow_right_default, {
+     height: 20,
+@@ -977,7 +977,7 @@ var NavLinks = ({
+   if (!prev && !next)
+     return null;
+   return /* @__PURE__ */ React17.createElement("div", {
+-    className: "nextra-navigation-links pt-8 mb-8 border-t dark:border-neutral-800 flex flex-row items-center justify-between"
++    className: "nextra-navigation-links pt-8 mb-8 border-t dark:border-theme-neutral-800 flex flex-row items-center justify-between"
+   }, /* @__PURE__ */ React17.createElement("div", {
+     className: "flex-1 min-w-0 flex justify-start"
+   }, prev ? /* @__PURE__ */ React17.createElement(PrevLink, {
+@@ -996,9 +996,9 @@ var Footer = ({ menu }) => {
+   const { locale } = useRouter5();
+   const config = useConfig();
+   return /* @__PURE__ */ React17.createElement("footer", {
+-    className: "bg-gray-100 dark:bg-neutral-900 pb-[env(safe-area-inset-bottom)]"
++    className: "bg-theme-gray-100 dark:bg-theme-neutral-900 pb-[env(safe-area-inset-bottom)]"
+   }, /* @__PURE__ */ React17.createElement("div", {
+-    className: cn5("py-2 border-b dark:border-neutral-800 hidden md:block", menu ? "" : "md:hidden")
++    className: cn5("py-2 border-b dark:border-theme-neutral-800 hidden md:block", menu ? "" : "md:hidden")
+   }, /* @__PURE__ */ React17.createElement("div", {
+     className: "max-w-[90rem] mx-auto"
+   }, /* @__PURE__ */ React17.createElement("div", {
+@@ -1016,7 +1016,7 @@ var Footer = ({ menu }) => {
+   }, /* @__PURE__ */ React17.createElement("div", {
+     className: "flex justify-between flex-col-reverse md:flex-row items-center md:items-end"
+   }, /* @__PURE__ */ React17.createElement("span", {
+-    className: "text-gray-600 dark:text-gray-400"
++    className: "text-theme-gray-600 dark:text-theme-gray-400"
+   }, render_component_default(config.footerText, { locale })), /* @__PURE__ */ React17.createElement("div", {
+     className: "mt-6"
+   }))));
+@@ -1138,13 +1138,13 @@ function Tabs({
+   }, /* @__PURE__ */ React20.createElement("div", {
+     className: "p-2 -m-2 overscroll-x-contain overflow-x-auto overflow-y-hidden no-scrollbar"
+   }, /* @__PURE__ */ React20.createElement(HeadlessTab.List, {
+-    className: "flex mt-4 pb-[1px] border-b border-gray-200 dark:border-neutral-800 w-max min-w-full"
++    className: "flex mt-4 pb-[1px] border-b border-theme-gray-200 dark:border-theme-neutral-800 w-max min-w-full"
+   }, items.map((item, index) => {
+     const disabled = !!(item && typeof item === "object" && "disabled" in item && item.disabled);
+     return /* @__PURE__ */ React20.createElement(HeadlessTab, {
+       key: index,
+       disabled,
+-      className: ({ selected }) => cn6("p-2 mr-2 leading-5 font-medium text-md transition-colors", "select-none border-b-2 mb-[-2px] focus:outline-none focus-visible:ring ring-offset-2 rounded-[1px]", selected ? "text-primary-500 border-primary-500" : "text-gray-600 dark:text-gray-200 hover:border-gray-200 dark:hover:border-neutral-800 border-transparent hover:text-black dark:hover:text-white", disabled ? "pointer-events-none text-gray-400 dark:text-neutral-600" : "")
++      className: ({ selected }) => cn6("p-2 mr-2 leading-5 font-medium text-md transition-colors", "select-none border-b-2 mb-[-2px] focus:outline-none focus-visible:ring ring-offset-2 rounded-[1px]", selected ? "text-theme-primary-500 border-theme-primary-500" : "text-theme-gray-600 dark:text-theme-gray-200 hover:border-theme-gray-200 dark:hover:border-theme-neutral-800 border-transparent hover:text-theme-black dark:hover:text-theme-white", disabled ? "pointer-events-none text-theme-gray-400 dark:text-theme-neutral-600" : "")
+     }, item && typeof item === "object" && "label" in item ? item.label : item);
+   }))), /* @__PURE__ */ React20.createElement(HeadlessTab.Panels, null, children));
+ }
+@@ -1170,10 +1170,10 @@ var bleed_default = Bleed;
+ // src/callout.tsx
+ import React22 from "react";
+ var themes = {
+-  default: "bg-orange-50 border border-orange-100 text-orange-800 dark:text-orange-300 dark:bg-orange-400 dark:border-orange-400 dark:bg-opacity-20 dark:border-opacity-30",
+-  error: "bg-red-100 border border-red-200 text-red-900 dark:text-red-200 dark:bg-red-900 dark:bg-opacity-30 dark:border-opacity-30",
+-  info: "bg-blue-100 border border-blue-200 text-blue-900 dark:text-blue-200 dark:bg-blue-900 dark:bg-opacity-30 dark:border-opacity-30",
+-  warning: "bg-yellow-50 border border-yellow-100 text-yellow-900 dark:text-yellow-200 dark:bg-yellow-700 dark:bg-opacity-30"
++  default: "bg-theme-orange-50 border border-theme-orange-100 text-theme-orange-800 dark:text-theme-orange-300 dark:bg-theme-orange-400 dark:border-theme-orange-400 dark:bg-opacity-20 dark:border-opacity-30",
++  error: "bg-theme-red-100 border border-theme-red-200 text-theme-red-900 dark:text-theme-red-200 dark:bg-theme-red-900 dark:bg-opacity-30 dark:border-opacity-30",
++  info: "bg-theme-blue-100 border border-theme-blue-200 text-theme-blue-900 dark:text-theme-blue-200 dark:bg-theme-blue-900 dark:bg-opacity-30 dark:border-opacity-30",
++  warning: "bg-theme-yellow-50 border border-theme-yellow-100 text-theme-yellow-900 dark:text-theme-yellow-200 dark:bg-theme-yellow-700 dark:bg-opacity-30"
+ };
+ var Callout = ({
+   children,
+@@ -1480,7 +1480,7 @@ function FolderImpl({ item, anchors }) {
+     className: "flex items-center justify-between"
+   }, item.title, /* @__PURE__ */ React24.createElement(arrow_right_default, {
+     height: "1em",
+-    className: "ml-2 p-[2px] rounded-sm min-w-[18px] h-[18px] dark:hover:bg-gray-100 hover:bg-gray-800 hover:bg-opacity-5 dark:hover:bg-opacity-5",
++    className: "ml-2 p-[2px] rounded-sm min-w-[18px] h-[18px] dark:hover:bg-theme-gray-100 hover:bg-theme-gray-800 hover:bg-opacity-5 dark:hover:bg-opacity-5",
+     childProps: {
+       className: cn8("transition-transform origin-center", open ? "rotate-90" : "")
+     }
+@@ -1504,9 +1504,9 @@ function Separator({ title, topLevel }) {
+   return /* @__PURE__ */ React24.createElement("li", {
+     className: cn8(topLevel ? "first:mt-1" : "first:mt-2", hasTitle ? "mt-5 mb-2" : "my-4")
+   }, hasTitle ? /* @__PURE__ */ React24.createElement("div", {
+-    className: "text-sm mx-2 py-1.5 font-semibold no-underline text-gray-900 dark:text-gray-100"
++    className: "text-sm mx-2 py-1.5 font-semibold no-underline text-theme-gray-900 dark:text-theme-gray-100"
+   }, sidebarSubtitle ? render_component_default(sidebarSubtitle, { title }) : title) : /* @__PURE__ */ React24.createElement("hr", {
+-    className: "mx-2 border-t border-gray-200 dark:border-primary-100 dark:border-opacity-10"
++    className: "mx-2 border-t border-theme-gray-200 dark:border-theme-primary-100 dark:border-opacity-10"
+   }));
+ }
+ function File({ item, anchors, topLevel }) {
+@@ -1646,9 +1646,9 @@ function Sidebar({
+     directories: fullDirectories,
+     anchors
+   }))), !hasMenu ? null : /* @__PURE__ */ React24.createElement("div", {
+-    className: "nextra-sidebar-menu mx-4 border-t dark:border-neutral-800 shadow-[0_-12px_16px_white] dark:shadow-[0_-12px_16px_#111]"
++    className: "nextra-sidebar-menu mx-4 border-t dark:border-theme-neutral-800 shadow-[0_-12px_16px_white] dark:shadow-[0_-12px_16px_#111]"
+   }, /* @__PURE__ */ React24.createElement("div", {
+-    className: "bg-white dark:bg-dark py-4 flex gap-1 pb-4"
++    className: "bg-theme-white dark:bg-dark py-4 flex gap-1 pb-4"
+   }, config.i18n ? /* @__PURE__ */ React24.createElement("div", {
+     className: "flex-1 relative"
+   }, /* @__PURE__ */ React24.createElement(LocaleSwitch, {
+@@ -1725,7 +1725,7 @@ var EditPageLink = ({
+   const url = createEditUrl(repository, filepath);
+   const { locale } = useRouter7();
+   return /* @__PURE__ */ React25.createElement("a", {
+-    className: "text-xs font-medium no-underline block text-gray-500 mb-2 hover:text-gray-900 dark:text-gray-400 dark:hover:text-gray-100",
++    className: "text-xs font-medium no-underline block text-theme-gray-500 mb-2 hover:text-theme-gray-900 dark:text-theme-gray-400 dark:hover:text-theme-gray-100",
+     href: url,
+     target: "_blank",
+     rel: "noreferrer"
+@@ -1742,7 +1742,7 @@ var FeedbackLink = ({
+   const url = useCreateFeedbackUrl(repository, filepath, labels);
+   const { locale } = useRouter7();
+   return /* @__PURE__ */ React25.createElement("a", {
+-    className: "text-xs font-medium no-underline block text-gray-500 mb-2 hover:text-gray-900 dark:text-gray-400 dark:hover:text-gray-100",
++    className: "text-xs font-medium no-underline block text-theme-gray-500 mb-2 hover:text-theme-gray-900 dark:text-theme-gray-400 dark:hover:text-theme-gray-100",
+     href: url,
+     target: "_blank",
+     rel: "noreferrer"
+@@ -1791,7 +1791,7 @@ function Item3({
+     ref
+   }, /* @__PURE__ */ React25.createElement("a", {
+     href: `#${slug}`,
+-    className: cn9("no-underline inline-block", heading.depth === 2 ? "font-semibold" : "", (state == null ? void 0 : state.isActive) ? "text-primary-500 subpixel-antialiased" : "text-gray-500 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-300"),
++    className: cn9("no-underline inline-block", heading.depth === 2 ? "font-semibold" : "", (state == null ? void 0 : state.isActive) ? "text-theme-primary-500 subpixel-antialiased" : "text-theme-gray-500 dark:text-theme-gray-400 hover:text-theme-gray-900 dark:hover:text-theme-gray-300"),
+     "aria-selected": state == null ? void 0 : state.isActive
+   }, text));
+ }
+@@ -1822,7 +1822,7 @@ function ToC({
+       key: slug
+     });
+   })) : null, hasMetaInfo ? /* @__PURE__ */ React25.createElement("div", {
+-    className: cn9("nextra-toc-meta", hasHeadings ? "border-t mt-8 pt-8 shadow-[0_-12px_16px_white] dark:shadow-[0_-12px_16px_#111] bg-white dark:bg-dark" : "", "sticky pb-8 bottom-0 dark:border-neutral-800")
++    className: cn9("nextra-toc-meta", hasHeadings ? "border-t mt-8 pt-8 shadow-[0_-12px_16px_white] dark:shadow-[0_-12px_16px_#111] bg-theme-white dark:bg-dark" : "", "sticky pb-8 bottom-0 dark:border-theme-neutral-800")
+   }, config.feedbackLink ? /* @__PURE__ */ React25.createElement(FeedbackLink, {
+     filepath: filepathWithName,
+     repository: config.docsRepositoryBase,
+@@ -1860,7 +1860,7 @@ var defaultTheme = {
+   logo: /* @__PURE__ */ React26.createElement(React26.Fragment, null, /* @__PURE__ */ React26.createElement("span", {
+     className: "mr-2 font-extrabold hidden md:inline"
+   }, "Nextra"), /* @__PURE__ */ React26.createElement("span", {
+-    className: "text-gray-600 font-normal hidden md:inline"
++    className: "text-theme-gray-600 font-normal hidden md:inline"
+   }, "The Next Docs Builder")),
+   head: /* @__PURE__ */ React26.createElement(React26.Fragment, null, /* @__PURE__ */ React26.createElement("meta", {
+     name: "msapplication-TileColor",
+@@ -1893,7 +1893,7 @@ var defaultTheme = {
+     return "Search documentation...";
+   },
+   unstable_searchResultEmpty: () => /* @__PURE__ */ React26.createElement("span", {
+-    className: "block p-8 text-center text-gray-400 text-sm select-none"
++    className: "block p-8 text-center text-theme-gray-400 text-sm select-none"
+   }, "No results found.")
+ };
+ var default_config_default = defaultTheme;
+@@ -2168,7 +2168,7 @@ import Link7 from "next/link";
+ import cn10 from "classnames";
+ function Breadcrumb({ activePath }) {
+   return /* @__PURE__ */ React27.createElement("div", {
+-    className: "nextra-breadcrumb text-sm font-normal flex mt-2.5 text-gray-500 transition-colors cursor-default overflow-hidden"
++    className: "nextra-breadcrumb text-sm font-normal flex mt-2.5 text-theme-gray-500 transition-colors cursor-default overflow-hidden"
+   }, activePath.map((item, index) => {
+     const isLink = !item.children || item.withIndexPage;
+     const isActive = index === activePath.length - 1;
+@@ -2179,8 +2179,8 @@ function Breadcrumb({ activePath }) {
+       className: "mx-1 select-none"
+     }) : null, /* @__PURE__ */ React27.createElement("div", {
+       key: item.route,
+-      className: cn10("transition-colors hover:text-gray-900 dark:hover:text-gray-200", {
+-        "text-gray-600 dark:text-gray-400 active": isActive,
++      className: cn10("transition-colors hover:text-theme-gray-900 dark:hover:text-theme-gray-200", {
++        "text-theme-gray-600 dark:text-theme-gray-400 active": isActive,
+         "text-ellipsis whitespace-nowrap overflow-hidden min-w-[24px]": !isActive
+       })
+     }, isLink && !isActive ? /* @__PURE__ */ React27.createElement(Link7, {
+@@ -2218,7 +2218,7 @@ var Body = ({
+   return /* @__PURE__ */ React28.createElement(React28.Fragment, null, /* @__PURE__ */ React28.createElement(SkipNavContent, null), themeContext.layout === "full" ? /* @__PURE__ */ React28.createElement("article", {
+     className: "nextra-body full relative justify-center overflow-x-hidden pl-[max(env(safe-area-inset-left),1.5rem)] pr-[max(env(safe-area-inset-right),1.5rem)]"
+   }, /* @__PURE__ */ React28.createElement(MDXTheme, null, children), date && config.gitTimestamp ? /* @__PURE__ */ React28.createElement("div", {
+-    className: "text-xs text-right block text-gray-500 mt-12 mb-8 dark:text-gray-400 pointer-default"
++    className: "text-xs text-right block text-theme-gray-500 mt-12 mb-8 dark:text-theme-gray-400 pointer-default"
+   }, typeof config.gitTimestamp === "string" ? config.gitTimestamp + " " + date.toLocaleDateString(locale, {
+     year: "numeric",
+     month: "long",
+@@ -2235,7 +2235,7 @@ var Body = ({
+   }, /* @__PURE__ */ React28.createElement("main", {
+     className: "max-w-4xl px-6 md:px-8 pt-4 z-10 min-w-0 w-full"
+   }, breadcrumb, /* @__PURE__ */ React28.createElement(MDXTheme, null, children), date && config.gitTimestamp ? /* @__PURE__ */ React28.createElement("div", {
+-    className: "text-xs text-right block text-gray-500 mt-12 mb-8 dark:text-gray-400 pointer-default"
++    className: "text-xs text-right block text-theme-gray-500 mt-12 mb-8 dark:text-theme-gray-400 pointer-default"
+   }, typeof config.gitTimestamp === "string" ? config.gitTimestamp + " " + date.toLocaleDateString(locale, {
+     year: "numeric",
+     month: "long",
