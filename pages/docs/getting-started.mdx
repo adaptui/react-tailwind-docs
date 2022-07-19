@@ -1,7 +1,7 @@
 # Getting Started
 
 AdaptUI uses tailwind to provide better styling at one place, so you'll need to
-setup a tailwind project using thier
+setup a tailwind project using their
 [installation](https://tailwindcss.com/docs/installation) guide.
 
 ## Installation
@@ -10,29 +10,31 @@ You can either install with NPM or Yarn
 
 <Nextra.Tabs items={['NPM', 'Yarn']} defaultIndex={1}>
   <Nextra.Tab>
+
     ```bash
-    npm i @adaptui/react-tailwind
+    npm install @adaptui/react-tailwind
     ```
+
   </Nextra.Tab>
   <Nextra.Tab>
+
     ```bash
     yarn add @adaptui/react-tailwind
-
     ```
 
   </Nextra.Tab>
-
 </Nextra.Tabs>
 
 ## Tailwind setup
 
-After setting up tailwind in your project, import our `preset()` function inside
-your `tailwind.config.js` and use it.
+After setting up tailwind and installing `@adaptui/react-tailwind` , import our
+custom tailwind `preset` inside `tailwind.config.js` and use it.
 
 ```js
 module.exports = {
   presets: [require("@adaptui/react-tailwind/preset")],
   content: [
+    ...,
     // Make sure to add this purge to generate the component's default styling
     "node_modules/@adaptui/react-tailwind/**/*",
   ],
@@ -40,7 +42,8 @@ module.exports = {
 ```
 
 <Nextra.Callout>
-  Checkout our integration [guides for CRA & Next.js](/guides/usage-with-cra)
+  Checkout our integration guides for [CRA](/guides/usage-with-cra) &
+  [Next.js](/guides/usage-with-nextjs)
 </Nextra.Callout>
 
 ## Setting up provider
@@ -51,13 +54,11 @@ components.
 Go to the root of your application and add the below code. Root of your app
 might be `App.js` or `App.tsx` or `index.js`
 
-```js
+```js filename="App.js" /AdaptUIProvider/ {2}
 import * as React from "react";
-// 1. import `AdaptUIProvider` component
 import { AdaptUIProvider } from "@adaptui/react-tailwind";
 
 function App() {
-  // 2. Wrap AdaptUIProvider at the root of your app
   return (
     <AdaptUIProvider>
       <App />
