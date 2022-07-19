@@ -3,25 +3,25 @@
 If you need to customize the default styling for any components, you can do so
 by extending the `DefaultTheme`
 
-Our `RenderlesskitProvider` accepts a `theme` prop which can be used to provide
-a custom theme of your choice.
+Our `AdaptUIProvider` accepts a `theme` prop which can be used to provide a
+custom theme of your choice.
 
 ```jsx
-// Pass the full theme object to `RenderlesskitProvider` from the theme file.
-<RenderlesskitProvider theme={theme}>
+// Pass the full theme object to `AdaptUIProvider` from the theme file.
+<AdaptUIProvider theme={theme}>
   <App />
-</RenderlesskitProvider>
+</AdaptUIProvider>
 ```
 
 ## Extending theme tokens
 
-Our `RenderlesskitProvider` accepts a `extend` prop which can be used to extend
-the theme.
+When using AdaptUI, The theme can be extended even futher with `extend` prop
+which can be added to `AdaptUIProvider`
 
 To extend or override a token in the default theme simply add a new file
-`renderlesskit.config.js` & export a theme object. Use a `extend` key to extend
-a theme token or simply to overwrite a token in the default theme object, create
-a new object of same name.
+`adaptui.config.js` & export a theme object. Use a `extend` key to extend a
+theme token or simply to overwrite a token in the default theme object, create a
+new object of same name.
 
 For example, if you want to add a new `red` variant to the button you can do
 this:
@@ -49,10 +49,10 @@ export default theme;
 ```
 
 ```jsx
-// Pass the new theme to `RenderlesskitProvider` from the config file.
-<RenderlesskitProvider extend={theme}>
+// Pass the new theme to `AdaptUIProvider` from the config file.
+<AdaptUIProvider extend={theme}>
   <App />
-</RenderlesskitProvider>;
+</AdaptUIProvider>;
 
 // Now you can use these colors in your components
 function Usage() {
@@ -62,7 +62,7 @@ function Usage() {
 
 If you are wondering about which keys of theme you can extend you can look at
 the source code for each specific
-[theme file](https://github.com/timelessco/renderlesskit-react-tailwind/tree/main/src/theme/defaultTheme)
+[theme file](https://github.com/adaptui/adaptui-react-tailwind/tree/main/src/theme/defaultTheme)
 
 Or if you have setup typescript you can also get autocompletion of those theme
 keys, checkout [TypeScript Guide](/guides/typescript-guide).
