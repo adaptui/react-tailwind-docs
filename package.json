@@ -69,7 +69,7 @@
     "@adaptui/react-tailwind": "0.1.0-alpha.4",
     "@chakra-ui/hooks": "2.0.4",
     "@reach/skip-nav": "0.17.0",
-    "ariakit": "2.0.0-next.34",
+    "ariakit": "2.0.0-next.35",
     "lodash": "4.17.21",
     "next": "12.2.2",
     "nextra": "2.0.0-alpha.56",

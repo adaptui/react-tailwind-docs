@@ -3540,10 +3540,10 @@ ariakit@2.0.0-next.31:
     "@floating-ui/dom" "0.5.4"
     ariakit-utils "0.17.0-next.22"
 
-ariakit@2.0.0-next.34:
-  version "2.0.0-next.34"
-  resolved "https://registry.yarnpkg.com/ariakit/-/ariakit-2.0.0-next.34.tgz#2e2073abfb9b3ec8c6292d0b438acd7e0ddce0d1"
-  integrity sha512-jZ/S6q+eNGd2561PhYBxqj7j1tzMm2gbA3FAJuvZ24xiKxIj9/n2dszgMnhyFxVnHJQ3oAn1DesHZwkNAAbl+Q==
+ariakit@2.0.0-next.35:
+  version "2.0.0-next.35"
+  resolved "https://registry.yarnpkg.com/ariakit/-/ariakit-2.0.0-next.35.tgz#5fea97d4a260b6c43bc653968d731412c9b74fce"
+  integrity sha512-Ec5LMAp8qUxo5eZvI1zj4nQ3hQiUWr6C38SEJbIF+UMSsKqsi/sGctjvu/kTBDuSOSnO0jVO55T48qyd0WhwZQ==
   dependencies:
     "@floating-ui/dom" "0.5.4"
     ariakit-utils "0.17.0-next.23"
