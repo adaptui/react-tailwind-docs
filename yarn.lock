@@ -2,10 +2,10 @@
 # yarn lockfile v1
 
 
-"@adaptui/react-tailwind@0.1.0-alpha.3":
-  version "0.1.0-alpha.3"
-  resolved "https://registry.yarnpkg.com/@adaptui/react-tailwind/-/react-tailwind-0.1.0-alpha.3.tgz#59cf341ec772b6a5b782a1c7d11e9755d72d0da4"
-  integrity sha512-FftvOoUBcNeRRWNeEoVSgJ1fQKdQO2dSBeyoaU4x60JiQq6qbv++Agb+BbHHYJrlgjHAIr3l1Dc4cFPHvDXpRQ==
+"@adaptui/react-tailwind@0.1.0-alpha.4":
+  version "0.1.0-alpha.4"
+  resolved "https://registry.yarnpkg.com/@adaptui/react-tailwind/-/react-tailwind-0.1.0-alpha.4.tgz#e7fdb9a89896fa4deaf11f4adfc71bee18cf5af7"
+  integrity sha512-7X4GgEoVtll+Vbut6dahFoTZ6J+7XGcctnhgKMo4GMCOl8zhoU9j3HuW47EhvJ4jhjeVP7KcTrfSJ3zZoNHcIw==
   dependencies:
     "@adaptui/react" "^1.0.0-alpha.7"
     "@react-aria/live-announcer" "^3.1.0"
@@ -2029,7 +2029,7 @@
     unist-util-visit "^4.0.0"
     vfile "^5.0.0"
 
-"@mdx-js/react@^2.1.0":
+"@mdx-js/react@^2.1.0", "@mdx-js/react@^2.1.2":
   version "2.1.2"
   resolved "https://registry.yarnpkg.com/@mdx-js/react/-/react-2.1.2.tgz#02972f170cd3ad9113ce448245c5f636bb3e750d"
   integrity sha512-52e3DTJBrjsw3U51ZCdZ3N1IBaqnbzLIngCSXpKtiYiGr7PIqp3/P/+kym0MPTwBL/y9ZBmCieD8FyrXuEDrRw==

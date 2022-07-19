@@ -1,24 +1,25 @@
-import { Button } from "@adaptui/react-tailwind";
 import { useClipboard } from "@chakra-ui/hooks";
 
-import { CopiedIcon, CopyIcon } from "./Icons";
+import { CopyButton } from "./CopyButton";
+import { Tooltip, TooltipProps } from "./Tooltip";
 
-export type ClipboardCopyButtonProps = {
+export type ClipboardCopyButtonProps = TooltipProps & {
   content: string;
 };
 
 export const ClipboardCopyButton: React.FC<ClipboardCopyButtonProps> = ({
   content,
+  ...props
 }) => {
   const { hasCopied, onCopy } = useClipboard(content);
 
   return (
-    <Button
-      size="sm"
-      onClick={onCopy}
-      iconOnly={hasCopied ? <CopiedIcon /> : <CopyIcon />}
+    <Tooltip
+      withArrow
+      placement="left"
+      anchor={<CopyButton hasCopied={hasCopied} onCopy={onCopy} />}
+      content={hasCopied ? "Copied!" : "Copy"}
+      {...props}
     />
   );
 };
-
-export default ClipboardCopyButton;

@@ -1,5 +1,3 @@
-import { Codeblock } from "@/components/index";
-
 # Composition
 
 Each and every atomic components in our library supports
@@ -16,7 +14,17 @@ Let's take the Checkbox component to explain the composition.
 
 ## Basic Usage
 
-<Codeblock live code={`<Checkbox size="md" defaultValue={true} />`} />
+<Codeblock live noInline>
+
+```
+import { Checkbox } from "@adaptui/react-tailwind";
+
+export const App = (props) => {
+  return <Checkbox size="md" defaultValue={true} {...props} />;
+};
+```
+
+</Codeblock>
 
 ## Simple Composition
 
@@ -25,64 +33,82 @@ childrens or as render prop.
 
 ### Without state as childrens
 
-<Codeblock
-  live
-  code={`
-<Checkbox
-  label="Checkbox"
-  description="Fruits in the basket"
->
-  <CheckboxLabel className="rounded border-2 border-blue-500 p-2" />
-  <CheckboxIcon className="bg-red-500" />
-  <CheckboxText className="text-green-500">New Checkbox</CheckboxText>
-  <CheckboxDescription className="text-orange-500">
-    New Description
-  </CheckboxDescription>
-</Checkbox>
-`}
-/>
+<Codeblock live noInline>
+
+```
+import {
+  Checkbox,
+  CheckboxLabel,
+  CheckboxIcon,
+  CheckboxText,
+  CheckboxDescription,
+} from "@adaptui/react-tailwind";
+
+export const App = props => {
+  return (
+    <Checkbox label="Checkbox" description="Fruits in the basket">
+      <CheckboxLabel className="rounded border-2 border-blue-500 p-2" />
+      <CheckboxIcon className="bg-red-500" />
+      <CheckboxText className="text-green-500">New Checkbox</CheckboxText>
+      <CheckboxDescription className="text-orange-500">
+        New Description
+      </CheckboxDescription>
+    </Checkbox>
+  );
+};
+```
+
+</Codeblock>
 
 ### With State as render prop
 
-<Codeblock
-  live
-  code={`
-<Checkbox label="Checkbox" description="Fruits in the basket">
-  {uiProps => {
-    return (
-      <>
-        <CheckboxLabel className="rounded border-2 border-blue-500 p-2" />
-        <CheckboxIcon
-          className={
-            uiProps.isChecked
-              ? "bg-red-500 peer-hover:bg-red-400"
-              : "bg-green-500 peer-hover:bg-green-400"
-          }
-        >
+<Codeblock live noInline>
+
+```
+import {
+  Checkbox,
+  CheckboxLabel,
+  CheckboxIcon,
+  CheckboxText,
+  CheckboxDescription,
+} from "@adaptui/react-tailwind";
+
+export const App = props => {
+  return (
+    <Checkbox label="Checkbox" description="Fruits in the basket">
+      {uiProps => {
+        return (
           <>
-            {uiProps.isUnchecked
-              ? withIconA11y(<EyeClose />, {}, {})
-              : null}
-            {uiProps.isChecked ? withIconA11y(<EyeOpen />, {}, {}) : null}
+            <CheckboxLabel className="rounded border-2 border-blue-500 p-2" />
+            <CheckboxIcon
+              className={
+                uiProps.isChecked
+                  ? "bg-red-500 peer-hover:bg-red-400"
+                  : "bg-green-500 peer-hover:bg-green-400"
+              }
+            >
+              <>
+                {uiProps.isUnchecked
+                  ? withIconA11y(<EyeClose />, {}, {})
+                  : null}
+                {uiProps.isChecked ? withIconA11y(<EyeOpen />, {}, {}) : null}
+              </>
+            </CheckboxIcon>
+            <CheckboxText className="text-green-500">
+              Overidden Label
+            </CheckboxText>
+            <CheckboxDescription className="text-orange-500">
+              Overridden Description
+            </CheckboxDescription>
           </>
-        </CheckboxIcon>
-        <CheckboxText className="text-green-500">
-          Overidden Label
-        </CheckboxText>
-        <CheckboxDescription className="text-orange-500">
-          Overridden Description
-        </CheckboxDescription>
-      </>
-    );
-  }}
-</Checkbox>
-`}
-/>
+        );
+      }}
+    </Checkbox>
+  );
+};
+```
 
-## Advanced Composition
-
-Only compose using the atomic components specific to its complex component
-separately with the help of `useComponentProps` & `useComponentState`.
+</Codeblock>
 
 ## Advanced Composition
 
@@ -94,112 +120,166 @@ separately with the help of `useComponentProps` & `useComponentState`.
 Basic usage that can be used to add additional DOM elements within these atomic
 components but cannot change the state or the libraries behavior.
 
-<Codeblock
-  live
-  noInline
-  code={`
-const Checkbox = React.forwardRef(
-  (props, ref) => {
-    const {
-      labelProps,
-      inputProps,
-      iconProps,
-      textWrapperProps,
-      textProps,
-      descriptionProps,
-      uiProps,
-    } = useCheckboxProps(props);
-    const { label, description, isChecked, isUnchecked } = uiProps;
+<Codeblock live noInline>
 
-    return (
-      <CheckboxLabel className="p-2 border-2 border-blue-500 rounded" {...labelProps}>
-        <CheckboxInput ref={ref} {...inputProps} />
-        <CheckboxIcon
-          className={
-            isChecked
-              ? "bg-red-500 peer-hover:bg-red-400"
-              : "bg-green-500 peer-hover:bg-green-400"
-          }
-           {...iconProps}
-        >
-          <>
-            {isUnchecked ? withIconA11y(<EyeClose />) : null}
-            {isChecked ? withIconA11y(<EyeOpen />) : null}
-          </>
-        </CheckboxIcon>
-        <div>
-          <CheckboxText className="text-green-500" {...textProps}>
-            Label
-          </CheckboxText>
-          <CheckboxDescription className="text-orange-500" {...descriptionProps}>
-            Description
-          </CheckboxDescription>
-        </div>
-      </CheckboxLabel>
-    );
+```
+import {
+  Checkbox,
+  CheckboxLabel,
+  CheckboxIcon,
+  CheckboxText,
+  CheckboxDescription,
+} from "@adaptui/react-tailwind";
 
-}, );
+export const App = props => {
+  const {
+    labelProps,
+    inputProps,
+    iconProps,
+    textWrapperProps,
+    textProps,
+    descriptionProps,
+    uiProps,
+  } = useCheckboxProps(props);
+  const { label, description, isChecked, isUnchecked } = uiProps;
 
-render (<Checkbox />); `} />
+  return (
+    <CheckboxLabel
+      className="rounded border-2 border-blue-500 p-2"
+      {...labelProps}
+    >
+      <CheckboxInput {...inputProps} />
+      <CheckboxIcon
+        className={
+          isChecked
+            ? "bg-red-500 peer-hover:bg-red-400"
+            : "bg-green-500 peer-hover:bg-green-400"
+        }
+        {...iconProps}
+      >
+        <>
+          {isUnchecked ? withIconA11y(<EyeClose />) : null}
+          {isChecked ? withIconA11y(<EyeOpen />) : null}
+        </>
+      </CheckboxIcon>
+      <div>
+        <CheckboxText className="text-green-500" {...textProps}>
+          Label
+        </CheckboxText>
+        <CheckboxDescription className="text-orange-500" {...descriptionProps}>
+          Description
+        </CheckboxDescription>
+      </div>
+    </CheckboxLabel>
+  );
+};
+```
+
+</Codeblock>
 
 ### Using `useComponentState`
 
 Advanced usage that uses the only the Component State to change the behavior of
 the component that is different from library logic.
 
-<Codeblock
-  live
-  noInline
-  code={`
-const Checkbox = () => {
-const state = Ariakit.useCheckboxState({ defaultValue: [] });
+<Codeblock live noInline>
 
-return ( <> <CustomCheckbox inputValue="one" state={state}> Button one 😁
+```
+import {
+  Checkbox,
+  CheckboxLabel,
+  CheckboxIcon,
+  CheckboxText,
+  CheckboxDescription,
+} from "@adaptui/react-tailwind";
+import * as Ariakit from "ariakit";
 
-</CustomCheckbox>
-<CustomCheckbox className="ml-2" inputValue="two" state={state}> Button two 🤓
-</CustomCheckbox>
-<CustomCheckbox className="ml-2" inputValue="three" state={state}> Button three
-👻 </CustomCheckbox> </> ); };
+export const App = props => {
+  const CustomCheckbox = props => {
+    const {
+      state,
+      value,
+      defaultValue,
+      setValue,
+      inputValue,
+      size,
+      icon,
+      label,
+      description,
+      className,
+      style,
+      children,
+      ...restProps
+    } = props;
 
-const CustomCheckbox = props => {
+    const uiState = useCheckboxUIState({
+      state,
+      inputValue,
+      size,
+      icon,
+      label,
+      description,
+    });
 
-const { state, value, defaultValue, setValue, inputValue, size, icon, label,
-description, className, style, children, ...restProps } = props;
+    const uiProps = React.useMemo(
+      () => ({ state, ...uiState }),
+      [state, uiState],
+    );
 
-const uiState = useCheckboxUIState({ state, inputValue, size, icon, label,
-description, });
+    return (
+      <CheckboxLabel
+        {...uiState}
+        className={tcm("rounded border-2 border-blue-500 px-8 py-2", className)}
+      >
+        <CheckboxInput {...uiProps} {...restProps} value={inputValue} />
+        {uiProps.isChecked ? (
+          <CheckboxIcon className="absolute inset-y-0 left-0 flex items-center pl-1.5 text-blue-500">
+            <svg
+              className="h-5 w-5"
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 20 20"
+              fill="currentColor"
+              aria-hidden="true"
+              role="img"
+              focusable={false}
+            >
+              <path
+                fillRule="evenodd"
+                d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                clipRule="evenodd"
+              />
+            </svg>
+          </CheckboxIcon>
+        ) : null}
+        <span className="select-none">{children}</span>
+      </CheckboxLabel>
+    );
+  };
 
-const uiProps = React.useMemo( () => ({ state, ...uiState }), [state, uiState],
-);
+  const state = Ariakit.useCheckboxState({ defaultValue: [] });
 
-return (
+  return (
+    <>
+      <CustomCheckbox className=" text-gray-800" inputValue="one" state={state}>
+        Button one 😁
+      </CustomCheckbox>
+      <CustomCheckbox
+        className="ml-2 text-gray-800"
+        inputValue="two"
+        state={state}
+      >
+        Button two 🤓
+      </CustomCheckbox>
+      <CustomCheckbox
+        className="ml-2 text-gray-800"
+        inputValue="three"
+        state={state}
+      >
+        Button three 👻
+      </CustomCheckbox>
+    </>
+  );
+};
+```
 
-<CheckboxLabel {...uiState} className={tcm("rounded border-2 border-blue-500 px-8 py-2", className)} >
-
-<CheckboxInput {...uiProps} {...restProps} value={inputValue} />
-
-{uiProps.isChecked ? (
-
-<CheckboxIcon className="absolute inset-y-0 left-0 flex items-center pl-1.5 text-blue-500">
-  <svg
-    className="h-5 w-5"
-    xmlns="http://www.w3.org/2000/svg"
-    viewBox="0 0 20 20"
-    fill="currentColor"
-    aria-hidden="true"
-    role="img"
-    focusable={false}
-  >
-    <path
-      fillRule="evenodd"
-      d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
-      clipRule="evenodd"
-    />
-  </svg>
-</CheckboxIcon>
-) : null}
-
-<span className="select-none">{children}</span> </CheckboxLabel> ); };
-
-render (<Checkbox />); `} />
+</Codeblock>

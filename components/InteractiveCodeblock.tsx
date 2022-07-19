@@ -17,7 +17,7 @@ import lightTheme from "prism-react-renderer/themes/vsLight";
 import { setup, tw } from "twind";
 import * as colors from "twind/colors";
 
-import CopyCodeBlockButton from "./Codeblock/CopyCodeButton";
+import { CopyCodeBlockButton } from "./Codeblock/CopyCodeBlockButton";
 
 setup({
   preflight: false, // do not include base style reset (default: use tailwind preflight)

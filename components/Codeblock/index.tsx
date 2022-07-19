@@ -7,18 +7,21 @@ import lightTheme from "prism-react-renderer/themes/vsLight";
 
 import { scope } from "../../utils";
 
-import CopyCodeBlockButton from "./CopyCodeButton";
+import { CopyCodeBlockButton } from "./CopyCodeBlockButton";
+import { transformer } from "./transformer";
 
 export type CodeblockProps = {
   code: string;
   noCopy?: boolean;
   noInline?: boolean;
+  children?: React.ReactNode | any;
 };
 
 export const Codeblock = (props: CodeblockProps) => {
-  const { code, noCopy, noInline, ...rest } = props;
+  const { code, noCopy, noInline, children, ...rest } = props;
+  const _code = children?.props?.children?.props?.children ?? code;
 
-  const [editorCode, setEditorCode] = React.useState(code.trim());
+  const [editorCode, setEditorCode] = React.useState(_code.trim());
   const handleChange = React.useCallback((code: string) => {
     setEditorCode(code.trim());
   }, []);
@@ -35,7 +38,10 @@ export const Codeblock = (props: CodeblockProps) => {
 
   return (
     <AdaptUIProvider>
-      <LiveProvider {...liveProviderProps}>
+      <LiveProvider
+        transformCode={rawCode => transformer(rawCode, noInline)}
+        {...liveProviderProps}
+      >
         <div className="mt-6 rounded-md border border-[#ededed] bg-transparent">
           <LivePreview className="rounded-t-md bg-white-900 p-6" />
           <div className="relative">
@@ -52,4 +58,4 @@ export const Codeblock = (props: CodeblockProps) => {
   );
 };
 
-export default Codeblock;
+export * from "./CopyCodeBlockButton";
