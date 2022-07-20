@@ -53,7 +53,7 @@ sizes are: `sm` `md` `lg` & `xl`.
 
 <Codeblock
   live
-  children={`
+  code={`
 <div className="inline-flex flex-col space-y-2">
   <Slider size="sm" defaultValue={[50]} />
   <Slider size="md" defaultValue={[50]} />
@@ -69,7 +69,7 @@ The knob icon can be customized by passing a custom icon for the SliderThumb.
 
 <Codeblock
   live
-  children={`
+  code={`
 <div className="inline-flex flex-col space-y-2">
   <Slider size="md" defaultValue={[50]} knobIcon={SliderDefaultKnobIcon} />
 </div>
@@ -83,7 +83,7 @@ as well.
 
 <Codeblock
   live
-  children={`
+  code={`
 <div className="inline-flex flex-col space-y-2">
   <Slider size="md" defaultValue={[50]} minValue={20} maxValue={80} />
   <Slider size="md" defaultValue={[50]} minValue={20} maxValue={80} step={10} />
@@ -103,7 +103,7 @@ Single Slider can be converted to a range slider using `range` prop.
 
 <Codeblock
   live
-  children={`
+  code={`
 <div className="inline-flex flex-col space-y-2">
   <Slider size="md" defaultValue={[33, 66]} range />
 </div>

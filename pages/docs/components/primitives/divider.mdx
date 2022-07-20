@@ -21,9 +21,7 @@ import { Divider } from "@renderlesskit/react-tailwind";
 
 ## Usage
 
-<InteractiveCodeblock
-  children={({ spreadProps }) => `<Divider${spreadProps} />`}
-/>
+<InteractiveCodeblock code={({ spreadProps }) => `<Divider${spreadProps} />`} />
 
 ## Divider direction
 
@@ -31,7 +29,7 @@ Divider comes with two directions: `horizontal` and `vertical`.
 
 <Codeblock
   live
-  children={`
+  code={`
 <div className="flex flex-col space-y-2">
   <div className="w-80">
     <Divider orientation="horizontal" />
@@ -49,7 +47,7 @@ Divider can have a label at the center to mark it as a section.
 
 <Codeblock
   live
-  children={`
+  code={`
 <div className="flex flex-col space-y-2">
  <Divider />
  <Divider label={<Button variant="outline">Continue</Button>} />

@@ -38,7 +38,7 @@ sizes are: `sm` `md` `lg` `xl`
 
 <Codeblock
   live
-  children={`
+  code={`
 <div className="space-x-2">
   <Tag size="sm">Small</Tag>
   <Tag size="md">Medium</Tag>
@@ -55,7 +55,7 @@ The available variants are: `solid` `subtle` `outline`
 
 <Codeblock
   live
-  children={`
+  code={`
 <div className="space-x-2">
   <Tag variant="solid">Solid</Tag>
   <Tag variant="subtle">Subtle</Tag>
@@ -78,7 +78,7 @@ directly.
 
 <Codeblock
   live
-  children={`
+  code={`
 <Tag closable>Removable</Tag>
 `}
 />
@@ -90,7 +90,7 @@ append or prepend content in the tag.
 
 <Codeblock
   live
-  children={`
+  code={`
 <div className="space-x-2">
   <Tag prefix={<SlotIcon />}>Search</Tag>
   <Tag closable suffix={<SlotIcon />}>
@@ -100,7 +100,9 @@ append or prepend content in the tag.
 `}
 />
 
-<Nextra.Callout>Suffix will only be rendered if `closable` is set to `true`</Nextra.Callout>
+<Nextra.Callout>
+  Suffix will only be rendered if `closable` is set to `true`
+</Nextra.Callout>
 
 ## API Reference
 

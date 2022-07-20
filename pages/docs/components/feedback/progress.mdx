@@ -46,7 +46,7 @@ sizes are: `sm` `md` `lg` `xl`
 
 <Codeblock
   live
-  children={`
+  code={`
 <div className="flex flex-col space-y-2">
   <Progress size="sm" value={20} />
   <Progress size="md" value={30} />
@@ -60,30 +60,27 @@ sizes are: `sm` `md` `lg` `xl`
 
 Set the `min` and `max` values of the progress bar.
 
-<Codeblock live children={`<Progress min={10} max={40} value={35} />`} />
+<Codeblock live code={`<Progress min={10} max={40} value={35} />`} />
 
 ## Indeterminate progress
 
 By setting the value prop to `null`, progress state becomes indeterminate
 
-<Codeblock live children={`<Progress value={null} />`} />
+<Codeblock live code={`<Progress value={null} />`} />
 
 ## Progress Label
 
 Progress also comes with A11y label that can also be used to describe the
 progress status
 
-<Codeblock live children={`<Progress value={50} label="Loading..."/>`} />
+<Codeblock live code={`<Progress value={50} label="Loading..."/>`} />
 
 ## Progress Hint
 
 Progress comes with A11y hint that can be used with label to indicate the
 progress status.
 
-<Codeblock
-  live
-  children={`<Progress value={50} label="Loading..." hint={50}/>`}
-/>
+<Codeblock live code={`<Progress value={50} label="Loading..." hint={50}/>`} />
 
 ## Customizing Progress
 
@@ -92,7 +89,7 @@ children components (ProgressTrack, ProgressBar) for more control.
 
 <Codeblock
   live
-  children={`
+  code={`
 <Progress value={40}>
   <ProgressTrack className="bg-red-300" />
   <ProgressBar className="bg-red-800" />

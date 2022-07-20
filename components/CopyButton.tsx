@@ -1,20 +1,25 @@
-import { Button } from "@adaptui/react-tailwind";
-import { useClipboard } from "@chakra-ui/hooks";
+import React, { forwardRef } from "react";
+import { Button, ButtonProps } from "@adaptui/react-tailwind";
 
-export type CopyButtonProps = {
-  code: string;
+import { CopiedIcon, CopyIcon } from "./Icons";
+
+export type CopyButtonProps = ButtonProps & {
+  hasCopied: boolean;
+  onCopy: () => void;
 };
 
-export const CopyButton: React.FC<CopyButtonProps> = ({ code }) => {
-  const { hasCopied, onCopy } = useClipboard(code);
+export const CopyButton = forwardRef<HTMLButtonElement, CopyButtonProps>(
+  (props, ref) => {
+    const { onCopy, hasCopied, ...rest } = props;
 
-  return (
-    <span className="absolute right-0 -top-2 -translate-x-2 translate-y-4 transform">
-      <Button size="sm" onClick={onCopy}>
-        {hasCopied ? "Copied!" : "Copy"}
-      </Button>
-    </span>
-  );
-};
-
-export default CopyButton;
+    return (
+      <Button
+        ref={ref}
+        size="sm"
+        onClick={onCopy}
+        iconOnly={hasCopied ? <CopiedIcon /> : <CopyIcon />}
+        {...rest}
+      />
+    );
+  },
+);
