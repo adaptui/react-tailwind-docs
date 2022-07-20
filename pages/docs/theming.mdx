@@ -6,7 +6,7 @@ by extending the `DefaultTheme`
 Our `AdaptUIProvider` accepts a `theme` prop which can be used to provide a
 custom theme of your choice.
 
-```jsx
+```jsx filename="App.js" /theme/2-3
 // Pass the full theme object to `AdaptUIProvider` from the theme file.
 <AdaptUIProvider theme={theme}>
   <App />
@@ -23,30 +23,61 @@ To extend or override a token in the default theme simply add a new file
 theme token or simply to overwrite a token in the default theme object, create a
 new object of same name.
 
-For example, if you want to add a new `red` variant to the button you can do
+For example, if you want to add a new color variant to the button you can do
 this:
 
-```js
+<Nextra.Tabs items={['JS', 'TS']} defaultIndex={1}>
+  <Nextra.Tab>
 
+```js filename="adaptui.config.js"
 export const theme = {
   extend: {
     button: {
-      variant: {
-        default: {
-          tertiary: "bg-purple-600 text-white",
+      themeColor: {
+        base: {
+          tertiary: { default: "bg-purple-600 text-white-900" },
         },
       },
       size: {
-        default: {
-          xxl: "h-14 min-w-14 px-6 rounded-xl text-xl",
+        xxl: {
+          base: "h-14 min-w-14 px-6 rounded-xl text-xl",
+        },
+      },
+    },
+  },
+};
+```
+
+  </Nextra.Tab>
+  <Nextra.Tab>
+
+```tsx filename="adaptui.config.ts"
+import { extendTheme } from "@adaptui/react-tailwind";
+
+export const theme = extendTheme({
+  extend: {
+    button: {
+      themeColor: {
+        base: {
+          tertiary: { default: "bg-purple-600 text-white-900" },
+        },
+      },
+      size: {
+        xxl: {
+          base: "h-14 min-w-14 px-6 rounded-xl text-xl",
         },
       },
     },
   },
 });
-
-export default theme;
 ```
+
+  </Nextra.Tab>
+</Nextra.Tabs>
+
+Now inside your `<AdaptUIProvider>` you can use extend prop to pass the theme.
+If you haven't already set up the provider you can
+[refer this guide](/docs/getting-started#setting-up-provider)
 
 ```jsx
 // Pass the new theme to `AdaptUIProvider` from the config file.
