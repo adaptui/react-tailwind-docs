@@ -1,68 +1,105 @@
-# Customize theme
+# Theming
 
-If you need to customize the default styling for any components, you can do so
-by extending the `DefaultTheme`
+## Extend Theme
 
-Our `RenderlesskitProvider` accepts a `theme` prop which can be used to provide
-a custom theme of your choice.
-
-```jsx
-// Pass the full theme object to `RenderlesskitProvider` from the theme file.
-<RenderlesskitProvider theme={theme}>
-  <App />
-</RenderlesskitProvider>
-```
-
-## Extending theme tokens
-
-Our `RenderlesskitProvider` accepts a `extend` prop which can be used to extend
-the theme.
+Default theme can be extended with `extend` prop which can be added to
+`AdaptUIProvider`.
 
 To extend or override a token in the default theme simply add a new file
-`renderlesskit.config.js` & export a theme object. Use a `extend` key to extend
-a theme token or simply to overwrite a token in the default theme object, create
-a new object of same name.
+`adaptui.config.js` & export a theme object. Use a `extend` key to extend a
+theme token or simply to overwrite a token in the default theme object, create a
+new object of same name like how it is done in
+[Tailwind customization](https://tailwindcss.com/docs/theme#customizing-the-default-theme).
 
-For example, if you want to add a new `red` variant to the button you can do
-this:
+For example, if you want to add a new color variant to the button you can as
+follows:
 
-```js
+<Nextra.Tabs items={['JS', 'TS']} defaultIndex={1}>
+  <Nextra.Tab>
 
+```js filename="adaptui.config.js" /extend/
 export const theme = {
   extend: {
     button: {
-      variant: {
-        default: {
-          tertiary: "bg-purple-600 text-white",
+      themeColor: {
+        base: {
+          tertiary: { default: "bg-purple-600 text-white-900" },
         },
       },
       size: {
-        default: {
-          xxl: "h-14 min-w-14 px-6 rounded-xl text-xl",
+        xxl: {
+          base: "h-14 min-w-14 px-6 rounded-xl text-xl",
+        },
+      },
+    },
+  },
+};
+```
+
+  </Nextra.Tab>
+  <Nextra.Tab>
+
+```tsx filename="adaptui.config.ts" /extend/3 {1,4}
+import { extendTheme } from "@adaptui/react-tailwind";
+
+// You get the typings for the theme object from the default theme file
+export const theme = extendTheme({
+  extend: {
+    button: {
+      themeColor: {
+        base: {
+          tertiary: { default: "bg-purple-600 text-white-900" },
+        },
+      },
+      size: {
+        xxl: {
+          base: "h-14 min-w-14 px-6 rounded-xl text-xl",
         },
       },
     },
   },
 });
-
-export default theme;
 ```
 
-```jsx
-// Pass the new theme to `RenderlesskitProvider` from the config file.
-<RenderlesskitProvider extend={theme}>
+  </Nextra.Tab>
+</Nextra.Tabs>
+
+Now inside your `<AdaptUIProvider>` you can use `extend` prop to pass the
+exported `theme` object. If you haven't already set up the provider you can
+[refer this guide](/docs/getting-started#setting-up-provider).
+
+```jsx filename="app.js" /extend={theme}/
+<AdaptUIProvider extend={theme}>
   <App />
-</RenderlesskitProvider>;
-
-// Now you can use these colors in your components
-function Usage() {
-  return <Button variant="tertiary">Welcome</Button>;
-}
+</AdaptUIProvider>
 ```
 
-If you are wondering about which keys of theme you can extend you can look at
-the source code for each specific
-[theme file](https://github.com/timelessco/renderlesskit-react-tailwind/tree/main/src/theme/defaultTheme)
+```jsx /tertiary/
+// Now you can use these colors in your components
+<Button variant="tertiary">Welcome</Button>
+```
 
-Or if you have setup typescript you can also get autocompletion of those theme
-keys, checkout [TypeScript Guide](/guides/typescript-guide).
+If you are wondering about which keys of the theme you can extend you can look
+at the source code of the
+[default theme file](https://github.com/adaptui/react-tailwind/tree/main/src/theme/defaultTheme).
+
+<Nextra.Callout>
+  Checkout our [typescript guide](/guides/typescript-guide) to get
+  autocompletion of your custom theme keys.
+</Nextra.Callout>
+
+## Custom Theme
+
+If you need to provide the default styling for any components, you can do so by
+creating a
+[theme file](https://github.com/adaptui/react-tailwind/tree/main/src/theme/defaultTheme)
+and exporting it.
+
+Our `AdaptUIProvider` accepts a `theme` prop which can be used to provide a
+custom theme of your choice.
+
+```jsx filename="App.js" /theme/2
+<AdaptUIProvider theme={theme} extend={extendTheme}>
+  <App />
+</AdaptUIProvider>
+```
