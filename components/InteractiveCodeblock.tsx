@@ -106,7 +106,6 @@ export const InteractiveCodeblock = (props: InteractiveCodeblockProps) => {
     booleanProps: finalBooleanProps,
     props: { ...themeStates, ...booleanStates, ...choiceStates },
   }) as string;
-  console.log("%ccode", "color: #cc0088", code);
 
   const { theme, systemTheme } = useTheme();
 
