@@ -1,5 +1,7 @@
 # Theming
 
+## Extend Theme
+
 Default theme can be extended with `extend` prop which can be added to
 `AdaptUIProvider`.
 
@@ -85,3 +87,19 @@ at the source code of the
   Checkout our [typescript guide](/guides/typescript-guide) to get
   autocompletion of your custom theme keys.
 </Nextra.Callout>
+
+## Custom Theme
+
+If you need to provide the default styling for any components, you can do so by
+creating a
+[theme file](https://github.com/adaptui/react-tailwind/tree/main/src/theme/defaultTheme)
+and exporting it.
+
+Our `AdaptUIProvider` accepts a `theme` prop which can be used to provide a
+custom theme of your choice.
+
+```jsx filename="App.js" /theme/2
+<AdaptUIProvider theme={theme} extend={extendTheme}>
+  <App />
+</AdaptUIProvider>
+```
