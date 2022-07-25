@@ -38,7 +38,7 @@ If no children is provided Icon will render a fallback icon.
 import { Icon } from "@adaptui/react-tailwind";
 
 export const App = (props) => {
-  return <Icon />;
+  return <Icon className="text-gray-800" />;
 };
 ```
 
@@ -70,7 +70,7 @@ export const App = props => {
     ),
   });
 
-  return <CheckIcon />;
+  return <CheckIcon className="text-gray-800" />;
 };
 ```
 
@@ -83,7 +83,7 @@ export const App = props => {
 ```
 export const App = props => {
   return (
-    <div className="inline-grid grid-cols-6 place-items-center gap-4 text-5xl">
+    <div className="grid grid-cols-4 sm:grid-cols-8 gap-4 place-items-center text-2xl sm:text-4xl text-black-900">
       <SlotIcon />
       <CaretDownIcon />
       <CaretLeftIcon />

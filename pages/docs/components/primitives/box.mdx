@@ -2,13 +2,12 @@ import {
   ComponentLinks,
   PropsTable,
   InteractiveCodeblock,
-  Codeblock,
 } from "@/components/index";
 
 # Box
 
 Box is the most abstract component on top of which all other AdaptUI components
-are built. It uses reakit's [Role](https://reakit.io/docs/role/) component
+are built. It uses Arikits's [Role](https://reakit.io/docs/role/) component
 internally.
 
 <ComponentLinks github="box" story="primitives-box" />
@@ -27,13 +26,13 @@ import { Box } from "@adaptui/react-tailwind";
 
 ## `As` prop
 
-By using the `as` prop you can control which element should be rendered, if you
-are using typescript Box is fully typesafe too.
+By using the `as` prop, you can control which element should be rendered. If you
+are using typescript, Box is fully typesafe too.
 
-You can either pass string elements or pass ReactNodes to the as prop.
+You can either pass string elements or pass `ReactNode` to the `as` prop.
 
-Follows all the Reakit composition rules
-[Reakit Composition Docs](https://reakit.io/docs/composition/)
+Follows all the Ariakits composition rules
+[Arikits Composition Docs](https://reakit.io/docs/composition/)
 
 <Codeblock live noInline>
 
@@ -105,16 +104,16 @@ import { Box } from "@adaptui/react-tailwind";
 export const App = (props) => {
   return (
     <Box as="dl" className="grid grid-cols-1 gap-5 mt-5 sm:grid-cols-2">
-      <Box className="px-4 py-5 overflow-hidden bg-white rounded-lg shadow sm:p-6">
-        <Box as="dt" className="text-sm font-medium text-gray-500 truncate">
+      <Box className="px-4 py-5 overflow-hidden bg-white rounded-lg shadow-md sm:p-6">
+        <Box as="dt" className="text-sm font-medium text-gray-600 truncate">
           Total Subscribers
         </Box>
         <Box as="dd" className="mt-1 text-3xl font-semibold text-gray-900">
           71,897
         </Box>
       </Box>
-      <Box className="px-4 py-5 overflow-hidden bg-white rounded-lg shadow sm:p-6">
-        <Box as="dt" className="text-sm font-medium text-gray-500 truncate">
+      <Box className="px-4 py-5 overflow-hidden bg-white rounded-lg shadow-md sm:p-6">
+        <Box as="dt" className="text-sm font-medium text-gray-600 truncate">
           Avg. Open Rate
         </Box>
         <Box as="dd" className="mt-1 text-3xl font-semibold text-gray-900">
