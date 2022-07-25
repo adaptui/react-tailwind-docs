@@ -113,7 +113,7 @@
     "postcss": "8.4.14",
     "postinstall-postinstall": "2.1.0",
     "prettier": "2.7.1",
-    "prettier-plugin-tailwindcss": "0.1.12",
+    "prettier-plugin-tailwindcss": "0.1.13",
     "react-icons": "4.4.0",
     "release-it": "15.1.4",
     "sort-package-json": "1.57.0",
