@@ -8,15 +8,15 @@ import {
 # Button
 
 The Button component can be used to trigger various kinds of user events such as
-such as submitting a form, opening a dialog, canceling an action, or performing
-a delete operation.
+submitting a form, opening a dialog, canceling an action, or performing a delete
+operation.
 
 <ComponentLinks github="button" theme="button" story="primitives-button" />
 
 ## Imports
 
 ```jsx
-import { Button } from "@adaptui/react-tailwind";
+import { Button, CloseButton } from "@adaptui/react-tailwind";
 ```
 
 - **Button:** The button which has prefix/suffix icons support, variants & size.
@@ -39,34 +39,48 @@ import { Button } from "@adaptui/react-tailwind";
 Sizes can be set using the `size` prop. The default size is `md`. The available
 sizes are: `sm` `md` `lg` `xl`
 
-<Codeblock
-  live
-  code={`
-<div className="space-x-2">
-  <Button size="sm">Small</Button>
-  <Button size="md">Medium</Button>
-  <Button size="lg">Large</Button>
-  <Button size="xl">Extra Large</Button>
-</div>
-`}
-/>
+<Codeblock live noInline>
+
+```
+import { Button } from "@adaptui/react-tailwind";
+
+export const App = props => {
+  return (
+    <div className="space-x-2">
+      <Button size="sm">Small</Button>
+      <Button size="md">Medium</Button>
+      <Button size="lg">Large</Button>
+      <Button size="xl">Extra Large</Button>
+    </div>
+  );
+};
+```
+
+</Codeblock>
 
 ## Button variants
 
 Variants can be set using the `variant` prop. The default variant is `solid`.
 The available variants are: `solid` `subtle` `outline` `ghost`
 
-<Codeblock
-  live
-  code={`
-<div className="space-x-2">
-  <Button variant="solid">Solid</Button>
-  <Button variant="subtle">Subtle</Button>
-  <Button variant="outline">Outline</Button>
-  <Button variant="ghost">Ghost</Button>
-</div>
-`}
-/>
+<Codeblock live noInline>
+
+```
+import { Button } from "@adaptui/react-tailwind";
+
+export const App = props => {
+  return (
+    <div className="space-x-2">
+      <Button variant="solid">Solid</Button>
+      <Button variant="subtle">Subtle</Button>
+      <Button variant="outline">Outline</Button>
+      <Button variant="ghost">Ghost</Button>
+    </div>
+  );
+};
+```
+
+</Codeblock>
 
 <Nextra.Callout>
   You can add extra variants & sizes via the theme file. Checkout [theming
@@ -78,43 +92,57 @@ The available variants are: `solid` `subtle` `outline` `ghost`
 You can pass `iconOnly`, `prefix` and `suffix` props to append or prepend any
 content inside of button.
 
-<Codeblock
-  live
-  code={`
-<div className="space-x-2">
-  <Button iconOnly={<SlotIcon />} />
-  <Button prefix={<SlotIcon />}>Search</Button>
-  <Button suffix={<SlotIcon />}>Search</Button>
-  <Button prefix={<SlotIcon />} suffix={<SlotIcon />}>
-    Search
-  </Button>
-</div>
-`}
-/>
+<Codeblock live noInline>
+
+```
+import { Button } from "@adaptui/react-tailwind";
+
+export const App = props => {
+  return (
+    <div className="space-x-2">
+      <Button iconOnly={<SlotIcon />} />
+      <Button prefix={<SlotIcon />}>Search</Button>
+      <Button suffix={<SlotIcon />}>Search</Button>
+      <Button prefix={<SlotIcon />} suffix={<SlotIcon />}>
+        Search
+      </Button>
+    </div>
+  );
+};
+```
+
+</Codeblock>
 
 ## Close Button
 
 Component which comes with accessibility to close the dialogs or other actions
 
-<Codeblock
-  live
-  code={`
-<div className="space-y-2">
-  <div className="space-x-2">
-    <CloseButton size="sm" />
-    <CloseButton size="md" />
-    <CloseButton size="lg" />
-    <CloseButton size="xl" />
-  </div>
-  <div className="space-x-2">
-    <CloseButton variant="solid" />
-    <CloseButton variant="subtle" />
-    <CloseButton variant="outline" />
-    <CloseButton variant="ghost" />
-  </div>
-</div>
-`}
-/>
+<Codeblock live noInline>
+
+```
+import { CloseButton } from "@adaptui/react-tailwind";
+
+export const App = props => {
+  return (
+    <div className="space-y-2">
+      <div className="space-x-2">
+        <CloseButton size="sm" />
+        <CloseButton size="md" />
+        <CloseButton size="lg" />
+        <CloseButton size="xl" />
+      </div>
+      <div className="space-x-2">
+        <CloseButton variant="solid" />
+        <CloseButton variant="subtle" />
+        <CloseButton variant="outline" />
+        <CloseButton variant="ghost" />
+      </div>
+    </div>
+  );
+};
+```
+
+</Codeblock>
 
 ## API Reference
 

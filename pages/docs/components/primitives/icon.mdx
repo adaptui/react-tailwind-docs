@@ -32,22 +32,29 @@ import { Icon, createIcon } from "@adaptui/react-tailwind";
 
 If no children is provided Icon will render a fallback icon.
 
-<Codeblock
-  live
-  code={`
-<Icon />
-`}
-/>
+<Codeblock live noInline>
+
+```
+import { Icon } from "@adaptui/react-tailwind";
+
+export const App = (props) => {
+  return <Icon className="text-gray-800" />;
+};
+```
+
+</Codeblock>
 
 ## `createIcon` utility
 
 To create icons more easily we provide a `createIcon` utility which takes few
 props and returns a React component;
 
-<Codeblock
-  live
-  noInline
-  code={`
+<Codeblock live noInline>
+
+```
+import { createIcon } from "@adaptui/react-tailwind";
+
+export const App = props => {
   const CheckIcon = createIcon({
     displayName: "CheckIcon",
     viewBox: "0 0 12 12",
@@ -63,52 +70,60 @@ props and returns a React component;
     ),
   });
 
-render (<CheckIcon />)`} />
+  return <CheckIcon className="text-gray-800" />;
+};
+```
+
+</Codeblock>
 
 ## All icons
 
-<Codeblock
-  live
-  code={`
-<div className="inline-grid grid-cols-6 gap-4 text-3xl place-items-center">
-  <SlotIcon />
-  <CaretDownIcon />
-  <CaretLeftIcon />
-  <CaretRightIcon />
-  <CheckIcon />
-  <CircledCheckIcon />
-  <ClockIcon />
-  <CloseIcon />
-  <DashIcon />
-  <UserIcon />
-  <ActiveStatusIcon />
-  <SleepStatusIcon />
-  <AwayStatusIcon />
-  <TypingSmallStatusIcon className="inline-block w-12" />
-  <TypingLargeStatusIcon className="inline-block w-12" />
-  <ArrowIcon className="inline-block w-12 h-12" />
-  <EqualsIcon />
-  <ErrorIcon />
-  <SelectIcon />
-  <TimelessIcon />
-</div>
-`}
-/>
+<Codeblock live noInline>
+
+```
+export const App = props => {
+  return (
+    <div className="grid grid-cols-4 sm:grid-cols-8 gap-4 place-items-center text-2xl sm:text-4xl text-black-900">
+      <SlotIcon />
+      <CaretDownIcon />
+      <CaretLeftIcon />
+      <CaretRightIcon />
+      <CheckIcon />
+      <CircledCheckIcon />
+      <ClockIcon />
+      <CloseIcon />
+      <DashIcon />
+      <UserIcon />
+      <ActiveStatusIcon />
+      <SleepStatusIcon />
+      <AwayStatusIcon />
+      <TypingSmallStatusIcon className="inline-block w-12" />
+      <TypingLargeStatusIcon className="inline-block w-12" />
+      <EqualsIcon />
+      <ErrorIcon />
+      <SelectIcon />
+      <TimelessIcon />
+    </div>
+  );
+};
+```
+
+</Codeblock>
 
 ## API Reference
 
 ### Icon
 
 <PropsTable
-  data={[
-    {
-      name: "as",
-      default: "svg",
-      typeSimple: "string | React.ElementType",
-      type: "type As<Props = any> = React.ElementType<Props>",
-      description:
-        "Polymorphic as prop, change the component to a different HTML tag or custom component.",
-    },
+data={[
+  {
+    name: "as",
+    default: "svg",
+    typeSimple: "string | React.ElementType",
+    type: "type As<Props = any> = React.ElementType<Props>",
+    description:
+      "Polymorphic as prop, change the component to a different HTML tag or custom component.",
+  },
 
 ]} />
 
