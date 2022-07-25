@@ -65,13 +65,13 @@
     ]
   },
   "dependencies": {
-    "@adaptui/react": "1.0.0-alpha.7",
+    "@adaptui/react": "1.0.0-alpha.9",
     "@adaptui/react-tailwind": "0.1.0-alpha.4",
     "@chakra-ui/hooks": "2.0.4",
     "@reach/skip-nav": "0.17.0",
-    "ariakit": "2.0.0-next.35",
+    "ariakit": "2.0.0-next.36",
     "lodash": "4.17.21",
-    "next": "12.2.2",
+    "next": "12.2.3",
     "nextra": "2.0.0-alpha.56",
     "nextra-theme-docs": "2.0.0-alpha.59",
     "react": "17.0.2",
