@@ -2,13 +2,14 @@ import {
   ComponentLinks,
   InteractiveCodeblock,
   PropsTable,
-  Codeblock,
 } from "@/components/index";
 
 # Meter
 
 Meter is used to display finite value that are within a known range eg., CPU
-usage.
+usage. It uses AdaptUI Core's
+[Meter](https://github.com/adaptui/react/blob/main/docs/meter.md) component
+internally.
 
 <ComponentLinks github="meter" theme="meter" story="feedback-meter" />
 
@@ -21,8 +22,6 @@ import {
   MeterBarWrapper,
   MeterHint,
   MeterLabel,
-  useMeterProps,
-  useMeterState,
   MeterTrack,
   MeterWrapper,
 } from "@adaptui/react-tailwind";
