@@ -25,7 +25,7 @@ import {
   useCheckboxGroupState,
   CheckboxGroupWrapper,
   CheckboxShowMore,
-} from "@renderlesskit/react-tailwind";
+} from "@adaptui/react-tailwind";
 ```
 
 <Nextra.Callout>
@@ -52,10 +52,14 @@ import {
 Sizes can be set using the `size` prop. The default size is `md`. The available
 sizes are: `sm` `md` `lg`
 
-<Codeblock
-  live
-  noInline
-  code={`
+<Codeblock live noInline>
+
+```
+import { CheckboxGroup, Checkbox } from "@adaptui/react-tailwind";
+
+export const App = props => {
+  return (
+
 const CheckboxGroupBasic = props => {
   return (
     <CheckboxGroup aria-label="fruits" {...props}>
@@ -76,7 +80,11 @@ const CheckboxGroupStack = props => { return (
 </div>
 ); };
 
+
 render (<CheckboxGroupStack/>); `} />
+```
+
+</Codeblock>
 
 ## CheckboxGroup Stack
 
@@ -156,3 +164,7 @@ render (<CheckboxGroupStack/>); `} />
     },
 
 ]} />
+
+```
+
+```

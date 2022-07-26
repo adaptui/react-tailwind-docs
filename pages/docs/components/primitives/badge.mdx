@@ -15,7 +15,7 @@ also be used to display a status
 ## Imports
 
 ```js
-import { Badge } from "@renderlesskit/react-tailwind";
+import { Badge } from "@adaptui/react-tailwind";
 ```
 
 ## Usage
@@ -23,9 +23,9 @@ import { Badge } from "@renderlesskit/react-tailwind";
 <InteractiveCodeblock
   children={({ spreadProps }) => `<Badge${spreadProps}>Click me</Badge>`}
   themeProps={{
-    size: "badge.size.common",
-    variant: "badge.variant",
-    themeColor: "badge.variant.solid",
+    size: "badge.size",
+    variant: "badge.themeColor.base",
+    themeColor: "badge.themeColor",
   }}
 />
 
@@ -34,100 +34,121 @@ import { Badge } from "@renderlesskit/react-tailwind";
 Variants can be set using the `variant` prop. The default variant is `solid`.
 The available variants are: `solid` `subtle` `outline`
 
-<Codeblock
-  live
-  code={`
-<div className="space-x-2">
-  <Badge variant="solid">Solid</Badge>
-  <Badge variant="subtle">Subtle</Badge>
-  <Badge variant="outline">Outline</Badge>
-</div>
-`}
-/>
+<Codeblock live noInline>
+
+```
+import { Badge } from "@adaptui/react-tailwind";
+
+export const App = props => {
+  return (
+    <div className="space-x-2">
+      <Badge variant="solid">Solid</Badge>
+      <Badge variant="subtle">Subtle</Badge>
+      <Badge variant="outline">Outline</Badge>
+    </div>
+  );
+};
+```
+
+</Codeblock>
 
 ## Badge Sizes
 
 Sizes can be set using the `size` prop. The default size is `md`. The available
 sizes are: `sm` `md` `lg`
 
-<Codeblock
-  live
-  code={`
-<div className="space-x-2">
-  <Badge size="sm">Small</Badge>
-  <Badge size="md">Medium</Badge>
-  <Badge size="lg">Large</Badge>
-</div>
-`}
-/>
+<Codeblock live noInline>
+
+```
+import { Badge } from "@adaptui/react-tailwind";
+
+export const App = props => {
+  return (
+    <div className="space-x-2">
+      <Badge size="sm">Small</Badge>
+      <Badge size="md">Medium</Badge>
+      <Badge size="lg">Large</Badge>
+    </div>
+  );
+};
+```
+
+</Codeblock>
 
 ## Badge Themes
 
 Theme can be set using the `theme` prop. The default theme is `default`. The
 available themes are: `default` `primary` `secondary` `success` `danger`
 
-<Codeblock
-  live
-  code={`
-<div className="flex flex-col space-y-1">
-  <div className="space-x-2">
-    <Badge size="md" variant="solid" themeColor="default">
-      Beta
-    </Badge>
-    <Badge size="md" variant="subtle" themeColor="default">
-      Beta
-    </Badge>
-    <Badge size="md" variant="outline" themeColor="default">
-      Beta
-    </Badge>
-  </div>
-  <div className="space-x-2">
-    <Badge size="md" variant="solid" themeColor="primary">
-      Beta
-    </Badge>
-    <Badge size="md" variant="subtle" themeColor="primary">
-      Beta
-    </Badge>
-    <Badge size="md" variant="outline" themeColor="primary">
-      Beta
-    </Badge>
-  </div>
-  <div className="space-x-2">
-    <Badge size="md" variant="solid" themeColor="secondary">
-      Beta
-    </Badge>
-    <Badge size="md" variant="subtle" themeColor="secondary">
-      Beta
-    </Badge>
-    <Badge size="md" variant="outline" themeColor="secondary">
-      Beta
-    </Badge>
-  </div>
-  <div className="space-x-2">
-    <Badge size="md" variant="solid" themeColor="success">
-      Beta
-    </Badge>
-    <Badge size="md" variant="subtle" themeColor="success">
-      Beta
-    </Badge>
-    <Badge size="md" variant="outline" themeColor="success">
-      Beta
-    </Badge>
-  </div>
-  <div className="space-x-2">
-    <Badge size="md" variant="solid" themeColor="danger">
-      Beta
-    </Badge>
-    <Badge size="md" variant="subtle" themeColor="danger">
-      Beta
-    </Badge>
-    <Badge size="md" variant="outline" themeColor="danger">
-      Beta
-    </Badge>
-  </div>
-</div>
-`}
-/>
+<Codeblock live noInline>
+
+```
+import { Badge } from "@adaptui/react-tailwind";
+
+export const App = props => {
+  return (
+    <div className="flex flex-col space-y-1">
+      <div className="space-x-2">
+        <Badge size="md" variant="solid" themeColor="default">
+          Beta
+        </Badge>
+        <Badge size="md" variant="subtle" themeColor="default">
+          Beta
+        </Badge>
+        <Badge size="md" variant="outline" themeColor="default">
+          Beta
+        </Badge>
+      </div>
+      <div className="space-x-2">
+        <Badge size="md" variant="solid" themeColor="primary">
+          Beta
+        </Badge>
+        <Badge size="md" variant="subtle" themeColor="primary">
+          Beta
+        </Badge>
+        <Badge size="md" variant="outline" themeColor="primary">
+          Beta
+        </Badge>
+      </div>
+      <div className="space-x-2">
+        <Badge size="md" variant="solid" themeColor="secondary">
+          Beta
+        </Badge>
+        <Badge size="md" variant="subtle" themeColor="secondary">
+          Beta
+        </Badge>
+        <Badge size="md" variant="outline" themeColor="secondary">
+          Beta
+        </Badge>
+      </div>
+      <div className="space-x-2">
+        <Badge size="md" variant="solid" themeColor="success">
+          Beta
+        </Badge>
+        <Badge size="md" variant="subtle" themeColor="success">
+          Beta
+        </Badge>
+        <Badge size="md" variant="outline" themeColor="success">
+          Beta
+        </Badge>
+      </div>
+      <div className="space-x-2">
+        <Badge size="md" variant="solid" themeColor="danger">
+          Beta
+        </Badge>
+        <Badge size="md" variant="subtle" themeColor="danger">
+          Beta
+        </Badge>
+        <Badge size="md" variant="outline" themeColor="danger">
+          Beta
+        </Badge>
+      </div>
+    </div>
+  );
+};
+```
+
+</Codeblock>
 
 <Nextra.Callout>
   You can add extra variants, themeColor & sizes via the theme file. Checkout
@@ -138,14 +159,21 @@ available themes are: `default` `primary` `secondary` `success` `danger`
 
 You can pass prefix props to the badge to prepend any content inside of badge.
 
-<Codeblock
-  live
-  code={`
-<div className="space-x-2">
-  <Badge prefix={<SlotIcon />}>Search</Badge>
-</div>
-`}
-/>
+<Codeblock live noInline>
+
+```
+import { Badge } from "@adaptui/react-tailwind";
+
+export const App = props => {
+  return (
+    <div className="space-x-2">
+      <Badge prefix={<SlotIcon />}>Search</Badge>
+    </div>
+  );
+};
+```
+
+</Codeblock>
 
 ## API Reference
 
