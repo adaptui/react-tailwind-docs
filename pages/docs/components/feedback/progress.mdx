@@ -8,7 +8,9 @@ import {
 # Progress
 
 Progress is used to display the progress status for a task that takes a long
-time or consists of several steps.
+time or consists of several steps. It uses AdaptUI Core's
+[Progress](https://github.com/adaptui/react/blob/main/docs/progress.md)
+component internally.
 
 <ComponentLinks github="progress" theme="progress" story="feedback-progress" />
 
@@ -20,11 +22,9 @@ import {
   ProgressBar,
   ProgressHint,
   ProgressLabel,
-  useProgressProps,
-  useProgressState,
   ProgressTrack,
   ProgressWrapper,
-} from "@renderlesskit/react-tailwind";
+} from "@adaptui/react-tailwind";
 ```
 
 <Nextra.Callout>
@@ -36,7 +36,7 @@ import {
 
 <InteractiveCodeblock
   children={({ spreadProps }) => `<Progress value={40} ${spreadProps} />`}
-  themeProps={{ size: "progress.track.size" }}
+  themeProps={{ size: "progress.size" }}
 />
 
 ## Progress sizes
@@ -44,64 +44,118 @@ import {
 Sizes can be set using the `size` prop. The default size is `md`. The available
 sizes are: `sm` `md` `lg` `xl`
 
-<Codeblock
-  live
-  code={`
-<div className="flex flex-col space-y-2">
-  <Progress size="sm" value={20} />
-  <Progress size="md" value={30} />
-  <Progress size="lg" value={40} />
-  <Progress size="xl" value={50} />
-</div>
-`}
-/>
+<Codeblock live noInline>
+
+```
+import { Progress } from "@adaptui/react-tailwind";
+
+export const App = props => {
+  return (
+    <div className="flex flex-col space-y-2">
+      <Progress size="sm" value={20} />
+      <Progress size="md" value={30} />
+      <Progress size="lg" value={40} />
+      <Progress size="xl" value={50} />
+    </div>
+  );
+};
+```
+
+</Codeblock>
 
 ## Min max values
 
 Set the `min` and `max` values of the progress bar.
 
-<Codeblock live code={`<Progress min={10} max={40} value={35} />`} />
+<Codeblock live noInline>
+
+```
+import { Progress } from "@adaptui/react-tailwind";
+
+export const App = props => {
+  return <Progress min={10} max={40} value={35} />;
+};
+```
+
+</Codeblock>
 
 ## Indeterminate progress
 
 By setting the value prop to `null`, progress state becomes indeterminate
 
-<Codeblock live code={`<Progress value={null} />`} />
+<Codeblock live noInline>
+
+```
+import { Progress } from "@adaptui/react-tailwind";
+
+export const App = props => {
+  return <Progress value={null} />;
+};
+```
+
+</Codeblock>
 
 ## Progress Label
 
 Progress also comes with A11y label that can also be used to describe the
 progress status
 
-<Codeblock live code={`<Progress value={50} label="Loading..."/>`} />
+<Codeblock live noInline>
+
+```
+import { Progress } from "@adaptui/react-tailwind";
+
+export const App = props => {
+  return <Progress value={50} label="Loading..." />;
+};
+```
+
+</Codeblock>
 
 ## Progress Hint
 
 Progress comes with A11y hint that can be used with label to indicate the
 progress status.
 
-<Codeblock live code={`<Progress value={50} label="Loading..." hint={50}/>`} />
+<Codeblock live noInline>
+
+```
+import { Progress } from "@adaptui/react-tailwind";
+
+export const App = props => {
+  return <Progress value={50} label="Loading..." hint={50} />;
+};
+```
+
+</Codeblock>
 
 ## Customizing Progress
 
 To customize the appearance of the Progress component we can simply pass down
 children components (ProgressTrack, ProgressBar) for more control.
 
-<Codeblock
-  live
-  code={`
-<Progress value={40}>
-  <ProgressTrack className="bg-red-300" />
-  <ProgressBar className="bg-red-800" />
-</Progress>
-`}
-/>
+<Codeblock live noInline>
+
+```
+import { Progress } from "@adaptui/react-tailwind";
+
+export const App = props => {
+  return (
+    <Progress value={40}>
+      <ProgressTrack className="bg-red-300" />
+      <ProgressBar className="bg-red-800" />
+    </Progress>
+  );
+};
+```
+
+</Codeblock>
 
 ## API Reference
 
 <PropsTable
   data={[
-    { name: "size", themeKey: "progress.track.size", default: "md" },
+    { name: "size", themeKey: "progress.size", default: "md" },
     {
       name: "hint",
       type: "React.ReactNode",

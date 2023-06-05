@@ -1,4 +1,4 @@
-# Setting up CRA with Renderlesskit
+# Setting up CRA with AdaptUI
 
 First let's create a new CRA project.
 
@@ -8,8 +8,8 @@ npx create-react-app my-website
 
 ## Setup TailwindCSS
 
-To get started with renderlesskit first step is to setup Tailwind CSS in your
-CRA project. Refer to tailwind documentation for
+To get started with AdaptUI first step is to setup Tailwind CSS in your CRA
+project. Refer to tailwind documentation for
 [Setting up Tailwind CSS in a Create React App project](https://tailwindcss.com/docs/guides/create-react-app)
 
 After setting up tailwind in your project, all you need to do inside your
@@ -17,23 +17,23 @@ After setting up tailwind in your project, all you need to do inside your
 
 ```js
 module.exports = preset({
-  presets: [require("@renderlesskit/react-tailwind/preset")],
+  presets: [require("@adaptui/react-tailwind/preset")],
   purge: [
     // Make sure to add this purge to generate the component's default styling
-    "node_modules/@renderlesskit/react-tailwind/**/*",
+    "node_modules/@adaptui/react-tailwind/**/*",
   ],
 });
 ```
 
 <Nextra.Callout>
-  `presets` merges your taiwind config with renderlesskit's internal tailwind
-  configs and enables certain plugins
+  `presets` merges your taiwind config with AdaptUI's internal tailwind configs
+  and enables certain plugins
 </Nextra.Callout>
 
-## Renderlesskit Setup
+## AdaptUI Setup
 
 After following all the steps and correctly setting up tailwind, now let's add
-the `RenderlesskitProvider`
+the `AdaptUIProvider`
 
 Follow [Setting Up Provider](/docs/getting-started#setting-up-provider) to setup
 the provider for your app.

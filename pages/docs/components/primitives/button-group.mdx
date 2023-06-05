@@ -19,7 +19,7 @@ type to perform the a set of actions.
 ## Imports
 
 ```jsx
-import { ButtonGroup } from "@renderlesskit/react-tailwind";
+import { ButtonGroup } from "@adaptui/react-tailwind";
 ```
 
 ## Usage
@@ -35,20 +35,24 @@ import { ButtonGroup } from "@renderlesskit/react-tailwind";
   <Button>Close</Button>
 </ButtonGroup>
     `}
-  booleanProps={["collapsed"]}
-  themeProps={{ size: "button.size.common", variant: "button.variant.common" }}
+  themeProps={{
+    size: "button.size",
+    variant: "button.themeColor.base",
+    themeColor: "button.themeColor",
+  }}
 />
 
 ## ButtonGroup Styles
 
-Buttons can be grouped together using `collapsed` prop.
+Buttons can be grouped together using `type` prop.
 
-<Codeblock
-  live
-  noInline
-  code={`
-const ButtonGroupBasic = props => {
-  return (
+<Codeblock live noInline>
+
+```
+import { Button, ButtonGroup } from "@adaptui/react-tailwind";
+
+export const App = props => {
+  const ButtonGroupBasic = (props) => (
     <ButtonGroup {...props}>
       <Button>Undo</Button>
       <Button>Redo</Button>
@@ -58,79 +62,91 @@ const ButtonGroupBasic = props => {
       <Button>Close</Button>
     </ButtonGroup>
   );
+
+  return (
+    <div className="flex flex-col space-y-2">
+      <ButtonGroupBasic size="md" type="group" />
+      <ButtonGroupBasic size="md" />
+    </div>
+  );
 };
+```
 
-render(
-
-<div className="flex flex-col space-y-2">
-  <ButtonGroupBasic size="md" collapsed={true} />
-  <ButtonGroupBasic size="md" />
-</div>
-) `} />
+</Codeblock>
 
 ## ButtonGroup sizes
 
 Sizes can be set using the `size` prop. The default size is `md`. The available
 sizes are: `sm` `md` `lg` `xl`
 
-<Codeblock
-  live
-  noInline
-  code={`
-const ButtonGroupBasic = props => {
+<Codeblock live noInline>
+
+```
+import { Button, ButtonGroup } from "@adaptui/react-tailwind";
+
+export const App = props => {
+  const ButtonGroupBasic = props => {
+    return (
+      <ButtonGroup {...props}>
+        <Button>Undo</Button>
+        <Button>Redo</Button>
+        <Button>Copy</Button>
+        <Button>Paste</Button>
+        <Button>Delete</Button>
+        <Button>Close</Button>
+      </ButtonGroup>
+    );
+  };
+
   return (
-    <ButtonGroup {...props}>
-      <Button>Undo</Button>
-      <Button>Redo</Button>
-      <Button>Copy</Button>
-      <Button>Paste</Button>
-      <Button>Delete</Button>
-      <Button>Close</Button>
-    </ButtonGroup>
+    <div className="flex flex-col space-y-2">
+      <ButtonGroupBasic size="sm" />
+      <ButtonGroupBasic size="md" />
+      <ButtonGroupBasic size="lg" />
+      <ButtonGroupBasic size="xl" />
+    </div>
   );
 };
+```
 
-render(
-
-<div className="flex flex-col space-y-2">
-  <ButtonGroupBasic size="sm" />
-  <ButtonGroupBasic size="md" />
-  <ButtonGroupBasic size="lg" />
-  <ButtonGroupBasic size="xl" />
-</div>
-) `} />
+</Codeblock>
 
 ## ButtonGroup variants
 
 Variants can be set using the `variant` prop. The default variant is `solid`.
 The available variants are: `solid` `subtle` `outline` `ghost`
 
-<Codeblock
-  live
-  noInline
-  code={`
-const ButtonGroupBasic = props => {
+<Codeblock live noInline>
+
+```
+import { Button, ButtonGroup } from "@adaptui/react-tailwind";
+
+export const App = props => {
+  const ButtonGroupBasic = props => {
+    return (
+      <ButtonGroup {...props}>
+        <Button>Undo</Button>
+        <Button>Redo</Button>
+        <Button>Copy</Button>
+        <Button>Paste</Button>
+        <Button>Delete</Button>
+        <Button>Close</Button>
+      </ButtonGroup>
+    );
+  };
+
   return (
-    <ButtonGroup {...props}>
-      <Button>Undo</Button>
-      <Button>Redo</Button>
-      <Button>Copy</Button>
-      <Button>Paste</Button>
-      <Button>Delete</Button>
-      <Button>Close</Button>
-    </ButtonGroup>
+    <div className="flex flex-col space-y-2">
+      <ButtonGroupBasic size="md" variant="solid" collapsed={true} />
+      <ButtonGroupBasic size="md" variant="subtle" collapsed={true} />
+      <ButtonGroupBasic size="md" variant="outline" collapsed={true} />
+      <ButtonGroupBasic size="md" variant="ghost" collapsed={true} />
+    </div>
   );
 };
+```
 
-render(
-
-<div className="flex flex-col space-y-2">
-  <ButtonGroupBasic size="md" variant="solid" collapsed={true} />
-  <ButtonGroupBasic size="md" variant="subtle" collapsed={true} />
-  <ButtonGroupBasic size="md" variant="outline" collapsed={true} />
-  <ButtonGroupBasic size="md" variant="ghost" collapsed={true} />
-</div>
-) `} />
+</Codeblock>
 
 <Nextra.Callout>
   You can add extra variants & sizes via the theme file. Checkout [theming
@@ -142,21 +158,21 @@ render(
 <PropsTable
   data={[
     {
-      name: "collapsed",
-      default: "false",
-      type: "boolean",
+      name: "type",
+      default: "collapsed",
+      type: "collapsed | group",
       description: "Whether the button borders are collapsed or not.",
     },
     {
       name: "size",
       default: "md",
-      themeKey: "button.size.common",
+      themeKey: "button.size",
       description: "Size of the button",
     },
     {
       name: "variant",
       default: "solid",
-      themeKey: "button.variant.common",
+      themeKey: "button.themeColor.base",
       description: "Variant of the button",
     },
   ]}

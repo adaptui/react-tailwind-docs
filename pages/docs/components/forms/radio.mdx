@@ -2,12 +2,11 @@ import {
   ComponentLinks,
   InteractiveCodeblock,
   PropsTable,
-  Codeblock,
 } from "@/components/index";
 
 # Radio
 
-Radio composes [reakit's radio](https://reakit.io/docs/radio/) component. A
+Radio composes Ariakit's [radio](https://reakit.io/docs/radio/) component. A
 Single Radio doesn't make sense without `RadioGroup`.
 
 <ComponentLinks github="radio" theme="radio" story="forms-radio" />
@@ -21,10 +20,9 @@ import {
   RadioIcon,
   RadioInput,
   RadioLabel,
-  useRadioProps,
-  useRadioState,
   RadioText,
-} from "@renderlesskit/react-tailwind";
+  RadioTextWrapper,
+} from "@adaptui/react-tailwind";
 ```
 
 <Nextra.Callout>
@@ -39,7 +37,7 @@ import {
     `<Radio value="apple" label="Apple" ${spreadProps} />`
   }
   booleanProps={["disabled"]}
-  themeProps={{ size: "radio.icon.size" }}
+  themeProps={{ size: "radio.size" }}
 />
 
 ## Radio sizes
@@ -47,61 +45,98 @@ import {
 Sizes can be set using the `size` prop. The default size is `md`. The available
 sizes are: `sm` `md` `lg`
 
-<Codeblock
-  live
-  code={`
-<div className="inline-flex flex-col space-y-2">
-  <Radio value="apple" label="Apple" size="sm" />
-  <Radio value="apple" label="Apple" size="md" />
-  <Radio value="apple" label="Apple"size="lg" />
-</div>
-`}
-/>
+<Codeblock live noInline>
+
+```
+import { Radio } from "@adaptui/react-tailwind";
+
+export const App = props => {
+  return (
+    <div className="inline-flex flex-col space-y-2">
+      <Radio value="apple" label="Apple" size="sm" />
+      <Radio value="apple" label="Apple" size="md" />
+      <Radio value="apple" label="Apple" size="lg" />
+    </div>
+  );
+};
+```
+
+</Codeblock>
 
 ## Radio UI states
 
 Radio can be controlled using `state` prop.
 
-<Codeblock
-  live
-  code={`
-<div className="inline-flex flex-col space-y-2">
-  <Radio size="md" value="apple" label="Apple" />
-  <Radio size="md" value="apple" label="Apple" state="apple" />
-</div>
-`}
-/>
+<Codeblock live noInline>
+
+```
+import { Radio } from "@adaptui/react-tailwind";
+
+export const App = props => {
+  return (
+    <div className="inline-flex flex-col space-y-2">
+      <Radio size="md" value="apple" label="Apple" />
+      <Radio size="md" value="apple" label="Apple" disabled="true" />
+    </div>
+  );
+};
+```
+
+</Codeblock>
 
 ## Radio Disabled states
 
-<Codeblock
-  live
-  code={`
-<div className="inline-flex flex-col space-y-2">
-  <Radio size="md" value="apple" label="Apple" disabled />
-  <Radio size="md" value="apple" label="Apple" state="apple" disabled />
-</div>
-`}
-/>
+<Codeblock live noInline>
+
+```
+import { Radio } from "@adaptui/react-tailwind";
+
+export const App = props => {
+  return (
+    <div className="inline-flex flex-col space-y-2">
+      <Radio size="md" value="apple" label="Apple" disabled />
+      <Radio size="md" value="apple" label="Apple" state="apple" disabled />
+    </div>
+  );
+};
+```
+
+</Codeblock>
 
 ## Radio Label & Description
 
-<Codeblock
-  live
-  code={`
-<div className="inline-flex flex-col space-y-2 w-72">
-  <Radio size="md" value="apple" label="Apple" />
-  <Radio size="md" value="apple" label="Used when the Radio is selected and will use its value for the form submission." />
-  <Radio size="md" value="apple" label="Apple" description="Used when the Radio is selected and will use its value for the form submission." />
-</div>
-`}
-/>
+<Codeblock live noInline>
+
+```
+import { Radio } from "@adaptui/react-tailwind";
+
+export const App = props => {
+  return (
+    <div className="inline-flex w-72 flex-col space-y-2">
+      <Radio size="md" value="apple" label="Apple" />
+      <Radio
+        size="md"
+        value="apple"
+        label="Used when the Radio is selected and will use its value for the form submission."
+      />
+      <Radio
+        size="md"
+        value="apple"
+        label="Apple"
+        description="Used when the Radio is selected and will use its value for the form submission."
+      />
+    </div>
+  );
+};
+```
+
+</Codeblock>
 
 ## API Reference
 
 <PropsTable
   data={[
-    { name: "size", themeKey: "radio.icon.size", default: "md" },
+    { name: "size", themeKey: "radio.size", default: "md" },
     {
       name: "disabled",
       type: "boolean",

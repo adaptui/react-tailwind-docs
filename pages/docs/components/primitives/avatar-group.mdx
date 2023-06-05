@@ -7,7 +7,8 @@ import {
 
 # AvatarGroup
 
-AvatarGroup is a component that displays a group of avatars.
+AvatarGroup is a component that displays a group of avatars. It uses AdaptUI's
+[Avatar](/docs/components/primitives/avatar) component internally.
 
 <ComponentLinks
   github="avatar-group"
@@ -48,74 +49,109 @@ import { Avatar, AvatarGroup } from "@adaptui/react-tailwind";
 Sizes can be set using the `size` prop. The default size is `"xl"`. The
 available sizes are: `xs` `sm` `md` `lg` `xl` `2xl` `3xl`
 
-<Codeblock
-  live
-  noInline
-  code={`
-const AvatarGroupBasic = props => {
-  return (
-    <AvatarGroup {...props}>
-      <Avatar name="Leanne Graham" src="https://i.pravatar.cc/300?img=1" />
-      <Avatar name="Ervin Howell" src="https://i.pravatar.cc/300?img=11" />
-      <Avatar name="Clementine Bauch" src="https://i.pravatar.cc/300?img=21" />
-      <Avatar name="Patricia Lebsack" src="https://i.pravatar.cc/300?img=31" />
-      <Avatar name="Chelsey Dietrich" src="https://i.pravatar.cc/300?img=41" />
-      <Avatar name="Dennis Schulist" src="https://i.pravatar.cc/300?img=51" />
-    </AvatarGroup>
-  );
+<Codeblock live noInline>
+
+```
+import { Avatar, AvatarGroup } from "@adaptui/react-tailwind";
+
+export const App = props => {
+  const AvatarGroupStack = props => {
+    const AvatarGroupBasic = props => {
+      return (
+        <AvatarGroup {...props}>
+          <Avatar name="Leanne Graham" src="https://i.pravatar.cc/300?img=1" />
+          <Avatar name="Ervin Howell" src="https://i.pravatar.cc/300?img=11" />
+          <Avatar
+            name="Clementine Bauch"
+            src="https://i.pravatar.cc/300?img=21"
+          />
+          <Avatar
+            name="Patricia Lebsack"
+            src="https://i.pravatar.cc/300?img=31"
+          />
+          <Avatar
+            name="Chelsey Dietrich"
+            src="https://i.pravatar.cc/300?img=41"
+          />
+          <Avatar
+            name="Dennis Schulist"
+            src="https://i.pravatar.cc/300?img=51"
+          />
+        </AvatarGroup>
+      );
+    };
+
+    return (
+      <Ariakit.Group
+        aria-label="group of avatar groups"
+        className="flex flex-col space-y-2"
+      >
+        <AvatarGroupBasic size="xs" {...props} />
+        <AvatarGroupBasic size="sm" {...props} />
+        <AvatarGroupBasic size="md" {...props} />
+        <AvatarGroupBasic size="lg" {...props} />
+        <AvatarGroupBasic size="xl" {...props} />
+        <AvatarGroupBasic size="2xl" {...props} />
+        <AvatarGroupBasic size="3xl" {...props} />
+      </Ariakit.Group>
+    );
+  };
+
+  return <AvatarGroupStack />;
 };
+```
 
-const AvatarGroupStack = props => { return (
-
-<Ariakit.Group
-  aria-label="group of avatar groups"
-  className="flex flex-col space-y-2"
->
-  <AvatarGroupBasic size="xs" {...props} />
-  <AvatarGroupBasic size="sm" {...props} />
-  <AvatarGroupBasic size="md" {...props} />
-  <AvatarGroupBasic size="lg" {...props} />
-  <AvatarGroupBasic size="xl" {...props} />
-  <AvatarGroupBasic size="2xl" {...props} />
-  <AvatarGroupBasic size="3xl" {...props} />
-</Ariakit.Group>
-); };
-
-render (<AvatarGroupStack/>); `} />
+</Codeblock>
 
 ## AvatarGroup styles
 
 AvatarGroup also comes in two styles of avatar, `rounded` & `squared`
 
-<Codeblock
-  live
-  noInline
-  code={`
-const AvatarGroupBasic = props => {
-  return (
-    <AvatarGroup {...props}>
-      <Avatar name="Leanne Graham" src="https://i.pravatar.cc/300?img=1" />
-      <Avatar name="Ervin Howell" src="https://i.pravatar.cc/300?img=11" />
-      <Avatar name="Clementine Bauch" src="https://i.pravatar.cc/300?img=21" />
-      <Avatar name="Patricia Lebsack" src="https://i.pravatar.cc/300?img=31" />
-      <Avatar name="Chelsey Dietrich" src="https://i.pravatar.cc/300?img=41" />
-      <Avatar name="Dennis Schulist" src="https://i.pravatar.cc/300?img=51" />
-    </AvatarGroup>
-  );
+<Codeblock live noInline>
+
+```
+import { Avatar, AvatarGroup } from "@adaptui/react-tailwind";
+
+export const App = props => {
+  const AvatarGroupBasic = props => {
+    return (
+      <AvatarGroup {...props}>
+        <Avatar name="Leanne Graham" src="https://i.pravatar.cc/300?img=1" />
+        <Avatar name="Ervin Howell" src="https://i.pravatar.cc/300?img=11" />
+        <Avatar
+          name="Clementine Bauch"
+          src="https://i.pravatar.cc/300?img=21"
+        />
+        <Avatar
+          name="Patricia Lebsack"
+          src="https://i.pravatar.cc/300?img=31"
+        />
+        <Avatar
+          name="Chelsey Dietrich"
+          src="https://i.pravatar.cc/300?img=41"
+        />
+        <Avatar name="Dennis Schulist" src="https://i.pravatar.cc/300?img=51" />
+      </AvatarGroup>
+    );
+  };
+
+  const AvatarGroupStack = props => {
+    return (
+      <AvatarGroup
+        aria-label="group of avatar groups"
+        className="flex flex-col space-y-2"
+      >
+        <AvatarGroupBasic size="xl" {...props} />
+        <AvatarGroupBasic size="xl" squared={true} {...props} />
+      </AvatarGroup>
+    );
+  };
+
+  return <AvatarGroupStack />;
 };
+```
 
-const AvatarGroupStack = props => { return (
-
-<AvatarGroup
-  aria-label="group of avatar groups"
-  className="flex flex-col space-y-2"
->
-  <AvatarGroupBasic size="xl" {...props} />
-  <AvatarGroupBasic size="xl" squared={true} {...props} />
-</AvatarGroup>
-); };
-
-render (<AvatarGroupStack/>); `} />
+</Codeblock>
 
 <Nextra.Callout>
   Avatar Group doesn't come with any status indicators
@@ -128,19 +164,39 @@ render (<AvatarGroupStack/>); `} />
 Set `max` to limit the number of avatars in the group. By default AvatarGroup
 will display all avatars.
 
-<Codeblock
-  live
-  code={`
-<AvatarGroup max={3}>
-  <Avatar name="Leanne Graham" src="https://i.pravatar.cc/300?img=1" />
-  <Avatar name="Ervin Howell" src="https://i.pravatar.cc/300?img=11" />
-  <Avatar name="Clementine Bauch" src="https://i.pravatar.cc/300?img=21" />
-  <Avatar name="Patricia Lebsack" src="https://i.pravatar.cc/300?img=31" />
-  <Avatar name="Chelsey Dietrich" src="https://i.pravatar.cc/300?img=41" />
-  <Avatar name="Dennis Schulist" src="https://i.pravatar.cc/300?img=51" />
-</AvatarGroup>
-`}
-/>
+<Codeblock live noInline>
+
+```
+import { Avatar, AvatarGroup } from "@adaptui/react-tailwind";
+
+export const App = props => {
+  const AvatarGroupBasic = props => {
+    return (
+      <AvatarGroup max={3}>
+        <Avatar name="Leanne Graham" src="https://i.pravatar.cc/300?img=1" />
+        <Avatar name="Ervin Howell" src="https://i.pravatar.cc/300?img=11" />
+        <Avatar
+          name="Clementine Bauch"
+          src="https://i.pravatar.cc/300?img=21"
+        />
+        <Avatar
+          name="Patricia Lebsack"
+          src="https://i.pravatar.cc/300?img=31"
+        />
+        <Avatar
+          name="Chelsey Dietrich"
+          src="https://i.pravatar.cc/300?img=41"
+        />
+        <Avatar name="Dennis Schulist" src="https://i.pravatar.cc/300?img=51" />
+      </AvatarGroup>
+    );
+  };
+
+  return <AvatarGroupBasic />;
+};
+```
+
+</Codeblock>
 
 ### `ringColor`
 
@@ -148,21 +204,44 @@ Set `ringColor` to change the color of the ring around the avatars. By default
 it is `"ring-white"`. This props can be used to match the parent's background to
 the AvatarGroup.
 
-<Codeblock
-  live
-  code={`
-<div className="flex h-20 w-40 items-center justify-center bg-orange-200">
-  <AvatarGroup max={3} ringColor="ring-orange-200">
-    <Avatar name="Leanne Graham" src="https://i.pravatar.cc/300?img=1" />
-    <Avatar name="Ervin Howell" src="https://i.pravatar.cc/300?img=11" />
-    <Avatar name="Clementine Bauch" src="https://i.pravatar.cc/300?img=21" />
-    <Avatar name="Patricia Lebsack" src="https://i.pravatar.cc/300?img=31" />
-    <Avatar name="Chelsey Dietrich" src="https://i.pravatar.cc/300?img=41" />
-    <Avatar name="Dennis Schulist" src="https://i.pravatar.cc/300?img=51" />
-  </AvatarGroup>
-</div>
-`}
-/>
+<Codeblock live noInline>
+
+```
+import { Avatar, AvatarGroup } from "@adaptui/react-tailwind";
+
+export const App = props => {
+  const AvatarGroupBasic = props => {
+    return (
+      <div className="flex h-20 w-40 items-center justify-center bg-orange-200">
+        <AvatarGroup max={3} ringColor="ring-orange-200">
+          <Avatar name="Leanne Graham" src="https://i.pravatar.cc/300?img=1" />
+          <Avatar name="Ervin Howell" src="https://i.pravatar.cc/300?img=11" />
+          <Avatar
+            name="Clementine Bauch"
+            src="https://i.pravatar.cc/300?img=21"
+          />
+          <Avatar
+            name="Patricia Lebsack"
+            src="https://i.pravatar.cc/300?img=31"
+          />
+          <Avatar
+            name="Chelsey Dietrich"
+            src="https://i.pravatar.cc/300?img=41"
+          />
+          <Avatar
+            name="Dennis Schulist"
+            src="https://i.pravatar.cc/300?img=51"
+          />
+        </AvatarGroup>
+      </div>
+    );
+  };
+
+  return <AvatarGroupBasic />;
+};
+```
+
+</Codeblock>
 
 ## API Reference
 
@@ -202,3 +281,4 @@ the AvatarGroup.
     },
   ]}
 />
+```

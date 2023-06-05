@@ -2,27 +2,27 @@ import {
   ComponentLinks,
   InteractiveCodeblock,
   PropsTable,
-  Codeblock,
 } from "@/components/index";
 
 # Spinner
 
 Spinners provide a visual cue that an action is either processing, awaiting a
-course of change or a result.
+course of change or a result. It uses AdaptUI's
+[Box](/docs/components/primitives/box) component internally.
 
 <ComponentLinks github="spinner" theme="spinner" story="feedback-spinner" />
 
 ## Imports
 
 ```js
-import { Spinner } from "@renderlesskit/react-tailwind";
+import { Spinner } from "@adaptui/react-tailwind";
 ```
 
 ## Usage
 
 <InteractiveCodeblock
   children={({ spreadProps }) => `<Spinner ${spreadProps} />`}
-  themeProps={{ size: "spinner.size", stroke: "spinner.stroke" }}
+  themeProps={{ size: "spinner.size", track: "spinner.track" }}
 />
 
 ## Spinner sizes
@@ -30,54 +30,75 @@ import { Spinner } from "@renderlesskit/react-tailwind";
 Sizes can be set using the `size` prop. The default size is `md`. The available
 sizes are: `xs` `sm` `md` `lg` & `em`
 
-<Codeblock
-  live
-  code={`
-<div className="flex items-center space-x-2">
-  <Spinner size="xs" />
-  <Spinner size="sm" />
-  <Spinner size="md" />
-  <Spinner size="lg" />
-  <Spinner size="em" />
-</div>
-`}
-/>
+<Codeblock live noInline>
 
-## Show stroke
+```
+import { Spinner } from "@adaptui/react-tailwind";
 
-To show the subtle stroke around the spinner we can use the `stroke` which
-accepts `visible` or `transparent` values
+export const App = props => {
+  return (
+    <div className="flex items-center space-x-2">
+      <Spinner size="xs" />
+      <Spinner size="sm" />
+      <Spinner size="md" />
+      <Spinner size="lg" />
+      <Spinner size="em" />
+    </div>
+  );
+};
+```
 
-<Codeblock
-  live
-  code={`
-<div className="flex items-center space-x-2">
-  <Spinner size="md" stroke="visible" />
-  <Spinner size="md" stroke="transparent" />
-</div>
-`}
-/>
+</Codeblock>
+
+## Show track
+
+To show the subtle track around the spinner we can use the `track` which accepts
+`visible` or `transparent` values
+
+<Codeblock live noInline>
+
+```
+import { Avatar, AvatarGroup } from "@adaptui/react-tailwind";
+
+export const App = props => {
+  return (
+    <div className="flex items-center space-x-2">
+      <Spinner size="md" track="visible" />
+      <Spinner size="md" track="transparent" />
+    </div>
+  );
+};
+```
+
+</Codeblock>
 
 ## With Label
 
-Spinner has a `label` prop to provide an customized A11y label which is only
-visible to the screen readers.
+Spinner has a `label` prop to provide an customized A11y label which is **only
+visible to the screen readers**.
 
-<Codeblock
-  live
-  code={`
-<div className="flex items-center space-x-2">
-  <Spinner size="md" label="spinning" />
-</div>
-`}
-/>
+<Codeblock live noInline>
+
+```
+import { Avatar, AvatarGroup } from "@adaptui/react-tailwind";
+
+export const App = props => {
+  return (
+    <div className="flex items-center space-x-2">
+      <Spinner size="md" label="spinning" />
+    </div>
+  );
+};
+```
+
+</Codeblock>
 
 ## API Reference
 
 <PropsTable
   data={[
     { name: "size", themeKey: "spinner.size", default: "md" },
-    { name: "stroke", themeKey: "spinner.stroke", default: "transparent" },
+    { name: "track", themeKey: "spinner.track", default: "transparent" },
     {
       name: "label",
       type: "string",

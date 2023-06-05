@@ -21,14 +21,10 @@ import {
   Tooltip,
   TooltipAnchor,
   TooltipArrow,
-  TooltipArrowContent,
-  TooltipContent,
-  useTooltipProps,
-  TooltipReference,
-  useTooltipState,
-  TooltipTrigger,
+  TooltipPrefix,
+  TooltipSuffix,
   TooltipWrapper,
-} from "@renderlesskit/react-tailwind";
+} from "@adaptui/react-tailwind";
 ```
 
 <Nextra.Callout>
@@ -45,7 +41,7 @@ import {
     <Button>Tooltip</Button>
   </Tooltip>`}
   booleanProps={["withArrow"]}
-  choiceProps={{ side: ["'top'", "'right'", "'bottom'", "'left'"] }}
+  choiceProps={{ placement: ["'top'", "'right'", "'bottom'", "'left'"] }}
 />
 
 ## Tooltip Sides
@@ -56,54 +52,72 @@ is displayed from the `bottom`.
 
 `withArrow` prop is used to toggle the arrow.
 
-<Codeblock
-  live
-  code={`
-<div className="inline-flex flex-row space-x-2">
-  <Tooltip content="Add your information" side="top">
-    <TooltipWrapper className="z-50" />
-    <Button>Tooltip</Button>
-  </Tooltip>
-  <Tooltip content="Add your information" side="bottom">
-    <TooltipWrapper className="z-50" />
-    <Button>Tooltip</Button>
-  </Tooltip>
-  <Tooltip content="Add your information" side="left">
-    <TooltipWrapper className="z-50" />
-    <Button>Tooltip</Button>
-  </Tooltip>
-  <Tooltip content="Add your information" side="right">
-    <TooltipWrapper className="z-50" />
-    <Button>Tooltip</Button>
-  </Tooltip>
-</div>
-`}
-/>
+<Codeblock live noInline>
+
+```
+import { Tooltip, TooltipWrapper } from "@adaptui/react-tailwind";
+
+export const App = props => {
+  return (
+    <div className="inline-flex flex-row space-x-2">
+      <Tooltip content="Add your information" placement="top">
+        <TooltipWrapper className="z-50" />
+        <Button>Tooltip</Button>
+      </Tooltip>
+      <Tooltip content="Add your information" placement="bottom">
+        <TooltipWrapper className="z-50" />
+        <Button>Tooltip</Button>
+      </Tooltip>
+      <Tooltip content="Add your information" placement="left">
+        <TooltipWrapper className="z-50" />
+        <Button>Tooltip</Button>
+      </Tooltip>
+      <Tooltip content="Add your information" placement="right">
+        <TooltipWrapper className="z-50" />
+        <Button>Tooltip</Button>
+      </Tooltip>
+    </div>
+  );
+};
+```
+
+</Codeblock>
 
 ## Tooltip Prefix/Suffix
 
 You can pass `prefix` and `suffix` props to append or prepend any content inside
 of button.
 
-<Codeblock
-  live
-  code={`
-<div className="inline-flex flex-row space-x-2">
-  <Tooltip content="Add your information" prefix={<SlotIcon />}>
-    <TooltipWrapper className="z-50" />
-    <Button>Tooltip</Button>
-  </Tooltip>
-  <Tooltip content="Add your information" suffix={<SlotIcon />}>
-    <TooltipWrapper className="z-50" />
-    <Button>Tooltip</Button>
-  </Tooltip>
-  <Tooltip content="Add your information" prefix={<SlotIcon />} suffix={<SlotIcon />}>
-    <TooltipWrapper className="z-50" />
-    <Button>Tooltip</Button>
-  </Tooltip>
-</div>
-`}
-/>
+<Codeblock live noInline>
+
+```
+import { Tooltip, TooltipWrapper } from "@adaptui/react-tailwind";
+
+export const App = props => {
+  return (
+    <div className="inline-flex flex-row space-x-2">
+      <Tooltip content="Add your information" prefix={<SlotIcon />}>
+        <TooltipWrapper className="z-50" />
+        <Button>Tooltip</Button>
+      </Tooltip>
+      <Tooltip content="Add your information" suffix={<SlotIcon />}>
+        <TooltipWrapper className="z-50" />
+        <Button>Tooltip</Button>
+      </Tooltip>
+      <Tooltip
+        content="Add your information"
+        prefix={<SlotIcon />}
+        suffix={<SlotIcon />}
+      >
+        <TooltipWrapper className="z-50" />
+        <Button>Tooltip</Button>
+      </Tooltip>
+    </div>
+  );
+};
+```
+
+</Codeblock>
 
 ## API Reference
 

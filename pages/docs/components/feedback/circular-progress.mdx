@@ -2,13 +2,14 @@ import {
   ComponentLinks,
   InteractiveCodeblock,
   PropsTable,
-  Codeblock,
 } from "@/components/index";
 
 # CircularProgress
 
 The CircularProgress component is used to indicate the progress for determinate
-and indeterminate processes.
+and indeterminate processes. It uses AdaptUI Core's
+[Progress](https://github.com/adaptui/react/blob/main/docs/progress.md)
+component internally.
 
 <ComponentLinks
   github="circular-progress"
@@ -24,11 +25,8 @@ import {
   CircularProgressBar,
   CircularProgressBarWrapper,
   CircularProgressHint,
-  useCircularProgressProps,
-  useCircularProgressState,
   CircularProgressTrack,
-  CircularProgressTrackWrapper,
-} from "@renderlesskit/react-tailwind";
+} from "@adaptui/react-tailwind";
 ```
 
 <Nextra.Callout>
@@ -42,7 +40,7 @@ import {
   children={({ spreadProps }) =>
     `<CircularProgress value={40} ${spreadProps} />`
   }
-  themeProps={{ size: "circularProgress.barWrapper.common.size" }}
+  themeProps={{ size: "circularProgress.size" }}
 />
 
 ## CircularProgress sizes
@@ -50,39 +48,73 @@ import {
 Sizes can be set using the `size` prop. The default size is `md`. The available
 sizes are: `sm` `md` `lg` `xl`
 
-<Codeblock
-  live
-  code={`
-<div className="flex items-center space-x-2">
-  <CircularProgress size="sm" value={20} />
-  <CircularProgress size="md" value={30} />
-  <CircularProgress size="lg" value={40} />
-  <CircularProgress size="xl" value={50} />
-</div>
-`}
-/>
+<Codeblock live noInline>
+
+```
+import { CircularProgress } from "@adaptui/react-tailwind";
+
+export const App = props => {
+  return (
+    <div className="flex items-center space-x-2">
+      <CircularProgress size="sm" value={20} />
+      <CircularProgress size="md" value={30} />
+      <CircularProgress size="lg" value={40} />
+      <CircularProgress size="xl" value={50} />
+    </div>
+  );
+};
+```
+
+</Codeblock>
 
 ## Min max values
 
 Set the `min` and `max` values of the progress bar.
 
-<Codeblock
-  live
-  code={`<CircularProgress min={10} max={40} value={35} />`}
-/>
+<Codeblock live noInline>
+
+```
+import { CircularProgress } from "@adaptui/react-tailwind";
+
+export const App = props => {
+  return <CircularProgress min={10} max={40} value={35} />;
+};
+```
+
+</Codeblock>
 
 ## Indeterminate progress
 
 By setting the value prop to `null`, progress state becomes indeterminate
 
-<Codeblock live code={`<CircularProgress value={null} />`} />
+<Codeblock live noInline>
+
+```
+import { CircularProgress } from "@adaptui/react-tailwind";
+
+export const App = props => {
+  return <CircularProgress value={null} />;
+};
+```
+
+</Codeblock>
 
 ## CircularProgress Hint
 
 CircularProgress comes with A11y hint that can be used with label to indicate
 the progress status.
 
-<Codeblock live code={`<CircularProgress value={50} hint={50}/>`} />
+<Codeblock live noInline>
+
+```
+import { CircularProgress } from "@adaptui/react-tailwind";
+
+export const App = props => {
+  return <CircularProgress value={50} hint={50} />;
+};
+```
+
+</Codeblock>
 
 ## Customizing CircularProgress
 
@@ -90,16 +122,23 @@ To customize the appearance of the CircularProgress component we can simply pass
 down children components (CircularProgressTrack, CircularProgressBar,
 CircularProgressHint) for more control.
 
-<Codeblock
-  live
-  code={`
-<CircularProgress value={40}>
-  <CircularProgressTrack className="text-red-300" />
-  <CircularProgressBar className="text-red-700" />
-  <CircularProgressHint className="text-red-900" />
-</CircularProgress>
-`}
-/>
+<Codeblock live noInline>
+
+```
+import { CircularProgress } from "@adaptui/react-tailwind";
+
+export const App = props => {
+  return (
+    <CircularProgress value={40}>
+      <CircularProgressTrack className="text-red-300" />
+      <CircularProgressBar className="text-red-700" />
+      <CircularProgressHint className="text-red-900" />
+    </CircularProgress>
+  );
+};
+```
+
+</Codeblock>
 
 ## API Reference
 
@@ -107,7 +146,7 @@ CircularProgressHint) for more control.
   data={[
     {
       name: "size",
-      themeKey: "circularProgress.barWrapper.common.size",
+      themeKey: "circularProgress.size",
       default: "md",
     },
     {

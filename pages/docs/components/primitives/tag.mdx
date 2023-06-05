@@ -15,7 +15,7 @@ keywords that describe them.
 ## Imports
 
 ```js
-import { Tag } from "@renderlesskit/react-tailwind";
+import { Tag } from "@adaptui/react-tailwind";
 ```
 
 - **Tag** Standalone tag component
@@ -26,8 +26,9 @@ import { Tag } from "@renderlesskit/react-tailwind";
   children={({ spreadProps }) => `<Tag${spreadProps}>Click me</Tag>`}
   booleanProps={["disabled"]}
   themeProps={{
-    size: "tag.size.default",
-    variant: "tag.variant.default",
+    size: "tag.size",
+    variant: "tag.themeColor.base",
+    themeColor: "tag.themeColor",
   }}
 />
 
@@ -36,33 +37,47 @@ import { Tag } from "@renderlesskit/react-tailwind";
 Sizes can be set using the `size` prop. The default size is `md`. The available
 sizes are: `sm` `md` `lg` `xl`
 
-<Codeblock
-  live
-  code={`
-<div className="space-x-2">
-  <Tag size="sm">Small</Tag>
-  <Tag size="md">Medium</Tag>
-  <Tag size="lg">Large</Tag>
-  <Tag size="xl">Extra Large</Tag>
-</div>
-`}
-/>
+<Codeblock live noInline>
+
+```
+import { Tag } from "@adaptui/react-tailwind";
+
+export const App = props => {
+  return (
+    <div className="space-x-2">
+      <Tag size="sm">Small</Tag>
+      <Tag size="md">Medium</Tag>
+      <Tag size="lg">Large</Tag>
+      <Tag size="xl">Extra Large</Tag>
+    </div>
+  );
+};
+```
+
+</Codeblock>
 
 ## Tag variants
 
 Variants can be set using the `variant` prop. The default variant is `solid`.
 The available variants are: `solid` `subtle` `outline`
 
-<Codeblock
-  live
-  code={`
-<div className="space-x-2">
-  <Tag variant="solid">Solid</Tag>
-  <Tag variant="subtle">Subtle</Tag>
-  <Tag variant="outline">Outline</Tag>
-</div>
-`}
-/>
+<Codeblock live noInline>
+
+```
+import { Tag } from "@adaptui/react-tailwind";
+
+export const App = props => {
+  return (
+    <div className="space-x-2">
+      <Tag variant="solid">Solid</Tag>
+      <Tag variant="subtle">Subtle</Tag>
+      <Tag variant="outline">Outline</Tag>
+    </div>
+  );
+};
+```
+
+</Codeblock>
 
 <Nextra.Callout>
   You can add extra variants & sizes via the theme file. Checkout [theming
@@ -76,29 +91,41 @@ close icon in the `suffix`. You can override the default icon inside `suffix`.
 Tag is by default renders a button component so you can pass the clickable props
 directly.
 
-<Codeblock
-  live
-  code={`
-<Tag closable>Removable</Tag>
-`}
-/>
+<Codeblock live noInline>
+
+```
+import { Tag } from "@adaptui/react-tailwind";
+
+export const App = props => {
+  return <Tag closable>Removable</Tag>;
+};
+```
+
+</Codeblock>
 
 ## Tag Prefix & Suffix
 
 Same as buttons Tag also accepts `prefix` & `suffix` props which can be used to
 append or prepend content in the tag.
 
-<Codeblock
-  live
-  code={`
-<div className="space-x-2">
-  <Tag prefix={<SlotIcon />}>Search</Tag>
-  <Tag closable suffix={<SlotIcon />}>
-    Search
-  </Tag>
-</div>
-`}
-/>
+<Codeblock live noInline>
+
+```
+import { Tag } from "@adaptui/react-tailwind";
+
+export const App = props => {
+  return (
+    <div className="space-x-2">
+      <Tag prefix={<SlotIcon />}>Search</Tag>
+      <Tag closable suffix={<SlotIcon />}>
+        Search
+      </Tag>
+    </div>
+  );
+};
+```
+
+</Codeblock>
 
 <Nextra.Callout>
   Suffix will only be rendered if `closable` is set to `true`
@@ -111,13 +138,13 @@ append or prepend content in the tag.
     {
       name: "size",
       default: "md",
-      themeKey: "tag.size.default",
+      themeKey: "tag.size",
       description: "Size of the tag",
     },
     {
       name: "variant",
       default: "solid",
-      themeKey: "tag.variant.default",
+      themeKey: "tag.themeColor.base",
       description: "Variant of the tag",
     },
     {

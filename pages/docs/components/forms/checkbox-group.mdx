@@ -2,13 +2,13 @@ import {
   ComponentLinks,
   InteractiveCodeblock,
   PropsTable,
-  Codeblock,
 } from "@/components/index";
 
 # CheckboxGroup
 
 CheckboxGroup are used when multiple choices may be selected in a series of
-options. CheckboxGroup composes `Checkbox` component.
+options. CheckboxGroup composes `Checkbox` component. It uses Ariakit's
+[Checkbox](https://reakit.io/docs/checkbox/) component internally.
 
 <ComponentLinks
   github="checkbox-group"
@@ -21,11 +21,9 @@ options. CheckboxGroup composes `Checkbox` component.
 ```js
 import {
   CheckboxGroup,
-  useCheckboxGroupProps,
-  useCheckboxGroupState,
   CheckboxGroupWrapper,
   CheckboxShowMore,
-} from "@renderlesskit/react-tailwind";
+} from "@adaptui/react-tailwind";
 ```
 
 <Nextra.Callout>
@@ -44,7 +42,7 @@ import {
   <Checkbox value="grapes" label="Grapes" />
 </CheckboxGroup>
 `}
-  themeProps={{ size: "checkbox.icon.size" }}
+  themeProps={{ size: "checkbox.size" }}
 />
 
 ## CheckboxGroup sizes
@@ -52,96 +50,117 @@ import {
 Sizes can be set using the `size` prop. The default size is `md`. The available
 sizes are: `sm` `md` `lg`
 
-<Codeblock
-  live
-  noInline
-  code={`
-const CheckboxGroupBasic = props => {
-  return (
-    <CheckboxGroup aria-label="fruits" {...props}>
-      <Checkbox value="apple" label="Apple" />
-      <Checkbox value="orange" label="Orange" />
-      <Checkbox value="watermelon" label="Watermelon" />
-      <Checkbox value="grapes" label="Grapes" />
-    </CheckboxGroup>
-  );
+<Codeblock live noInline>
+
+```
+import { CheckboxGroup, Checkbox } from "@adaptui/react-tailwind";
+
+export const App = props => {
+  const CheckboxGroupBasic = props => {
+    return (
+      <CheckboxGroup aria-label="fruits" {...props}>
+        <Checkbox value="apple" label="Apple" />
+        <Checkbox value="orange" label="Orange" />
+        <Checkbox value="watermelon" label="Watermelon" />
+        <Checkbox value="grapes" label="Grapes" />
+      </CheckboxGroup>
+    );
+  };
+
+  const CheckboxGroupStack = props => {
+    return (
+      <div className="flex space-x-2">
+        <CheckboxGroupBasic size="sm" />
+        <CheckboxGroupBasic size="md" />
+        <CheckboxGroupBasic size="lg" />
+      </div>
+    );
+  };
+
+  return <CheckboxGroupStack />;
 };
+```
 
-const CheckboxGroupStack = props => { return (
-
-<div className="flex space-x-2">
-  <CheckboxGroupBasic size="sm" />
-  <CheckboxGroupBasic size="md" />
-  <CheckboxGroupBasic size="lg" />
-</div>
-); };
-
-render (<CheckboxGroupStack/>); `} />
+</Codeblock>
 
 ## CheckboxGroup Stack
 
 CheckboxGroup can be arranged `vertical` or `horizontal`
 
-<Codeblock
-  live
-  noInline
-  code={`
-const CheckboxGroupBasic = props => {
-  return (
-    <CheckboxGroup aria-label="fruits" {...props}>
-      <Checkbox value="apple" label="Apple" />
-      <Checkbox value="orange" label="Orange" />
-      <Checkbox value="watermelon" label="Watermelon" />
-      <Checkbox value="grapes" label="Grapes" />
-    </CheckboxGroup>
-  );
+<Codeblock live noInline>
+
+```
+import { CheckboxGroup, Checkbox } from "@adaptui/react-tailwind";
+
+export const App = props => {
+  const CheckboxGroupBasic = props => {
+    return (
+      <CheckboxGroup aria-label="fruits" {...props}>
+        <Checkbox value="apple" label="Apple" />
+        <Checkbox value="orange" label="Orange" />
+        <Checkbox value="watermelon" label="Watermelon" />
+        <Checkbox value="grapes" label="Grapes" />
+      </CheckboxGroup>
+    );
+  };
+
+  const CheckboxGroupStack = props => {
+    return (
+      <div className="flex flex-col space-y-2">
+        <CheckboxGroupBasic size="md" stack="vertical" />
+        <CheckboxGroupBasic size="md" stack="horizontal" />
+      </div>
+    );
+  };
+
+  return <CheckboxGroupStack />;
 };
+```
 
-const CheckboxGroupStack = props => { return (
-
-<div className="flex flex-col space-y-2">
-  <CheckboxGroupBasic size="md" stack="vertical" />
-  <CheckboxGroupBasic size="md" stack="horizontal" />
-</div>
-); };
-
-render (<CheckboxGroupStack/>); `} />
+</Codeblock>
 
 ## CheckboxGroup Show More
 
 CheckboxGroup with more Checkboxs can be made hidden by adding `maxVisibleItems`
 prop
 
-<Codeblock
-  live
-  noInline
-  code={`
-const CheckboxGroupBasic = props => {
-  return (
-    <CheckboxGroup aria-label="fruits" maxVisibleItems={2} {...props}>
-      <Checkbox value="apple" label="Apple" />
-      <Checkbox value="orange" label="Orange" />
-      <Checkbox value="watermelon" label="Watermelon" />
-      <Checkbox value="grapes" label="Grapes" />
-    </CheckboxGroup>
-  );
+<Codeblock live noInline>
+
+```
+import { CheckboxGroup, Checkbox } from "@adaptui/react-tailwind";
+
+export const App = props => {
+  const CheckboxGroupBasic = props => {
+    return (
+      <CheckboxGroup aria-label="fruits" maxVisibleItems={2} {...props}>
+        <Checkbox value="apple" label="Apple" />
+        <Checkbox value="orange" label="Orange" />
+        <Checkbox value="watermelon" label="Watermelon" />
+        <Checkbox value="grapes" label="Grapes" />
+      </CheckboxGroup>
+    );
+  };
+
+  const CheckboxGroupStack = props => {
+    return (
+      <div className="flex flex-col space-y-2">
+        <CheckboxGroupBasic size="md" stack="vertical" className="w-32" />
+        <CheckboxGroupBasic size="md" stack="horizontal" />
+      </div>
+    );
+  };
+
+  return <CheckboxGroupStack />;
 };
+```
 
-const CheckboxGroupStack = props => { return (
-
-<div className="flex flex-col space-y-2">
-  <CheckboxGroupBasic size="md" stack="vertical" className="w-32" />
-  <CheckboxGroupBasic size="md" stack="horizontal" />
-</div>
-); };
-
-render (<CheckboxGroupStack/>); `} />
+</Codeblock>
 
 ## API Reference
 
 <PropsTable
   data={[
-    { name: "size", themeKey: "checkbox.icon.size", default: "md" },
+    { name: "size", themeKey: "checkbox.size", default: "md" },
     {
       name: "stack",
       type: "string",

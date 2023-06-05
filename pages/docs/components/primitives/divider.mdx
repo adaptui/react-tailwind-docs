@@ -16,44 +16,59 @@ internally.
 ## Imports
 
 ```js
-import { Divider } from "@renderlesskit/react-tailwind";
+import { Divider } from "@adaptui/react-tailwind";
 ```
 
 ## Usage
 
-<InteractiveCodeblock code={({ spreadProps }) => `<Divider${spreadProps} />`} />
+<InteractiveCodeblock
+  children={({ spreadProps }) => `<Divider${spreadProps} />`}
+/>
 
 ## Divider direction
 
 Divider comes with two directions: `horizontal` and `vertical`.
 
-<Codeblock
-  live
-  code={`
-<div className="flex flex-col space-y-2">
-  <div className="w-80">
-    <Divider orientation="horizontal" />
-  </div>
-  <div className="flex items-center justify-center h-80">
-    <Divider orientation="vertical" />
-  </div>
-</div>
-`}
-/>
+<Codeblock live noInline>
 
+```
+import { Divider } from "@adaptui/react-tailwind";
+
+export const App = props => {
+  return (
+    <div className="flex flex-col space-y-2">
+      <div className="w-80">
+        <Divider orientation="horizontal" />
+      </div>
+      <div className="flex h-80 items-center justify-center">
+        <Divider orientation="vertical" />
+      </div>
+    </div>
+  );
+};
+```
+
+</Codeblock>
 ## Divider label
 
 Divider can have a label at the center to mark it as a section.
 
-<Codeblock
-  live
-  code={`
-<div className="flex flex-col space-y-2">
- <Divider />
- <Divider label={<Button variant="outline">Continue</Button>} />
-</div>
-`}
-/>
+<Codeblock live noInline>
+
+```
+import { Divider } from "@adaptui/react-tailwind";
+
+export const App = props => {
+  return (
+    <div className="flex flex-col space-y-2">
+      <Divider />
+      <Divider label={<Button variant="outline">Continue</Button>} />
+    </div>
+  );
+};
+```
+
+</Codeblock>
 
 ## API Reference
 

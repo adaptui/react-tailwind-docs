@@ -1,14 +1,14 @@
 import {
   ComponentLinks,
   InteractiveCodeblock,
-  Codeblock,
   PropsTable,
 } from "@/components/index";
 
 # ShowMore
 
 ShowMore is used to display the progress status for a task that takes a long
-time or consists of several steps.
+time or consists of several steps. It uses Ariakit's
+[Disclosure](https://reakit.io/docs/disclosure/) component internally.
 
 <ComponentLinks github="show-more" story="feedback-showmore" />
 
@@ -19,9 +19,7 @@ import {
   ShowMore,
   ShowMoreButton,
   ShowMoreContent,
-  useShowMoreProps,
-  useShowMoreState,
-} from "@renderlesskit/react-tailwind";
+} from "@adaptui/react-tailwind";
 ```
 
 <Nextra.Callout>
@@ -57,31 +55,38 @@ import {
 
 ShowMore component comes with two directions `vertical` & `horizontal`
 
-<Codeblock
-  live
-  code={`
-<div className="h-80 overflow-y-scroll">
-  <div className="flex flex-col items-start space-y-2">
-    <div>Apple</div>
-    <div>Orange</div>
-    <div>Watermelon</div>
-    <div>Grapes</div>
-    <div>Banana</div>
-    <div>Blueberry</div>
-    <ShowMore direction="vertical" className="flex flex-col space-y-2">
-      <div>Sapota</div>
-      <div>Papaya</div>
-      <div>Avocado</div>
-      <div>Strawberry</div>
-      <div>Cherry</div>
-      <div>Fig</div>
-      <div>Guava</div>
-      <div>Mango</div>
-    </ShowMore>
-  </div>
-</div>
-`}
-/>
+<Codeblock live noInline>
+
+```
+import { ShowMore } from "@adaptui/react-tailwind";
+
+export const App = props => {
+  return (
+    <div className="h-80 overflow-y-scroll">
+      <div className="flex flex-col items-start space-y-2">
+        <div>Apple</div>
+        <div>Orange</div>
+        <div>Watermelon</div>
+        <div>Grapes</div>
+        <div>Banana</div>
+        <div>Blueberry</div>
+        <ShowMore direction="vertical" className="flex flex-col space-y-2">
+          <div>Sapota</div>
+          <div>Papaya</div>
+          <div>Avocado</div>
+          <div>Strawberry</div>
+          <div>Cherry</div>
+          <div>Fig</div>
+          <div>Guava</div>
+          <div>Mango</div>
+        </ShowMore>
+      </div>
+    </div>
+  );
+};
+```
+
+</Codeblock>
 
 ## API Reference
 
@@ -95,3 +100,7 @@ ShowMore component comes with two directions `vertical` & `horizontal`
     },
 
 ]} />
+
+```
+
+```

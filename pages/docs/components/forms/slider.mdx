@@ -17,18 +17,14 @@ The Slider is used to allow users to make selections from a range of values.
 import {
   Slider,
   SliderFilledTrack,
-  useSliderProps,
-  useSliderState,
   SliderThumb,
   SliderThumbContainer,
   SliderThumbInput,
-  useSliderThumbProps,
-  useSliderThumbState,
   SliderThumbWrapper,
   SliderTrack,
   SliderTrackWrapper,
   SliderWrapper,
-} from "@renderlesskit/react-tailwind";
+} from "@adaptui/react-tailwind";
 ```
 
 <Nextra.Callout>
@@ -43,7 +39,7 @@ import {
     `<Slider defaultValue={[50]} ${spreadProps} />`
   }
   booleanProps={["tooltip", "isDisabled"]}
-  themeProps={{ size: "slider.track.base.size" }}
+  themeProps={{ size: "slider.size" }}
 />
 
 ## Slider sizes
@@ -51,30 +47,45 @@ import {
 Sizes can be set using the `size` prop. The default size is `md`. The available
 sizes are: `sm` `md` `lg` & `xl`.
 
-<Codeblock
-  live
-  code={`
-<div className="inline-flex flex-col space-y-2">
-  <Slider size="sm" defaultValue={[50]} />
-  <Slider size="md" defaultValue={[50]} />
-  <Slider size="lg" defaultValue={[50]} />
-  <Slider size="xl" defaultValue={[50]} />
-</div>
-`}
-/>
+<Codeblock live noInline>
+
+```
+import { Slider } from "@adaptui/react-tailwind";
+
+export const App = props => {
+  return (
+    <div className="inline-flex flex-col space-y-2">
+      <Slider size="sm" defaultValue={[50]} />
+      <Slider size="md" defaultValue={[50]} />
+      <Slider size="lg" defaultValue={[50]} />
+      <Slider size="xl" defaultValue={[50]} />
+    </div>
+  );
+};
+
+```
+
+</Codeblock>
 
 ## Slider KnobIcon
 
 The knob icon can be customized by passing a custom icon for the SliderThumb.
 
-<Codeblock
-  live
-  code={`
-<div className="inline-flex flex-col space-y-2">
-  <Slider size="md" defaultValue={[50]} knobIcon={SliderDefaultKnobIcon} />
-</div>
-`}
-/>
+<Codeblock live noInline>
+
+```
+import { Slider } from "@adaptui/react-tailwind";
+
+export const App = props => {
+  return (
+    <div className="inline-flex flex-col space-y-2">
+      <Slider size="md" defaultValue={[50]} knobIcon={SliderDefaultKnobIcon} />
+    </div>
+  );
+};
+```
+
+</Codeblock>
 
 ## Slider states
 
@@ -114,7 +125,7 @@ Single Slider can be converted to a range slider using `range` prop.
 
 <PropsTable
   data={[
-    { name: "size", themeKey: "slider.track.base.size", default: "md" },
+    { name: "size", themeKey: "slider.size", default: "md" },
     {
       name: "isDisabled",
       type: "boolean",

@@ -2,13 +2,14 @@ import {
   ComponentLinks,
   InteractiveCodeblock,
   PropsTable,
-  Codeblock,
 } from "@/components/index";
 
 # Meter
 
 Meter is used to display finite value that are within a known range eg., CPU
-usage.
+usage. It uses AdaptUI Core's
+[Meter](https://github.com/adaptui/react/blob/main/docs/meter.md) component
+internally.
 
 <ComponentLinks github="meter" theme="meter" story="feedback-meter" />
 
@@ -21,11 +22,9 @@ import {
   MeterBarWrapper,
   MeterHint,
   MeterLabel,
-  useMeterProps,
-  useMeterState,
   MeterTrack,
   MeterWrapper,
-} from "@renderlesskit/react-tailwind";
+} from "@adaptui/react-tailwind";
 ```
 
 <Nextra.Callout>
@@ -39,7 +38,7 @@ import {
   children={({ spreadProps }) =>
     `<Meter value={40} max={100} ${spreadProps} />`
   }
-  themeProps={{ size: "meter.track.size" }}
+  themeProps={{ size: "meter.size" }}
 />
 
 ## Meter sizes
@@ -47,69 +46,119 @@ import {
 Sizes can be set using the `size` prop. The default size is `md`. The available
 sizes are: `sm` `md` `lg` `xl`
 
-<Codeblock
-  live
-  code={`
-<div className="flex flex-col space-y-2">
-  <Meter size="sm" value={20} max={100} />
-  <Meter size="md" value={30} max={100} />
-  <Meter size="lg" value={40} max={100} />
-  <Meter size="xl" value={50} max={100} />
-</div>
-`}
-/>
+<Codeblock live noInline>
+
+```
+import { Meter } from "@adaptui/react-tailwind";
+
+export const App = props => {
+  return (
+    <div className="flex flex-col space-y-2">
+      <Meter size="sm" value={20} max={100} />
+      <Meter size="md" value={30} max={100} />
+      <Meter size="lg" value={40} max={100} />
+      <Meter size="xl" value={50} max={100} />
+    </div>
+  );
+};
+```
+
+</Codeblock>
 
 ## Min max values
 
 Set the `min` and `max` values of the progress bar.
 
-<Codeblock live code={`<Meter value={35} max={100} />`} />
+<Codeblock live noInline>
+
+```
+import { Meter } from "@adaptui/react-tailwind";
+
+export const App = props => {
+  return <Meter value={35} max={100} />;
+};
+```
+
+</Codeblock>
 
 ## Meter Label
 
 Meter also comes with A11y label that can also be used to describe the meter.
 
-<Codeblock live code={`<Meter value={50} max={100} label="Charging..."/>`} />
+<Codeblock live noInline>
+
+```
+import { Meter } from "@adaptui/react-tailwind";
+
+export const App = props => {
+  return <Meter value={50} max={100} label="Charging..." />;
+};
+```
+
+</Codeblock>
 
 ## Meter Hint
 
 Meter comes with A11y hint that can be used with label to indicate the meter
 status.
 
-<Codeblock
-  live
-  code={`<Meter value={50} max={100} label="Charging..." hint={50}/>`}
-/>
+<Codeblock live noInline>
+
+```
+import { Meter } from "@adaptui/react-tailwind";
+
+export const App = props => {
+  return <Meter value={50} max={100} label="Charging..." hint={50} />;
+};
+```
+
+</Codeblock>
 
 ## Meter Interval
 
 Meter has an interval that can be used to indicate multiple range of the meter.
 
-<Codeblock
-  live
-  code={`<Meter value={50} max={100} label="Charging..." hint={50} intervals={4} /> `}
-/>
+<Codeblock live noInline>
+
+```
+import { Meter } from "@adaptui/react-tailwind";
+
+export const App = props => {
+  return (
+    <Meter value={50} max={100} label="Charging..." hint={50} intervals={4} />
+  );
+};
+```
+
+</Codeblock>
 
 ## Customizing Meter
 
 To customize the appearance of the Meter component we can simply pass down
 children components (MeterTrack, MeterBar) for more control.
 
-<Codeblock
-  live
-  code={`
-<Meter value={40} max={100}>
-  <MeterTrack className="bg-red-300" />
-  <MeterBar className="bg-red-800" />
-</Meter>
-`}
-/>
+<Codeblock live noInline>
+
+```
+import { Meter } from "@adaptui/react-tailwind";
+
+export const App = props => {
+  return (
+    <Meter value={40} max={100}>
+      <MeterTrack className="bg-red-300" />
+      <MeterBar className="bg-red-800" />
+    </Meter>
+  );
+};
+```
+
+</Codeblock>
 
 ## API Reference
 
 <PropsTable
   data={[
-    { name: "size", themeKey: "meter.track.size", default: "md" },
+    { name: "size", themeKey: "meter.size", default: "md" },
     {
       name: "intervals",
       type: "number",
@@ -132,3 +181,7 @@ children components (MeterTrack, MeterBar) for more control.
     },
 
 ]} />
+
+```
+
+```

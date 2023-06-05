@@ -21,11 +21,9 @@ import {
   AvatarIcon,
   AvatarImage,
   AvatarInitials,
-  useAvatarProps,
-  useAvatarState,
   AvatarStatusIndicator,
   AvatarWrapper,
-} from "@renderlesskit/react-tailwind";
+} from "@adaptui/react-tailwind";
 ```
 
 <Nextra.Callout>
@@ -39,8 +37,11 @@ import {
   children={({ spreadProps }) =>
     `<Avatar name="Leanne Graham" src="https://i.pravatar.cc/300?img=61" circular={false} ${spreadProps} />`
   }
-  booleanProps={["circular"]}
-  themeProps={{ size: "avatar.icon.size", status: "avatar.statusIndicators" }}
+  booleanProps={["squared"]}
+  themeProps={{
+    size: "avatar.wrapper.size",
+    status: "avatar.statusIndicators",
+  }}
 />
 
 ## Avatar sizes
@@ -48,34 +49,85 @@ import {
 Sizes can be set using the `size` prop. The default size is `xl`. The available
 sizes are: `xs` `sm` `md` `lg` `xl` `2xl` `3xl`
 
-<Codeblock
-  live
-  code={`
-<div className="flex space-x-2">
-  <Avatar size="xs" name="Leanne Graham" src="https://i.pravatar.cc/300?img=1" />
-  <Avatar size="sm" name="Ervin Howell" src="https://i.pravatar.cc/300?img=11" />
-  <Avatar size="md" name="Clementine Bauch" src="https://i.pravatar.cc/300?img=21" />
-  <Avatar size="lg" name="Patricia Lebsack" src="https://i.pravatar.cc/300?img=31" />
-  <Avatar size="xl" name="Chelsey Dietrich" src="https://i.pravatar.cc/300?img=41" />
-  <Avatar size="2xl" name="Dennis Schulist" src="https://i.pravatar.cc/300?img=51" />
-  <Avatar size="3xl" name="Chris Evans" src="https://i.pravatar.cc/300?img=61" />
-</div>
-`}
-/>
+<Codeblock live noInline>
+
+```
+import { Avatar } from "@adaptui/react-tailwind";
+
+export const App = props => {
+  return (
+    <div className="flex space-x-2">
+      <Avatar
+        size="xs"
+        name="Leanne Graham"
+        src="https://i.pravatar.cc/300?img=1"
+      />
+      <Avatar
+        size="sm"
+        name="Ervin Howell"
+        src="https://i.pravatar.cc/300?img=11"
+      />
+      <Avatar
+        size="md"
+        name="Clementine Bauch"
+        src="https://i.pravatar.cc/300?img=21"
+      />
+      <Avatar
+        size="lg"
+        name="Patricia Lebsack"
+        src="https://i.pravatar.cc/300?img=31"
+      />
+      <Avatar
+        size="xl"
+        name="Chelsey Dietrich"
+        src="https://i.pravatar.cc/300?img=41"
+      />
+      <Avatar
+        size="2xl"
+        name="Dennis Schulist"
+        src="https://i.pravatar.cc/300?img=51"
+      />
+      <Avatar
+        size="3xl"
+        name="Chris Evans"
+        src="https://i.pravatar.cc/300?img=61"
+      />
+    </div>
+  );
+};
+```
+
+</Codeblock>
 
 ## Avatar styles
 
-Avatar comes in two styles, `rounded` & `squared`
+Avatar comes in two styles, `circular` & `squared`
 
-<Codeblock
-  live
-  code={`
-<div className="flex space-x-2">
-  <Avatar size="xl" name="Chelsey Dietrich" src="https://i.pravatar.cc/300?img=41" />
-  <Avatar size="xl" name="Dennis Schulist" src="https://i.pravatar.cc/300?img=51" circular={false} />
-</div>
-`}
-/>
+<Codeblock live noInline>
+
+```
+import { Avatar } from "@adaptui/react-tailwind";
+
+export const App = props => {
+  return (
+    <div className="flex space-x-2">
+      <Avatar
+        size="xl"
+        name="Chelsey Dietrich"
+        src="https://i.pravatar.cc/300?img=41"
+      />
+      <Avatar
+        size="xl"
+        name="Dennis Schulist"
+        src="https://i.pravatar.cc/300?img=51"
+        squared={true}
+      />
+    </div>
+  );
+};
+```
+
+</Codeblock>
 
 ## Avatar fallbacks
 
@@ -88,55 +140,82 @@ If both name and src are not provided you can pass a `icon` prop to show any
 content, `icon` has the lowest priority thus if name or src is provided fallback
 will be ignored.
 
-<Codeblock
-  live
-  code={`
-<div className="flex space-x-2">
-  <Avatar size="xl" name="Chelsey Dietrich" src="https://bit.ly/broken-link" />
-  <Avatar size="xl" name="Dennis Schulist" src="https://bit.ly/broken-link" />
-  <Avatar size="xl" src="https://bit.ly/broken-link" />
-  <Avatar size="xl" icon={<InfoCircleIcon />} />
-</div>
-`}
-/>
+<Codeblock live noInline>
+
+```
+import { Avatar } from "@adaptui/react-tailwind";
+
+export const App = props => {
+  return (
+    <div className="flex space-x-2">
+      <Avatar
+        size="xl"
+        name="Chelsey Dietrich"
+        src="https://bit.ly/broken-link"
+      />
+      <Avatar
+        size="xl"
+        name="Dennis Schulist"
+        src="https://bit.ly/broken-link"
+      />
+      <Avatar size="xl" src="https://bit.ly/broken-link" />
+      <Avatar size="xl" icon={<InfoCircleIcon />} />
+    </div>
+  );
+};
+```
+
+</Codeblock>
 
 ## Avatar with status indicators
 
 You can show status icons at the right corner of the Avatar using `status` prop.
 Each avatar sizes has its own status indicators sizes.
 
-<Codeblock
-  live
-  code={`
-<div className="flex space-x-2">
-  <Avatar
-    status="active"
-    size="xl"
-    name="Leanne Graham"
-    src="https://i.pravatar.cc/300?img=1"
-  />
-  <Avatar
-    status="sleep"
-    size="xl"
-    name="Ervin Howell"
-    src="https://i.pravatar.cc/300?img=11"
-  />
-  <Avatar
-    status="away"
-    size="xl"
-    name="Clementine Bauch"
-    src="https://i.pravatar.cc/300?img=21"
-  />
-  <Avatar
-    status="typing"
-    size="xl"
-    name="Patricia Lebsack"
-    src="https://i.pravatar.cc/300?img=31"
-  />
-  <Avatar status="org" size="xl" name="Chelsey Dietrich" src="https://i.pravatar.cc/300?img=41" />
-</div>
-`}
-/>
+<Codeblock live noInline>
+
+```
+import { Avatar } from "@adaptui/react-tailwind";
+
+export const App = props => {
+  return (
+    <div className="flex space-x-2">
+      <Avatar
+        status="active"
+        size="xl"
+        name="Leanne Graham"
+        src="https://i.pravatar.cc/300?img=1"
+      />
+      <Avatar
+        status="sleep"
+        size="xl"
+        name="Ervin Howell"
+        src="https://i.pravatar.cc/300?img=11"
+      />
+      <Avatar
+        status="away"
+        size="xl"
+        name="Clementine Bauch"
+        src="https://i.pravatar.cc/300?img=21"
+      />
+      <Avatar
+        status="typing"
+        size="xl"
+        name="Patricia Lebsack"
+        src="https://i.pravatar.cc/300?img=31"
+      />
+      <Avatar
+        status="org"
+        size="xl"
+        name="Chelsey Dietrich"
+        src="https://i.pravatar.cc/300?img=41"
+      />
+    </div>
+  );
+};
+```
+
+</Codeblock>
 
 ## API Reference
 
@@ -149,14 +228,14 @@ Each avatar sizes has its own status indicators sizes.
       description: "Name prop used for `alt` & calculate placeholder initials.",
     },
     {
-      name: "circular",
+      name: "squared",
       type: "boolean",
-      description: "If `true`, Avatar looks like a round.",
-      default: "true",
+      description: "If `true`, Avatar looks like a squared.",
+      default: "false",
     },
     {
       name: "size",
-      themeKey: "avatar.icon.size",
+      themeKey: "avatar.wrapper.size",
       description: "Size of the avatar",
       default: "xl",
     },

@@ -21,10 +21,8 @@ import {
   SwitchIcon,
   SwitchInput,
   SwitchLabel,
-  useSwitchProps,
-  useSwitchState,
   SwitchText,
-} from "@renderlesskit/react-tailwind";
+} from "@adaptui/react-tailwind";
 ```
 
 <Nextra.Callout>
@@ -37,7 +35,7 @@ import {
 <InteractiveCodeblock
   children={({ spreadProps }) => `<Switch ${spreadProps}>Label text</Switch>`}
   booleanProps={["disabled"]}
-  themeProps={{ size: "switch.icon.size" }}
+  themeProps={{ size: "switch.size" }}
 />
 
 ## Switch sizes
@@ -45,63 +43,111 @@ import {
 Sizes can be set using the `size` prop. The default size is `md`. The available
 sizes are: `sm` `md` `lg`
 
-<Codeblock
-  live
-  code={`
-<div className="inline-flex flex-col space-y-2">
-  <Switch size="sm" defaultState={false} />
-  <Switch size="md" defaultState={false} />
-  <Switch size="lg" defaultState={false} />
-</div>
-`}
-/>
+<Codeblock live noInline>
+
+```
+import { Switch } from "@adaptui/react-tailwind";
+
+export const App = props => {
+  return (
+    <div className="inline-flex flex-col space-y-2">
+      <Switch size="sm" defaultState={false} />
+      <Switch size="md" defaultState={false} />
+      <Switch size="lg" defaultState={false} />
+    </div>
+  );
+};
+```
+
+</Codeblock>
 
 ## Switch Uncontrolled
 
 Uncontrolled switch can be used with `defaultState` prop.
 
-<Codeblock
-  live
-  code={`
-<div className="inline-flex flex-col space-y-2">
-  <Switch size="md" defaultState={true} />
-  <Switch size="md" defaultState={false} />
-</div>
-`}
-/>
+<Codeblock live noInline>
+
+```
+import { Switch } from "@adaptui/react-tailwind";
+
+export const App = props => {
+  return (
+    <div className="inline-flex flex-col space-y-2">
+      <Switch size="md" defaultState={true} />
+      <Switch size="md" defaultState={false} />
+    </div>
+  );
+};
+```
+
+</Codeblock>
 
 ## Switch UI states
 
-<Codeblock
-  live
-  code={`
-<div className="inline-flex flex-col space-y-2 w-72">
-  <Switch size="md" defaultState={false} label="Switch" />
-  <Switch size="md" defaultState={false} label="Multilined label Switch, just for demonstration" />
-  <Switch size="md" defaultState={false} label="Switch" description="Used when the switch is selected and will use its value for the form submission."/>
-</div>
-`}
-/>
+<Codeblock live noInline>
+
+```
+import { Switch } from "@adaptui/react-tailwind";
+
+export const App = props => {
+  return (
+    <div className="inline-flex w-72 flex-col space-y-2">
+      <Switch size="md" defaultState={false} label="Switch" />
+      <Switch
+        size="md"
+        defaultState={false}
+        label="Multilined label Switch, just for demonstration"
+      />
+      <Switch
+        size="md"
+        defaultState={false}
+        label="Switch"
+        description="Used when the switch is selected and will use its value for the form submission."
+      />
+    </div>
+  );
+};
+```
+
+</Codeblock>
 
 ## Switch Disabled states
 
-<Codeblock
-  live
-  code={`
-<div className="flex flex-col space-y-2 w-72">
-  <Switch size="md" disabled defaultState={false} />
-  <Switch size="md" disabled defaultState={false} label="Switchs" />
-  <Switch size="md" disabled defaultState={false} label="Used when the switch is selected and will use its value for the form submission." />
-  <Switch size="md" disabled defaultState={false} label="Switchs" description="Used when the switch is selected and will use its value for the form submission."/>
-</div>
-`}
-/>
+<Codeblock live noInline>
+
+```
+import { Switch } from "@adaptui/react-tailwind";
+
+export const App = props => {
+  return (
+    <div className="flex w-72 flex-col space-y-2">
+      <Switch size="md" disabled defaultState={false} />
+      <Switch size="md" disabled defaultState={false} label="Switchs" />
+      <Switch
+        size="md"
+        disabled
+        defaultState={false}
+        label="Used when the switch is selected and will use its value for the form submission."
+      />
+      <Switch
+        size="md"
+        disabled
+        defaultState={false}
+        label="Switchs"
+        description="Used when the switch is selected and will use its value for the form submission."
+      />
+    </div>
+  );
+};
+```
+
+</Codeblock>
 
 ## API Reference
 
 <PropsTable
   data={[
-    { name: "size", themeKey: "switch.icon.size", default: "md" },
+    { name: "size", themeKey: "switch.size", default: "md" },
     {
       name: "disabled",
       type: "boolean",

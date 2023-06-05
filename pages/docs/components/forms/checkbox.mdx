@@ -8,8 +8,8 @@ import {
 # Checkbox
 
 The Checkbox is used in forms when a user needs to select multiple values from
-several options. Checkbox composes
-[reakit's checkbox](https://reakit.io/docs/checkbox/) component.
+several options. Checkbox composes Ariakit's
+[checkbox](https://reakit.io/docs/checkbox/) component.
 
 <ComponentLinks github="checkbox" theme="checkbox" story="forms-checkbox" />
 
@@ -22,10 +22,9 @@ import {
   CheckboxIcon,
   CheckboxInput,
   CheckboxLabel,
-  useCheckboxProps,
-  useCheckboxState,
   CheckboxText,
-} from "@renderlesskit/react-tailwind";
+  CheckboxTextWrapper,
+} from "@adaptui/react-tailwind";
 ```
 
 <Nextra.Callout>
@@ -40,8 +39,8 @@ import {
     `<Checkbox${spreadProps}>Label text</Checkbox>`
   }
   booleanProps={["disabled"]}
-  themeProps={{ size: "checkbox.icon.size" }}
-  choiceProps={{ defaultState: ["true", "false", "'indeterminate'"] }}
+  themeProps={{ size: "checkbox.size" }}
+  choiceProps={{ defaultValue: ["true", "false", "'indeterminate'"] }}
 />
 
 ## Checkbox sizes
@@ -49,64 +48,112 @@ import {
 Sizes can be set using the `size` prop. The default size is `md`. The available
 sizes are: `sm` `md` `lg`
 
-<Codeblock
-  live
-  code={`
-<div className="inline-flex flex-col space-y-2">
-  <Checkbox size="sm" defaultState={false} />
-  <Checkbox size="md" defaultState={false} />
-  <Checkbox size="lg" defaultState={false} />
-</div>
-`}
-/>
+<Codeblock live noInline>
+
+```
+import { Checkbox } from "@adaptui/react-tailwind";
+
+export const App = props => {
+  return (
+    <div className="inline-flex flex-col space-y-2">
+      <Checkbox size="sm" defaultValue={false} />
+      <Checkbox size="md" defaultValue={false} />
+      <Checkbox size="lg" defaultValue={false} />
+    </div>
+  );
+};
+```
+
+</Codeblock>
 
 ## Checkbox Uncontrolled
 
 Uncontrolled checkbox can be used with `defaultState` prop.
 
-<Codeblock
-  live
-  code={`
-<div className="inline-flex flex-col space-y-2">
-  <Checkbox size="md" defaultState={true} />
-  <Checkbox size="md" defaultState={false} />
-  <Checkbox size="md" defaultState="indeterminate" />
-</div>
-`}
-/>
+<Codeblock live noInline>
+
+```
+import { Checkbox } from "@adaptui/react-tailwind";
+
+export const App = props => {
+  return (
+    <div className="inline-flex flex-col space-y-2">
+      <Checkbox size="md" defaultValue={true} />
+      <Checkbox size="md" defaultValue={false} />
+      <Checkbox size="md" defaultValue="indeterminate" />
+    </div>
+  );
+};
+```
+
+</Codeblock>
 
 ## Checkbox UI states
 
-<Codeblock
-  live
-  code={`
-<div className="inline-flex flex-col space-y-2 w-72">
-  <Checkbox size="md" defaultState={false} label="Checkbox" />
-  <Checkbox size="md" defaultState={false} label="Multilined label Checkbox, just for demonstration" />
-  <Checkbox size="md" defaultState={false} label="Checkbox" description="Used when the checkbox is selected and will use its value for the form submission."/>
-</div>
-`}
-/>
+<Codeblock live noInline>
+
+```
+import { Checkbox } from "@adaptui/react-tailwind";
+
+export const App = props => {
+  return (
+    <div className="inline-flex w-72 flex-col space-y-2">
+      <Checkbox size="md" defaultState={false} label="Checkbox" />
+      <Checkbox
+        size="md"
+        defaultValue={false}
+        label="Multilined label Checkbox, just for demonstration"
+      />
+      <Checkbox
+        size="md"
+        defaultValue={false}
+        label="Checkbox"
+        description="Used when the checkbox is selected and will use its value for the form submission."
+      />
+    </div>
+  );
+};
+```
+
+</Codeblock>
 
 ## Checkbox Disabled states
 
-<Codeblock
-  live
-  code={`
-<div className="flex flex-col space-y-2 w-72">
-  <Checkbox size="md" disabled defaultState={false} />
-  <Checkbox size="md" disabled defaultState={false} label="Checkboxs" />
-  <Checkbox size="md" disabled defaultState={false} label="Used when the checkbox is selected and will use its value for the form submission." />
-  <Checkbox size="md" disabled defaultState={false} label="Checkboxs" description="Used when the checkbox is selected and will use its value for the form submission."/>
-</div>
-`}
-/>
+<Codeblock live noInline>
+
+```
+import { Checkbox } from "@adaptui/react-tailwind";
+
+export const App = props => {
+  return (
+    <div className="flex w-72 flex-col space-y-2">
+      <Checkbox size="md" disabled defaultState={false} />
+      <Checkbox size="md" disabled defaultState={false} label="Checkboxs" />
+      <Checkbox
+        size="md"
+        disabled
+        defaultValue={false}
+        label="Used when the checkbox is selected and will use its value for the form submission."
+      />
+      <Checkbox
+        size="md"
+        disabled
+        defaultValue={false}
+        label="Checkboxs"
+        description="Used when the checkbox is selected and will use its value for the form submission."
+      />
+    </div>
+  );
+};
+```
+
+</Codeblock>
 
 ## API Reference
 
 <PropsTable
   data={[
-    { name: "size", themeKey: "checkbox.icon.size", default: "md" },
+    { name: "size", themeKey: "checkbox.size", default: "md" },
     {
       name: "disabled",
       type: "boolean",

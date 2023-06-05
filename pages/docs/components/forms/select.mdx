@@ -20,10 +20,8 @@ import {
   SelectBase,
   SelectPrefix,
   SelectSuffix,
-  useSelectProps,
-  useSelectState,
   SelectWrapper,
-} from "@renderlesskit/react-tailwind";
+} from "@adaptui/react-tailwind";
 ```
 
 <Nextra.Callout>
@@ -45,7 +43,7 @@ import {
   <option value="goldfish">Goldfish</option>
 </Select>`}
   booleanProps={["disabled", "invalid", "loading"]}
-  themeProps={{ variant: "select.base.variant", size: "select.base.size" }}
+  themeProps={{ variant: "select.variant", size: "select.size" }}
 />
 
 ## Select Variants
@@ -53,100 +51,121 @@ import {
 Variants can be set using the `variant` prop. The default variant is `outline`.
 The available variants are: `outline` `subtle` `underline` & `ghost`
 
-<Codeblock
-  live
-  code={`
-<div className="inline-flex flex-col space-y-2">
-  <Select variant="outline">
-    <option value="">Select anyone</option>
-    <option value="dog">Dog</option>
-    <option value="cat">Cat</option>
-    <option value="hamster">Hamster</option>
-  </Select>
-  <Select variant="subtle">
-    <option value="">Select anyone</option>
-    <option value="dog">Dog</option>
-    <option value="cat">Cat</option>
-    <option value="hamster">Hamster</option>
-  </Select>
-  <Select variant="underline">
-    <option value="">Select anyone</option>
-    <option value="dog">Dog</option>
-    <option value="cat">Cat</option>
-    <option value="hamster">Hamster</option>
-  </Select>
-  <Select variant="ghost">
-    <option value="">Select anyone</option>
-    <option value="dog">Dog</option>
-    <option value="cat">Cat</option>
-    <option value="hamster">Hamster</option>
-  </Select>
-</div>
-`}
-/>
+<Codeblock live noInline>
+
+```
+import { Select } from "@adaptui/react-tailwind";
+
+export const App = props => {
+  return (
+    <div className="inline-flex flex-col space-y-2">
+      <Select variant="outline">
+        <option value="">Select anyone</option>
+        <option value="dog">Dog</option>
+        <option value="cat">Cat</option>
+        <option value="hamster">Hamster</option>
+      </Select>
+      <Select variant="subtle">
+        <option value="">Select anyone</option>
+        <option value="dog">Dog</option>
+        <option value="cat">Cat</option>
+        <option value="hamster">Hamster</option>
+      </Select>
+      <Select variant="underline">
+        <option value="">Select anyone</option>
+        <option value="dog">Dog</option>
+        <option value="cat">Cat</option>
+        <option value="hamster">Hamster</option>
+      </Select>
+      <Select variant="ghost">
+        <option value="">Select anyone</option>
+        <option value="dog">Dog</option>
+        <option value="cat">Cat</option>
+        <option value="hamster">Hamster</option>
+      </Select>
+    </div>
+  );
+};
+```
+
+</Codeblock>
 
 ## Select sizes
 
 Sizes can be set using the `size` prop. The default size is `md`. The available
 sizes are: `sm` `md` `lg` `xl`
 
-<Codeblock
-  live
-  code={`
-<div className="inline-flex flex-col space-y-2">
-  <Select size="sm">
-    <option value="">Select anyone</option>
-    <option value="dog">Dog</option>
-    <option value="cat">Cat</option>
-    <option value="hamster">Hamster</option>
-  </Select>
-  <Select size="md">
-    <option value="">Select anyone</option>
-    <option value="dog">Dog</option>
-    <option value="cat">Cat</option>
-    <option value="hamster">Hamster</option>
-  </Select>
-  <Select size="lg">
-    <option value="">Select anyone</option>
-    <option value="dog">Dog</option>
-    <option value="cat">Cat</option>
-    <option value="hamster">Hamster</option>
-  </Select>
-  <Select size="xl">
-    <option value="">Select anyone</option>
-    <option value="dog">Dog</option>
-    <option value="cat">Cat</option>
-    <option value="hamster">Hamster</option>
-  </Select>
-</div>
-`}
-/>
+<Codeblock live noInline>
+
+```
+import { Select } from "@adaptui/react-tailwind";
+
+export const App = props => {
+  return (
+    <div className="inline-flex flex-col space-y-2">
+      <Select size="sm">
+        <option value="">Select anyone</option>
+        <option value="dog">Dog</option>
+        <option value="cat">Cat</option>
+        <option value="hamster">Hamster</option>
+      </Select>
+      <Select size="md">
+        <option value="">Select anyone</option>
+        <option value="dog">Dog</option>
+        <option value="cat">Cat</option>
+        <option value="hamster">Hamster</option>
+      </Select>
+      <Select size="lg">
+        <option value="">Select anyone</option>
+        <option value="dog">Dog</option>
+        <option value="cat">Cat</option>
+        <option value="hamster">Hamster</option>
+      </Select>
+      <Select size="xl">
+        <option value="">Select anyone</option>
+        <option value="dog">Dog</option>
+        <option value="cat">Cat</option>
+        <option value="hamster">Hamster</option>
+      </Select>
+    </div>
+  );
+};
+```
+
+</Codeblock>
 
 ## Select Prefix
 
 Comes only with `prefix` prop to append any content inside the Select. Also you
 can change the default `suffix` component aswell.
 
-<Codeblock
-  live
-  code={`
-<div className="inline-flex flex-col space-y-2">
-  <Select prefix={<SlotIcon />}>
-    <option value="">Select anyone</option>
-    <option value="dog">Dog</option>
-    <option value="cat">Cat</option>
-    <option value="hamster">Hamster</option>
-  </Select>
-</div>
-`}
-/>
+<Codeblock live noInline>
+
+```
+import { Select } from "@adaptui/react-tailwind";
+
+export const App = props => {
+  return (
+    <div className="inline-flex flex-col space-y-2">
+      <Select prefix={<SlotIcon />}>
+        <option value="">Select anyone</option>
+        <option value="dog">Dog</option>
+        <option value="cat">Cat</option>
+        <option value="hamster">Hamster</option>
+      </Select>
+    </div>
+  );
+};
+```
+
+</Codeblock>
 
 ## API Reference
 
 <PropsTable
   data={[
-    { name: "size", themeKey: "select.base.size", default: "md" },
-    { name: "variant", themeKey: "select.base.variant", default: "outline" },
+    { name: "size", themeKey: "select.size", default: "md" },
+    { name: "variant", themeKey: "select.variant", default: "outline" },
     {
       name: "disabled",
       type: "boolean",

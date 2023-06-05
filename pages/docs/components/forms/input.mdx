@@ -2,12 +2,12 @@ import {
   ComponentLinks,
   InteractiveCodeblock,
   PropsTable,
-  Codeblock,
 } from "@/components/index";
 
 # Input
 
-The Input component is a text field used to get input from the user.
+The Input component is a text field used to get input from the user. It uses
+Ariakit's [Input](https://reakit.io/docs/input/) Component internally.
 
 <ComponentLinks github="input" theme="input" story="forms-input" />
 
@@ -19,10 +19,8 @@ import {
   InputBase,
   InputPrefix,
   InputSuffix,
-  useInputProps,
-  useInputState,
   InputWrapper,
-} from "@renderlesskit/react-tailwind";
+} from "@adaptui/react-tailwind";
 ```
 
 <Nextra.Callout>
@@ -35,7 +33,7 @@ import {
 <InteractiveCodeblock
   children={({ spreadProps }) => `<Input placeholder="Search" ${spreadProps}/>`}
   booleanProps={["disabled", "invalid", "loading"]}
-  themeProps={{ variant: "input.base.variant", size: "input.base.size" }}
+  themeProps={{ variant: "input.variant", size: "input.size" }}
 />
 
 ## Input Variants
@@ -43,34 +41,48 @@ import {
 Variants can be set using the `variant` prop. The default variant is `outline`.
 The available variants are: `outline` `subtle` `underline` & `ghost`
 
-<Codeblock
-  live
-  code={`
-<div className="inline-flex flex-col space-y-2">
-  <Input placeholder="Search" size="md" variant="outline" />
-  <Input placeholder="Search" size="md" variant="subtle" />
-  <Input placeholder="Search" size="md" variant="underline" />
-  <Input placeholder="Search" size="md" variant="ghost" />
-</div>
-`}
-/>
+<Codeblock live noInline>
+
+```
+import { Input } from "@adaptui/react-tailwind";
+
+export const App = props => {
+  return (
+    <div className="inline-flex flex-col space-y-2">
+      <Input placeholder="Search" size="md" variant="outline" />
+      <Input placeholder="Search" size="md" variant="subtle" />
+      <Input placeholder="Search" size="md" variant="underline" />
+      <Input placeholder="Search" size="md" variant="ghost" />
+    </div>
+  );
+};
+```
+
+</Codeblock>
 
 ## Input sizes
 
 Sizes can be set using the `size` prop. The default size is `md`. The available
 sizes are: `sm` `md` `lg` `xl`
 
-<Codeblock
-  live
-  code={`
-<div className="inline-flex flex-col space-y-2">
-  <Input placeholder="Search" size="sm" />
-  <Input placeholder="Search" size="md" />
-  <Input placeholder="Search" size="lg" />
-  <Input placeholder="Search" size="xl" />
-</div>
-`}
-/>
+<Codeblock live noInline>
+
+```
+import { Input } from "@adaptui/react-tailwind";
+
+export const App = props => {
+  return (
+    <div className="inline-flex flex-col space-y-2">
+      <Input placeholder="Search" size="sm" />
+      <Input placeholder="Search" size="md" />
+      <Input placeholder="Search" size="lg" />
+      <Input placeholder="Search" size="xl" />
+    </div>
+  );
+};
+```
+
+</Codeblock>
 
 ## Input Prefix/Suffix
 
@@ -79,23 +91,30 @@ spacing to the elements so you have to add spacing as needed.
 
 Prefix is positioned absolutely within the input.
 
-<Codeblock
-  live
-  code={`
-<div className="inline-flex flex-col space-y-2">
-  <Input placeholder="Search" prefix={<SlotIcon />} />
-  <Input placeholder="Search" suffix={<SlotIcon />} />
-  <Input placeholder="Search" prefix={<SlotIcon />} suffix={<SlotIcon />} />
-</div>
-`}
-/>
+<Codeblock live noInline>
+
+```
+import { Input } from "@adaptui/react-tailwind";
+
+export const App = props => {
+  return (
+    <div className="inline-flex flex-col space-y-2">
+      <Input placeholder="Search" prefix={<SlotIcon />} />
+      <Input placeholder="Search" suffix={<SlotIcon />} />
+      <Input placeholder="Search" prefix={<SlotIcon />} suffix={<SlotIcon />} />
+    </div>
+  );
+};
+```
+
+</Codeblock>
 
 ## API Reference
 
 <PropsTable
   data={[
-    { name: "size", themeKey: "input.base.size", default: "md" },
-    { name: "variant", themeKey: "input.base.variant", default: "outline" },
+    { name: "size", themeKey: "input.size", default: "md" },
+    { name: "variant", themeKey: "input.variant", default: "outline" },
     {
       name: "disabled",
       type: "boolean",

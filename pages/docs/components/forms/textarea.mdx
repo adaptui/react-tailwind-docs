@@ -19,10 +19,9 @@ import {
   TextareaBase,
   TextareaGhost,
   TextareaIcon,
-  useTextareaProps,
-  useTextareaState,
+  TextareaSpinner,
   TextareaWrapper,
-} from "@renderlesskit/react-tailwind";
+} from "@adaptui/react-tailwind";
 ```
 
 <Nextra.Callout>
@@ -37,7 +36,7 @@ import {
     `<Textarea placeholder="Search" aria-label="Textarea Story Default Example" rowsMin={3} col={30} ${spreadProps}/>`
   }
   booleanProps={["disabled", "invalid", "loading"]}
-  themeProps={{ variant: "textarea.base.variant", size: "textarea.base.size" }}
+  themeProps={{ variant: "textarea.variant", size: "textarea.size" }}
 />
 
 ## Textarea Variants
@@ -45,71 +44,169 @@ import {
 Variants can be set using the `variant` prop. The default variant is `outline`.
 The available variants are: `outline` `subtle` `underline`
 
-<Codeblock
-  live
-  code={`
-<div className="inline-flex flex-col space-y-2">
-  <Textarea placeholder="Search" aria-label="Textarea Story Default Example" rowsMin={3} col={30} variant="outline" />
-  <Textarea placeholder="Search" aria-label="Textarea Story Default Example" rowsMin={3} col={30} variant="subtle" />
-  <Textarea placeholder="Search" aria-label="Textarea Story Default Example" rowsMin={3} col={30} variant="underline" />
-</div>
-`}
-/>
+<Codeblock live noInline>
+
+```
+import { Textarea } from "@adaptui/react-tailwind";
+
+export const App = props => {
+  return (
+    <div className="inline-flex flex-col space-y-2">
+      <Textarea
+        placeholder="Search"
+        aria-label="Textarea Story Default Example"
+        rowsMin={3}
+        col={30}
+        variant="outline"
+      />
+      <Textarea
+        placeholder="Search"
+        aria-label="Textarea Story Default Example"
+        rowsMin={3}
+        col={30}
+        variant="subtle"
+      />
+      <Textarea
+        placeholder="Search"
+        aria-label="Textarea Story Default Example"
+        rowsMin={3}
+        col={30}
+        variant="underline"
+      />
+    </div>
+  );
+};
+```
+
+</Codeblock>
 
 ## Textarea sizes
 
 Sizes can be set using the `size` prop. The default size is `md`. The available
 sizes are: `sm` `md` `lg` `xl`
 
-<Codeblock
-  live
-  code={`
-<div className="inline-flex flex-col space-y-2">
-  <Textarea placeholder="Search" aria-label="Textarea Story Default Example" rowsMin={3} col={30} size="sm" />
-  <Textarea placeholder="Search" aria-label="Textarea Story Default Example" rowsMin={3} col={30} size="md" />
-  <Textarea placeholder="Search" aria-label="Textarea Story Default Example" rowsMin={3} col={30} size="lg" />
-  <Textarea placeholder="Search" aria-label="Textarea Story Default Example" rowsMin={3} col={30} size="xl" />
-</div>
-`}
-/>
+<Codeblock live noInline>
+
+```
+import { Textarea } from "@adaptui/react-tailwind";
+
+export const App = props => {
+  return (
+    <div className="inline-flex flex-col space-y-2">
+      <Textarea
+        placeholder="Search"
+        aria-label="Textarea Story Default Example"
+        rowsMin={3}
+        col={30}
+        size="sm"
+      />
+      <Textarea
+        placeholder="Search"
+        aria-label="Textarea Story Default Example"
+        rowsMin={3}
+        col={30}
+        size="md"
+      />
+      <Textarea
+        placeholder="Search"
+        aria-label="Textarea Story Default Example"
+        rowsMin={3}
+        col={30}
+        size="lg"
+      />
+      <Textarea
+        placeholder="Search"
+        aria-label="Textarea Story Default Example"
+        rowsMin={3}
+        col={30}
+        size="xl"
+      />
+    </div>
+  );
+};
+```
+
+</Codeblock>
 
 ## Textarea autoSize
 
 By setting `autoSize` prop the textarea will increase it's size according to the
 content.
 
-<Codeblock
-  live
-  code={`
-<div className="inline-flex flex-col space-y-2 w-72" >
-  <Textarea placeholder="Search" autoSize={true} defaultValue="Velit voluptatem a veritatis nam ducimus ut corporis. Iure dolorem perspiciatis nihil quam laudantium ea magnam est voluptatem. Quam repellat pariatur quasi accusantium aut architecto ut est. Ab totam voluptate beatae et alias quod vero enim tempora. Corporis laboriosam velit eveniet eos ut repellat pariatur ipsam." />
-</div>
-`}
-/>
+<Codeblock live noInline>
+
+```
+import { Textarea } from "@adaptui/react-tailwind";
+
+export const App = props => {
+  return (
+    <div className="inline-flex w-72 flex-col space-y-2">
+      <Textarea
+        placeholder="Search"
+        autoSize={true}
+        defaultValue="Velit voluptatem a veritatis nam ducimus ut corporis. Iure dolorem perspiciatis nihil quam laudantium ea magnam est voluptatem. Quam repellat pariatur quasi accusantium aut architecto ut est. Ab totam voluptate beatae et alias quod vero enim tempora. Corporis laboriosam velit eveniet eos ut repellat pariatur ipsam."
+      />
+    </div>
+  );
+};
+```
+
+</Codeblock>
 
 ## Textarea Resize
 
 `resize` prop contarints the resize direction of the textarea, It can accept 4
 values `both | vertical | horizontal | none`
 
-<Codeblock
-  live
-  code={`
-<div className="inline-flex flex-col space-y-2">
-  <Textarea placeholder="None" aria-label="Textarea Story Default Example" rowsMin={3} col={30} resize="none" />
-  <Textarea placeholder="Both" aria-label="Textarea Story Default Example" rowsMin={3} col={30} resize="both" />
-  <Textarea placeholder="Horizontal" aria-label="Textarea Story Default Example" rowsMin={3} col={30} resize="horizontal" />
-  <Textarea placeholder="Vertical" aria-label="Textarea Story Default Example" rowsMin={3} col={30} resize="vertical" />
-</div>
-`}
-/>
+<Codeblock live noInline>
+
+```
+import { Textarea } from "@adaptui/react-tailwind";
+
+export const App = props => {
+  return (
+    <div className="inline-flex flex-col space-y-2">
+      <Textarea
+        placeholder="None"
+        aria-label="Textarea Story Default Example"
+        rowsMin={3}
+        col={30}
+        resize="none"
+      />
+      <Textarea
+        placeholder="Both"
+        aria-label="Textarea Story Default Example"
+        rowsMin={3}
+        col={30}
+        resize="both"
+      />
+      <Textarea
+        placeholder="Horizontal"
+        aria-label="Textarea Story Default Example"
+        rowsMin={3}
+        col={30}
+        resize="horizontal"
+      />
+      <Textarea
+        placeholder="Vertical"
+        aria-label="Textarea Story Default Example"
+        rowsMin={3}
+        col={30}
+        resize="vertical"
+      />
+    </div>
+  );
+};
+```
+
+</Codeblock>
 
 ## API Reference
 
 <PropsTable
   data={[
-    { name: "size", themeKey: "textarea.base.size", default: "md" },
-    { name: "variant", themeKey: "textarea.base.variant", default: "outline" },
+    { name: "size", themeKey: "textarea.size", default: "md" },
+    { name: "variant", themeKey: "textarea.variant", default: "outline" },
     {
       name: "rowsMin",
       type: "number",
