@@ -4,7 +4,9 @@ AdaptUI uses tailwind to provide better styling at one place, so you'll need to
 setup a tailwind project using their
 [installation](https://tailwindcss.com/docs/installation) guide.
 
-## Installation
+Installation can be done in three steps
+
+## 1. Installation
 
 You can either install with NPM or Yarn
 
@@ -25,9 +27,9 @@ You can either install with NPM or Yarn
   </Nextra.Tab>
 </Nextra.Tabs>
 
-## Tailwind setup
+## 2. Modifying `tailwind.config.js`
 
-After setting up tailwind and installing `@adaptui/react-tailwind` , import our
+Once you're done with the above steps `@adaptui/react-tailwind` , import our
 custom tailwind `preset` inside `tailwind.config.js` and use it.
 
 ```js
@@ -46,13 +48,13 @@ module.exports = {
   [Next.js](/guides/usage-with-nextjs)
 </Nextra.Callout>
 
-## Setting up provider
+## 3. Wrap your entire app with `AdaptUIProvider`
 
-AdaptUI needs a theme provider to pass down all the neccesary styling for the
-components.
+AdaptUI needs to pass down all the neccesary styling for the components. So you
+just have to wrap your entire app inside the provider.
 
 Go to the root of your application and add the below code. Root of your app
-might be `App.js` or `App.tsx` or `index.js`.
+might be `App.js` or `App.tsx` or `index.js` based on your project setup.
 
 ```js filename="App.js" /AdaptUIProvider/2-3 {2}
 import * as React from "react";

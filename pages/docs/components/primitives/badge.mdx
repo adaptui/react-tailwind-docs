@@ -15,7 +15,7 @@ also be used to display a status
 ## Imports
 
 ```js
-import { Badge } from "@renderlesskit/react-tailwind";
+import { Badge } from "@adaptui/react-tailwind";
 ```
 
 ## Usage
@@ -23,9 +23,9 @@ import { Badge } from "@renderlesskit/react-tailwind";
 <InteractiveCodeblock
   children={({ spreadProps }) => `<Badge${spreadProps}>Click me</Badge>`}
   themeProps={{
-    size: "badge.size.common",
-    variant: "badge.variant",
-    themeColor: "badge.variant.solid",
+    size: "badge.size",
+    variant: "badge.themeColor.base",
+    themeColor: "badge.themeColor",
   }}
 />
 
@@ -154,19 +154,19 @@ You can pass prefix props to the badge to prepend any content inside of badge.
     {
       name: "size",
       default: "md",
-      themeKey: "badge.size.common",
+      themeKey: "badge.size",
       description: "Size of the badge",
     },
     {
       name: "variant",
       default: "solid",
-      themeKey: "badge.variant",
+      themeKey: "badge.themeColor.base",
       description: "Variant of the badge",
     },
     {
       name: "themeColor",
       default: "default",
-      themeKey: "badge.variant.solid",
+      themeKey: "badge.themeColor",
       description: "Theme of the badge",
     },
     {

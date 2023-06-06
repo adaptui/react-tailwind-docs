@@ -19,7 +19,7 @@ type to perform the a set of actions.
 ## Imports
 
 ```jsx
-import { ButtonGroup } from "@renderlesskit/react-tailwind";
+import { ButtonGroup } from "@adaptui/react-tailwind";
 ```
 
 ## Usage
@@ -36,7 +36,7 @@ import { ButtonGroup } from "@renderlesskit/react-tailwind";
 </ButtonGroup>
     `}
   booleanProps={["collapsed"]}
-  themeProps={{ size: "button.size.common", variant: "button.variant.common" }}
+  themeProps={{ size: "button.size", variant: "button.themeColor.base" }}
 />
 
 ## ButtonGroup Styles
@@ -150,13 +150,13 @@ render(
     {
       name: "size",
       default: "md",
-      themeKey: "button.size.common",
+      themeKey: "button.size",
       description: "Size of the button",
     },
     {
       name: "variant",
       default: "solid",
-      themeKey: "button.variant.common",
+      themeKey: "button.themeColor.base",
       description: "Variant of the button",
     },
   ]}

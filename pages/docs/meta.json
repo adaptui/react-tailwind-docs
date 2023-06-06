@@ -1,5 +1,11 @@
 {
   "getting-started": "Getting Started",
+  "figma": {
+    "title": "Figma Design",
+    "href": "https://www.figma.com/community/file/1108051488381095193/AdaptUI-v1.0",
+    "type": "page",
+    "newWindow": true
+  },
   "theming": "Theming",
   "composition": "Composition",
   "components": "Components"

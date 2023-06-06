@@ -15,7 +15,7 @@ keywords that describe them.
 ## Imports
 
 ```js
-import { Tag } from "@renderlesskit/react-tailwind";
+import { Tag } from "@adaptui/react-tailwind";
 ```
 
 - **Tag** Standalone tag component
@@ -26,8 +26,8 @@ import { Tag } from "@renderlesskit/react-tailwind";
   children={({ spreadProps }) => `<Tag${spreadProps}>Click me</Tag>`}
   booleanProps={["disabled"]}
   themeProps={{
-    size: "tag.size.default",
-    variant: "tag.variant.default",
+    size: "tag.size",
+    variant: "tag.themeColor.base",
   }}
 />
 
