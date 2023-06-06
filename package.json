@@ -72,6 +72,7 @@
     "ariakit": "2.0.0-next.36",
     "lodash": "4.17.21",
     "next": "12.2.3",
+    "next-themes": "^0.2.1",
     "nextra": "2.0.0-alpha.56",
     "nextra-theme-docs": "2.0.0-alpha.59",
     "react": "17.0.2",
