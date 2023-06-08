@@ -28,7 +28,7 @@ import {
   SliderTrack,
   SliderTrackWrapper,
   SliderWrapper,
-} from "@renderlesskit/react-tailwind";
+} from "@adaptui/react-tailwind";
 ```
 
 <Nextra.Callout>
@@ -43,7 +43,7 @@ import {
     `<Slider defaultValue={[50]} ${spreadProps} />`
   }
   booleanProps={["tooltip", "isDisabled"]}
-  themeProps={{ size: "slider.track.base.size" }}
+  themeProps={{ size: "slider.size" }}
 />
 
 ## Slider sizes
@@ -114,7 +114,7 @@ Single Slider can be converted to a range slider using `range` prop.
 
 <PropsTable
   data={[
-    { name: "size", themeKey: "slider.track.base.size", default: "md" },
+    { name: "size", themeKey: "slider.size", default: "md" },
     {
       name: "isDisabled",
       type: "boolean",

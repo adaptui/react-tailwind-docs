@@ -25,7 +25,7 @@ import {
   useCheckboxProps,
   useCheckboxState,
   CheckboxText,
-} from "@renderlesskit/react-tailwind";
+} from "@adaptui/react-tailwind";
 ```
 
 <Nextra.Callout>
@@ -40,7 +40,7 @@ import {
     `<Checkbox${spreadProps}>Label text</Checkbox>`
   }
   booleanProps={["disabled"]}
-  themeProps={{ size: "checkbox.icon.size" }}
+  themeProps={{ size: "checkbox.size" }}
   choiceProps={{ defaultState: ["true", "false", "'indeterminate'"] }}
 />
 
@@ -106,7 +106,7 @@ Uncontrolled checkbox can be used with `defaultState` prop.
 
 <PropsTable
   data={[
-    { name: "size", themeKey: "checkbox.icon.size", default: "md" },
+    { name: "size", themeKey: "checkbox.size", default: "md" },
     {
       name: "disabled",
       type: "boolean",

@@ -24,7 +24,7 @@ import {
   useSwitchProps,
   useSwitchState,
   SwitchText,
-} from "@renderlesskit/react-tailwind";
+} from "@adaptui/react-tailwind";
 ```
 
 <Nextra.Callout>
@@ -37,7 +37,7 @@ import {
 <InteractiveCodeblock
   children={({ spreadProps }) => `<Switch ${spreadProps}>Label text</Switch>`}
   booleanProps={["disabled"]}
-  themeProps={{ size: "switch.icon.size" }}
+  themeProps={{ size: "switch.size" }}
 />
 
 ## Switch sizes
@@ -101,7 +101,7 @@ Uncontrolled switch can be used with `defaultState` prop.
 
 <PropsTable
   data={[
-    { name: "size", themeKey: "switch.icon.size", default: "md" },
+    { name: "size", themeKey: "switch.size", default: "md" },
     {
       name: "disabled",
       type: "boolean",

@@ -22,7 +22,7 @@ import {
   useInputProps,
   useInputState,
   InputWrapper,
-} from "@renderlesskit/react-tailwind";
+} from "@adaptui/react-tailwind";
 ```
 
 <Nextra.Callout>
@@ -35,7 +35,7 @@ import {
 <InteractiveCodeblock
   children={({ spreadProps }) => `<Input placeholder="Search" ${spreadProps}/>`}
   booleanProps={["disabled", "invalid", "loading"]}
-  themeProps={{ variant: "input.base.variant", size: "input.base.size" }}
+  themeProps={{ variant: "input.variant", size: "input.size" }}
 />
 
 ## Input Variants
@@ -94,8 +94,8 @@ Prefix is positioned absolutely within the input.
 
 <PropsTable
   data={[
-    { name: "size", themeKey: "input.base.size", default: "md" },
-    { name: "variant", themeKey: "input.base.variant", default: "outline" },
+    { name: "size", themeKey: "input.size", default: "md" },
+    { name: "variant", themeKey: "input.variant", default: "outline" },
     {
       name: "disabled",
       type: "boolean",

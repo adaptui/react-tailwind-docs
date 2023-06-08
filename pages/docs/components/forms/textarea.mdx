@@ -22,7 +22,7 @@ import {
   useTextareaProps,
   useTextareaState,
   TextareaWrapper,
-} from "@renderlesskit/react-tailwind";
+} from "@adaptui/react-tailwind";
 ```
 
 <Nextra.Callout>
@@ -37,7 +37,7 @@ import {
     `<Textarea placeholder="Search" aria-label="Textarea Story Default Example" rowsMin={3} col={30} ${spreadProps}/>`
   }
   booleanProps={["disabled", "invalid", "loading"]}
-  themeProps={{ variant: "textarea.base.variant", size: "textarea.base.size" }}
+  themeProps={{ variant: "textarea.variant", size: "textarea.size" }}
 />
 
 ## Textarea Variants
@@ -108,8 +108,8 @@ values `both | vertical | horizontal | none`
 
 <PropsTable
   data={[
-    { name: "size", themeKey: "textarea.base.size", default: "md" },
-    { name: "variant", themeKey: "textarea.base.variant", default: "outline" },
+    { name: "size", themeKey: "textarea.size", default: "md" },
+    { name: "variant", themeKey: "textarea.variant", default: "outline" },
     {
       name: "rowsMin",
       type: "number",

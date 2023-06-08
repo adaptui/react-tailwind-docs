@@ -21,7 +21,7 @@ import {
   useRadioGroupState,
   RadioGroupWrapper,
   RadioShowMore,
-} from "@renderlesskit/react-tailwind";
+} from "@adaptui/react-tailwind";
 ```
 
 <Nextra.Callout>
@@ -40,7 +40,7 @@ import {
   <Radio value="grapes" label="Grapes" />
 </RadioGroup>
 `}
-  themeProps={{ size: "radio.icon.size" }}
+  themeProps={{ size: "radio.size" }}
 />
 
 ## RadioGroup sizes
@@ -136,7 +136,7 @@ render (<RadioGroupStack/>); `} />
 
 <PropsTable
   data={[
-    { name: "size", themeKey: "radio.icon.size", default: "md" },
+    { name: "size", themeKey: "radio.size", default: "md" },
     {
       name: "stack",
       type: "string",
