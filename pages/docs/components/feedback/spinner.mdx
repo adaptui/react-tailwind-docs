@@ -15,14 +15,14 @@ course of change or a result.
 ## Imports
 
 ```js
-import { Spinner } from "@renderlesskit/react-tailwind";
+import { Spinner } from "@adaptui/react-tailwind";
 ```
 
 ## Usage
 
 <InteractiveCodeblock
   children={({ spreadProps }) => `<Spinner ${spreadProps} />`}
-  themeProps={{ size: "spinner.size", stroke: "spinner.stroke" }}
+  themeProps={{ size: "spinner.size", track: "spinner.track" }}
 />
 
 ## Spinner sizes
@@ -43,10 +43,10 @@ sizes are: `xs` `sm` `md` `lg` & `em`
 `}
 />
 
-## Show stroke
+## Show track
 
-To show the subtle stroke around the spinner we can use the `stroke` which
-accepts `visible` or `transparent` values
+To show the subtle track around the spinner we can use the `track` which accepts
+`visible` or `transparent` values
 
 <Codeblock
   live
@@ -77,7 +77,7 @@ visible to the screen readers.
 <PropsTable
   data={[
     { name: "size", themeKey: "spinner.size", default: "md" },
-    { name: "stroke", themeKey: "spinner.stroke", default: "transparent" },
+    { name: "track", themeKey: "spinner.track", default: "transparent" },
     {
       name: "label",
       type: "string",

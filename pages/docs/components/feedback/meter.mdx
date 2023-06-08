@@ -25,7 +25,7 @@ import {
   useMeterState,
   MeterTrack,
   MeterWrapper,
-} from "@renderlesskit/react-tailwind";
+} from "@adaptui/react-tailwind";
 ```
 
 <Nextra.Callout>
@@ -39,7 +39,7 @@ import {
   children={({ spreadProps }) =>
     `<Meter value={40} max={100} ${spreadProps} />`
   }
-  themeProps={{ size: "meter.track.size" }}
+  themeProps={{ size: "meter.size" }}
 />
 
 ## Meter sizes
@@ -109,7 +109,7 @@ children components (MeterTrack, MeterBar) for more control.
 
 <PropsTable
   data={[
-    { name: "size", themeKey: "meter.track.size", default: "md" },
+    { name: "size", themeKey: "meter.size", default: "md" },
     {
       name: "intervals",
       type: "number",

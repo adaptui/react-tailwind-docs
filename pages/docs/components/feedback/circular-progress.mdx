@@ -28,7 +28,7 @@ import {
   useCircularProgressState,
   CircularProgressTrack,
   CircularProgressTrackWrapper,
-} from "@renderlesskit/react-tailwind";
+} from "@adaptui/react-tailwind";
 ```
 
 <Nextra.Callout>
@@ -42,7 +42,7 @@ import {
   children={({ spreadProps }) =>
     `<CircularProgress value={40} ${spreadProps} />`
   }
-  themeProps={{ size: "circularProgress.barWrapper.common.size" }}
+  themeProps={{ size: "circularProgress.size" }}
 />
 
 ## CircularProgress sizes
@@ -66,10 +66,7 @@ sizes are: `sm` `md` `lg` `xl`
 
 Set the `min` and `max` values of the progress bar.
 
-<Codeblock
-  live
-  code={`<CircularProgress min={10} max={40} value={35} />`}
-/>
+<Codeblock live code={`<CircularProgress min={10} max={40} value={35} />`} />
 
 ## Indeterminate progress
 
@@ -107,7 +104,7 @@ CircularProgressHint) for more control.
   data={[
     {
       name: "size",
-      themeKey: "circularProgress.barWrapper.common.size",
+      themeKey: "circularProgress.size",
       default: "md",
     },
     {
