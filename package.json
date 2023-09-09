@@ -67,17 +67,17 @@
   "dependencies": {
     "@adaptui/react": "1.0.0-alpha.9",
     "@adaptui/react-tailwind": "0.1.0-alpha.5",
-    "@chakra-ui/hooks": "2.0.4",
-    "@reach/skip-nav": "0.17.0",
-    "ariakit": "2.0.0-next.36",
+    "@chakra-ui/hooks": "2.2.1",
+    "@reach/skip-nav": "0.18.0",
+    "ariakit": "2.0.0-next.44",
     "lodash": "4.17.21",
-    "next": "12.2.3",
+    "next": "12.3.4",
     "nextra": "2.0.0-alpha.56",
     "nextra-theme-docs": "2.0.0-alpha.59",
     "react": "17.0.2",
     "react-dom": "17.0.2",
     "react-live": "2.4.1",
-    "twind": "0.16.17"
+    "twind": "0.16.19"
   },
   "devDependencies": {
     "@babel/core": "7.18.9",
