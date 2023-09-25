@@ -71,7 +71,7 @@
     "@reach/skip-nav": "0.17.0",
     "ariakit": "2.0.0-next.36",
     "lodash": "4.17.21",
-    "next": "12.2.3",
+    "next": "13.5.3",
     "nextra": "2.0.0-alpha.56",
     "nextra-theme-docs": "2.0.0-alpha.59",
     "react": "17.0.2",
