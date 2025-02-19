@@ -5,9 +5,7 @@ class MyDocument extends Document {
   render() {
     return (
       <Html>
-        <Head>
-          <link href="https://rsms.me/inter/inter.css" rel="stylesheet" />
-        </Head>
+        <Head />
         <body>
           <SkipNavLink />
           <Main />

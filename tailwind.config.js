@@ -27,12 +27,16 @@ module.exports = {
   content: [
     "./pages/**/*.{js,ts,jsx,tsx,md,mdx}",
     "./components/**/*.{js,ts,jsx,tsx,md,mdx}",
+    "./theme.config.js",
     "node_modules/@adaptui/react-tailwind/**/*",
     "node_modules/nextra-theme-docs/dist**/*",
   ],
   darkMode: "class",
   theme: {
     extend: {
+      fontFamily: {
+        sans: ["InterVar", "Adjusted Arial Fallback", "serif"],
+      },
       colors: {
         dark: "#111",
         "theme-black": "#000",
